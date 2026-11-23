@@ -2,7 +2,7 @@
 
 The design language for Nittany Rooms, a student-made web app for finding and reserving study rooms at Penn State University Park. It is not an official Penn State service.
 
-**v2.1 is minimal and neutral.** Dark and light gray surfaces, **green = open/available, red = occupied/not available**, and blue (actions, selection) and yellow (brand, “opens soon”) as accents only. Appearance can be Light, Dark (default) or Auto. The 3D campus map is the canvas, and a quiet sidebar or bottom sheet holds the content. The palette is navy surfaces with a single yellow accent. v1, the original mockups, is kept in [`v1/`](v1/) for reference.
+**v2.1 is minimal and neutral.** Dark and light gray surfaces, **green = open/available, red = occupied/not available, grey = closed/unknown, purple = walk-in study space**, and blue (actions, selection) and yellow (brand, “opens soon”) as accents only. Appearance can be Light, Dark (default) or Auto. The 3D campus map is the canvas, and a quiet sidebar or bottom sheet holds the content. The palette is navy surfaces with a single yellow accent. v1, the original mockups, is kept in [`v1/`](v1/) for reference.
 
 ## What's in here
 
@@ -15,15 +15,19 @@ The design language for Nittany Rooms, a student-made web app for finding and re
 | `fonts/` | **Inter** variable (`inter-latin-wght-normal.woff2`, weights 100–900, SIL OFL), the v2 typeface. Overpass files remain only for the archived v1 mockups |
 | `v1/` | Original v1 mockups, tokens and canvas sources (superseded) |
 
-Screens in `png/`:
+Screens in `png/` (2x, real app, **sample availability** at Mon Nov 23, 1:00 PM so every state shows):
 
-1. `02-design-system`: tokens, room states, timeline, controls, rows, map pins, dark vs light
-2. `03-desktop-campus-dark`: home, 3D campus with buildings that have reservable rooms
-3. `04-desktop-building-dark`: building view, floor tabs, rooms with mini timelines
-4. `05-desktop-room-dark`: room view, live timeline, bookable windows, official handoff
+1. `02-design-system`: tokens, room states, timeline, header controls, building list, open study spaces, map pins and route, dark vs light
+2. `03-desktop-campus-dark`: 3D campus, grouped building list, open study spaces
+3. `04-desktop-building-dark`: rooms by floor with status chips and mini timelines
+4. `05-desktop-room-dark`: room timeline, bookable windows, official handoff
 5. `06-desktop-campus-light`: light theme
-6. `07-mobile-campus-dark`: phone, map with bottom sheet
-7. `08-mobile-room-dark`: phone, room details in the expanded sheet
+6. `07-mobile-campus-dark` / `08-mobile-room-dark`: phone bottom sheet
+7. `09-desktop-filters`: filters popover (open now, accessible, free until, available for at least, size, distance)
+8. `10-desktop-date-time`: custom date and time picker
+9. `11-desktop-near-me-route`: closest building and animated walking route
+10. `12-desktop-settings`: ⋯ menu with Appearance, Important notes, Data updates, GitHub
+11. `13-desktop-open-study-spaces`: walk-in spaces with live library hours and purple "Check hours"
 
 The code is the source of truth. Tokens are implemented in `apps/web/src/index.css` as `--nr-*` CSS variables, exposed to Tailwind as semantic colors (`bg`, `surface`, `fg`, `muted`, `accent`, …).
 
@@ -59,4 +63,3 @@ The code is the source of truth. Tokens are implemented in `apps/web/src/index.c
 
 Map data © OpenStreetMap contributors (ODbL). Tiles from OpenFreeMap.
 
-> Screenshots in `png/` show the v2.0 navy palette; tokens.json (v2.1) is current. Re-render them with the app when convenient.
