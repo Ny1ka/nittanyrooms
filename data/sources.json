@@ -52,5 +52,23 @@
     "accessMethod": "public-page",
     "retrievedAt": "2026-11-22",
     "notes": "Room list parsed from the public page (resources.push blocks): eid, title, capacity, features, booking URL."
+  },
+  {
+    "id": "ime-leonhard-commons",
+    "name": "Leonhard Knowledge Commons",
+    "owner": "Harold and Inge Marcus Department of Industrial and Manufacturing Engineering",
+    "url": "https://www.ime.psu.edu/department/leonhard-commons.aspx",
+    "accessMethod": "public-page",
+    "retrievedAt": "2026-11-23",
+    "notes": "First-floor lobby of the Leonhard Building; 'Five group study rooms'. No room numbers or booking method published."
+  },
+  {
+    "id": "owner-coe-booking",
+    "name": "Project owner confirmation: CoE spaces & group rooms booked in Outlook",
+    "owner": "Nittany Rooms project owner",
+    "url": "https://www.engr.psu.edu",
+    "accessMethod": "manual",
+    "retrievedAt": "2026-11-23",
+    "notes": "Owner confirmed on 2026-11-23 that Leonhard group rooms are reserved like other College of Engineering spaces & group rooms: Outlook Calendar, with the room."
   }
 ]

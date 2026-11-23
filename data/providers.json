@@ -9,7 +9,7 @@
     "handoffSteps": [
       "Sign in to Outlook Calendar with your Penn State account.",
       "Click the day you want and start a new event.",
-      "Search for the building and location: “ECoRE Bldg” brings up a list of available rooms.",
+      "Search for the building and location (for example “ECoRE Bldg” or “Leonhard Bldg”) to see that building's rooms.",
       "Add the room and the time shown here, then send the request.",
       "You'll get an email if the reservation is approved. Until then, it isn't booked."
     ],

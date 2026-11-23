@@ -54,5 +54,30 @@
       "verifiedAt": "2026-11-22",
       "note": "15-minute start increment observed in the LibCal availability grid (2026-11-22). Minimum duration of one 15-minute slot is inferred from the grid, not confirmed; gaps under 30 minutes are hidden by default."
     }
+  },
+  {
+    "id": "coe-leonhard",
+    "providerId": "coe-outlook",
+    "minDurationMinutes": 30,
+    "maxDurationMinutes": null,
+    "startIncrementMinutes": 30,
+    "leadTimeMinutes": 0,
+    "bookingHorizonDays": null,
+    "minUsefulGapMinutes": 30,
+    "verifiedFields": [],
+    "rules": [
+      "Booked in Outlook Calendar like other College of Engineering spaces and group rooms.",
+      "IME describes the Leonhard Knowledge Commons as a space for Industrial and Manufacturing Engineering students; check eligibility when you book.",
+      "Room numbers aren't published, so the five rooms are listed together."
+    ],
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "ime-leonhard-commons",
+        "owner-coe-booking"
+      ],
+      "verifiedAt": "2026-11-23",
+      "note": "Booking method confirmed by the project owner; durations not published."
+    }
   }
 ]

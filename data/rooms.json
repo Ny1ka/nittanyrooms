@@ -1764,5 +1764,32 @@
       ],
       "verifiedAt": "2026-11-22"
     }
+  },
+  {
+    "id": "leonhard-commons-group-rooms",
+    "providerRoomId": null,
+    "buildingId": "leonhard",
+    "floorId": "leonhard-f1",
+    "officialLabel": "Five group study rooms, Leonhard Knowledge Commons",
+    "shortLabel": "5 group rooms",
+    "displayName": "Knowledge Commons group rooms",
+    "area": "Leonhard Knowledge Commons",
+    "type": "group-study",
+    "capacity": null,
+    "features": [],
+    "eligibility": "Described by IME as a space for Industrial and Manufacturing Engineering students. Check eligibility in Outlook.",
+    "providerId": "coe-outlook",
+    "policyId": "coe-leonhard",
+    "bookingUrl": null,
+    "floorplanLocation": "unknown",
+    "floorVerification": "verified",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "ime-leonhard-commons",
+        "owner-coe-booking"
+      ],
+      "verifiedAt": "2026-11-23"
+    }
   }
 ]

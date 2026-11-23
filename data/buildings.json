@@ -343,5 +343,60 @@
       "verifiedAt": "2026-11-22"
     },
     "mapLabel": "PMS Library"
+  },
+  {
+    "id": "leonhard",
+    "name": "Leonhard Building",
+    "shortName": "Leonhard",
+    "aliases": [
+      "Leonhard",
+      "Leonhard Bldg",
+      "Leonhard Knowledge Commons",
+      "IME"
+    ],
+    "headline": "Leonhard Knowledge Commons",
+    "mapLabel": "Leonhard Commons",
+    "address": null,
+    "location": {
+      "lat": 40.7913332,
+      "lon": -77.8698573,
+      "source": "openstreetmap",
+      "osmElement": "way/52000911"
+    },
+    "hoursUrl": null,
+    "status": "verified",
+    "roomInventory": "partial",
+    "providerIds": [
+      "coe-outlook"
+    ],
+    "floors": [
+      {
+        "id": "leonhard-f1",
+        "label": "1",
+        "level": 1,
+        "floorplan": "none",
+        "verification": {
+          "status": "verified",
+          "sourceIds": [
+            "ime-leonhard-commons"
+          ],
+          "verifiedAt": "2026-11-23",
+          "note": "IME: 'Located in the first-floor lobby space of the Leonhard Building.'"
+        }
+      }
+    ],
+    "notes": [
+      "Five group study rooms in the Leonhard Knowledge Commons (first-floor lobby). Room numbers aren't published, so they're listed together.",
+      "Booked in Outlook like other College of Engineering group rooms."
+    ],
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "ime-leonhard-commons",
+        "owner-coe-booking",
+        "osm"
+      ],
+      "verifiedAt": "2026-11-23"
+    }
   }
 ]
