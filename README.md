@@ -39,6 +39,13 @@ Choosing a building flies the camera in and lists its rooms by floor, each with 
 
 **Near me** sorts buildings by walking distance and shows the closest one, plus the closest with a room open now. **Show walking route** draws an animated path from your location. It asks before sending your location to the OpenStreetMap routing service (FOSSGIS OSRM).
 
+### Favorites, calendar, sharing, and reporting
+
+- **Favorites:** star buildings and rooms to pin them at the top of the list with live status. Saved in your browser only, with no account.
+- **Add to calendar:** after Penn State confirms your booking, add it to Apple or Outlook (.ics) or Google Calendar.
+- **Share room:** send a link that reopens the exact room, date, and time, using your phone's share sheet or copied to the clipboard.
+- **Report wrong info:** opens a GitHub issue pre-filled with the room's ID, sources, and a checklist, so data fixes are quick.
+
 ### Filters, time travel, and settings
 
 | Filters | Date and time | Settings |
