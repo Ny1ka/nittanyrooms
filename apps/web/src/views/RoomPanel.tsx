@@ -16,6 +16,7 @@ import { featureList, floorName, unknownReason } from '../lib/labels';
 import type { LiveState } from '../lib/live';
 import { setParams } from '../lib/router';
 import type { SelectedTime } from '../lib/time';
+import { BookingRange } from '../components/BookingRange';
 import { HandoffPanel } from '../components/HandoffPanel';
 import { RoomActions } from '../components/RoomActions';
 import { ChevronLeft, ChevronRight, Star } from '../components/Icons';
@@ -57,8 +58,16 @@ export function RoomPanel({ room, building, sel, demo, live }: { room: Room; bui
 
   // Start at the selected time when it falls inside the window, else at the window start.
   const selStart = chosen ? ((sel.at > chosen.start ? chosen.startTimes.find((t) => t >= sel.at) : undefined) ?? chosen.start) : null;
-  const maxEnd = (s: number) => (policy.maxDurationMinutes === null ? Infinity : s + policy.maxDurationMinutes * MINUTE);
-  const selection = chosen && selStart !== null ? { start: selStart, end: Math.min(chosen.end, maxEnd(selStart)) } : null;
+  const step = policy.startIncrementMinutes;
+  const minLen = Math.max(15, policy.minDurationMinutes);
+  const capFor = (s: number) =>
+    chosen ? Math.floor(Math.min((chosen.end - s) / MINUTE, policy.maxDurationMinutes ?? Infinity) / step) * step : 0;
+  // User-adjusted range inside the chosen window (reset when the window or date changes).
+  const [custom, setCustom] = useState<{ start: number; minutes: number } | null>(null);
+  useEffect(() => setCustom(null), [chosen?.start, sel.date]);
+  const rangeStart = custom?.start ?? selStart;
+  const rangeMinutes = rangeStart !== null ? Math.max(minLen, Math.min(capFor(rangeStart), custom?.minutes ?? capFor(rangeStart))) : 0;
+  const selection = chosen && rangeStart !== null ? { start: rangeStart, end: rangeStart + rangeMinutes * MINUTE } : null;
 
   const shortGaps = day.filtered.filter((f) => f.reason === 'too-short' && f.raw.end > sel.now);
   const today = campusDate(sel.now);
@@ -135,7 +144,18 @@ export function RoomPanel({ room, building, sel, demo, live }: { room: Room; bui
         unknownText={unknownReason(provider)}
         onNextDay={canNext ? () => sel.setDate(shiftDate(sel.date, 1)) : null}
       />
-      {expired && (
+      {chosen && rangeStart !== null && capFor(rangeStart) >= minLen && (
+        <BookingRange
+          window={chosen}
+          start={rangeStart}
+          minutes={rangeMinutes}
+          minMinutes={minLen}
+          maxMinutes={policy.maxDurationMinutes}
+          step={step}
+          onChange={(start, minutes) => setCustom({ start, minutes })}
+        />
+      )}
+            {expired && (
         <p role="alert" className="rounded-control border border-dashed border-yellow px-3 py-2 text-xs text-soon-text">
           That time is no longer bookable. It may have passed or been taken.
         </p>

@@ -291,3 +291,25 @@ test.describe('favorite buildings', () => {
     await expect(page.getByRole('button', { name: 'Remove Earth and Mineral Sciences Library from favorites' })).toHaveAttribute('aria-pressed', 'true');
   });
 });
+
+test.describe('adjustable booking range', () => {
+  test('slide and resize the booking; summary and calendar follow (15 min – 3 hr)', async ({ page, api: _ }) => {
+    await page.goto('/b/pattee-paterno?room=pattee-w120');
+    // Window 1:00–5:00 PM; default fills up to the 3-hour maximum.
+    await expect(page.getByText('Mon, Nov 23 · 1:00 – 4:00 PM · 3 hr')).toBeVisible();
+    const length = page.getByRole('slider', { name: 'Booking length' });
+    await expect(length).toHaveAttribute('max', '180');
+    await length.focus();
+    await page.keyboard.press('Home');
+    await expect(page.getByText('Mon, Nov 23 · 1:00 – 1:15 PM · 15 min')).toBeVisible();
+    const start = page.getByRole('slider', { name: 'Start time' });
+    await start.focus();
+    await page.keyboard.press('ArrowRight');
+    await page.keyboard.press('ArrowRight');
+    await expect(page.getByText('Mon, Nov 23 · 1:30 – 1:45 PM · 15 min')).toBeVisible();
+    await page.getByRole('button', { name: 'Add to calendar' }).click();
+    const href = decodeURIComponent((await page.getByRole('link', { name: 'Apple / Outlook (.ics)' }).getAttribute('href'))!);
+    expect(href).toContain('DTSTART:20261123T183000Z');
+    expect(href).toContain('DTEND:20261123T184500Z');
+  });
+});
