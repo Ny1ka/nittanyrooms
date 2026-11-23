@@ -139,7 +139,7 @@ export function App() {
             {route.name === 'building' ? (
               <BuildingPanel buildingId={route.buildingId} sel={sel} demo={demo} live={live} filters={filters} clearFilters={() => setFilters(NO_FILTERS)} />
             ) : (
-              <CampusList markers={markers} visible={visible} filters={filters} setFilters={setFilters} demo={demo} live={live} geo={geo} sel={sel} route={walk} onRoute={showRoute} onClearRoute={() => setWalk({ status: 'idle' })} />
+              <CampusList markers={markers} visible={visible} filters={filters} setFilters={setFilters} demo={demo} live={live} geo={geo} sel={sel} route={walk} onRoute={showRoute} onClearRoute={() => setWalk({ status: 'idle' })} onExitNearby={() => { setWalk({ status: 'idle' }); setGeo({ status: 'idle' }); }} />
             )}
           </main>
         </div>

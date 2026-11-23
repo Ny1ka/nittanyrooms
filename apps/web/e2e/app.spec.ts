@@ -218,12 +218,17 @@ test.describe('walking route to the closest building', () => {
     await page.getByRole('button', { name: 'Filters' }).click();
     await page.getByRole('button', { name: /Sort by distance/ }).click();
     await page.keyboard.press('Escape');
-    await expect(page.getByText('Closest to you')).toBeVisible();
+    await expect(page.getByText('Closest open room')).toBeVisible();
+    await expect(page.getByText(/Closest building:/)).toBeVisible(); // Davey is nearer but closed
     expect(routed).toBe(0); // nothing sent until the user asks
     await page.getByRole('button', { name: /Show walking route to/ }).click();
     await expect(page.getByText(/5 min walk · 0\.2 mi to/)).toBeVisible();
     await expect(page.getByRole('link', { name: 'Fix the map' })).toBeVisible();
     expect(routed).toBe(1);
+    // Back leaves the nearby view: grouped list returns, location and route cleared.
+    await page.getByRole('button', { name: 'Back', exact: true }).click();
+    await expect(page.getByText('Closest open room')).toHaveCount(0);
+    await expect(page.getByRole('region', { name: 'Libraries' })).toBeVisible();
   });
 });
 

@@ -9,7 +9,7 @@ import { StatusChip } from '../components/StatusChip';
 import { spaceStatus } from '../lib/openSpaces';
 import { formatWalk, ROUTE_ATTRIBUTION, type RouteState } from '../lib/route';
 import type { SelectedTime } from '../lib/time';
-import { External, Star } from '../components/Icons';
+import { ChevronLeft, External, Star } from '../components/Icons';
 import { anyFilter, NO_FILTERS, type Filters } from '../lib/filters';
 import { distanceMeters, formatDistance, type GeoState } from '../lib/geo';
 import type { LiveState } from '../lib/live';
@@ -31,6 +31,7 @@ export function CampusList({
   route,
   onRoute,
   onClearRoute,
+  onExitNearby,
 }: {
   markers: MarkerInfo[];
   visible: MarkerInfo[];
@@ -43,6 +44,8 @@ export function CampusList({
   route: RouteState;
   onRoute: (buildingId: string) => void;
   onClearRoute: () => void;
+  /** Leave the nearby view (forget location, clear route). */
+  onExitNearby: () => void;
 }) {
   const favs = useFavorites();
   const watches = useWatches();
@@ -66,21 +69,35 @@ export function CampusList({
     <div className="pb-3">
       <h1 className="sr-only">Study rooms you can reserve at Penn State University Park</h1>
       {geo.status === 'error' && <p className="px-4 pt-3 text-xs text-busy-text">{geo.message}</p>}
-      {nearest && (
-        <div className="mx-4 mt-3 rounded-panel border border-line bg-surface-2 p-3 text-xs text-muted">
-          <div className="text-[11px] font-semibold tracking-wide text-subtle uppercase">Closest to you</div>
-          <button type="button" onClick={() => navigate(`/b/${nearest.building.id}`)} className="mt-1 block text-left">
-            <span className="text-[14px] font-semibold text-fg hover:underline">{nearest.building.headline}</span>
-            <span className="block">{formatDistance(dist(nearest))}</span>
-          </button>
-          <RouteControls target={nearestOpen ?? nearest} route={route} onRoute={onRoute} onClearRoute={onClearRoute} />
-          {nearestOpen && nearestOpen !== nearest && (
-            <button type="button" onClick={() => navigate(`/b/${nearestOpen.building.id}`)} className="mt-2 block text-left">
-              Closest with a room open: <span className="font-semibold text-open-text">{nearestOpen.building.headline}</span> · {formatDistance(dist(nearestOpen))}
+      {nearest && (() => {
+        const main = nearestOpen ?? nearest;
+        return (
+          <div className="mx-4 mt-3 rounded-panel border border-line bg-surface-2 p-3 text-xs text-muted">
+            <div className="flex items-center justify-between">
+              <button type="button" onClick={onExitNearby} className="-ml-1 inline-flex h-7 items-center gap-0.5 rounded-control px-1 font-semibold text-muted hover:text-fg">
+                <ChevronLeft size={13} /> Back
+              </button>
+              <span className="text-[11px] font-semibold tracking-wide text-subtle uppercase">
+                {nearestOpen ? 'Closest open room' : 'Closest to you'}
+              </span>
+            </div>
+            {!nearestOpen && <p className="mt-1 text-busy-text">No rooms are open right now.</p>}
+            <button type="button" onClick={() => navigate(`/b/${main.building.id}`)} className="mt-1 block text-left">
+              <span className="text-[15px] font-semibold text-fg hover:underline">{main.building.headline}</span>
+              <span className="block">
+                {nearestOpen && <span className="font-semibold text-open-text">{main.counts.open} open · </span>}
+                {formatDistance(dist(main))}
+              </span>
             </button>
-          )}
-        </div>
-      )}
+            <RouteControls target={main} route={route} onRoute={onRoute} onClearRoute={onClearRoute} />
+            {nearestOpen && nearest !== nearestOpen && (
+              <button type="button" onClick={() => navigate(`/b/${nearest.building.id}`)} className="mt-2 block text-left text-[11px]">
+                Closest building: <span className="font-semibold text-fg">{nearest.building.headline}</span> · {formatDistance(dist(nearest))}
+              </button>
+            )}
+          </div>
+        );
+      })()}
       {anyFilter(filters) && (
         <div className="flex items-center justify-between px-4 pt-3 text-xs text-muted" aria-live="polite">
           <span>
