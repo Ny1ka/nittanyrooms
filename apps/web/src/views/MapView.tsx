@@ -292,6 +292,9 @@ export function MapView({
   const mapRef = useRef<MLMap | null>(null);
   const markerRefs = useRef(new Map<string, { marker: Marker; el: HTMLButtonElement }>());
   const [status, setStatus] = useState<'loading' | 'ready' | 'error'>('loading');
+  const [view, setView] = useState({ bearing: OVERVIEW.bearing, pitch: OVERVIEW.pitch });
+  /** The 3D view to return to after switching to overhead. */
+  const saved3d = useRef<{ bearing: number; pitch: number } | null>(null);
   const latest = useRef({ markers, selectedId, onSelect, theme });
   latest.current = { markers, selectedId, onSelect, theme };
   const overviewCenter = useRef<[number, number]>([-77.8655, 40.7968]);
@@ -333,7 +336,10 @@ export function MapView({
           attributionControl: { compact: true },
         });
         map = lm;
-        lm.addControl(new maplibre.NavigationControl({ visualizePitch: true }), 'top-right');
+        lm.addControl(new maplibre.NavigationControl({ showCompass: false }), 'top-right');
+        const syncView = () => setView({ bearing: lm.getBearing(), pitch: lm.getPitch() });
+        lm.on('rotate', syncView);
+        lm.on('pitch', syncView);
         lm.on('style.load', () => {
           const { markers: ms, selectedId: sid, theme: th } = latest.current;
           addOverlays(lm, th, footprintData(ms, sid));
@@ -502,15 +508,47 @@ export function MapView({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userPos, status]);
 
+  const flat = Math.abs(view.pitch) < 1 && Math.abs(view.bearing) < 1;
+  const toggleOverhead = () => {
+    const map = mapRef.current;
+    if (!map) return;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const go = (o: { bearing: number; pitch: number }) => (reduce ? map.jumpTo(o) : map.easeTo({ ...o, duration: 600 }));
+    if (flat) {
+      // Back to the 3D view the user had (or the default for where they are).
+      const fallback = selectedId ? FOCUS : OVERVIEW;
+      go(saved3d.current ?? { bearing: fallback.bearing, pitch: fallback.pitch });
+      saved3d.current = null;
+    } else {
+      saved3d.current = { bearing: map.getBearing(), pitch: map.getPitch() };
+      go({ bearing: 0, pitch: 0 });
+    }
+  };
+
   return (
     <div className="absolute inset-0 bg-bg">
+      {status === 'ready' && (
+        <button
+          type="button"
+          onClick={toggleOverhead}
+          aria-pressed={flat}
+          aria-label={flat ? 'Return to the 3D view' : 'Switch to overhead view facing north'}
+          title={flat ? 'Back to 3D view' : 'Overhead view (north up)'}
+          className="absolute top-[78px] right-[10px] z-10 grid size-[29px] place-items-center rounded-[4px] bg-surface text-fg shadow-[0_0_0_1px_var(--nr-line)] hover:bg-surface-2"
+        >
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" style={{ transform: `rotate(${-view.bearing}deg)` }}>
+            <path d="M8 1.5 10.5 8H5.5Z" fill="#EF4444" />
+            <path d="M8 14.5 5.5 8h5Z" fill="currentColor" opacity="0.55" />
+          </svg>
+        </button>
+      )}
       {onLocate && (
         <button
           type="button"
           onClick={onLocate}
           aria-label="Show my location and the closest building"
           title="Find my location"
-          className="absolute top-[108px] right-[10px] z-10 grid size-[29px] place-items-center rounded-[4px] bg-surface text-fg shadow-[0_0_0_1px_var(--nr-line)] hover:bg-surface-2"
+          className="absolute top-[115px] right-[10px] z-10 grid size-[29px] place-items-center rounded-[4px] bg-surface text-fg shadow-[0_0_0_1px_var(--nr-line)] hover:bg-surface-2"
         >
           <Locate size={15} />
         </button>
