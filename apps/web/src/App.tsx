@@ -5,8 +5,9 @@ import { DemoBanner } from './components/Notices';
 import { buildingMatches, NO_FILTERS, type Filters } from './lib/filters';
 import { requestLocation, type GeoState } from './lib/geo';
 import { fetchWalkingRoute, type RouteState } from './lib/route';
+import { spaceStatus } from './lib/openSpaces';
 import { buildingCounts, useDemo } from './lib/availability';
-import { buildings, getBuilding } from './lib/data';
+import { buildings, getBuilding, openSpaces } from './lib/data';
 import { useLiveLibcal } from './lib/live';
 import { navigate, useRoute } from './lib/router';
 import { useThemePref } from './lib/theme';
@@ -132,6 +133,7 @@ export function App() {
             userPos={geo.status === 'ok' ? geo.pos : null}
             onLocate={locate}
             routeLine={routeLine}
+            spaceStatuses={Object.fromEntries(openSpaces.filter((s) => s.footprint).map((s) => [s.id, spaceStatus(s, live, sel)]))}
           />
         </Suspense>
         <Legend />
@@ -152,6 +154,7 @@ function Legend() {
       {item('bg-open', 'Rooms open')}
       {item('bg-busy', 'None open')}
       {item('fill-unknown', 'Check PSU site')}
+      {item('bg-space', 'Walk-in study space')}
       {item('border border-dashed border-subtle', 'Not verified')}
     </div>
   );

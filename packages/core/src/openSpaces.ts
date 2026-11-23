@@ -20,6 +20,16 @@ export const OpenSpace = z.object({
     z.object({ mode: z.literal('libcal') }),
     z.object({ mode: z.literal('not-published') }),
   ]),
+  /** Short label for the map pin. */
+  mapLabel: z.string().min(1).optional(),
+  /** OSM outline for spaces in buildings without reservable rooms (drawn purple on the map). */
+  footprint: z
+    .object({
+      heightMeters: z.number().positive().max(200),
+      heightSource: z.string().min(1),
+      coordinates: z.array(z.tuple([z.number(), z.number()])).min(4),
+    })
+    .optional(),
   /** Official page students should check (hours/policies). */
   url: z.url(),
   notes: z.array(z.string()),
@@ -45,6 +55,11 @@ export function validateOpenSpaces(raw: unknown, ctx: { buildingIds: string[]; s
     for (const id of s.verification.sourceIds) if (!ctx.sourceIds.includes(id)) issues.push({ severity: 'error', code: 'unknown-source', message: id, ref });
     const { lat, lon } = s.location;
     if (lat < bb.minLat || lat > bb.maxLat || lon < bb.minLon || lon > bb.maxLon) issues.push({ severity: 'error', code: 'coords-outside-campus', message: `${lat},${lon}`, ref });
+    if (s.footprint) {
+      const r = s.footprint.coordinates;
+      if (r[0]![0] !== r[r.length - 1]![0] || r[0]![1] !== r[r.length - 1]![1]) issues.push({ severity: 'error', code: 'footprint-open-ring', message: 'Ring is not closed', ref });
+      if (r.some(([x, y]) => y < bb.minLat || y > bb.maxLat || x < bb.minLon || x > bb.maxLon)) issues.push({ severity: 'error', code: 'footprint-outside-campus', message: 'Point outside University Park', ref });
+    }
     const ageDays = (now - Date.parse(s.verification.verifiedAt)) / 86_400_000;
     if (ageDays > 60) issues.push({ severity: 'warning', code: 'stale-open-space', message: `Checked ${Math.floor(ageDays)} days ago; re-check hours and access`, ref });
   }

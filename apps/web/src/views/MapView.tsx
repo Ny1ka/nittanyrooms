@@ -2,7 +2,9 @@ import type { Building } from '@nittany-rooms/core';
 import type { Map as MLMap, Marker, StyleSpecification } from 'maplibre-gl';
 import { useEffect, useRef, useState } from 'react';
 import type { StateCounts } from '../lib/availability';
-import { footprints } from '../lib/data';
+import type { OpenSpace } from '@nittany-rooms/core';
+import { footprints, openSpaces } from '../lib/data';
+import type { SpaceStatus } from '../lib/openSpaces';
 import type { LatLon } from '../lib/geo';
 import { useThemeValue, type Theme } from '../lib/theme';
 import { Locate } from '../components/Icons';
@@ -151,6 +153,45 @@ function addOverlays(map: MLMap, theme: Theme, data: ReturnType<typeof footprint
   });
 }
 
+/** Walk-in study spaces in buildings without reservable rooms, drawn purple. */
+const mappedSpaces = openSpaces.filter((s) => s.footprint);
+
+function spaceData() {
+  return {
+    type: 'FeatureCollection' as const,
+    features: mappedSpaces.map((s) => ({
+      type: 'Feature' as const,
+      geometry: { type: 'Polygon' as const, coordinates: [inflate(s.footprint!.coordinates as [number, number][])] },
+      properties: { spaceId: s.id, height: s.footprint!.heightMeters + 2 },
+    })),
+  };
+}
+
+function addSpaceLayers(map: MLMap, theme: Theme) {
+  if (map.getSource('nr-spaces')) return;
+  map.addSource('nr-spaces', { type: 'geojson', data: spaceData() });
+  map.addLayer({
+    id: 'nr-spaces-3d',
+    type: 'fill-extrusion',
+    source: 'nr-spaces',
+    paint: {
+      'fill-extrusion-color': theme === 'dark' ? '#8B5CF6' : '#A78BFA',
+      'fill-extrusion-height': ['get', 'height'],
+      'fill-extrusion-base': 0,
+      'fill-extrusion-opacity': 0.92,
+    },
+  });
+}
+
+function spacePinHtml(space: OpenSpace, status: SpaceStatus | undefined) {
+  const esc = (t: string) => t.replace(/[&<>"]/g, (c) => `&#${c.charCodeAt(0)};`);
+  const word = status?.state === 'open' ? 'open now' : status?.state === 'closed' ? 'closed now' : 'check hours';
+  return {
+    label: `${space.name}, walk-in study space, ${word}. Opens the official page.`,
+    html: `<span class="nr-pin nr-pin--space"><span class="nr-pin__badge">●</span><span class="nr-pin__name">${esc(space.mapLabel ?? space.name)}</span></span>`,
+  };
+}
+
 function addRouteLayers(map: MLMap, theme: Theme) {
   if (map.getSource('nr-route')) return;
   map.addSource('nr-route', { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
@@ -218,6 +259,7 @@ export function MapView({
   userPos = null,
   onLocate,
   routeLine = null,
+  spaceStatuses = {},
 }: {
   markers: MarkerInfo[];
   visibleIds: Set<string>;
@@ -228,7 +270,10 @@ export function MapView({
   onLocate?: () => void;
   /** Walking route (or straight-line fallback) to draw, [lon, lat] pairs. */
   routeLine?: { coords: [number, number][]; fallback: boolean } | null;
+  /** Status per open-space id, for pin labels. */
+  spaceStatuses?: Record<string, SpaceStatus>;
 }) {
+  const spaceMarkers = useRef(new Map<string, HTMLAnchorElement>());
   const routeRef = useRef(routeLine);
   routeRef.current = routeLine;
   const userMarker = useRef<Marker | null>(null);
@@ -283,6 +328,7 @@ export function MapView({
         lm.on('style.load', () => {
           const { markers: ms, selectedId: sid, theme: th } = latest.current;
           addOverlays(lm, th, footprintData(ms, sid));
+          addSpaceLayers(lm, th);
           addRouteLayers(lm, th);
           if (routeRef.current) setRoute(lm, routeRef.current.coords, routeRef.current.fallback);
         });
@@ -309,6 +355,15 @@ export function MapView({
             .setLngLat([m.building.location.lon, m.building.location.lat])
             .addTo(lm);
           markerRefs.current.set(m.building.id, { marker, el });
+        }
+        for (const s of mappedSpaces) {
+          const el = document.createElement('a');
+          el.className = 'nr-marker';
+          el.href = s.url;
+          el.target = '_blank';
+          el.rel = 'noopener noreferrer';
+          new maplibre.Marker({ element: el, anchor: 'bottom', offset: [0, -6] }).setLngLat([s.location.lon, s.location.lat]).addTo(lm);
+          spaceMarkers.current.set(s.id, el);
         }
       } catch {
         if (!cancelled) setStatus('error');
@@ -366,6 +421,17 @@ export function MapView({
     // Only react to selection and layout changes, not every count refresh.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedId, status, bottomPadding]);
+
+  // Space pins: labels follow live status (purple = walk-in study space).
+  useEffect(() => {
+    for (const s of mappedSpaces) {
+      const el = spaceMarkers.current.get(s.id);
+      if (!el) continue;
+      const { html, label } = spacePinHtml(s, spaceStatuses[s.id]);
+      el.innerHTML = html;
+      el.setAttribute('aria-label', label);
+    }
+  }, [spaceStatuses, status]);
 
   // Walking route: animate the line drawing from the user to the building.
   useEffect(() => {
@@ -464,6 +530,7 @@ export function MapView({
           background:var(--nr-surface-3);color:var(--nr-fg);font-weight:800;font-size:11px;box-sizing:border-box}
         .nr-pin--open .nr-pin__badge{background:var(--nr-open);color:#05230f}
         .nr-pin--busy .nr-pin__badge{background:var(--nr-busy);color:#fff}
+        .nr-pin--space .nr-pin__badge{background:var(--nr-space);color:#fff;font-size:9px}
         .nr-pin--candidate{box-shadow:none;outline:1.5px dashed var(--nr-subtle);outline-offset:-1.5px}
         .nr-pin--selected{box-shadow:0 0 0 2px var(--nr-accent-border),0 4px 14px rgb(0 0 0 / .35)}
         .nr-user{width:16px;height:16px;border-radius:999px;background:#3b82f6;border:3px solid #fff;box-shadow:0 0 0 6px rgb(59 130 246 / .25)}
