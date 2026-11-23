@@ -31,7 +31,7 @@ Library availability is live from Penn State's public LibCal, refreshed every 3 
 |---|---|
 | ![Building view: rooms by floor with status and a mini timeline each](nittany-rooms-design/png/04-desktop-building-dark.png) | ![Room view: day timeline, bookable windows, and the official booking button](nittany-rooms-design/png/05-desktop-room-dark.png) |
 
-Choosing a building flies the camera in and lists its rooms by floor, each with a status chip and a mini day timeline. A room shows its features and capacity, a timeline for the day, the windows you can actually book (gaps too short to book are hidden), and **Continue to Penn State reservation**. That button goes straight to the room's LibCal page, or to Outlook with step-by-step instructions for College of Engineering rooms.
+Choosing a building flies the camera in and lists its rooms by floor, each with a status chip and a mini day timeline. A room shows its features and capacity, a timeline for the day, the windows you can actually book (gaps too short to book are hidden), and **Continue to Penn State reservation**. That button goes straight to the room's LibCal page, **already open on your chosen date**, and tells you which time to tap. LibCal has no link parameter for the time itself. For College of Engineering rooms, it opens Outlook with step-by-step instructions.
 
 ### Closest room and a walking route
 
@@ -43,7 +43,7 @@ Choosing a building flies the camera in and lists its rooms by floor, each with 
 
 - **Favorites:** star buildings and rooms to pin them at the top of the list with live status. Saved in your browser only, with no account.
 - **Pick your exact time:** drag the booking block inside an open window, or use the Start and Length sliders (15 minutes up to the 3-hour maximum).
-- **Notify me when it opens:** watch a busy room and get a browser notification (plus an in-app alert) when a slot of your chosen length frees up around your time. Works while the site is open in a tab, and is stored in your browser only.
+- **Notify me when it opens:** watch a busy room and choose the length you need (15 min to 2 hr). When a slot frees up within 30 minutes of your time, you get a push notification, **even with the site closed**, plus an in-app alert. Tapping it opens the room. Alerts fire once and expire after their day. On iPhone, add the site to your Home Screen first. Without push support, it still works while the site is open in a tab.
 - **Add to calendar:** after Penn State confirms your booking, add it to Apple or Outlook (.ics) or Google Calendar.
 - **Share room:** send a link that reopens the exact room, date, and time, using your phone's share sheet or copied to the clipboard.
 - **Report wrong info:** opens a GitHub issue pre-filled with the room's ID, sources, and a checklist, so data fixes are quick.
@@ -88,7 +88,8 @@ Campus-wide classroom availability (classes, events, and building hours, like il
 | Path | Purpose |
 |---|---|
 | `apps/web/` | React + TypeScript + Vite app: 3D map (MapLibre + OpenFreeMap), sidebar, room timeline, booking handoff |
-| `apps/web/api/` | Vercel Function `GET /api/availability?date=` (live LibCal availability, CDN-cached) |
+| `apps/web/api/` | Vercel Functions: `GET /api/availability?date=` (live LibCal availability, CDN-cached), `POST/DELETE /api/watches` and `GET /api/check-watches` (push alerts), `GET /api/push-config` |
+| `apps/web/public/sw.js` | Service worker that shows push notifications |
 | `apps/web/e2e/` | Playwright end-to-end tests (mocked API, keyboard, mobile, axe accessibility) |
 | `packages/core/` | Shared schemas, the availability engine (pure functions), data-quality checks, LibCal ingestion |
 | `data/` | Buildings, rooms, providers, policies, open spaces, and footprints, each with sources and verification dates |
@@ -107,9 +108,12 @@ pnpm e2e             # build + Playwright end-to-end tests
 pnpm dev             # web app (also serves /api locally)
 ```
 
-Server env vars (Vercel; see `apps/web/.env.example`): `LIBCAL_LIVE=off` disables live library availability, and `LIBCAL_USER_AGENT` sets the identifier sent to LibCal.
+Server env vars (Vercel; see `apps/web/.env.example`):
 
-CI (GitHub Actions) runs the data gate, typecheck, unit tests, build, and end-to-end tests on every push. Vercel deploys `main` automatically (Root Directory: `apps/web`).
+- `LIBCAL_LIVE=off` disables live library availability; `LIBCAL_USER_AGENT` sets the identifier sent to LibCal.
+- **Push alerts (optional):** connect **Upstash for Redis** in Vercel Storage (sets `KV_REST_API_URL` / `KV_REST_API_TOKEN`). Run `node apps/web/scripts/gen-push-keys.mjs` to generate `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY` and `CRON_SECRET` into a git-ignored file, then add them to Vercel. Add `CRON_SECRET` as a GitHub Actions secret and redeploy. A GitHub Actions schedule (`.github/workflows/watch-check.yml`) checks alerts every ~5 minutes.
+
+CI (GitHub Actions) runs the data gate, typecheck, unit tests, build, and end-to-end tests on every push. A separate scheduled workflow runs the alert checker. Vercel deploys `main` automatically (Root Directory: `apps/web`).
 
 ## Data rules
 
@@ -117,6 +121,7 @@ CI (GitHub Actions) runs the data gate, typecheck, unit tests, build, and end-to
 - Every record carries its source, its verification date, and a confidence status.
 - If availability can't be verified, it's shown as **"Check PSU site"** (or "Check hours"), never as free.
 - Penn State's booking page always has the final say.
+- Privacy: favorites, alerts and your location stay in your browser. Push alerts store only an anonymous push subscription with the room and time, deleted once the alert fires or the day ends.
 
 ## Credits
 
