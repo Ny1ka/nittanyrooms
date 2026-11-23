@@ -180,9 +180,24 @@ export async function handleAvailability(request: Request, deps: HandlerDeps): P
     );
   }
 
-  const hit = deps.memo?.get(date);
-  if (hit && hit.expires > now) return json(hit.payload, 200, SUCCESS_CACHE);
+  const result = await loadPayload(date, deps, now);
+  if ('error' in result) {
+    return json({ error: result.error, ...(result.status ? { status: result.status } : {}) }, 502, ERROR_CACHE);
+  }
+  return json(result.payload, 200, SUCCESS_CACHE);
+}
 
+/**
+ * Fetch and parse one campus date from LibCal (memoized per instance).
+ * Shared by the availability API and the notification checker.
+ */
+export async function loadPayload(
+  date: string,
+  deps: HandlerDeps,
+  now = deps.now?.() ?? Date.now(),
+): Promise<{ payload: AvailabilityPayload } | { error: string; status?: number }> {
+  const hit = deps.memo?.get(date);
+  if (hit && hit.expires > now) return { payload: hit.payload };
   let upstream: Response;
   try {
     upstream = await deps.fetch(LIBCAL_GRID_URL, {
@@ -198,18 +213,15 @@ export async function handleAvailability(request: Request, deps: HandlerDeps): P
       body: gridRequestBody(date),
       signal: AbortSignal.timeout(10_000),
     });
-  } catch (e) {
-    return json({ error: 'upstream-unreachable', message: String((e as Error)?.message ?? e) }, 502, ERROR_CACHE);
+  } catch {
+    return { error: 'upstream-unreachable' };
   }
-  if (!upstream.ok) {
-    return json({ error: 'upstream-status', status: upstream.status }, 502, ERROR_CACHE);
-  }
-
+  if (!upstream.ok) return { error: 'upstream-status', status: upstream.status };
   try {
     const payload = parseGrid(await upstream.json(), date, now);
     deps.memo?.set(date, { expires: now + MEMO_TTL_MS, payload });
-    return json(payload, 200, SUCCESS_CACHE);
+    return { payload };
   } catch {
-    return json({ error: 'upstream-shape', message: 'LibCal returned an unexpected response.' }, 502, ERROR_CACHE);
+    return { error: 'upstream-shape' };
   }
 }

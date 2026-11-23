@@ -17,14 +17,19 @@ function vercelApiDev(): Plugin {
         const m = /^\/api\/([a-z0-9-]+)$/.exec(url.pathname);
         if (!m) return next();
         try {
-          const mod = (await server.ssrLoadModule(`/api/${m[1]}.ts`)) as {
-            GET?: (r: Request) => Promise<Response>;
-          };
-          if (!mod.GET || req.method !== 'GET') {
+          const mod = (await server.ssrLoadModule(`/api/${m[1]}.ts`)) as Record<string, ((r: Request) => Promise<Response> | Response) | undefined>;
+          const handler = mod[req.method ?? 'GET'];
+          if (!handler) {
             res.statusCode = 405;
             return res.end();
           }
-          const response = await mod.GET(new Request(url));
+          const chunks: Buffer[] = [];
+          for await (const c of req) chunks.push(c as Buffer);
+          const headers = new Headers();
+          for (const [k, v] of Object.entries(req.headers)) if (typeof v === 'string') headers.set(k, v);
+          const response = await handler(
+            new Request(url, { method: req.method, headers, ...(chunks.length ? { body: Buffer.concat(chunks) } : {}) }),
+          );
           res.statusCode = response.status;
           response.headers.forEach((v, k) => res.setHeader(k, v));
           res.end(Buffer.from(await response.arrayBuffer()));
