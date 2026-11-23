@@ -242,7 +242,10 @@ export function nextWindow(day: DayAvailability, t: number): BookableWindow | un
  * Room state at an instant, mapped to the design system's five room states.
  * `soonMinutes` controls how close the next window must be to count as "opens soon".
  */
-export function statusAt(day: DayAvailability, t: number, soonMinutes = 60): RoomStatus {
+/** How close the next bookable start must be to count as "opens soon" (≈ one campus walk). */
+export const OPENS_SOON_MINUTES = 30;
+
+export function statusAt(day: DayAvailability, t: number, soonMinutes = OPENS_SOON_MINUTES): RoomStatus {
   const seg = day.segments.find((s) => contains(s, t));
   if (!seg || seg.kind === 'unknown') return { state: 'unknown' };
 

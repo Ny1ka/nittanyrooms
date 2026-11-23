@@ -360,3 +360,18 @@ test.describe('between booking increments', () => {
     await expect(page.getByRole('button', { name: /Pattee and Paterno Libraries/ })).not.toContainText('0/');
   });
 });
+
+test.describe('opening soon in the building list', () => {
+  test('a building with nothing open but a room opening within 30 min shows "1 soon", not red 0/n', async ({ page, api: _ }) => {
+    await page.unroute('**/api/availability?*');
+    await page.route('**/api/availability?*', async (route) => {
+      const body = payload(new URL(route.request().url()).searchParams.get('date')!);
+      body.items['8251'] = { open: body.items['8251']!.open, busy: [[NOW.set({ hour: 12 }).toMillis(), NOW.set({ hour: 13, minute: 15 }).toMillis()]] };
+      await route.fulfill({ json: body });
+    });
+    await page.goto('/');
+    const ems = page.getByRole('button', { name: /Earth and Mineral Sciences Library/ });
+    await expect(ems).toContainText('1 soon');
+    await expect(ems).not.toContainText('0/8');
+  });
+});

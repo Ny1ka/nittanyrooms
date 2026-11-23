@@ -21,7 +21,7 @@ A visual study-room finder for **Penn State University Park**. Pick a building o
 
 ### Live availability on a 3D campus map
 
-Buildings with reservable rooms are drawn from their OpenStreetMap outlines and colored by what's free at the selected time: **green** = rooms open, **red** = none open, **grey** = closed or can't be checked, **purple** = walk-in study space. The list groups Libraries, Engineering, and open study spaces, with one badge per building (`22/36`, `0/8`, `Closed`, `Check site`).
+Buildings with reservable rooms are drawn from their OpenStreetMap outlines and colored by what's free at the selected time: **green** = rooms open, **yellow** = a room opens within 30 minutes, **red** = none open, **grey** = closed or can't be checked, **purple** = walk-in study space. The list groups Libraries, Engineering, and open study spaces, with one badge per building (`22/36`, `2 soon`, `0/8`, `Closed`, `Check site`).
 
 Library availability is live from Penn State's public LibCal, refreshed every 3 minutes.
 

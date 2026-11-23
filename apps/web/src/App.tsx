@@ -175,6 +175,7 @@ function Legend() {
   return (
     <div className="pointer-events-none absolute top-3 left-3 hidden gap-3 rounded-full border border-line bg-surface/90 px-3 py-1.5 text-[11px] text-muted md:flex">
       {item('bg-open', 'Rooms open')}
+      {item('bg-yellow', 'Opening soon')}
       {item('bg-busy', 'None open')}
       {item('fill-unknown', 'Check PSU site')}
       {item('bg-space', 'Walk-in study space')}

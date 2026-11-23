@@ -186,8 +186,14 @@ function Badge({ info }: { info: MarkerInfo }) {
   const base = 'inline-flex h-6 min-w-12 items-center justify-center rounded-full px-2 text-xs font-semibold tabular';
   if (info.building.status === 'candidate') return <span className={`${base} bg-surface-2 text-muted`}>Not verified</span>;
   if (!info.known) return <span className={`${base} bg-surface-2 text-muted`}>Check site</span>;
-  const { open, total, unavailable } = info.counts;
+  const { open, total, unavailable, opensSoon } = info.counts;
   if (open === 0 && unavailable === total) return <span className={`${base} bg-surface-2 text-muted`}>Closed</span>;
+  if (open === 0 && opensSoon > 0)
+    return (
+      <span className={`${base} border border-dashed border-yellow text-soon-text`} aria-label={`${opensSoon} of ${total} opening within 30 minutes`}>
+        {opensSoon} soon
+      </span>
+    );
   return open > 0 ? (
     <span className={`${base} bg-open-soft text-open-text`} aria-label={`${open} of ${total} open`}>
       {open}/{total}

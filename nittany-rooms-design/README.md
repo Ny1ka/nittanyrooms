@@ -2,7 +2,7 @@
 
 The design language for Nittany Rooms, a student-made web app for finding and reserving study rooms at Penn State University Park. It is not an official Penn State service.
 
-**v2.1 is minimal and neutral.** Dark and light gray surfaces, **green = open/available, red = occupied/not available, grey = closed/unknown, purple = walk-in study space**, and blue (actions, selection) and yellow (brand, “opens soon”) as accents only. Appearance can be Light, Dark (default) or Auto. The 3D campus map is the canvas, and a quiet sidebar or bottom sheet holds the content. The palette is navy surfaces with a single yellow accent. v1, the original mockups, is kept in [`v1/`](v1/) for reference.
+**v2.1 is minimal and neutral.** Dark and light gray surfaces, **green = open/available, yellow = opens within 30 min, red = occupied/not available, grey = closed/unknown, purple = walk-in study space**, and blue (actions, selection) and yellow (brand, “opens soon”) as accents only. Appearance can be Light, Dark (default) or Auto. The 3D campus map is the canvas, and a quiet sidebar or bottom sheet holds the content. The palette is navy surfaces with a single yellow accent. v1, the original mockups, is kept in [`v1/`](v1/) for reference.
 
 ## What's in here
 

@@ -107,7 +107,8 @@ function footprintData(markers: MarkerInfo[], selectedId: string | null) {
         const m = byId.get(f.properties.buildingId)!;
         const open = m.known && m.counts.open > 0;
         const closed = m.known && m.counts.unavailable === m.counts.total;
-        const none = m.known && m.counts.open === 0 && !closed;
+        const soon = m.known && m.counts.open === 0 && m.counts.opensSoon > 0;
+        const none = m.known && m.counts.open === 0 && !closed && !soon;
         const selected = f.properties.buildingId === selectedId;
         return {
           type: 'Feature' as const,
@@ -115,7 +116,7 @@ function footprintData(markers: MarkerInfo[], selectedId: string | null) {
           properties: {
             buildingId: f.properties.buildingId,
             height: f.properties.heightMeters + 2,
-            tone: `${open ? 'open' : none ? 'busy' : 'quiet'}${selected ? '-selected' : ''}`,
+            tone: `${open ? 'open' : soon ? 'soon' : none ? 'busy' : 'quiet'}${selected ? '-selected' : ''}`,
           },
         };
       }),
@@ -138,6 +139,10 @@ function addOverlays(map: MLMap, theme: Theme, data: ReturnType<typeof footprint
         '#22C55E',
         'open-selected',
         '#4ADE80',
+        'soon',
+        '#FACC15',
+        'soon-selected',
+        '#FDE047',
         'busy',
         '#DC2626',
         'busy-selected',
@@ -235,6 +240,10 @@ function markerHtml(info: MarkerInfo, selected: boolean): { html: string; label:
     cls += ' nr-pin--open';
     badge = String(info.counts.open);
     label = `${b.headline}, ${info.counts.open} of ${info.counts.total} rooms open at this time`;
+  } else if (info.known && info.counts.open === 0 && info.counts.opensSoon > 0) {
+    cls += ' nr-pin--soon';
+    badge = String(info.counts.opensSoon);
+    label = `${b.headline}, ${info.counts.opensSoon} rooms opening within 30 minutes`;
   } else if (info.known && info.counts.unavailable === info.counts.total) {
     badge = '–';
     label = `${b.headline}, closed at this time`;
@@ -530,6 +539,7 @@ export function MapView({
           background:var(--nr-surface-3);color:var(--nr-fg);font-weight:800;font-size:11px;box-sizing:border-box}
         .nr-pin--open .nr-pin__badge{background:var(--nr-open);color:#05230f}
         .nr-pin--busy .nr-pin__badge{background:var(--nr-busy);color:#fff}
+        .nr-pin--soon .nr-pin__badge{background:#FACC15;color:#111418}
         .nr-pin--space .nr-pin__badge{background:var(--nr-space);color:#fff;font-size:9px}
         .nr-pin--candidate{box-shadow:none;outline:1.5px dashed var(--nr-subtle);outline-offset:-1.5px}
         .nr-pin--selected{box-shadow:0 0 0 2px var(--nr-accent-border),0 4px 14px rgb(0 0 0 / .35)}

@@ -299,8 +299,9 @@ describe('statusAt', () => {
   it('occupied with until = end of occupied run', () => {
     expect(statusAt(d, t('12:30'))).toMatchObject({ state: 'occupied', until: t('15:00') });
   });
-  it('opens soon when the next window is within the hour', () => {
-    expect(statusAt(d, t('14:15'))).toMatchObject({ state: 'opensSoon', opensAt: t('15:00') });
+  it('opens soon when the next window starts within 30 minutes; occupied when further out', () => {
+    expect(statusAt(d, t('14:35'))).toMatchObject({ state: 'opensSoon', opensAt: t('15:00') });
+    expect(statusAt(d, t('14:15'))).toMatchObject({ state: 'occupied', until: t('15:00') });
   });
   it('unknown when data is missing', () => {
     expect(statusAt(run({ snapshot: null }), t('10:00')).state).toBe('unknown');
