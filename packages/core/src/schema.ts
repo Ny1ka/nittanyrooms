@@ -110,8 +110,13 @@ export type FloorplanState = z.infer<typeof FloorplanState>;
 
 export const Floor = z.object({
   id,
-  /** Label as students would say it, e.g. "1", "Ground". */
+  /** Label as students would say it, e.g. "1", "G". */
   label: z.string().min(1),
+  /**
+   * True when the source doesn't say which floor these rooms are on.
+   * Rooms are grouped here instead of being guessed onto a real floor.
+   */
+  unlisted: z.boolean().optional(),
   /** Sort order, lowest first. */
   level: z.number().int(),
   floorplan: FloorplanState,
@@ -145,6 +150,26 @@ export const Building = z.object({
 });
 export type Building = z.infer<typeof Building>;
 
+/** Room features we recognise. Only ever set from a verified source. */
+export const RoomFeature = z.enum([
+  'accessible',
+  'whiteboard',
+  'screen-monitor',
+  'power',
+  'desktop-pc',
+  'solstice',
+]);
+export type RoomFeature = z.infer<typeof RoomFeature>;
+
+export const FEATURE_LABELS: Record<RoomFeature, string> = {
+  accessible: 'Accessible',
+  whiteboard: 'Whiteboard',
+  'screen-monitor': 'Screen monitor',
+  power: 'Power outlets',
+  'desktop-pc': 'Desktop PC',
+  solstice: 'Solstice wireless display',
+};
+
 export const Room = z.object({
   id,
   /** The provider's own identifier (LibCal space id, mailbox, …) when known. */
@@ -154,10 +179,12 @@ export const Room = z.object({
   /** Official label exactly as published, e.g. "248". */
   officialLabel: z.string().min(1),
   displayName: z.string().min(1),
+  /** Named area within the building, e.g. "Knowledge Commons". */
+  area: z.string().nullable().optional(),
   type: z.enum(['group-study', 'individual-study', 'conference', 'other']),
   capacity: z.number().int().positive().nullable(),
   /** Only verified features. Empty when unknown. */
-  features: z.array(z.string()),
+  features: z.array(RoomFeature),
   eligibility: z.string().min(1),
   providerId: id,
   policyId: id,

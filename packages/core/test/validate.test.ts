@@ -91,6 +91,12 @@ describe('validateDataset', () => {
     expect(r.errors[0]!.code).toBe('schema');
   });
 
+  it('rejects features outside the known vocabulary (no free-text claims)', () => {
+    const d = clone();
+    d.rooms[0].features = ['hot tub'];
+    expect(validateDataset(d, { now: NOW }).errors[0]!.code).toBe('schema');
+  });
+
   it('excludes candidate rooms from the user-facing inventory', () => {
     const d = clone();
     d.rooms[0].verification.status = 'candidate';
