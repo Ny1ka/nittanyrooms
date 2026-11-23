@@ -57,6 +57,11 @@ export const ReservationProvider = z.object({
    */
   handoffMode: z.enum(['room-link', 'portal-with-instructions']),
   handoffSteps: z.array(z.string().min(1)).min(1),
+  /**
+   * Verified deep-link support for room links. Only set after testing against the
+   * live provider (e.g. LibCal reads ?date=YYYY-MM-DD into the room calendar).
+   */
+  deepLink: z.object({ dateParam: z.string().min(1), verifiedAt: z.iso.date() }).optional(),
   /** Whether booking is instant or a request that must be approved. */
   confirmation: z.enum(['instant-email', 'approval-email']),
   /** What permitted programmatic availability access exists right now. */

@@ -33,7 +33,7 @@
     "portalUrl": "https://psu.libcal.com/spaces?lid=428&gid=2159",
     "handoffMode": "room-link",
     "handoffSteps": [
-      "Pick an open time on the room's page. Rooms can be reserved for up to 3 hours a day.",
+      "The room's page opens on your date. Tap your start time on its calendar, then choose the end time (up to 3 hours a day).",
       "Enter your details, including your Penn State access ID.",
       "Watch for the email confirmation. It isn't reserved until that arrives."
     ],
@@ -49,6 +49,10 @@
         "psu-libcal-up-spaces"
       ],
       "verifiedAt": "2026-11-22"
+    },
+    "deepLink": {
+      "dateParam": "date",
+      "verifiedAt": "2026-11-23"
     }
   }
 ]

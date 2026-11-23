@@ -127,8 +127,10 @@ describe('buildHandoff', () => {
 
   it('uses the room link when the provider supports it and the room has one', () => {
     const r = { ...room, providerId: 'psul-libcal', bookingUrl: 'https://psu.libcal.com/space/1' };
-    expect(buildHandoff({ room: r, building, provider: libcal, date: '2026-11-23', selection }).url)
-      .toBe('https://psu.libcal.com/space/1');
+    const h = buildHandoff({ room: r, building, provider: libcal, date: '2026-11-23', selection });
+    // LibCal's room page reads ?date= into its calendar (verified 2026-11-23).
+    expect(h.url).toBe('https://psu.libcal.com/space/1?date=2026-11-23');
+    expect(h.datePreselected).toBe(true);
   });
 
   it('falls back to the portal when a room-link provider room has no verified link', () => {

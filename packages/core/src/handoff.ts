@@ -5,6 +5,8 @@ import type { Interval } from './availability/intervals.js';
 export interface Handoff {
   /** Official destination. Never a Nittany Rooms URL. */
   url: string;
+  /** True when the official page opens on the selected date. */
+  datePreselected: boolean;
   /** Effective mode — falls back to portal when a room has no verified link. */
   mode: 'room-link' | 'portal-with-instructions';
   providerName: string;
@@ -59,8 +61,17 @@ export function buildHandoff(args: {
     time ? `${dateLabel}, ${time}` : dateLabel,
   ].join('\n');
 
+  let url = useRoomLink ? room.bookingUrl! : provider.portalUrl;
+  if (useRoomLink && provider.deepLink) {
+    const u = new URL(url);
+    u.searchParams.set(provider.deepLink.dateParam, date);
+    url = u.toString();
+  }
+
   return {
-    url: useRoomLink ? room.bookingUrl! : provider.portalUrl,
+    url,
+    /** True when the official page opens on the selected date. */
+    datePreselected: useRoomLink && !!provider.deepLink,
     mode: useRoomLink ? 'room-link' : 'portal-with-instructions',
     providerName: provider.name,
     steps: provider.handoffSteps,
