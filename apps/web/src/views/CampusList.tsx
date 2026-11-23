@@ -1,9 +1,12 @@
 import { formatTime } from '@nittany-rooms/core';
-import { getProvider, openSpaces } from '../lib/data';
+import { getBuilding, getProvider, openSpaces, rooms as allRooms } from '../lib/data';
+import { roomDay, roomStatus } from '../lib/availability';
+import { useFavorites } from '../lib/favorites';
+import { StatusChip } from '../components/StatusChip';
 import { spaceStatus } from '../lib/openSpaces';
 import { formatWalk, ROUTE_ATTRIBUTION, type RouteState } from '../lib/route';
 import type { SelectedTime } from '../lib/time';
-import { External } from '../components/Icons';
+import { External, Star } from '../components/Icons';
 import { anyFilter, NO_FILTERS, type Filters } from '../lib/filters';
 import { distanceMeters, formatDistance, type GeoState } from '../lib/geo';
 import type { LiveState } from '../lib/live';
@@ -38,6 +41,8 @@ export function CampusList({
   onRoute: (buildingId: string) => void;
   onClearRoute: () => void;
 }) {
+  const favs = useFavorites();
+  const favRooms = allRooms.filter((r) => favs.ids.includes(r.id));
   const pos = geo.status === 'ok' ? geo.pos : null;
   const dist = (m: MarkerInfo) => (pos ? distanceMeters(pos, { lat: m.building.location.lat, lon: m.building.location.lon }) : 0);
   const rows = pos ? [...visible].sort((a, b) => dist(a) - dist(b)) : visible;
@@ -80,6 +85,32 @@ export function CampusList({
             Clear
           </button>
         </div>
+      )}
+
+      {favRooms.length > 0 && !anyFilter(filters) && (
+        <section aria-label="Favorites">
+          <h2 className="flex items-center gap-1.5 px-4 pt-4 pb-1.5 text-[13px] font-medium text-subtle">
+            <Star size={12} filled className="text-yellow" /> Favorites
+          </h2>
+          <ul className="border-t border-line">
+            {favRooms.map((r) => {
+              const b = getBuilding(r.buildingId)!;
+              const st = roomStatus(roomDay(r, sel.date, sel.now, { demo, live }), sel.at);
+              return (
+                <li key={r.id} className="border-b border-line">
+                  <button type="button" onClick={() => navigate(`/b/${b.id}`, { room: r.id })} className="flex w-full items-center gap-3 px-4 py-3 text-left hover:bg-surface-2">
+                    <span className="min-w-0 flex-1">
+                      <span className="block truncate text-[15px] font-semibold">{r.displayName}</span>
+                      <span className="block truncate text-xs text-muted">{b.headline}</span>
+                    </span>
+                    <StatusChip status={st} />
+                    <ChevronRight size={14} className="shrink-0 text-subtle" />
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
       )}
 
       {rows.length === 0 && (

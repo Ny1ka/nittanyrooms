@@ -17,7 +17,8 @@ import type { LiveState } from '../lib/live';
 import { setParams } from '../lib/router';
 import type { SelectedTime } from '../lib/time';
 import { HandoffPanel } from '../components/HandoffPanel';
-import { ChevronLeft, ChevronRight } from '../components/Icons';
+import { ChevronLeft, ChevronRight, Star } from '../components/Icons';
+import { useFavorites } from '../lib/favorites';
 import { FreshnessNote } from '../components/Notices';
 import { StatusChip } from '../components/StatusChip';
 import { Timeline } from '../components/Timeline';
@@ -32,6 +33,8 @@ export function RoomPanel({ room, building, sel, demo, live }: { room: Room; bui
   const policy = getPolicy(room.policyId);
   const provider = getProvider(room.providerId);
   const floor = floorOf(room, building);
+  const fav = useFavorites();
+  const isFav = fav.has(room.id);
   const [showShorter, setShowShorter] = useState(false);
   const day = useMemo(() => roomDay(room, sel.date, sel.now, { demo, showShorter, live }), [room, sel.date, sel.now, demo, showShorter, live]);
   const status = roomStatus(day, sel.at);
@@ -68,7 +71,19 @@ export function RoomPanel({ room, building, sel, demo, live }: { room: Room; bui
 
       <div className="space-y-2">
         <div>
-          <h1 className="text-xl leading-tight font-semibold">{room.displayName}</h1>
+          <div className="flex items-start justify-between gap-2">
+            <h1 className="text-xl leading-tight font-semibold">{room.displayName}</h1>
+            <button
+              type="button"
+              aria-pressed={isFav}
+              aria-label={isFav ? `Remove ${room.displayName} from favorites` : `Save ${room.displayName} to favorites`}
+              title={isFav ? 'Remove from favorites' : 'Save to favorites'}
+              onClick={() => fav.toggle(room.id)}
+              className={`grid size-8 shrink-0 place-items-center rounded-control hover:bg-surface-2 ${isFav ? 'text-yellow' : 'text-subtle hover:text-fg'}`}
+            >
+              <Star size={18} filled={isFav} />
+            </button>
+          </div>
           <p className="mt-0.5 text-xs text-muted">{meta}</p>
           {room.officialLabel !== room.displayName && (
             <p className="mt-0.5 text-[11px] text-subtle">On Penn State's site: “{room.officialLabel}”</p>

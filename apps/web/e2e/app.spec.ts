@@ -224,3 +224,16 @@ test.describe('walking route to the closest building', () => {
     expect(routed).toBe(1);
   });
 });
+
+test.describe('favorites', () => {
+  test('save a room, see it pinned at the top with live status after reload', async ({ page, api: _ }) => {
+    await page.goto('/b/pattee-paterno?room=pattee-w120');
+    await page.getByRole('button', { name: 'Save Pattee W120 to favorites' }).click();
+    await expect(page.getByRole('button', { name: 'Remove Pattee W120 from favorites' })).toHaveAttribute('aria-pressed', 'true');
+    await page.goto('/');
+    const favs = page.getByRole('region', { name: 'Favorites' });
+    await expect(favs.getByRole('button', { name: /Pattee W120/ })).toContainText('Open');
+    await favs.getByRole('button', { name: /Pattee W120/ }).click();
+    await expect(page.getByRole('heading', { level: 1, name: 'Pattee W120' })).toBeVisible();
+  });
+});

@@ -7,7 +7,8 @@ import { anyFilter, roomMatches, type Filters } from '../lib/filters';
 import type { LiveState } from '../lib/live';
 import { navigate, setParams, useRoute } from '../lib/router';
 import type { SelectedTime } from '../lib/time';
-import { ChevronLeft, External } from '../components/Icons';
+import { ChevronLeft, External, Star } from '../components/Icons';
+import { useFavorites } from '../lib/favorites';
 import { AvailabilityFreshness } from '../components/Notices';
 import { StatusChip, statusLabel } from '../components/StatusChip';
 import { MiniTimeline, displayRange } from '../components/Timeline';
@@ -189,6 +190,7 @@ function RoomRow({
   nowish: boolean;
 }) {
   const f = floorOf(room, building);
+  const isFav = useFavorites().has(room.id);
   const sub = [room.area, room.capacity ? `${room.capacity} seats` : null].filter(Boolean).join(' · ');
   return (
     <li>
@@ -201,6 +203,7 @@ function RoomRow({
         <span className="flex items-center gap-3">
           <span className="min-w-0 flex-1">
             <span className="text-[14px] font-semibold">{roomShort(room)}</span>
+            {isFav && <Star size={12} filled className="ml-1 inline align-[-1px] text-yellow" aria-label="Favorite" />}
             {sub && <span className="ml-2 truncate text-xs text-muted">{sub}</span>}
           </span>
           <StatusChip status={status} />
