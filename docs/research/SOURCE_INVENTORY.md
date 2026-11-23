@@ -136,3 +136,9 @@ Goal: cover all of University Park, like illiniSpots does for UIUC, not just res
 | Building hours | No central public source found. Libraries: libraries.psu.edu/hours. 24/7 finals buildings announced by OPP (Boucke, Hammond, Osmond, Thomas, Willard; HUB-Robeson) | ❔ Use the Penn State Map hours if it has them. Otherwise curate per building, with dates. |
 
 Sources: https://www.psu.edu/news/office-physical-plant/story/five-university-park-classroom-buildings-open-24-7-during-finals-week · https://www.psu.edu/news/students/story/lionpath-updates-class-search-feature-students · https://www.registrar.psu.edu/faculty-staff/scheduling/classroom-scheduling/
+
+### 9a. Findings, 2026-11-23
+
+- **Penn State Map** (map.psu.edu) is a **Concept3D** map (id 1134). Its app reads data from `api.concept3d.com` using a public key embedded in the page. **Not queried:** using that key from our server was treated as unauthorized access and blocked. It needs explicit approval, from the project owner at minimum and ideally Penn State/Concept3D, plus a review of Concept3D's SaaS end-user terms (https://www.concept3d.com/concept3d-saas-end-user-terms-of-use).
+- **Leonhard Building:** IME's page (https://www.ime.psu.edu/department/leonhard-commons.aspx) says the Leonhard Knowledge Commons, in the first-floor lobby, has "Five group study rooms" and "provides students in the Harold and Inge Marcus Department of Industrial and Manufacturing Engineering with a dedicated space". **No room numbers, booking method or eligibility are published.** The project owner reports the rooms are booked through Outlook; not yet confirmed from a published source.
+- **Reber Building (ME E-Knowledge Commons):** five small group study rooms, sponsor-named I–V, each with a large monitor and whiteboards (https://www.me.psu.edu/commons/Study-Rooms.aspx). **No booking method or eligibility published.**
