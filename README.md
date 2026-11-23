@@ -1,4 +1,13 @@
-# Nittany Rooms
+<p align="center">
+  <a href="https://nittanyrooms.vercel.app">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="nittany-rooms-design/logo/readme-header-dark.png">
+      <img src="nittany-rooms-design/logo/readme-header-light.png" alt="Nittany Rooms" width="420">
+    </picture>
+  </a>
+</p>
+
+<h1 align="center">Nittany Rooms</h1>
 
 A visual study-room finder for **Penn State University Park**. Pick a building on a 3D campus map, see which rooms are open right now and for how long, and continue to the **official Penn State reservation page** for that exact room.
 
