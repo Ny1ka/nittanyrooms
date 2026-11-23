@@ -349,3 +349,14 @@ test.describe('notify me when it opens', () => {
     await expect(page.getByRole('region', { name: 'Alerts' })).toHaveCount(0); // watch removed after firing
   });
 });
+
+test.describe('between booking increments', () => {
+  test('a room free at 1:05 shows Open (booking from 1:15) and counts as open for its building', async ({ page, api: _ }) => {
+    await page.clock.setFixedTime(NOW.set({ minute: 5 }).toJSDate());
+    await page.goto('/b/pattee-paterno?room=pattee-w120');
+    await expect(page.getByText('Open now until 5:00 PM')).toBeVisible();
+    await expect(page.getByText(/Mon, Nov 23 · 1:15 – /)).toBeVisible();
+    await page.goto('/');
+    await expect(page.getByRole('button', { name: /Pattee and Paterno Libraries/ })).not.toContainText('0/');
+  });
+});

@@ -89,6 +89,8 @@ export interface DayAvailability {
   complete: boolean;
   retrievedAt: number | null;
   thresholdMinutes: number;
+  /** Provider booking-start increment, used to tell 'open now' from 'opens soon'. */
+  incrementMinutes: number;
 }
 
 function freshnessOf(input: DayInput): Freshness {
@@ -216,6 +218,7 @@ export function computeDay(input: DayInput): DayAvailability {
     complete: freshness === 'fresh' && !!snapshot?.complete,
     retrievedAt: snapshot?.retrievedAt ?? null,
     thresholdMinutes,
+    incrementMinutes: p.startIncrementMinutes,
   };
 }
 
@@ -243,7 +246,11 @@ export function statusAt(day: DayAvailability, t: number, soonMinutes = 60): Roo
   const seg = day.segments.find((s) => contains(s, t));
   if (!seg || seg.kind === 'unknown') return { state: 'unknown' };
 
-  const current = day.windows.find((w) => contains(w, t));
+  // Open if t is inside the window, or the room is already free at t and the
+  // first bookable start is just the next increment (e.g. free at 1:05, book from 1:15).
+  const current = day.windows.find(
+    (w) => contains(w, t) || (w.raw.start <= t && t < w.start && w.start - t < day.incrementMinutes * MINUTE),
+  );
   if (current) return { state: 'open', until: current.end, window: current };
 
   const upcoming = day.windows.find((w) => w.start > t);

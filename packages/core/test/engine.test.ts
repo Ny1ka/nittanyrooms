@@ -305,6 +305,15 @@ describe('statusAt', () => {
   it('unknown when data is missing', () => {
     expect(statusAt(run({ snapshot: null }), t('10:00')).state).toBe('unknown');
   });
+  it('a room free now whose next bookable start is the next increment is open, not "opens soon"', () => {
+    const q = run({ now: t('14:05'), policy: { ...policy, startIncrementMinutes: 15 } });
+    expect(q.windows[0]!.start).toBe(t('14:15'));
+    expect(statusAt(q, t('14:05'))).toMatchObject({ state: 'open', until: t('22:00') });
+  });
+  it('still "opens soon" when the room is occupied until shortly before the next window', () => {
+    const q = run({ busy: [iv('12:00', '14:10')], now: t('14:00'), policy: { ...policy, startIncrementMinutes: 15 } });
+    expect(statusAt(q, t('14:00'))).toMatchObject({ state: 'opensSoon', opensAt: t('14:15') });
+  });
   it('closed time is unavailable', () => {
     expect(statusAt(d, t('23:00')).state).toBe('unavailable');
   });
