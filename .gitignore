@@ -28,3 +28,6 @@ test-results/
 
 # Raw source snapshots fetched during research (keep provenance in data/, not raw dumps)
 data/raw/
+
+# Vercel local project link and build output
+.vercel/
