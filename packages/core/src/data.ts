@@ -3,7 +3,16 @@ import policies from '../../../data/policies.json';
 import providers from '../../../data/providers.json';
 import rooms from '../../../data/rooms.json';
 import sources from '../../../data/sources.json';
+import footprintsRaw from '../../../data/footprints.json';
 import { Dataset } from './schema.js';
+import { FootprintCollection } from './validate/footprints.js';
+
+/** Raw building footprints (OSM, ODbL). */
+export const rawFootprints: unknown = footprintsRaw;
+
+export function loadFootprints(): FootprintCollection {
+  return FootprintCollection.parse(footprintsRaw);
+}
 
 /** Raw dataset as stored in /data (unvalidated). */
 export const rawDataset = { sources, providers, policies, buildings, rooms };

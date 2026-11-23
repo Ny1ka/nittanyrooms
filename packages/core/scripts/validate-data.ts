@@ -4,10 +4,19 @@
  *   pnpm validate:data           human-readable report
  *   pnpm validate:data --json    machine-readable report
  */
-import { rawDataset } from '../src/data.js';
+import { rawDataset, rawFootprints } from '../src/data.js';
+import { validateFootprints } from '../src/validate/footprints.js';
 import { validateDataset } from '../src/validate/index.js';
 
 const report = validateDataset(rawDataset);
+const buildings = (rawDataset.buildings as { id: string; status: string }[]);
+const fpIssues = validateFootprints(
+  rawFootprints,
+  buildings.map((b) => b.id),
+  buildings.filter((b) => b.status === 'verified').map((b) => b.id),
+);
+for (const i of fpIssues) (i.severity === 'error' ? report.errors : report.warnings).push(i);
+report.ok = report.errors.length === 0;
 
 if (process.argv.includes('--json')) {
   console.log(JSON.stringify(report, null, 2));

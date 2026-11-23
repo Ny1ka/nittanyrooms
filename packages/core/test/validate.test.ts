@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { buildHandoff, loadDataset, localTime, rawDataset, validateDataset } from '../src/index.js';
+import { buildHandoff, loadDataset, localTime, rawDataset, rawFootprints, validateDataset, validateFootprints } from '../src/index.js';
 
 const NOW = Date.parse('2026-11-23T12:00:00Z');
 const clone = () => structuredClone(rawDataset) as any;
@@ -136,5 +136,20 @@ describe('buildHandoff', () => {
     expect(h.mode).toBe('portal-with-instructions');
     expect(h.url).toBe(libcal.portalUrl);
     expect(h.summary.time).toBeNull();
+  });
+});
+
+describe('validateFootprints', () => {
+  const ids = rawDataset.buildings.map((b) => b.id);
+  it('passes on the committed footprints and covers every verified building', () => {
+    expect(validateFootprints(rawFootprints, ids, ids)).toEqual([]);
+  });
+  it('flags orphans, open rings and off-campus points', () => {
+    const fc = structuredClone(rawFootprints) as any;
+    fc.features[0].properties.buildingId = 'nowhere';
+    fc.features[1].geometry.coordinates[0].pop();
+    fc.features[2].geometry.coordinates[0][1] = [-80, 41];
+    const codes = validateFootprints(fc, ids, ids).map((i) => i.code);
+    expect(codes).toEqual(expect.arrayContaining(['footprint-orphan', 'footprint-open-ring', 'footprint-outside-campus']));
   });
 });

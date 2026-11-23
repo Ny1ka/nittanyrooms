@@ -6,3 +6,4 @@ export * from './availability/intervals.js';
 export * from './availability/time.js';
 export * from './availability/engine.js';
 export * from './validate/index.js';
+export * from './validate/footprints.js';
