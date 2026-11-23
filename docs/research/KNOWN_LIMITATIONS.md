@@ -17,14 +17,16 @@ Last updated: **2026-11-22**. This file separates what we know from what we're g
 - ECoRE room floors match their first digit (133 → floor 1, 248/249 → floor 2, 322/333 → floor 3). The design mockups make the same assumption. **The UI labels these floors as "inferred".**
 - The Libraries' LibCal can deep-link to a specific space (`/space/<id>`), as other LibCal sites can. PSU room IDs haven't been observed, and date preselection is untested.
 - ECoRE room availability may follow ECoRE building hours rather than Engineering Library hours.
-- Deike, Stuckeman, and Davey house the EMS, Architecture, and PMS libraries.
+
+6. **LibCal's public availability grid works without credentials** (tested 2026-11-22). It returns 15-minute slots for every University Park library room, with booked slots marked, so the data is complete. The test used a browser User-Agent temporarily; production must identify honestly.
+7. **54 LibCal rooms** with official labels, IDs, capacities, and features. The branch-library buildings (Deike, Davey, Stuckeman) are confirmed by room titles.
 
 ## Unknowns and blockers
 
 | # | Unknown | Why it matters | Who can answer |
 |---|---|---|---|
-| U1 | LibCal room names and IDs for each University Park location | Can't list library rooms or deep-link to them | Viewing psu.libcal.com in a browser, or PSU Libraries (Ul-study-rooms@lists.psu.edu) |
-| U2 | Permission to read LibCal availability programmatically (vendor API credentials, or approval to read the public grid) | Without it, library availability stays "Check on PSU site" | PSU Libraries |
+| ~~U1~~ | ~~LibCal room names and IDs~~ | **Resolved 2026-11-22.** 54 rooms parsed from the public page ([LIBCAL_GRID_TEST.md](LIBCAL_GRID_TEST.md)) | — |
+| U2 | Terms review for reading the public LibCal grid. **Technically confirmed working without credentials** (2026-11-22) | Decides whether the live adapter ships | Springshare/PSU Libraries terms, plus a courtesy note to PSU Libraries |
 | U3 | Any public availability source for ECoRE rooms | Without it, ECoRE availability stays "Check on PSU site" permanently | College of Engineering facilities (coefacilities@engr.psu.edu) |
 | U4 | ECoRE room capacity, features, accessibility | Shown as "Not verified yet" | College of Engineering facilities |
 | U5 | ECoRE booking limits (duration, advance window) | Can't apply policy rules to ECoRE timelines | College of Engineering facilities |

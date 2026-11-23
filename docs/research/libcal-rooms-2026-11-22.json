@@ -1,0 +1,825 @@
+{
+  "source": "https://psu.libcal.com/spaces?lid=428&gid=0",
+  "retrievedAt": "2026-11-22",
+  "note": "Parsed from the public LibCal spaces page (resources.push blocks + searchFilters). Research snapshot for ingestion; not loaded by the app.",
+  "features": {
+    "4025": "Accessible Seat/Space",
+    "4026": "Power Available",
+    "5710": "Desktop PC",
+    "5711": "Solstice",
+    "5713": "Screen Monitor",
+    "5714": "Whiteboard"
+  },
+  "rooms": [
+    {
+      "eid": 30978,
+      "title": "Paterno E128A",
+      "url": "/space/30978",
+      "grouping": "Pattee / Paterno Library",
+      "gid": 2159,
+      "lid": 428,
+      "capacity": 4,
+      "features": [
+        "Accessible Seat/Space",
+        "Power Available",
+        "Solstice",
+        "Whiteboard"
+      ]
+    },
+    {
+      "eid": 30979,
+      "title": "Paterno E128B",
+      "url": "/space/30979",
+      "grouping": "Pattee / Paterno Library",
+      "gid": 2159,
+      "lid": 428,
+      "capacity": 4,
+      "features": [
+        "Accessible Seat/Space",
+        "Power Available",
+        "Solstice",
+        "Whiteboard"
+      ]
+    },
+    {
+      "eid": 31012,
+      "title": "Paterno E128C",
+      "url": "/space/31012",
+      "grouping": "Pattee / Paterno Library",
+      "gid": 2159,
+      "lid": 428,
+      "capacity": 4,
+      "features": [
+        "Accessible Seat/Space",
+        "Power Available",
+        "Solstice",
+        "Whiteboard"
+      ]
+    },
+    {
+      "eid": 31013,
+      "title": "Paterno E128D",
+      "url": "/space/31013",
+      "grouping": "Pattee / Paterno Library",
+      "gid": 2159,
+      "lid": 428,
+      "capacity": 4,
+      "features": [
+        "Accessible Seat/Space",
+        "Power Available",
+        "Solstice",
+        "Whiteboard"
+      ]
+    },
+    {
+      "eid": 31014,
+      "title": "Paterno E128E",
+      "url": "/space/31014",
+      "grouping": "Pattee / Paterno Library",
+      "gid": 2159,
+      "lid": 428,
+      "capacity": 4,
+      "features": [
+        "Accessible Seat/Space",
+        "Power Available",
+        "Solstice",
+        "Whiteboard"
+      ]
+    },
+    {
+      "eid": 32325,
+      "title": "Paterno E128F",
+      "url": "/space/32325",
+      "grouping": "Pattee / Paterno Library",
+      "gid": 2159,
+      "lid": 428,
+      "capacity": 4,
+      "features": [
+        "Accessible Seat/Space",
+        "Power Available",
+        "Solstice",
+        "Whiteboard"
+      ]
+    },
+    {
+      "eid": 31015,
+      "title": "Paterno E128G",
+      "url": "/space/31015",
+      "grouping": "Pattee / Paterno Library",
+      "gid": 2159,
+      "lid": 428,
+      "capacity": 4,
+      "features": [
+        "Accessible Seat/Space",
+        "Power Available",
+        "Solstice",
+        "Whiteboard"
+      ]
+    },
+    {
+      "eid": 8570,
+      "title": "Paterno E304",
+      "url": "/space/8570",
+      "grouping": "Pattee / Paterno Library",
+      "gid": 2159,
+      "lid": 428,
+      "capacity": 16,
+      "features": [
+        "Accessible Seat/Space",
+        "Power Available",
+        "Solstice",
+        "Whiteboard"
+      ]
+    },
+    {
+      "eid": 8571,
+      "title": "Paterno E307",
+      "url": "/space/8571",
+      "grouping": "Pattee / Paterno Library",
+      "gid": 2159,
+      "lid": 428,
+      "capacity": 12,
+      "features": [
+        "Accessible Seat/Space",
+        "Power Available",
+        "Solstice",
+        "Whiteboard"
+      ]
+    },
+    {
+      "eid": 41114,
+      "title": "Pattee W024 - Collaboration Commons",
+      "url": "/space/41114",
+      "grouping": "Pattee / Paterno Library",
+      "gid": 2159,
+      "lid": 428,
+      "capacity": 4,
+      "features": [
+        "Accessible Seat/Space",
+        "Power Available",
+        "Solstice",
+        "Whiteboard"
+      ]
+    },
+    {
+      "eid": 41115,
+      "title": "Pattee W025 - Collaboration Commons",
+      "url": "/space/41115",
+      "grouping": "Pattee / Paterno Library",
+      "gid": 2159,
+      "lid": 428,
+      "capacity": 4,
+      "features": [
+        "Accessible Seat/Space",
+        "Power Available",
+        "Solstice",
+        "Whiteboard"
+      ]
+    },
+    {
+      "eid": 41116,
+      "title": "Pattee W026 - Collaboration Commons Mini",
+      "url": "/space/41116",
+      "grouping": "Pattee / Paterno Library",
+      "gid": 2159,
+      "lid": 428,
+      "capacity": 2,
+      "features": [
+        "Accessible Seat/Space",
+        "Power Available",
+        "Solstice",
+        "Whiteboard"
+      ]
+    },
+    {
+      "eid": 41118,
+      "title": "Pattee W028 - Collaboration Commons",
+      "url": "/space/41118",
+      "grouping": "Pattee / Paterno Library",
+      "gid": 2159,
+      "lid": 428,
+      "capacity": 4,
+      "features": [
+        "Accessible Seat/Space",
+        "Power Available",
+        "Solstice",
+        "Whiteboard"
+      ]
+    },
+    {
+      "eid": 41119,
+      "title": "Pattee W029 - Collaboration Commons",
+      "url": "/space/41119",
+      "grouping": "Pattee / Paterno Library",
+      "gid": 2159,
+      "lid": 428,
+      "capacity": 4,
+      "features": [
+        "Accessible Seat/Space",
+        "Power Available",
+        "Solstice",
+        "Whiteboard"
+      ]
+    },
+    {
+      "eid": 41120,
+      "title": "Pattee W030 - Collaboration Commons",
+      "url": "/space/41120",
+      "grouping": "Pattee / Paterno Library",
+      "gid": 2159,
+      "lid": 428,
+      "capacity": 4,
+      "features": [
+        "Accessible Seat/Space",
+        "Power Available",
+        "Solstice",
+        "Whiteboard"
+      ]
+    },
+    {
+      "eid": 41121,
+      "title": "Pattee W031 - Collaboration Commons",
+      "url": "/space/41121",
+      "grouping": "Pattee / Paterno Library",
+      "gid": 2159,
+      "lid": 428,
+      "capacity": 6,
+      "features": [
+        "Accessible Seat/Space",
+        "Power Available",
+        "Solstice",
+        "Whiteboard"
+      ]
+    },
+    {
+      "eid": 41122,
+      "title": "Pattee W032 - Collaboration Commons",
+      "url": "/space/41122",
+      "grouping": "Pattee / Paterno Library",
+      "gid": 2159,
+      "lid": 428,
+      "capacity": 4,
+      "features": [
+        "Accessible Seat/Space",
+        "Power Available",
+        "Solstice",
+        "Whiteboard"
+      ]
+    },
+    {
+      "eid": 41123,
+      "title": "Pattee W033 - Collaboration Commons",
+      "url": "/space/41123",
+      "grouping": "Pattee / Paterno Library",
+      "gid": 2159,
+      "lid": 428,
+      "capacity": 4,
+      "features": [
+        "Accessible Seat/Space",
+        "Power Available",
+        "Solstice",
+        "Whiteboard"
+      ]
+    },
+    {
+      "eid": 41124,
+      "title": "Pattee W034 - Collaboration Commons",
+      "url": "/space/41124",
+      "grouping": "Pattee / Paterno Library",
+      "gid": 2159,
+      "lid": 428,
+      "capacity": 4,
+      "features": [
+        "Accessible Seat/Space",
+        "Power Available",
+        "Solstice",
+        "Whiteboard"
+      ]
+    },
+    {
+      "eid": 41125,
+      "title": "Pattee W035 - Collaboration Commons",
+      "url": "/space/41125",
+      "grouping": "Pattee / Paterno Library",
+      "gid": 2159,
+      "lid": 428,
+      "capacity": 4,
+      "features": [
+        "Accessible Seat/Space",
+        "Power Available",
+        "Solstice",
+        "Whiteboard"
+      ]
+    },
+    {
+      "eid": 41126,
+      "title": "Pattee W036 - Collaboration Commons",
+      "url": "/space/41126",
+      "grouping": "Pattee / Paterno Library",
+      "gid": 2159,
+      "lid": 428,
+      "capacity": 4,
+      "features": [
+        "Accessible Seat/Space",
+        "Power Available",
+        "Solstice",
+        "Whiteboard"
+      ]
+    },
+    {
+      "eid": 41127,
+      "title": "Pattee W037 - Collaboration Commons",
+      "url": "/space/41127",
+      "grouping": "Pattee / Paterno Library",
+      "gid": 2159,
+      "lid": 428,
+      "capacity": 4,
+      "features": [
+        "Accessible Seat/Space",
+        "Power Available",
+        "Solstice",
+        "Whiteboard"
+      ]
+    },
+    {
+      "eid": 41128,
+      "title": "Pattee W038 - Collaboration Commons",
+      "url": "/space/41128",
+      "grouping": "Pattee / Paterno Library",
+      "gid": 2159,
+      "lid": 428,
+      "capacity": 4,
+      "features": [
+        "Accessible Seat/Space",
+        "Power Available",
+        "Solstice",
+        "Whiteboard"
+      ]
+    },
+    {
+      "eid": 41129,
+      "title": "Pattee W039 - Collaboration Commons",
+      "url": "/space/41129",
+      "grouping": "Pattee / Paterno Library",
+      "gid": 2159,
+      "lid": 428,
+      "capacity": 4,
+      "features": [
+        "Accessible Seat/Space",
+        "Power Available",
+        "Solstice",
+        "Whiteboard"
+      ]
+    },
+    {
+      "eid": 8572,
+      "title": "Pattee W101A - Leisure Reading Room",
+      "url": "/space/8572",
+      "grouping": "Pattee / Paterno Library",
+      "gid": 2159,
+      "lid": 428,
+      "capacity": 8,
+      "features": [
+        "Accessible Seat/Space",
+        "Power Available",
+        "Solstice",
+        "Whiteboard"
+      ]
+    },
+    {
+      "eid": 8573,
+      "title": "Pattee W101B - Leisure Reading Room",
+      "url": "/space/8573",
+      "grouping": "Pattee / Paterno Library",
+      "gid": 2159,
+      "lid": 428,
+      "capacity": 4,
+      "features": [
+        "Accessible Seat/Space",
+        "Power Available",
+        "Solstice",
+        "Whiteboard"
+      ]
+    },
+    {
+      "eid": 8577,
+      "title": "Pattee W120 - Knowledge Commons",
+      "url": "/space/8577",
+      "grouping": "Pattee / Paterno Library",
+      "gid": 2159,
+      "lid": 428,
+      "capacity": 12,
+      "features": [
+        "Power Available",
+        "Solstice",
+        "Whiteboard"
+      ]
+    },
+    {
+      "eid": 120911,
+      "title": "Pattee W121 - Knowledge Commons",
+      "url": "/space/120911",
+      "grouping": "Pattee / Paterno Library",
+      "gid": 2159,
+      "lid": 428,
+      "capacity": 4,
+      "features": [
+        "Accessible Seat/Space",
+        "Power Available",
+        "Solstice",
+        "Whiteboard"
+      ]
+    },
+    {
+      "eid": 8578,
+      "title": "Pattee W122 - Knowledge Commons",
+      "url": "/space/8578",
+      "grouping": "Pattee / Paterno Library",
+      "gid": 2159,
+      "lid": 428,
+      "capacity": 4,
+      "features": [
+        "Accessible Seat/Space",
+        "Power Available",
+        "Solstice",
+        "Whiteboard"
+      ]
+    },
+    {
+      "eid": 8579,
+      "title": "Pattee W123 - Knowledge Commons",
+      "url": "/space/8579",
+      "grouping": "Pattee / Paterno Library",
+      "gid": 2159,
+      "lid": 428,
+      "capacity": 4,
+      "features": [
+        "Accessible Seat/Space",
+        "Power Available",
+        "Solstice",
+        "Whiteboard"
+      ]
+    },
+    {
+      "eid": 8580,
+      "title": "Pattee W124 - Knowledge Commons",
+      "url": "/space/8580",
+      "grouping": "Pattee / Paterno Library",
+      "gid": 2159,
+      "lid": 428,
+      "capacity": 4,
+      "features": [
+        "Accessible Seat/Space",
+        "Power Available",
+        "Solstice",
+        "Whiteboard"
+      ]
+    },
+    {
+      "eid": 8581,
+      "title": "Pattee W125 - Knowledge Commons",
+      "url": "/space/8581",
+      "grouping": "Pattee / Paterno Library",
+      "gid": 2159,
+      "lid": 428,
+      "capacity": 4,
+      "features": [
+        "Accessible Seat/Space",
+        "Power Available",
+        "Solstice",
+        "Whiteboard"
+      ]
+    },
+    {
+      "eid": 8582,
+      "title": "Pattee W126 - Knowledge Commons ",
+      "url": "/space/8582",
+      "grouping": "Pattee / Paterno Library",
+      "gid": 2159,
+      "lid": 428,
+      "capacity": 10,
+      "features": [
+        "Accessible Seat/Space",
+        "Power Available",
+        "Solstice",
+        "Whiteboard"
+      ]
+    },
+    {
+      "eid": 8583,
+      "title": "Pattee W127 - Knowledge Commons",
+      "url": "/space/8583",
+      "grouping": "Pattee / Paterno Library",
+      "gid": 2159,
+      "lid": 428,
+      "capacity": 8,
+      "features": [
+        "Accessible Seat/Space",
+        "Power Available",
+        "Solstice",
+        "Whiteboard"
+      ]
+    },
+    {
+      "eid": 8584,
+      "title": "Pattee W128 - Knowledge Commons",
+      "url": "/space/8584",
+      "grouping": "Pattee / Paterno Library",
+      "gid": 2159,
+      "lid": 428,
+      "capacity": 8,
+      "features": [
+        "Accessible Seat/Space",
+        "Power Available",
+        "Solstice",
+        "Whiteboard"
+      ]
+    },
+    {
+      "eid": 8586,
+      "title": "Pattee W129 - Knowledge Commons",
+      "url": "/space/8586",
+      "grouping": "Pattee / Paterno Library",
+      "gid": 2159,
+      "lid": 428,
+      "capacity": 8,
+      "features": [
+        "Accessible Seat/Space",
+        "Power Available",
+        "Solstice",
+        "Whiteboard"
+      ]
+    },
+    {
+      "eid": 8246,
+      "title": "Stuckeman 117 - Architecture & Landscape Architecture Library",
+      "url": "/space/8246",
+      "grouping": "Architecture and Landscape Architecture Library",
+      "gid": 2154,
+      "lid": 428,
+      "capacity": 11,
+      "features": [
+        "Accessible Seat/Space",
+        "Power Available",
+        "Solstice",
+        "Whiteboard"
+      ]
+    },
+    {
+      "eid": 8251,
+      "title": "Deike 105A - Earth and Mineral Sciences Library",
+      "url": "/space/8251",
+      "grouping": "Earth and Mineral Sciences Library",
+      "gid": 2157,
+      "lid": 428,
+      "capacity": 6,
+      "features": [
+        "Accessible Seat/Space",
+        "Power Available",
+        "Solstice",
+        "Whiteboard"
+      ]
+    },
+    {
+      "eid": 51793,
+      "title": "Deike 105B - Earth and Mineral Sciences Library",
+      "url": "/space/51793",
+      "grouping": "Earth and Mineral Sciences Library",
+      "gid": 2157,
+      "lid": 428,
+      "capacity": 6,
+      "features": [
+        "Accessible Seat/Space",
+        "Power Available",
+        "Whiteboard"
+      ]
+    },
+    {
+      "eid": 12730,
+      "title": "Deike 113A - Study Cubicle - Earth and Mineral Sciences Library",
+      "url": "/space/12730",
+      "grouping": "Earth and Mineral Sciences Library",
+      "gid": 2157,
+      "lid": 428,
+      "capacity": 6,
+      "features": [
+        "Accessible Seat/Space",
+        "Power Available",
+        "Solstice",
+        "Whiteboard"
+      ]
+    },
+    {
+      "eid": 12731,
+      "title": "Deike 113B - Study Cubicle - Earth and Mineral Sciences Library",
+      "url": "/space/12731",
+      "grouping": "Earth and Mineral Sciences Library",
+      "gid": 2157,
+      "lid": 428,
+      "capacity": 6,
+      "features": [
+        "Accessible Seat/Space",
+        "Power Available",
+        "Solstice",
+        "Whiteboard"
+      ]
+    },
+    {
+      "eid": 12732,
+      "title": "Deike 113C - Study Cubicle - Earth and Mineral Sciences Library",
+      "url": "/space/12732",
+      "grouping": "Earth and Mineral Sciences Library",
+      "gid": 2157,
+      "lid": 428,
+      "capacity": 6,
+      "features": [
+        "Accessible Seat/Space",
+        "Power Available",
+        "Solstice",
+        "Whiteboard"
+      ]
+    },
+    {
+      "eid": 12733,
+      "title": "Deike 113D - Study Cubicle - Earth and Mineral Sciences Library",
+      "url": "/space/12733",
+      "grouping": "Earth and Mineral Sciences Library",
+      "gid": 2157,
+      "lid": 428,
+      "capacity": 6,
+      "features": [
+        "Accessible Seat/Space",
+        "Power Available",
+        "Solstice",
+        "Whiteboard"
+      ]
+    },
+    {
+      "eid": 8253,
+      "title": "Deike 114A - Earth and Mineral Sciences Library",
+      "url": "/space/8253",
+      "grouping": "Earth and Mineral Sciences Library",
+      "gid": 2157,
+      "lid": 428,
+      "capacity": 6,
+      "features": [
+        "Accessible Seat/Space",
+        "Power Available",
+        "Solstice",
+        "Whiteboard"
+      ]
+    },
+    {
+      "eid": 8254,
+      "title": "Deike 114B - Earth and Mineral Sciences Library",
+      "url": "/space/8254",
+      "grouping": "Earth and Mineral Sciences Library",
+      "gid": 2157,
+      "lid": 428,
+      "capacity": 6,
+      "features": [
+        "Accessible Seat/Space",
+        "Power Available",
+        "Solstice",
+        "Whiteboard"
+      ]
+    },
+    {
+      "eid": 3335,
+      "title": "Davey 204 - Physical and Mathematical Sciences Library",
+      "url": "/space/3335",
+      "grouping": "Physical and Mathematical Sciences Library",
+      "gid": 876,
+      "lid": 428,
+      "capacity": 6,
+      "features": [
+        "Accessible Seat/Space",
+        "Power Available",
+        "Solstice",
+        "Whiteboard"
+      ]
+    },
+    {
+      "eid": 3577,
+      "title": "Davey 205 - Physical and Mathematical Sciences Library",
+      "url": "/space/3577",
+      "grouping": "Physical and Mathematical Sciences Library",
+      "gid": 876,
+      "lid": 428,
+      "capacity": 6,
+      "features": [
+        "Accessible Seat/Space",
+        "Power Available",
+        "Solstice",
+        "Whiteboard"
+      ]
+    },
+    {
+      "eid": 3680,
+      "title": "Davey 214 - Physical and Mathematical Sciences Library",
+      "url": "/space/3680",
+      "grouping": "Physical and Mathematical Sciences Library",
+      "gid": 876,
+      "lid": 428,
+      "capacity": 10,
+      "features": [
+        "Accessible Seat/Space",
+        "Power Available",
+        "Solstice",
+        "Whiteboard"
+      ]
+    },
+    {
+      "eid": 3710,
+      "title": "Davey Collaboration Space 1 - Physical and Mathematical Sciences Libary",
+      "url": "/space/3710",
+      "grouping": "Physical and Mathematical Sciences Library",
+      "gid": 876,
+      "lid": 428,
+      "capacity": 6,
+      "features": [
+        "Accessible Seat/Space",
+        "Power Available",
+        "Desktop PC",
+        "Screen Monitor",
+        "Whiteboard"
+      ]
+    },
+    {
+      "eid": 3711,
+      "title": "Davey Collaboration Space 2 - Physical and Mathematical Sciences Library",
+      "url": "/space/3711",
+      "grouping": "Physical and Mathematical Sciences Library",
+      "gid": 876,
+      "lid": 428,
+      "capacity": 6,
+      "features": [
+        "Accessible Seat/Space",
+        "Power Available",
+        "Desktop PC",
+        "Screen Monitor",
+        "Whiteboard"
+      ]
+    },
+    {
+      "eid": 3712,
+      "title": "Davey Collaboration Space 3 - Physical and Mathematical Sciences Library",
+      "url": "/space/3712",
+      "grouping": "Physical and Mathematical Sciences Library",
+      "gid": 876,
+      "lid": 428,
+      "capacity": 6,
+      "features": [
+        "Accessible Seat/Space",
+        "Power Available",
+        "Desktop PC",
+        "Screen Monitor",
+        "Whiteboard"
+      ]
+    },
+    {
+      "eid": 3713,
+      "title": "Davey Collaboration Space 4 - Physical and Mathematical Sciences Library",
+      "url": "/space/3713",
+      "grouping": "Physical and Mathematical Sciences Library",
+      "gid": 876,
+      "lid": 428,
+      "capacity": 6,
+      "features": [
+        "Accessible Seat/Space",
+        "Power Available",
+        "Desktop PC",
+        "Screen Monitor",
+        "Whiteboard"
+      ]
+    },
+    {
+      "eid": 3714,
+      "title": "Davey Collaboration Space 5 - Physical and Mathematical Sciences Library",
+      "url": "/space/3714",
+      "grouping": "Physical and Mathematical Sciences Library",
+      "gid": 876,
+      "lid": 428,
+      "capacity": 6,
+      "features": [
+        "Accessible Seat/Space",
+        "Power Available",
+        "Desktop PC",
+        "Screen Monitor",
+        "Whiteboard"
+      ]
+    },
+    {
+      "eid": 209784,
+      "title": "Davey Lab 206 - Physical and Mathematical Library",
+      "url": "/space/209784",
+      "grouping": "Wellness space",
+      "gid": 49240,
+      "lid": 428,
+      "capacity": 1,
+      "features": [
+        "Power Available"
+      ]
+    }
+  ]
+}

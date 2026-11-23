@@ -12,11 +12,11 @@ Legend for **Status**: ✅ verified from an official source · 🟡 partial / in
 |---|---|
 | Owner | Penn State University Libraries |
 | Official URL | https://psu.libcal.com/spaces?lid=428&gid=2159 (linked as "Reserve a Study Room" from https://libraries.psu.edu/services/rooms-spaces) |
-| Status | ✅ provider verified · ❔ individual rooms not yet inventoried |
+| Status | ✅ provider verified · ✅ 54 University Park rooms and live grid confirmed 2026-11-22 ([LIBCAL_GRID_TEST.md](LIBCAL_GRID_TEST.md)) |
 | Data available | Locations, room categories, capacity buckets (2–4, 5–8, 9–16), feature filters (Accessible Seat/Space, Desktop Mac, Desktop PC, Power Available, Screen Monitor, Solstice, Whiteboard), interactive availability grid |
 | University Park locations listed | Pattee / Paterno Library · Architecture and Landscape Architecture Library · Earth and Mineral Sciences Library · Physical and Mathematical Sciences Library · "Wellness space" |
-| Room IDs | **Not obtained.** The room list and grid are rendered by JavaScript, so static HTML has no `/space/<id>` links. The sitemap lists only location pages (`/spaces?lid=` 428, 948, 949, 1572, 1646, 1734, 1747, 2543, 2609, 3443, 5147, 5986, 6023), which aren't all University Park. |
-| Access method | Public web UI. LibCal has a vendor API (`/1.1/...`, OAuth client credentials), but `psu.libcal.com/admin/api` redirects to a LibApps login. Credentials would have to come from PSU Libraries. |
+| Room IDs | **Obtained.** The static HTML of `/spaces?lid=428&gid=0` has `resources.push({eid,title,url,capacity,grouping,filterIds})` for each room (an earlier text-only fetch missed them). The sitemap lists only location pages (`/spaces?lid=` 428, 948, 949, 1572, 1646, 1734, 1747, 2543, 2609, 3443, 5147, 5986, 6023), which aren't all University Park. |
+| Access method | Public web UI. The page's own JSON endpoint, `POST /spaces/availability/grid`, returns 15-minute slots with booked ones marked (`s-lc-eq-checkout`). It's the same approach as illiniSpots and works without credentials (tested 2026-11-22). LibCal has a vendor API (`/1.1/...`, OAuth client credentials), but `psu.libcal.com/admin/api` redirects to a LibApps login. Credentials would have to come from PSU Libraries. |
 | Auth to view | The grid page loads without login. Whether slots render without login is unconfirmed (they're JS-rendered). |
 | Auth to book | Yes. Policy requires "contact information (e.g., access ID)". An email confirmation is required. |
 | robots.txt | `User-agent: *` → `Crawl-delay: 10`, `Disallow: /process_`. `GPTBot`, `crawler`, `crawl` → `Disallow: /`. |
@@ -105,7 +105,7 @@ Legend for **Status**: ✅ verified from an official source · 🟡 partial / in
 | Stuckeman Family Building (Architecture Library) | way 431071070 | 40.8010877, -77.8667354 |
 | Davey Laboratory (PMS Library) | way 431740622 | 40.7981700, -77.8628638 |
 
-🟡 The building that houses each branch library (Deike → EMS Library, Stuckeman → Architecture & Landscape Architecture Library, Davey → PMS Library) is from general knowledge, not yet confirmed against a Libraries page.
+✅ The building that houses each branch library (Deike → EMS Library, Stuckeman → Architecture & Landscape Architecture Library, Davey → PMS Library) is confirmed by official LibCal room titles (e.g. "Deike 105A", "Stuckeman 117", "Davey 204").
 
 ## 7. Floor plans
 
