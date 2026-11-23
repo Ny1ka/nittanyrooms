@@ -5,6 +5,12 @@ import { Search } from './Icons';
 
 const INDEX = searchIndex();
 
+function search(query: string) {
+  const terms = query.trim().toLowerCase().split(/\s+/).filter(Boolean);
+  if (!terms.length) return [];
+  return INDEX.filter((e) => terms.every((t) => e.hay.includes(t))).slice(0, 8);
+}
+
 /** Combobox search across building names, aliases and room numbers (ARIA 1.2 pattern). */
 export function SearchBox({ placeholder = 'Search buildings and rooms' }: { placeholder?: string }) {
   const [q, setQ] = useState('');
@@ -14,14 +20,11 @@ export function SearchBox({ placeholder = 'Search buildings and rooms' }: { plac
   const listId = useId();
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const results = useMemo(() => {
-    const terms = deferred.trim().toLowerCase().split(/\s+/).filter(Boolean);
-    if (!terms.length) return [];
-    return INDEX.filter((e) => terms.every((t) => e.hay.includes(t))).slice(0, 8);
-  }, [deferred]);
+  const results = useMemo(() => search(deferred), [deferred]);
 
+  /** Always resolve against the current text, so a fast Enter never acts on stale results. */
   function choose(i: number) {
-    const r = results[i];
+    const r = search(q)[i];
     if (!r) return;
     setOpen(false);
     setQ('');
