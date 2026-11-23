@@ -4,6 +4,31 @@ import { buildIcs, googleCalendarUrl } from '../lib/calendar';
 import { getProvider } from '../lib/data';
 import { Calendar, Check, External } from './Icons';
 
+/** GitHub issue pre-filled with the room's identifiers so a data fix is easy to trace. */
+export function reportUrl(room: Room, building: Building, pageUrl: string) {
+  const body = [
+    `**Room:** ${room.displayName} (\`${room.id}\`)`,
+    `**Official label:** ${room.officialLabel}`,
+    `**Building:** ${building.name}`,
+    `**Booking system:** ${getProvider(room.providerId).name}`,
+    `**Sources:** ${room.verification.sourceIds.join(', ')} (verified ${room.verification.verifiedAt})`,
+    `**Page:** ${pageUrl}`,
+    '',
+    '**What looks wrong?** (check any)',
+    '- [ ] Room name or number',
+    '- [ ] Floor or location',
+    '- [ ] Capacity or features',
+    '- [ ] Open/booked times',
+    '- [ ] Booking link or steps',
+    '- [ ] Other',
+    '',
+    '**Details** (what you saw, and what is correct if you know):',
+    '',
+  ].join('\n');
+  const q = new URLSearchParams({ title: `Wrong info: ${room.displayName}`, body });
+  return `https://github.com/Ny1ka/nittanyrooms/issues/new?${q}`;
+}
+
 /** Link that reopens this exact room, date and time. */
 export function roomShareUrl(room: Room, building: Building, date: string, start: number) {
   const q = new URLSearchParams({ room: room.id, d: date, t: toTimeInputValue(start) });
@@ -52,6 +77,10 @@ export function RoomActions({ room, building, date, selection, at }: { room: Roo
         <button type="button" aria-expanded={calOpen} onClick={() => setCalOpen((o) => !o)} className={actionBtn}>
           <Calendar size={13} /> Add to calendar
         </button>
+        <a href={reportUrl(room, building, shareUrl)} target="_blank" rel="noopener noreferrer" className={`${actionBtn} no-underline`}>
+          Report wrong info
+          <span className="sr-only">(opens GitHub in a new tab)</span>
+        </a>
         <button type="button" onClick={share} className={actionBtn}>
           {shared === 'copied' ? <Check size={13} /> : <External size={13} />}
           {shared === 'copied' ? 'Link copied' : 'Share room'}

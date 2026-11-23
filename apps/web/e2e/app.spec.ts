@@ -265,3 +265,16 @@ test.describe('share a room', () => {
     await expect(page.getByRole('button', { name: /Date and time/ })).toContainText('1:00 PM');
   });
 });
+
+test.describe('report wrong info', () => {
+  test('opens a GitHub issue pre-filled with the room identifiers', async ({ page, api: _ }) => {
+    await page.goto('/b/leonhard?room=leonhard-105a');
+    const link = page.getByRole('link', { name: /Report wrong info/ });
+    await expect(link).toHaveAttribute('target', '_blank');
+    const u = new URL((await link.getAttribute('href'))!);
+    expect(u.origin + u.pathname).toBe('https://github.com/Ny1ka/nittanyrooms/issues/new');
+    expect(u.searchParams.get('title')).toBe('Wrong info: Leonhard 105A');
+    expect(u.searchParams.get('body')).toContain('`leonhard-105a`');
+    expect(u.searchParams.get('body')).toContain('Open/booked times');
+  });
+});
