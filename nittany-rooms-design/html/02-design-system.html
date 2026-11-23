@@ -1,150 +1,128 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="utf-8">
-<title>Nittany Rooms design system</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<style>@font-face{font-family:Overpass;font-weight:400;src:url(../fonts/overpass-latin-400-normal.woff2) format('woff2')}@font-face{font-family:Overpass;font-weight:600;src:url(../fonts/overpass-latin-600-normal.woff2) format('woff2')}@font-face{font-family:Overpass;font-weight:800;src:url(../fonts/overpass-latin-800-normal.woff2) format('woff2')}</style>
+<title>Nittany Rooms design system v2</title>
+<style>
+@font-face{font-family:Overpass;font-weight:400;src:url(../fonts/overpass-latin-400-normal.woff2) format('woff2')}
+@font-face{font-family:Overpass;font-weight:600;src:url(../fonts/overpass-latin-600-normal.woff2) format('woff2')}
+@font-face{font-family:Overpass;font-weight:800;src:url(../fonts/overpass-latin-800-normal.woff2) format('woff2')}
+:root{--bg:#0A1628;--surface:#0F1F38;--s2:#16294A;--s3:#1F3358;--line:#22365A;--fg:#E8EEF7;--muted:#8FA0BA;--subtle:#60759A;
+--accent:#FFC845;--ink:#12284C;--accent-text:#FFC845;--accent-border:#FFC845;--occ:#2B4170;--occ-fg:#DCE4F2;--ha:#1F3358;--hb:#2B4170;--da:#3A5280;--db:#16294A;--now:#FF5C93}
+.light{--bg:#F5F7FA;--surface:#FFFFFF;--s2:#F0F3F7;--s3:#E4E9F0;--line:#DCE2EA;--fg:#12284C;--muted:#4F5B6E;--subtle:#7A8699;
+--accent-text:#6B4700;--accent-border:#C99400;--occ:#12284C;--occ-fg:#FFFFFF;--ha:#E3E7ED;--hb:#CBD2DC;--da:#B8C1CE;--db:#EEF1F5;--now:#C2185B}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 14px/1.45 Overpass,sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:0 auto;padding:40px 24px 56px;display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:16px}
+.head{grid-column:1/-1;display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.head h1{font-size:20px;font-weight:800;letter-spacing:-.01em;margin:0}
+.head p{margin:0;color:var(--muted);font-size:12px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px}
+.card h2{margin:0 0 14px;font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--subtle)}
+.sw{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.sw div{font-size:11px;color:var(--muted)} .sw span{display:block;height:40px;border-radius:8px;margin-bottom:6px;box-shadow:inset 0 0 0 1px var(--line)}
+.sw b{display:block;color:var(--fg);font-weight:600;font-size:12px}
+.chip{display:inline-flex;align-items:center;gap:5px;height:24px;padding:0 9px;border-radius:999px;font:600 11px Overpass;margin:0 6px 8px 0}
+.open{background:var(--accent);color:var(--ink)} .soon{border:1px dashed var(--accent-border);color:var(--accent-text)}
+.occ{background:var(--occ);color:var(--occ-fg)} .na{background:repeating-linear-gradient(135deg,var(--ha) 0 5px,var(--hb) 5px 7px)}
+.unk{background:radial-gradient(var(--da) 1px,var(--db) 1.5px) 0 0/6px 6px}
+.tl{position:relative;height:32px;border-radius:8px;background:var(--s2);overflow:hidden;display:flex}
+.tl i{display:block;height:100%}
+.ticks{display:flex;justify-content:space-between;font-size:11px;color:var(--subtle);margin-top:4px;font-variant-numeric:tabular-nums}
+.type div{display:flex;align-items:baseline;gap:14px;margin-bottom:10px} .type small{width:92px;flex:none;color:var(--subtle);font-size:11px}
+.pill{display:inline-flex;align-items:center;height:32px;padding:0 12px;border-radius:999px;background:var(--s2);border:1px solid var(--line);font:600 12px Overpass;color:var(--fg);margin-right:6px}
+.input{height:40px;border-radius:8px;background:var(--s2);border:1px solid var(--line);color:var(--subtle);display:flex;align-items:center;padding:0 12px;margin:10px 0}
+.cta{height:44px;border-radius:8px;background:var(--accent);color:var(--ink);font:600 14px Overpass;display:flex;align-items:center;justify-content:center;margin-top:10px}
+.row{display:block;padding:8px;border-radius:8px} .row:hover,.row.hl{background:var(--s2)}
+.row .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.row b{font-weight:600} .row em{font-style:normal;color:var(--muted);font-size:12px;margin-left:8px}
+.mini{height:6px;border-radius:999px;background:var(--s2);overflow:hidden;display:flex} .mini i{display:block;height:100%}
+.pin{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 10px 0 3px;border-radius:999px;background:var(--surface);box-shadow:0 0 0 1px var(--line),0 4px 14px rgb(0 0 0/.3);font:600 12px Overpass;margin:0 8px 10px 0}
+.pin span{display:inline-grid;place-items:center;min-width:22px;height:22px;border-radius:999px;background:var(--s3);font-weight:800;font-size:11px}
+.pin.o span{background:var(--accent);color:var(--ink)} .pin.c{box-shadow:none;outline:1.5px dashed var(--subtle);outline-offset:-1.5px}
+.pin.sel{box-shadow:0 0 0 2px var(--accent)}
+.note{font-size:12px;color:var(--muted);margin:10px 0 0}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.split > div{border-radius:10px;padding:14px;background:var(--bg);border:1px solid var(--line)}
+</style>
 </head>
 <body>
+<div class="wrap">
+  <div class="head">
+    <svg width="28" height="28" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 3C18.2 3 7.5 13.6 7.5 27C7.5 44.5 32 61 32 61S56.5 44.5 56.5 27C56.5 13.6 45.8 3 32 3Z" fill="#fff"/><rect x="22" y="15" width="20" height="26" rx="2" fill="#FFC845"/><path d="M42 15L33 18.5V41H42Z" fill="#000" fill-opacity=".28"/></svg>
+    <div><h1>Nittany Rooms · design system v2</h1><p>Minimal, dark-first. Navy surfaces, one yellow accent, map as the canvas. Student-made, not an official Penn State service.</p></div>
+  </div>
 
+  <section class="card">
+    <h2>Color · dark (default)</h2>
+    <div class="sw">
+      <div><span style="background:#0A1628"></span><b>bg</b>#0A1628</div>
+      <div><span style="background:#0F1F38"></span><b>surface</b>#0F1F38</div>
+      <div><span style="background:#16294A"></span><b>surface-2</b>#16294A</div>
+      <div><span style="background:#22365A"></span><b>line</b>#22365A</div>
+      <div><span style="background:#E8EEF7"></span><b>fg</b>#E8EEF7</div>
+      <div><span style="background:#8FA0BA"></span><b>muted</b>#8FA0BA</div>
+      <div><span style="background:#FFC845"></span><b>accent</b>#FFC845</div>
+      <div><span style="background:#2B4170"></span><b>occupied</b>#2B4170</div>
+    </div>
+    <p class="note">Accent always carries navy (#12284C) text. The pink “now” marker (#FF5C93) is the only other hue.</p>
+  </section>
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Overpass:wght@400;600;800&amp;display=swap">
-<style>
-body{margin:0}
-</style>
-
-<div style="width: 1400px; height: 1040px; box-sizing: border-box; padding: 56px; background: #F5F7FA; font-family: Overpass, sans-serif; color: #12284C; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px">
-
-  <section style="background: #FFFFFF; border: 1px solid #DCE2EA; border-radius: 16px; padding: 28px; display: flex; flex-direction: column; gap: 18px">
-    <h2 style="margin: 0; font-size: 20px; font-weight: 800">Color</h2>
-    <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px">
-      
-        <div style="display: flex; flex-direction: column; gap: 6px">
-          <div style="height: 64px; border-radius: 10px; border: 1px solid #DCE2EA; background: #12284C"></div>
-          <div style="font-size: 14px; font-weight: 600">Navy</div>
-          <div style="font-size: 13px; color: #4F5B6E; font-variant-numeric: tabular-nums">#12284C</div>
-          <div style="font-size: 12px; color: #4F5B6E; line-height: 1.4">Text, primary buttons, occupied</div>
-        </div>
-      
-        <div style="display: flex; flex-direction: column; gap: 6px">
-          <div style="height: 64px; border-radius: 10px; border: 1px solid #DCE2EA; background: #0E1E3A"></div>
-          <div style="font-size: 14px; font-weight: 600">Night</div>
-          <div style="font-size: 13px; color: #4F5B6E; font-variant-numeric: tabular-nums">#0E1E3A</div>
-          <div style="font-size: 12px; color: #4F5B6E; line-height: 1.4">Map and floor plan canvas</div>
-        </div>
-      
-        <div style="display: flex; flex-direction: column; gap: 6px">
-          <div style="height: 64px; border-radius: 10px; border: 1px solid #DCE2EA; background: #FFC845"></div>
-          <div style="font-size: 14px; font-weight: 600">Glow</div>
-          <div style="font-size: 13px; color: #4F5B6E; font-variant-numeric: tabular-nums">#FFC845</div>
-          <div style="font-size: 12px; color: #4F5B6E; line-height: 1.4">Open rooms, current floor</div>
-        </div>
-      
-        <div style="display: flex; flex-direction: column; gap: 6px">
-          <div style="height: 64px; border-radius: 10px; border: 1px solid #DCE2EA; background: #6B4700"></div>
-          <div style="font-size: 14px; font-weight: 600">Amber text</div>
-          <div style="font-size: 13px; color: #4F5B6E; font-variant-numeric: tabular-nums">#6B4700</div>
-          <div style="font-size: 12px; color: #4F5B6E; line-height: 1.4">Glow-family text on white</div>
-        </div>
-      
-        <div style="display: flex; flex-direction: column; gap: 6px">
-          <div style="height: 64px; border-radius: 10px; border: 1px solid #DCE2EA; background: #F5F7FA"></div>
-          <div style="font-size: 14px; font-weight: 600">Paper</div>
-          <div style="font-size: 13px; color: #4F5B6E; font-variant-numeric: tabular-nums">#F5F7FA</div>
-          <div style="font-size: 12px; color: #4F5B6E; line-height: 1.4">App background</div>
-        </div>
-      
-        <div style="display: flex; flex-direction: column; gap: 6px">
-          <div style="height: 64px; border-radius: 10px; border: 1px solid #DCE2EA; background: #DCE2EA"></div>
-          <div style="font-size: 14px; font-weight: 600">Line</div>
-          <div style="font-size: 13px; color: #4F5B6E; font-variant-numeric: tabular-nums">#DCE2EA</div>
-          <div style="font-size: 12px; color: #4F5B6E; line-height: 1.4">Borders, dividers</div>
-        </div>
-      
-        <div style="display: flex; flex-direction: column; gap: 6px">
-          <div style="height: 64px; border-radius: 10px; border: 1px solid #DCE2EA; background: #4F5B6E"></div>
-          <div style="font-size: 14px; font-weight: 600">Slate</div>
-          <div style="font-size: 13px; color: #4F5B6E; font-variant-numeric: tabular-nums">#4F5B6E</div>
-          <div style="font-size: 12px; color: #4F5B6E; line-height: 1.4">Secondary text</div>
-        </div>
-      
-        <div style="display: flex; flex-direction: column; gap: 6px">
-          <div style="height: 64px; border-radius: 10px; border: 1px solid #DCE2EA; background: #C2185B"></div>
-          <div style="font-size: 14px; font-weight: 600">Now</div>
-          <div style="font-size: 13px; color: #4F5B6E; font-variant-numeric: tabular-nums">#C2185B</div>
-          <div style="font-size: 12px; color: #4F5B6E; line-height: 1.4">Current-time marker only</div>
-        </div>
-      
+  <section class="card">
+    <h2>Type · Overpass</h2>
+    <div class="type">
+      <div><small>Title 20/600</small><span style="font-size:20px;font-weight:600">Paterno E128A</span></div>
+      <div><small>Heading 18/600</small><span style="font-size:18px;font-weight:600">Pattee and Paterno Libraries</span></div>
+      <div><small>Row 14/600</small><span style="font-weight:600">W120 <em style="font-style:normal;color:var(--muted);font-size:12px;font-weight:400">Knowledge Commons · 12 seats</em></span></div>
+      <div><small>Small 12/400</small><span style="font-size:12px;color:var(--muted)">Live from Penn State's LibCal · checked 8:58 PM</span></div>
+      <div><small>Label 11/600</small><span style="font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--subtle)">Open times you can book</span></div>
     </div>
   </section>
 
-  <section style="background: #FFFFFF; border: 1px solid #DCE2EA; border-radius: 16px; padding: 28px; display: flex; flex-direction: column; gap: 14px">
-    <h2 style="margin: 0; font-size: 20px; font-weight: 800">Type: Overpass</h2>
-    <div style="font-size: 14px; color: #4F5B6E; line-height: 1.5">Built on highway-sign lettering, so it reads like campus wayfinding. Times use tabular figures so columns line up.</div>
-    <div style="display: flex; align-items: baseline; gap: 16px; border-top: 1px solid #DCE2EA; padding-top: 12px"><span style="width: 90px; font-size: 12px; color: #4F5B6E">Display 40/800</span><span style="font-size: 40px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1">Engineering Library</span></div>
-    <div style="display: flex; align-items: baseline; gap: 16px"><span style="width: 90px; font-size: 12px; color: #4F5B6E">Title 28/800</span><span style="font-size: 28px; font-weight: 800; letter-spacing: -0.01em">Room 248</span></div>
-    <div style="display: flex; align-items: baseline; gap: 16px"><span style="width: 90px; font-size: 12px; color: #4F5B6E">Heading 20/600</span><span style="font-size: 20px; font-weight: 600">Open until 4:30 PM</span></div>
-    <div style="display: flex; align-items: baseline; gap: 16px"><span style="width: 90px; font-size: 12px; color: #4F5B6E">Body 16/400</span><span style="font-size: 16px; line-height: 1.5">Booking finishes on Penn State's reservation site.</span></div>
-    <div style="display: flex; align-items: baseline; gap: 16px"><span style="width: 90px; font-size: 12px; color: #4F5B6E">Small 13/400</span><span style="font-size: 13px; color: #4F5B6E; font-variant-numeric: tabular-nums">Checked 10:42 AM · 2:00–3:30 PM</span></div>
+  <section class="card">
+    <h2>Room states</h2>
+    <span class="chip open"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 14V2h7v12M10 3l3 1.5V14"/></svg> Open until 2:00 PM</span><span class="chip soon"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M8 4.5V8l2.5 1.5"/></svg> Opens 1:00</span><span class="chip occ"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 14V2h10v12M10 8.5h.5"/></svg> Occupied</span><span class="chip na"><svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M3.8 12.2l8.4-8.4"/></svg> Unavailable</span><span class="chip unk">? Check PSU site</span>
+    <p class="note">Fill or pattern, icon and word. Never color alone.</p>
+    <h2 style="margin-top:18px">Timeline</h2>
+    <div class="tl">
+      <i style="flex:1" class="na"></i><i style="flex:5;background:var(--accent)"></i><i style="flex:.5;background:var(--s3)"></i><i style="flex:3;background:var(--occ)"></i><i style="flex:1" class="na"></i>
+      <b style="position:absolute;left:30%;top:0;bottom:0;width:2px;background:var(--now)"></b><b style="position:absolute;left:0;top:0;bottom:0;width:30%;background:rgb(10 22 40/.55)"></b>
+    </div>
+    <div class="ticks"><span>8 AM</span><span>11 AM</span><span>2 PM</span><span>5 PM</span></div>
+    <p class="note">Past is dimmed; grey slot = gap shorter than the minimum, hidden from booking.</p>
   </section>
 
-  <section style="background: #FFFFFF; border: 1px solid #DCE2EA; border-radius: 16px; padding: 28px; display: flex; flex-direction: column; gap: 18px">
-    <h2 style="margin: 0; font-size: 20px; font-weight: 800">Room states</h2>
-    <div style="font-size: 14px; color: #4F5B6E; line-height: 1.5">Every state has a fill, a pattern and a word, so it never depends on color alone.</div>
-    <div style="display: flex; flex-wrap: wrap; gap: 10px">
-      <span style="display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 14px; border-radius: 999px; background: #FFC845; color: #12284C; font-size: 14px; font-weight: 600"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 14V2h7v12M10 3l3 1.5V14"></path></svg>Open</span>
-      <span style="display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 14px; border-radius: 999px; border: 2px dashed #C99400; color: #6B4700; font-size: 14px; font-weight: 600"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="8" cy="8" r="6"></circle><path d="M8 4.5V8l2.5 1.5"></path></svg>Opens 2:00</span>
-      <span style="display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 14px; border-radius: 999px; background: #12284C; color: #FFFFFF; font-size: 14px; font-weight: 600"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 14V2h10v12M10 8.5h.5"></path></svg>Occupied</span>
-      <span style="display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 14px; border-radius: 999px; background: repeating-linear-gradient(135deg, #E3E7ED 0 6px, #CBD2DC 6px 8px); color: #3A4558; font-size: 14px; font-weight: 600"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="8" cy="8" r="6"></circle><path d="M4 12L12 4"></path></svg>Unavailable</span>
-      <span style="display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 14px; border-radius: 999px; background: radial-gradient(#B8C1CE 1px, #EEF1F5 1.5px) 0 0 / 6px 6px; color: #3A4558; font-size: 14px; font-weight: 600"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 6a2 2 0 1 1 2.8 1.8c-.5.3-.8.7-.8 1.2V10M8 12.5v.2"></path></svg>Check on PSU site</span>
-    </div>
-    <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 4px">
-      <div style="font-size: 14px; font-weight: 600">Availability timeline</div>
-      <div style="position: relative; height: 40px; border-radius: 8px; overflow: hidden; display: flex; border: 1px solid #DCE2EA">
-        <div style="flex: 2; background: #12284C"></div>
-        <div style="flex: 3; background: #FFC845"></div>
-        <div style="flex: 0.25; background: #EEF1F5; border-left: 1px solid #B8C1CE; border-right: 1px solid #B8C1CE"></div>
-        <div style="flex: 1.5; background: #12284C"></div>
-        <div style="flex: 4; background: #FFC845"></div>
-        <div style="flex: 1.25; background: repeating-linear-gradient(135deg, #E3E7ED 0 6px, #CBD2DC 6px 8px)"></div>
-        <div style="position: absolute; left: 31%; top: -2px; bottom: -2px; width: 2px; background: #C2185B"></div>
-      </div>
-      <div style="display: flex; justify-content: space-between; font-size: 12px; color: #4F5B6E; font-variant-numeric: tabular-nums"><span>8 AM</span><span>12 PM</span><span>4 PM</span><span>8 PM</span><span>Close</span></div>
-      <div style="font-size: 13px; color: #4F5B6E; line-height: 1.5">The pink line is now. Gaps shorter than the minimum booking (thin grey slot) are shown but can't be picked.</div>
-    </div>
+  <section class="card">
+    <h2>Controls</h2>
+    <div class="input">⌕&nbsp; Search buildings and rooms</div>
+    <span class="pill">Today</span><span class="pill">Now</span>
+    <div style="margin-top:10px"><span class="chip open" style="height:28px;padding:0 12px;font-size:12px">Open now</span><span class="chip" style="height:28px;padding:0 12px;font-size:12px;border:1px solid var(--line);color:var(--muted)">Any size ▾</span></div>
+    <div class="cta">Continue to Penn State reservation ↗</div>
+    <p class="note">Honest booking language: never “Booked”.</p>
   </section>
 
-  <section style="background: #FFFFFF; border: 1px solid #DCE2EA; border-radius: 16px; padding: 28px; display: flex; flex-direction: column; gap: 18px">
-    <h2 style="margin: 0; font-size: 20px; font-weight: 800">Controls</h2>
-    <div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center">
-      <button type="button" style="height: 48px; padding: 0 20px; border: 0; border-radius: 10px; background: #12284C; color: #FFFFFF; font: 600 16px Overpass, sans-serif">Continue to Penn State reservation</button>
-      <button type="button" style="height: 48px; padding: 0 20px; border: 1.5px solid #12284C; border-radius: 10px; background: #FFFFFF; color: #12284C; font: 600 16px Overpass, sans-serif">Explore floors</button>
-      <button type="button" style="height: 48px; padding: 0 16px; border: 0; border-radius: 10px; background: transparent; color: #12284C; font: 600 16px Overpass, sans-serif; text-decoration: underline">Back to campus map</button>
-    </div>
-    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
-      <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600">Search
-        <input type="search" placeholder="Building or room" style="height: 44px; padding: 0 14px; border: 1px solid #B8C1CE; border-radius: 10px; font: 400 16px Overpass, sans-serif; color: #12284C; background: #FFFFFF">
-      </label>
-      <label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600">Date and time
-        <input type="text" value="Mon, Nov 23 · 2:00 PM" style="height: 44px; padding: 0 14px; border: 1px solid #B8C1CE; border-radius: 10px; font: 400 16px Overpass, sans-serif; color: #12284C; background: #FFFFFF">
-      </label>
-    </div>
-    <div style="display: flex; gap: 20px; align-items: center">
-      <div style="display: flex; flex-direction: column; gap: 6px; padding: 6px; background: #0E1E3A; border-radius: 14px">
-        <button type="button" style="width: 52px; height: 44px; border: 0; border-radius: 10px; background: #1F3358; color: #FFFFFF; font: 800 16px Overpass, sans-serif">3</button>
-        <button type="button" aria-pressed="true" style="width: 52px; height: 44px; border: 0; border-radius: 10px; background: #FFC845; color: #12284C; font: 800 16px Overpass, sans-serif">2</button>
-        <button type="button" style="width: 52px; height: 44px; border: 0; border-radius: 10px; background: #1F3358; color: #FFFFFF; font: 800 16px Overpass, sans-serif">1</button>
-      </div>
-      <div style="display: flex; flex-direction: column; gap: 10px; font-size: 14px; color: #4F5B6E; line-height: 1.5">
-        <div><strong style="color: #12284C">Floor picker</strong> styled like elevator buttons. The lit button is the current floor.</div>
-        <div><strong style="color: #12284C">Spacing</strong> 4 · 8 · 12 · 16 · 24 · 32 · 48. <strong style="color: #12284C">Radius</strong> 10 controls, 16 panels, 999 chips.</div>
-        <div><strong style="color: #12284C">Motion</strong> One zoom from campus into a building, about 300 ms. Turned off with reduced motion.</div>
-      </div>
+  <section class="card">
+    <h2>List rows</h2>
+    <div class="row hl"><div class="top"><span><b>W120</b><em>Knowledge Commons · 12 seats</em></span><span class="chip open" style="margin:0">Open</span></div>
+      <div class="mini"><i style="flex:2;background:var(--accent)"></i><i style="flex:1;background:var(--occ)"></i><i style="flex:3;background:var(--accent)"></i></div></div>
+    <div class="row"><div class="top"><span><b>W101B</b><em>Leisure Reading Room · 4 seats</em></span><span class="chip occ" style="margin:0">Occupied</span></div>
+      <div class="mini"><i style="flex:1;background:var(--accent)"></i><i style="flex:4;background:var(--occ)"></i><i style="flex:1;background:var(--accent)"></i></div></div>
+  </section>
+
+  <section class="card">
+    <h2>Map pins (3D map)</h2>
+    <span class="pin o"><span>34</span>Pattee &amp; Paterno</span><span class="pin o sel"><span>7</span>EMS Library</span><span class="pin"><span>5</span>Engineering Library</span><span class="pin c"><span>?</span>Not verified</span>
+    <p class="note">Buildings with rooms open are extruded in accent yellow from OSM footprints; others in muted blue. The camera pitches ~52° over campus and flies to ~60° into a building.</p>
+  </section>
+
+  <section class="card" style="grid-column:1/-1">
+    <h2>Dark and light</h2>
+    <div class="split">
+      <div><span class="chip open">Open</span><span class="chip soon">Opens 1:00</span><span class="chip occ">Occupied</span><div class="cta">Continue to Penn State reservation ↗</div></div>
+      <div class="light" style="background:var(--bg);color:var(--fg)"><span class="chip open">Open</span><span class="chip soon">Opens 1:00</span><span class="chip occ">Occupied</span><div class="cta">Continue to Penn State reservation ↗</div></div>
     </div>
   </section>
 </div>
-
-
 </body>
 </html>

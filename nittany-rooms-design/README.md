@@ -1,50 +1,59 @@
-# Nittany Rooms: design package
+# Nittany Rooms: design package (v2)
 
-Logo, design system and mockups for Nittany Rooms, a student-made web app for finding and reserving study rooms at Penn State University Park. It is not an official Penn State service.
+The design language for Nittany Rooms, a student-made web app for finding and reserving study rooms at Penn State University Park. It is not an official Penn State service.
+
+**v2 is minimal and dark-first.** The 3D campus map is the canvas, and a quiet sidebar or bottom sheet holds the content. The palette is navy surfaces with a single yellow accent. v1, the original mockups, is kept in [`v1/`](v1/) for reference.
 
 ## What's in here
 
-| Folder | Contents |
+| Path | Contents |
 |---|---|
-| `png/` | Each mockup rendered at 2x |
-| `html/` | Standalone HTML for each mockup. Open in a browser; fonts load from `fonts/` |
-| `logo/` | Logo mark (color, on navy, one-color black, 16 px favicon) and wordmark lockups |
-| `tokens/tokens.json` | Colors, room-state styles, type scale, spacing, radius, motion |
+| `tokens/tokens.json` | **v2 tokens**: dark and light themes, room states, map palette and camera, type scale, spacing, radius, motion |
+| `html/02-design-system.html` | Standalone v2 design-system sheet (open in a browser; fonts load from `fonts/`) |
+| `png/` | v2 design sheet and screenshots of the **real app** at 2x (live Penn State data, Mon Nov 23 2026, 1 PM) |
+| `logo/` | Logo mark and lockups (unchanged from v1; use `mark-on-navy.svg` on dark) |
 | `fonts/` | Overpass 400/600/800 (SIL Open Font License) |
-| `source-dc-html/` | Original canvas source files |
+| `v1/` | Original v1 mockups, tokens and canvas sources (superseded) |
 
-Screens, in flow order:
+Screens in `png/`:
 
-1. `01-logo`: logo sheet
-2. `02-design-system`: tokens, room states, timeline, controls
-3. `03-desktop-campus-map`: home screen, campus map with buildings that have reservable rooms
-4. `04-desktop-floor-plan`: building view, floor plan with room details and booking handoff
-5. `05-desktop-fallback-no-floor-plan`: building view when no floor plan has been sourced yet
-6. `06-mobile-campus-map`: home screen on a phone, with a building preview sheet
+1. `02-design-system`: tokens, room states, timeline, controls, rows, map pins, dark vs light
+2. `03-desktop-campus-dark`: home, 3D campus with buildings that have reservable rooms
+3. `04-desktop-building-dark`: building view, floor tabs, rooms with mini timelines
+4. `05-desktop-room-dark`: room view, live timeline, bookable windows, official handoff
+5. `06-desktop-campus-light`: light theme
+6. `07-mobile-campus-dark`: phone, map with bottom sheet
+7. `08-mobile-room-dark`: phone, room details in the expanded sheet
 
-## Copy the look, not the data
+The code is the source of truth. Tokens are implemented in `apps/web/src/index.css` as `--nr-*` CSS variables, exposed to Tailwind as semantic colors (`bg`, `surface`, `fg`, `muted`, `accent`, …).
 
-These mockups show layout, styling and interaction only. Don't reuse any place, position or number in them as real data. Every screen with drawn stand-in content has a `*` footnote saying so.
+## v2 principles
 
-| Element | Status | What to build from instead |
-|---|---|---|
-| Campus map (03, 06): roads, building shapes, marker positions | Hand-drawn guesses, not to scale | Real OpenStreetMap tiles centered on University Park, plus official or properly licensed building coordinates |
-| Road names on the desktop map | Real roads, drawn in made-up positions | OSM tiles show the real roads |
-| Floor plan layout (04): walls, corridor, room sizes and positions, stairs, elevator, restrooms, entrance | Invented | ECoRE's sourced floor plan, with room polygons tied to official room IDs |
-| Fallback tiles (05) | Rooms in number order on purpose, not positions | This is the intended fallback design |
-| Room numbers 133, 248, 249, 322, 333 | Real, from the Penn State University Libraries Engineering Library page | Re-verify during data ingestion |
-| Floor of each room | Read from the room number, not confirmed | Official room data |
-| Pattee and Paterno, Earth and Mineral Sciences libraries | Candidates only, shown as "not verified" | Verify that they have reservable rooms before listing them |
-| All statuses, times, timelines, open-room counts, the 15-minute gap | Sample data | Live, complete provider data; mark anything stale or incomplete as unknown |
-| Capacity and features | Shown as "Not verified yet" | Show only verified values |
-| Booking button destination | Placeholder link | The official room-specific Penn State reservation URL |
+- **Map first.** The 3D OpenFreeMap campus is always on screen. Choosing a building flies the camera in, which is the campus → building transition. Buildings with reservable rooms are extruded from their OpenStreetMap footprints in the accent color when rooms are open, and in muted blue otherwise.
+- **One accent.** Yellow `#FFC845` marks open rooms, the primary action, and the selected floor. It always carries navy `#12284C` text. On light surfaces, yellow-family *text* uses `#6B4700`. The only other hue is the pink current-time marker.
+- **Quiet surfaces.** Three navy steps (`bg` → `surface` → `surface-2`), 1px `line` borders, and almost no shadows (only floating sheets and popovers have one). No gradients, glass, or oversized cards.
+- **Small, steady type.** Overpass at 14px body, 18–20px headings, and 11px uppercase section labels. Times and counts use tabular figures.
+- **Lists over decoration.** Rooms are compact rows with a status chip and a thin day timeline. Until a real floor plan is sourced, the building view is a floor-grouped list. That's the documented fallback, not a drawn layout.
+- **Dark by default**, with a light theme one tap away. Both themes share every component; only tokens change.
 
-## Design rules worth keeping
+## Rules carried over from v1 (still binding)
 
-- Room states never rely on color alone. Each one has a fill or pattern, an icon and a text label (see `tokens.json` → `roomState`).
-- Glow yellow always carries navy text. On white backgrounds, use `amberText` for glow-family text.
+- Room states never rely on color alone. Each has a fill or pattern, an icon and a word (`tokens.json` → `roomState`).
 - Booking language stays honest: "Continue to Penn State reservation", never "Booked".
-- Every screen shows how fresh the data is and carries the "Student-made, not an official Penn State service" line.
+- Every screen shows where availability came from and how fresh it is, and carries the "Student-made, not an official Penn State service" line.
 - No Nittany Lion or other Penn State marks in the branding.
-- Touch targets are at least 44 px. Times use tabular figures.
-- The lockup SVGs use live `Overpass` text. Convert the text to outlines before using them where the font isn't installed.
+- Touch targets are at least 44px on rows and primary actions. Pills and chips sit inside larger hit areas.
+- Unknown or stale availability shows "Check PSU site" (dots), never "free".
+- Reduced motion: the camera jumps instead of flying, and transitions are off.
+
+## Map spec (summary)
+
+| | Dark (default) | Light |
+|---|---|---|
+| Base style | OpenFreeMap `fiord`, recolored to navy | OpenFreeMap `liberty`, POI icons removed |
+| Buildings | 3D extrusion `#1A2E52` | Liberty's 3D buildings |
+| Reservable, rooms open | `#FFC845` extrusion | `#FFC845` |
+| Reservable, none open or unknown | `#3B5A92` | `#8EA6CC` |
+| Camera | Overview: pitch 52°, bearing −18°, zoom 15.35 (14.7 on phones). Building: pitch 60°, zoom 17.3 | same |
+
+Map data © OpenStreetMap contributors (ODbL). Tiles from OpenFreeMap.
