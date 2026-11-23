@@ -1,4 +1,5 @@
 import { formatDateLabel, formatTime, localTime } from '@nittany-rooms/core';
+import { DateTime } from 'luxon';
 import { anyFilter, NO_FILTERS, type Filters, type SizeFilter } from '../lib/filters';
 import type { GeoState } from '../lib/geo';
 import { navigate } from '../lib/router';
@@ -44,7 +45,14 @@ function FilterPanel({ filters, setFilters, geo, onLocate }: { filters: Filters;
       </div>
       <label className="block">
         <span className={sectionH + ' block'}>Free until</span>
-        <input type="time" step={900} value={filters.freeUntil ?? ''} onChange={(e) => set({ freeUntil: e.target.value || null })} className={field} />
+        <select value={filters.freeUntil ?? ''} onChange={(e) => set({ freeUntil: e.target.value || null })} className={field}>
+          <option value="">Any time</option>
+          {HALF_HOURS.filter((t) => t >= '08:00').map((t) => (
+            <option key={t} value={t}>
+              {label12(t)}
+            </option>
+          ))}
+        </select>
       </label>
       <label className="block">
         <span className={sectionH + ' block'}>Available for at least</span>
@@ -77,29 +85,76 @@ function FilterPanel({ filters, setFilters, geo, onLocate }: { filters: Filters;
   );
 }
 
+/** Half-hour slots shown in the time picker and "Free until" (campus time). */
+export const HALF_HOURS = Array.from({ length: 36 }, (_, i) => {
+  const m = 6 * 60 + i * 30; // 6:00 AM – 11:30 PM
+  return `${String(Math.floor(m / 60)).padStart(2, '0')}:${String(m % 60).padStart(2, '0')}`;
+});
+export const label12 = (hhmm: string) => {
+  const [h, m] = hhmm.split(':').map(Number);
+  return `${((h! + 11) % 12) + 1}:${String(m).padStart(2, '0')} ${h! < 12 ? 'AM' : 'PM'}`;
+};
+
+const chipBtn = (on: boolean, disabled = false) =>
+  `h-9 rounded-control text-[13px] font-medium tabular ${
+    on ? 'bg-accent text-accent-ink' : disabled ? 'text-subtle/50 cursor-not-allowed' : 'bg-surface-2 text-fg hover:bg-surface-3'
+  }`;
+
 function TimePanel({ sel, close }: { sel: SelectedTime; close: () => void }) {
-  const today = new Date(sel.now).toLocaleDateString('en-CA', { timeZone: 'America/New_York' });
+  const today = DateTime.fromMillis(sel.now, { zone: 'America/New_York' }).startOf('day');
+  const days = Array.from({ length: 15 }, (_, i) => today.plus({ days: i })); // booking window
+  const nowHHMM = DateTime.fromMillis(sel.now, { zone: 'America/New_York' }).toFormat('HH:mm');
+  const live = sel.isLive && sel.isToday;
   return (
     <div className="space-y-3">
-      <label className="block">
-        <span className={sectionH + ' block'}>Date</span>
-        <input type="date" value={sel.date} min={today} onChange={(e) => e.target.value && sel.setDate(e.target.value)} className={field} />
-      </label>
-      <label className="block">
-        <span className={sectionH + ' block'}>Time</span>
-        <input type="time" step={900} value={sel.time} onChange={(e) => sel.setTime(e.target.value)} className={field} />
-      </label>
+      <div>
+        <div className={sectionH}>Day</div>
+        <div className="grid grid-cols-5 gap-1">
+          {days.map((d, i) => {
+            const iso = d.toISODate()!;
+            const on = sel.date === iso;
+            return (
+              <button
+                key={iso}
+                type="button"
+                aria-pressed={on}
+                aria-label={d.toFormat('cccc, LLLL d')}
+                onClick={() => sel.setDate(iso)}
+                className={`${chipBtn(on)} flex h-12 flex-col items-center justify-center leading-tight`}
+              >
+                <span className={`text-[10px] font-semibold uppercase ${on ? '' : 'text-subtle'}`}>{i === 0 ? 'Today' : d.toFormat('ccc')}</span>
+                <span className="text-[14px] font-semibold">{d.toFormat('d')}</span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+      <div>
+        <div className={sectionH}>Time</div>
+        <button
+          type="button"
+          aria-pressed={live}
+          onClick={() => {
+            sel.reset();
+            close();
+          }}
+          className={`${chipBtn(live)} mb-1 w-full`}
+        >
+          Now
+        </button>
+        <div className="grid max-h-48 grid-cols-4 gap-1 overflow-y-auto pr-0.5">
+          {HALF_HOURS.filter((t) => !(sel.isToday && t < nowHHMM.slice(0, 3) + (Number(nowHHMM.slice(3)) >= 30 ? '30' : '00'))).map((t) => {
+            const past = false;
+            const on = !live && sel.time === t;
+            return (
+              <button key={t} type="button" disabled={past} aria-pressed={on} onClick={() => sel.setTime(t)} className={chipBtn(on, past)}>
+                {label12(t).replace(':00', '')}
+              </button>
+            );
+          })}
+        </div>
+      </div>
       <p className="text-[11px] text-subtle">Penn State campus time (Eastern).</p>
-      <button
-        type="button"
-        onClick={() => {
-          sel.reset();
-          close();
-        }}
-        className="h-8 w-full rounded-control bg-surface-2 text-xs font-semibold text-fg hover:bg-surface-3"
-      >
-        Now
-      </button>
     </div>
   );
 }
@@ -140,7 +195,7 @@ export function Controls({
       >
         <LogoMark size={20} onNavy={theme === 'dark'} />
         <span className="hidden text-[15px] font-extrabold tracking-[-0.02em] lg:inline">
-          <span style={{ color: 'var(--nr-brand-navy)' }}>Nittany</span>
+          <span style={{ color: 'var(--nr-brand-navy)' }}>Nittany</span>{' '}
           <span style={{ color: 'var(--nr-brand-yellow)' }}>Rooms</span>
         </span>
       </a>
@@ -150,7 +205,7 @@ export function Controls({
       <Popover label="Filters" active={nFilters > 0 || geo.status === 'ok'} button={<><FilterIcon />{nFilters > 0 && <span className="text-xs font-bold">{nFilters}</span>}</>}>
         {() => <FilterPanel filters={filters} setFilters={setFilters} geo={geo} onLocate={onLocate} />}
       </Popover>
-      <Popover label={`Date and time: ${live ? 'now' : timeLabel}`} active={!live} width={240} button={<><Calendar size={14} /><span className="whitespace-nowrap tabular">{timeLabel}</span></>}>
+      <Popover label={`Date and time: ${live ? 'now' : timeLabel}`} active={!live} width={300} button={<><Calendar size={14} /><span className="whitespace-nowrap tabular">{timeLabel}</span></>}>
         {(close) => <TimePanel sel={sel} close={close} />}
       </Popover>
       <Popover label="More" width={320} button={<DotsIcon />}>
