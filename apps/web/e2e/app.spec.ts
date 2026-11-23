@@ -237,3 +237,16 @@ test.describe('favorites', () => {
     await expect(page.getByRole('heading', { level: 1, name: 'Pattee W120' })).toBeVisible();
   });
 });
+
+test.describe('room actions', () => {
+  test('add to calendar offers .ics and Google for the selected window', async ({ page, api: _ }) => {
+    await page.goto('/b/pattee-paterno?room=paterno-e128a');
+    await page.getByRole('button', { name: 'Add to calendar' }).click();
+    const ics = page.getByRole('link', { name: 'Apple / Outlook (.ics)' });
+    await expect(ics).toHaveAttribute('download', 'nittany-rooms-paterno-e128a.ics');
+    const href = decodeURIComponent((await ics.getAttribute('href'))!);
+    expect(href).toContain('DTSTART:20261123T180000Z');
+    expect(href).toContain('DTEND:20261123T190000Z');
+    await expect(page.getByRole('link', { name: 'Google Calendar' })).toHaveAttribute('href', /calendar\.google\.com.*20261123T180000Z/);
+  });
+});
