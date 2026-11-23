@@ -120,7 +120,7 @@ export function RoomPanel({ room, building, sel, demo, live }: { room: Room; bui
         onNextDay={canNext ? () => sel.setDate(shiftDate(sel.date, 1)) : null}
       />
       {expired && (
-        <p role="alert" className="rounded-control border border-dashed border-accent-border px-3 py-2 text-xs text-accent-text">
+        <p role="alert" className="rounded-control border border-dashed border-yellow px-3 py-2 text-xs text-soon-text">
           That time is no longer bookable. It may have passed or been taken.
         </p>
       )}

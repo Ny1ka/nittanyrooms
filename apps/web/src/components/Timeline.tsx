@@ -4,9 +4,9 @@ import type { RoomDay } from '../lib/availability';
 type Visual = 'open' | 'short' | 'occupied' | 'unavailable' | 'unknown';
 
 const VISUAL_CLASS: Record<Visual, string> = {
-  open: 'bg-accent',
+  open: 'bg-open',
   short: 'bg-surface-3',
-  occupied: 'bg-occupied',
+  occupied: 'bg-busy',
   unavailable: 'fill-unavailable',
   unknown: 'fill-unknown',
 };

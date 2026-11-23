@@ -2,7 +2,7 @@
 
 The design language for Nittany Rooms, a student-made web app for finding and reserving study rooms at Penn State University Park. It is not an official Penn State service.
 
-**v2 is minimal and dark-first.** The 3D campus map is the canvas, and a quiet sidebar or bottom sheet holds the content. The palette is navy surfaces with a single yellow accent. v1, the original mockups, is kept in [`v1/`](v1/) for reference.
+**v2.1 is minimal and neutral.** Dark and light gray surfaces, **green = open/available, red = occupied/not available**, and blue (actions, selection) and yellow (brand, “opens soon”) as accents only. Appearance can be Light, Dark (default) or Auto. The 3D campus map is the canvas, and a quiet sidebar or bottom sheet holds the content. The palette is navy surfaces with a single yellow accent. v1, the original mockups, is kept in [`v1/`](v1/) for reference.
 
 ## What's in here
 
@@ -30,8 +30,8 @@ The code is the source of truth. Tokens are implemented in `apps/web/src/index.c
 ## v2 principles
 
 - **Map first.** The 3D OpenFreeMap campus is always on screen. Choosing a building flies the camera in, which is the campus → building transition. Buildings with reservable rooms are extruded from their OpenStreetMap footprints in the accent color when rooms are open, and in muted blue otherwise.
-- **One accent.** Yellow `#FFC845` marks open rooms, the primary action, and the selected floor. It always carries navy `#12284C` text. On light surfaces, yellow-family *text* uses `#6B4700`. The only other hue is the pink current-time marker.
-- **Quiet surfaces.** Three navy steps (`bg` → `surface` → `surface-2`), 1px `line` borders, and almost no shadows (only floating sheets and popovers have one). No gradients, glass, or oversized cards.
+- **State colors carry meaning.** Green marks open and available, red marks occupied and not available. Both appear as soft tinted chips with AA text. Blue `#2563EB` is for actions and selection (with white text). Yellow is reserved for the brand, “opens soon”, and the now marker.
+- **Quiet surfaces.** Three neutral gray steps (`bg` → `surface` → `surface-2`), 1px `line` borders, and almost no shadows (only floating sheets and popovers have one). No gradients, glass, or oversized cards.
 - **Small, steady type.** Inter (variable, features `cv11` and `ss03`) at 14px body, 18–20px headings, and 11px uppercase section labels. Times and counts use tabular figures.
 - **Lists over decoration.** Rooms are compact rows with a status chip and a thin day timeline. Until a real floor plan is sourced, the building view is a floor-grouped list. That's the documented fallback, not a drawn layout.
 - **Dark by default**, with a light theme one tap away. Both themes share every component; only tokens change.
@@ -57,3 +57,5 @@ The code is the source of truth. Tokens are implemented in `apps/web/src/index.c
 | Camera | Overview: pitch 52°, bearing −18°, zoom 15.35 (14.7 on phones). Building: pitch 60°, zoom 17.3 | same |
 
 Map data © OpenStreetMap contributors (ODbL). Tiles from OpenFreeMap.
+
+> Screenshots in `png/` show the v2.0 navy palette; tokens.json (v2.1) is current. Re-render them with the app when convenient.

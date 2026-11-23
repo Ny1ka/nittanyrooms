@@ -8,13 +8,14 @@
       name="description"
       content="Find study rooms you can reserve at Penn State University Park, see where they are, and continue to the official Penn State reservation page. Student-made, not an official Penn State service."
     />
-    <meta name="theme-color" content="#0A1628" />
+    <meta name="theme-color" content="#0B0D10" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="preload" href="/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
     <script>
       // Dark by default; remember the visitor's choice. Runs before paint to avoid a flash.
       try {
-        var t = localStorage.getItem('nr-theme');
+        var t = localStorage.getItem('nr-theme') || 'dark';
+        if (t === 'auto') t = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
         document.documentElement.dataset.theme = t === 'light' ? 'light' : 'dark';
       } catch (e) {
         document.documentElement.dataset.theme = 'dark';

@@ -3,9 +3,9 @@ import { Clock, DoorClosed, DoorOpen, Question, SlashCircle } from './Icons';
 
 /** Room states never rely on color alone: fill/pattern + icon + word (tokens.json → roomState). */
 export const STATE_STYLE: Record<RoomState, string> = {
-  open: 'bg-accent text-accent-ink',
-  opensSoon: 'border border-dashed border-accent-border text-accent-text',
-  occupied: 'bg-occupied text-occupied-fg',
+  open: 'bg-open-soft text-open-text',
+  opensSoon: 'border border-dashed border-yellow text-soon-text',
+  occupied: 'bg-busy-soft text-busy-text',
   unavailable: 'fill-unavailable text-fg',
   unknown: 'fill-unknown text-fg',
 };

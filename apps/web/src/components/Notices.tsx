@@ -5,7 +5,7 @@ import { setParams } from '../lib/router';
 /** Shown on every page in demo mode. Sample data never appears without it. */
 export function DemoBanner() {
   return (
-    <div role="status" className="flex items-center justify-between gap-3 bg-accent px-3 py-1.5 text-xs font-semibold text-accent-ink">
+    <div role="status" className="flex items-center justify-between gap-3 bg-yellow px-3 py-1.5 text-xs font-semibold text-[#111418]">
       <span>Demo mode: sample data, not real Penn State availability.</span>
       <button type="button" className="underline underline-offset-2" onClick={() => setParams({ demo: null })}>
         Exit
@@ -16,7 +16,7 @@ export function DemoBanner() {
 
 /** Quiet provenance line with a status dot. */
 export function FreshnessNote({ children, tone = 'muted' }: { children: React.ReactNode; tone?: 'live' | 'muted' | 'warn' }) {
-  const dot = tone === 'live' ? 'bg-accent' : tone === 'warn' ? 'bg-now' : 'bg-subtle';
+  const dot = tone === 'live' ? 'bg-open' : tone === 'warn' ? 'bg-yellow' : 'bg-subtle';
   return (
     <p className="flex items-start gap-2 text-xs leading-snug text-muted">
       <span className={`mt-[5px] size-1.5 shrink-0 rounded-full ${dot}`} aria-hidden="true" />

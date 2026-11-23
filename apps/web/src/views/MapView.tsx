@@ -3,7 +3,9 @@ import type { Map as MLMap, Marker, StyleSpecification } from 'maplibre-gl';
 import { useEffect, useRef, useState } from 'react';
 import type { StateCounts } from '../lib/availability';
 import { footprints } from '../lib/data';
+import type { LatLon } from '../lib/geo';
 import { useThemeValue, type Theme } from '../lib/theme';
+import { Locate } from '../components/Icons';
 
 /**
  * 3D campus map: MapLibre + OpenFreeMap (OpenStreetMap data, no key, no billing).
@@ -37,17 +39,17 @@ function darkify(style: StyleSpecification): StyleSpecification {
     const l = { ...raw, paint: { ...(raw.paint ?? {}) } } as AnyLayer;
     const sl = l['source-layer'];
     const p = l.paint as Record<string, unknown>;
-    if (l.type === 'background') p['background-color'] = '#0A1628';
-    else if (sl === 'water' && l.type === 'fill') p['fill-color'] = '#0B2242';
-    else if (sl === 'waterway' && l.type === 'line') p['line-color'] = '#0B2242';
+    if (l.type === 'background') p['background-color'] = '#0B0D10';
+    else if (sl === 'water' && l.type === 'fill') p['fill-color'] = '#0E1621';
+    else if (sl === 'waterway' && l.type === 'line') p['line-color'] = '#0E1621';
     else if ((sl === 'landcover' || sl === 'landuse' || sl === 'park') && l.type === 'fill') {
-      p['fill-color'] = '#0E2140';
+      p['fill-color'] = '#10161D';
       p['fill-opacity'] = 0.55;
     } else if (sl === 'building') continue; // replaced by our extrusion layer
-    else if (sl === 'transportation' && l.type === 'line') p['line-color'] = '#1D3259';
+    else if (sl === 'transportation' && l.type === 'line') p['line-color'] = '#232A33';
     else if (l.type === 'symbol') {
-      p['text-color'] = '#7F91AE';
-      p['text-halo-color'] = '#0A1628';
+      p['text-color'] = '#8A94A1';
+      p['text-halo-color'] = '#0B0D10';
       p['text-halo-width'] = 1.2;
     }
     layers.push(l);
@@ -60,7 +62,7 @@ function darkify(style: StyleSpecification): StyleSpecification {
     'source-layer': 'building',
     minzoom: 14,
     paint: {
-      'fill-extrusion-color': '#1A2E52',
+      'fill-extrusion-color': '#1C2129',
       'fill-extrusion-height': ['get', 'render_height'],
       'fill-extrusion-base': ['get', 'render_min_height'],
       'fill-extrusion-opacity': 0.92,
@@ -102,6 +104,7 @@ function footprintData(markers: MarkerInfo[], selectedId: string | null) {
       .map((f) => {
         const m = byId.get(f.properties.buildingId)!;
         const open = m.known && m.counts.open > 0;
+        const none = m.known && m.counts.open === 0;
         const selected = f.properties.buildingId === selectedId;
         return {
           type: 'Feature' as const,
@@ -109,7 +112,7 @@ function footprintData(markers: MarkerInfo[], selectedId: string | null) {
           properties: {
             buildingId: f.properties.buildingId,
             height: f.properties.heightMeters + 2,
-            tone: `${open ? 'open' : 'quiet'}${selected ? '-selected' : ''}`,
+            tone: `${open ? 'open' : none ? 'busy' : 'quiet'}${selected ? '-selected' : ''}`,
           },
         };
       }),
@@ -119,7 +122,7 @@ function footprintData(markers: MarkerInfo[], selectedId: string | null) {
 function addOverlays(map: MLMap, theme: Theme, data: ReturnType<typeof footprintData>) {
   if (map.getSource('nr-footprints')) return;
   map.addSource('nr-footprints', { type: 'geojson', data });
-  const quiet = theme === 'dark' ? '#3B5A92' : '#8EA6CC';
+  const quiet = theme === 'dark' ? '#4B5563' : '#9CA3AF';
   map.addLayer({
     id: 'nr-footprints-3d',
     type: 'fill-extrusion',
@@ -129,11 +132,15 @@ function addOverlays(map: MLMap, theme: Theme, data: ReturnType<typeof footprint
         'match',
         ['get', 'tone'],
         'open',
-        '#FFC845',
+        '#22C55E',
         'open-selected',
-        '#FFD978',
+        '#4ADE80',
+        'busy',
+        '#DC2626',
+        'busy-selected',
+        '#F87171',
         'quiet-selected',
-        theme === 'dark' ? '#6E93D6' : '#5E7FB8',
+        '#3B82F6',
         quiet,
       ],
       'fill-extrusion-height': ['get', 'height'],
@@ -159,6 +166,7 @@ function markerHtml(info: MarkerInfo, selected: boolean): { html: string; label:
     badge = String(info.counts.open);
     label = `${b.headline}, ${info.counts.open} of ${info.counts.total} rooms open at this time`;
   } else if (info.known) {
+    cls += ' nr-pin--busy';
     badge = '0';
     label = `${b.headline}, no rooms open at this time`;
   } else {
@@ -175,13 +183,19 @@ export function MapView({
   selectedId,
   onSelect,
   bottomPadding = 0,
+  userPos = null,
+  onLocate,
 }: {
   markers: MarkerInfo[];
   visibleIds: Set<string>;
   selectedId: string | null;
   onSelect: (id: string) => void;
   bottomPadding?: number;
+  userPos?: LatLon | null;
+  onLocate?: () => void;
 }) {
+  const userMarker = useRef<Marker | null>(null);
+  const mlRef = useRef<typeof import('maplibre-gl') | null>(null);
   const theme = useThemeValue();
   const container = useRef<HTMLDivElement>(null);
   const mapRef = useRef<MLMap | null>(null);
@@ -203,6 +217,7 @@ export function MapView({
           import('maplibre-gl/dist/maplibre-gl.css'),
         ]);
         maplibre.setWorkerUrl(worker.default);
+        mlRef.current = maplibre;
         const style = await loadStyle(latest.current.theme);
         if (cancelled || !container.current) return;
         const pts = latest.current.markers.map((m) => [m.building.location.lon, m.building.location.lat] as const);
@@ -313,8 +328,42 @@ export function MapView({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedId, status, bottomPadding]);
 
+  // "You are here" dot; fly to show it once located.
+  useEffect(() => {
+    const map = mapRef.current;
+    const ml = mlRef.current;
+    if (!map || !ml || status !== 'ready') return;
+    if (!userPos) {
+      userMarker.current?.remove();
+      userMarker.current = null;
+      return;
+    }
+    if (!userMarker.current) {
+      const el = document.createElement('div');
+      el.className = 'nr-user';
+      el.setAttribute('aria-label', 'Your location');
+      userMarker.current = new ml.Marker({ element: el }).setLngLat([userPos.lon, userPos.lat]).addTo(map);
+    } else {
+      userMarker.current.setLngLat([userPos.lon, userPos.lat]);
+    }
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    map[reduce ? 'jumpTo' : 'flyTo']({ center: [userPos.lon, userPos.lat], zoom: 16, padding: { top: 40, bottom: bottomPadding + 40, left: 40, right: 40 } });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userPos, status]);
+
   return (
     <div className="absolute inset-0 bg-bg">
+      {onLocate && (
+        <button
+          type="button"
+          onClick={onLocate}
+          aria-label="Show my location and the closest building"
+          title="Find my location"
+          className="absolute top-[108px] right-[10px] z-10 grid size-[29px] place-items-center rounded-[4px] bg-surface text-fg shadow-[0_0_0_1px_var(--nr-line)] hover:bg-surface-2"
+        >
+          <Locate size={15} />
+        </button>
+      )}
       {/* Inline position: maplibre's CSS sets .maplibregl-map{position:relative}. */}
       <div ref={container} style={{ position: 'absolute', inset: 0 }} aria-label="3D campus map of University Park" role="region" />
       {status === 'loading' && (
@@ -337,9 +386,11 @@ export function MapView({
           font-size:12px;font-weight:600;white-space:nowrap}
         .nr-pin__badge{display:inline-grid;place-items:center;min-width:22px;height:22px;padding:0 5px;border-radius:999px;
           background:var(--nr-surface-3);color:var(--nr-fg);font-weight:800;font-size:11px;box-sizing:border-box}
-        .nr-pin--open .nr-pin__badge{background:var(--nr-accent);color:var(--nr-accent-ink)}
+        .nr-pin--open .nr-pin__badge{background:var(--nr-open);color:#05230f}
+        .nr-pin--busy .nr-pin__badge{background:var(--nr-busy);color:#fff}
         .nr-pin--candidate{box-shadow:none;outline:1.5px dashed var(--nr-subtle);outline-offset:-1.5px}
-        .nr-pin--selected{box-shadow:0 0 0 2px var(--nr-accent),0 4px 14px rgb(0 0 0 / .35)}
+        .nr-pin--selected{box-shadow:0 0 0 2px var(--nr-accent-border),0 4px 14px rgb(0 0 0 / .35)}
+        .nr-user{width:16px;height:16px;border-radius:999px;background:#3b82f6;border:3px solid #fff;box-shadow:0 0 0 6px rgb(59 130 246 / .25)}
         .nr-marker:focus-visible{outline:none}
         .nr-marker:focus-visible .nr-pin{box-shadow:0 0 0 2px var(--nr-accent)}
       `}</style>
