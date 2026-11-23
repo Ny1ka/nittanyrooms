@@ -11,8 +11,8 @@ The design language for Nittany Rooms, a student-made web app for finding and re
 | `tokens/tokens.json` | **v2 tokens**: dark and light themes, room states, map palette and camera, type scale, spacing, radius, motion |
 | `html/02-design-system.html` | Standalone v2 design-system sheet (open in a browser; fonts load from `fonts/`) |
 | `png/` | v2 design sheet and screenshots of the **real app** at 2x (live Penn State data, Mon Nov 23 2026, 1 PM) |
-| `logo/` | Logo mark and lockups (unchanged from v1; use `mark-on-navy.svg` on dark) |
-| `fonts/` | Overpass 400/600/800 (SIL Open Font License) |
+| `logo/` | Logo mark and lockups (use `mark-on-navy.svg` on dark). Lockups set the wordmark in live Inter text; outline it before using it where Inter isn't installed |
+| `fonts/` | **Inter** variable (`inter-latin-wght-normal.woff2`, weights 100–900, SIL OFL), the v2 typeface. Overpass files remain only for the archived v1 mockups |
 | `v1/` | Original v1 mockups, tokens and canvas sources (superseded) |
 
 Screens in `png/`:
@@ -32,7 +32,7 @@ The code is the source of truth. Tokens are implemented in `apps/web/src/index.c
 - **Map first.** The 3D OpenFreeMap campus is always on screen. Choosing a building flies the camera in, which is the campus → building transition. Buildings with reservable rooms are extruded from their OpenStreetMap footprints in the accent color when rooms are open, and in muted blue otherwise.
 - **One accent.** Yellow `#FFC845` marks open rooms, the primary action, and the selected floor. It always carries navy `#12284C` text. On light surfaces, yellow-family *text* uses `#6B4700`. The only other hue is the pink current-time marker.
 - **Quiet surfaces.** Three navy steps (`bg` → `surface` → `surface-2`), 1px `line` borders, and almost no shadows (only floating sheets and popovers have one). No gradients, glass, or oversized cards.
-- **Small, steady type.** Overpass at 14px body, 18–20px headings, and 11px uppercase section labels. Times and counts use tabular figures.
+- **Small, steady type.** Inter (variable, features `cv11` and `ss03`) at 14px body, 18–20px headings, and 11px uppercase section labels. Times and counts use tabular figures.
 - **Lists over decoration.** Rooms are compact rows with a status chip and a thin day timeline. Until a real floor plan is sourced, the building view is a floor-grouped list. That's the documented fallback, not a drawn layout.
 - **Dark by default**, with a light theme one tap away. Both themes share every component; only tokens change.
 

@@ -5,15 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Nittany Rooms design system v2</title>
 <style>
-@font-face{font-family:Overpass;font-weight:400;src:url(../fonts/overpass-latin-400-normal.woff2) format('woff2')}
-@font-face{font-family:Overpass;font-weight:600;src:url(../fonts/overpass-latin-600-normal.woff2) format('woff2')}
-@font-face{font-family:Overpass;font-weight:800;src:url(../fonts/overpass-latin-800-normal.woff2) format('woff2')}
+@font-face{font-family:Inter;font-weight:100 900;src:url(../fonts/inter-latin-wght-normal.woff2) format('woff2')}
 :root{--bg:#0A1628;--surface:#0F1F38;--s2:#16294A;--s3:#1F3358;--line:#22365A;--fg:#E8EEF7;--muted:#8FA0BA;--subtle:#7E92B3;
 --accent:#FFC845;--ink:#12284C;--accent-text:#FFC845;--accent-border:#FFC845;--occ:#2B4170;--occ-fg:#DCE4F2;--ha:#1F3358;--hb:#2B4170;--da:#3A5280;--db:#16294A;--now:#FF5C93}
 .light{--bg:#F5F7FA;--surface:#FFFFFF;--s2:#F0F3F7;--s3:#E4E9F0;--line:#DCE2EA;--fg:#12284C;--muted:#4F5B6E;--subtle:#5F6B7F;
 --accent-text:#6B4700;--accent-border:#C99400;--occ:#12284C;--occ-fg:#FFFFFF;--ha:#E3E7ED;--hb:#CBD2DC;--da:#B8C1CE;--db:#EEF1F5;--now:#C2185B}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--fg);font:400 14px/1.45 Overpass,sans-serif;-webkit-font-smoothing:antialiased}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 14px/1.45 Inter,sans-serif;font-feature-settings:'cv11','ss03';-webkit-font-smoothing:antialiased}
 .wrap{max-width:1180px;margin:0 auto;padding:40px 24px 56px;display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:16px}
 .head{grid-column:1/-1;display:flex;align-items:center;gap:12px;margin-bottom:8px}
 .head h1{font-size:20px;font-weight:800;letter-spacing:-.01em;margin:0}
@@ -23,7 +21,7 @@ body{margin:0;background:var(--bg);color:var(--fg);font:400 14px/1.45 Overpass,s
 .sw{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
 .sw div{font-size:11px;color:var(--muted)} .sw span{display:block;height:40px;border-radius:8px;margin-bottom:6px;box-shadow:inset 0 0 0 1px var(--line)}
 .sw b{display:block;color:var(--fg);font-weight:600;font-size:12px}
-.chip{display:inline-flex;align-items:center;gap:5px;height:24px;padding:0 9px;border-radius:999px;font:600 11px Overpass;margin:0 6px 8px 0}
+.chip{display:inline-flex;align-items:center;gap:5px;height:24px;padding:0 9px;border-radius:999px;font:600 11px Inter;margin:0 6px 8px 0}
 .open{background:var(--accent);color:var(--ink)} .soon{border:1px dashed var(--accent-border);color:var(--accent-text)}
 .occ{background:var(--occ);color:var(--occ-fg)} .na{background:repeating-linear-gradient(135deg,var(--ha) 0 5px,var(--hb) 5px 7px)}
 .unk{background:radial-gradient(var(--da) 1px,var(--db) 1.5px) 0 0/6px 6px}
@@ -31,14 +29,14 @@ body{margin:0;background:var(--bg);color:var(--fg);font:400 14px/1.45 Overpass,s
 .tl i{display:block;height:100%}
 .ticks{display:flex;justify-content:space-between;font-size:11px;color:var(--subtle);margin-top:4px;font-variant-numeric:tabular-nums}
 .type div{display:flex;align-items:baseline;gap:14px;margin-bottom:10px} .type small{width:92px;flex:none;color:var(--subtle);font-size:11px}
-.pill{display:inline-flex;align-items:center;height:32px;padding:0 12px;border-radius:999px;background:var(--s2);border:1px solid var(--line);font:600 12px Overpass;color:var(--fg);margin-right:6px}
+.pill{display:inline-flex;align-items:center;height:32px;padding:0 12px;border-radius:999px;background:var(--s2);border:1px solid var(--line);font:600 12px Inter;color:var(--fg);margin-right:6px}
 .input{height:40px;border-radius:8px;background:var(--s2);border:1px solid var(--line);color:var(--subtle);display:flex;align-items:center;padding:0 12px;margin:10px 0}
-.cta{height:44px;border-radius:8px;background:var(--accent);color:var(--ink);font:600 14px Overpass;display:flex;align-items:center;justify-content:center;margin-top:10px}
+.cta{height:44px;border-radius:8px;background:var(--accent);color:var(--ink);font:600 14px Inter;display:flex;align-items:center;justify-content:center;margin-top:10px}
 .row{display:block;padding:8px;border-radius:8px} .row:hover,.row.hl{background:var(--s2)}
 .row .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
 .row b{font-weight:600} .row em{font-style:normal;color:var(--muted);font-size:12px;margin-left:8px}
 .mini{height:6px;border-radius:999px;background:var(--s2);overflow:hidden;display:flex} .mini i{display:block;height:100%}
-.pin{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 10px 0 3px;border-radius:999px;background:var(--surface);box-shadow:0 0 0 1px var(--line),0 4px 14px rgb(0 0 0/.3);font:600 12px Overpass;margin:0 8px 10px 0}
+.pin{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 10px 0 3px;border-radius:999px;background:var(--surface);box-shadow:0 0 0 1px var(--line),0 4px 14px rgb(0 0 0/.3);font:600 12px Inter;margin:0 8px 10px 0}
 .pin span{display:inline-grid;place-items:center;min-width:22px;height:22px;border-radius:999px;background:var(--s3);font-weight:800;font-size:11px}
 .pin.o span{background:var(--accent);color:var(--ink)} .pin.c{box-shadow:none;outline:1.5px dashed var(--subtle);outline-offset:-1.5px}
 .pin.sel{box-shadow:0 0 0 2px var(--accent)}
@@ -70,7 +68,7 @@ body{margin:0;background:var(--bg);color:var(--fg);font:400 14px/1.45 Overpass,s
   </section>
 
   <section class="card">
-    <h2>Type · Overpass</h2>
+    <h2>Type · Inter</h2>
     <div class="type">
       <div><small>Title 20/600</small><span style="font-size:20px;font-weight:600">Paterno E128A</span></div>
       <div><small>Heading 18/600</small><span style="font-size:18px;font-weight:600">Pattee and Paterno Libraries</span></div>
