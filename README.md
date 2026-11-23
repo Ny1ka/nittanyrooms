@@ -11,6 +11,8 @@ A visual study-room finder for **Penn State University Park**. Pick a building o
 
 **Live:** https://nittanyrooms.vercel.app
 
+> **Inspired by [illiniSpots](https://illinispots.com)** ([github.com/plon/illinispots](https://github.com/plon/illinispots)), made by [plon](https://github.com/plon) for UIUC. Nittany Rooms brings the same idea to Penn State University Park with its own code and design.
+
 > **Student-made. Not an official Penn State service.** Nittany Rooms does not make reservations. Penn State's own systems decide who can book and confirm every booking.
 
 ![Nittany Rooms: 3D campus map with buildings colored by availability, and the building list](nittany-rooms-design/png/03-desktop-campus-dark.png)
@@ -109,7 +111,7 @@ CI (GitHub Actions) runs the data gate, typecheck, unit tests, build, and end-to
 
 ## Credits
 
-Map data © [OpenStreetMap](https://www.openstreetmap.org/copyright) contributors (ODbL), tiles by [OpenFreeMap](https://openfreemap.org), and walking routes by [FOSSGIS OSRM](https://routing.openstreetmap.de/about.html). The illiniSpots architecture (UIUC) inspired the approach. No code was copied.
+Map data © [OpenStreetMap](https://www.openstreetmap.org/copyright) contributors (ODbL), tiles by [OpenFreeMap](https://openfreemap.org), and walking routes by [FOSSGIS OSRM](https://routing.openstreetmap.de/about.html). Inspired by [illiniSpots](https://github.com/plon/illinispots) by [plon](https://github.com/plon): the map-plus-schedule idea, live library availability, and the clean list layout. No code was copied.
 
 ## License
 
