@@ -35,6 +35,7 @@ Last updated: **2026-11-22**. This file separates what we know from what we're g
 ## What the product does about it today
 
 - **Availability:** No permitted live source exists yet, so every room shows **"Check on PSU site"** (the "unknown" state). The availability engine is built and tested, but it only marks time as free when a provider snapshot is flagged complete and fresh.
-- **Floor plans:** ECoRE uses the **fallback schematic**: rooms in number order, explicitly labeled "not real positions".
-- **Handoff:** ECoRE sends students to Outlook Calendar with step-by-step instructions, because no room-specific link exists. Library rooms will deep-link once room IDs are verified.
+- **Rooms:** 58 verified rooms: 5 in ECoRE, plus 53 library rooms from LibCal with official titles, capacities, features, and direct booking links. Floors are inferred from room numbers. Davey's five collaboration spaces have no floor in LibCal, so they're grouped as "Floor not listed".
+- **Floor plans:** every building uses the **fallback schematic**: rooms in number order, explicitly labeled "not real positions".
+- **Handoff:** ECoRE sends students to Outlook Calendar with step-by-step instructions, because no room-specific link exists. Library rooms link straight to each room's LibCal page.
 - **Demo mode:** Adding `?demo=1` to the URL shows clearly labeled **sample** schedules, so the timeline and gap filtering can be seen working. Sample data never appears without the banner.

@@ -19,7 +19,7 @@ The design package uses the **Engineering Library (ECoRE)** as its example build
 | M4 | Web app shell: design tokens, header, campus map (MapLibre/OSM), building list, building preview | ✅ |
 | M5 | Building view: floor picker, fallback schematic, synced room list, room panel, timeline, handoff | ✅ |
 | M6 | Playwright E2E (search → building → floor → room → handoff, keyboard, mobile viewport), CI workflow | ⏭ next |
-| M7 | Ingest the 54 LibCal rooms into `data/` with provenance; verify branch-library building mapping | ✅ unblocked (grid test 2026-11-22) |
+| M7 | Ingest LibCal rooms into `data/` with provenance (`pnpm --filter @nittany-rooms/core ingest:libcal <snapshot>`) | ✅ 53 rooms (wellness room excluded) |
 | M8 | LibCal grid adapter as a Vercel Function with CDN cache, honest User-Agent, and a kill switch | technically feasible; terms review pending (U2) |
 | M9 | Floor plan sourcing for one building (needs U6), plus the SVG floor plan renderer | blocked on U6 |
 | M10 | Coverage page, "report an error" link, privacy/disclaimer page, deploy | — |
