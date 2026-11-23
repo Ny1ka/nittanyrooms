@@ -7,8 +7,6 @@
   </a>
 </p>
 
-<h1 align="center">Nittany Rooms</h1>
-
 A visual study-room finder for **Penn State University Park**. Pick a building on a 3D campus map, see which rooms are open right now and for how long, and continue to the **official Penn State reservation page** for that exact room.
 
 **Live:** https://nittanyrooms.vercel.app
