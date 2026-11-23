@@ -3,6 +3,7 @@ import { useMemo } from 'react';
 import { roomDay, roomStatus, type RoomDay } from '../lib/availability';
 import { floorOf, getBuilding, getProvider, getSource, roomsIn } from '../lib/data';
 import { buildingPhrase, floorName, floorsPhrase, roomCountPhrase, roomShort } from '../lib/labels';
+import { anyFilter, roomMatches, type Filters } from '../lib/filters';
 import type { LiveState } from '../lib/live';
 import { navigate, setParams, useRoute } from '../lib/router';
 import type { SelectedTime } from '../lib/time';
@@ -23,7 +24,7 @@ export function BackButton({ label, onClick }: { label: string; onClick: () => v
 
 const toCampus = () => navigate('/');
 
-export function BuildingPanel({ buildingId, sel, demo, live }: { buildingId: string; sel: SelectedTime; demo: boolean; live: LiveState }) {
+export function BuildingPanel({ buildingId, sel, demo, live, filters, clearFilters }: { buildingId: string; sel: SelectedTime; demo: boolean; live: LiveState; filters: Filters; clearFilters: () => void }) {
   const { params } = useRoute();
   const building = getBuilding(buildingId);
   if (!building) {
@@ -38,7 +39,7 @@ export function BuildingPanel({ buildingId, sel, demo, live }: { buildingId: str
   if (building.roomInventory === 'none') return <NoRoomsYet building={building} />;
   const room = roomsIn(building.id).find((r) => r.id === params.get('room'));
   if (room) return <RoomPanel key={room.id} room={room} building={building} sel={sel} demo={demo} live={live} />;
-  return <RoomList building={building} sel={sel} demo={demo} live={live} />;
+  return <RoomList building={building} sel={sel} demo={demo} live={live} filters={filters} clearFilters={clearFilters} />;
 }
 
 function NoRoomsYet({ building }: { building: Building }) {
@@ -60,9 +61,11 @@ function NoRoomsYet({ building }: { building: Building }) {
   );
 }
 
-function RoomList({ building, sel, demo, live }: { building: Building; sel: SelectedTime; demo: boolean; live: LiveState }) {
+function RoomList({ building, sel, demo, live, filters, clearFilters }: { building: Building; sel: SelectedTime; demo: boolean; live: LiveState; filters: Filters; clearFilters: () => void }) {
   const { params } = useRoute();
-  const rooms = roomsIn(building.id);
+  const allRooms = roomsIn(building.id);
+  const filtering = anyFilter(filters);
+  const rooms = filtering ? allRooms.filter((r) => roomMatches(r, filters, sel, demo, live)) : allRooms;
   const provider = getProvider(building.providerIds[0]!);
   const days = useMemo(() => {
     const m = new Map<string, { day: RoomDay; status: RoomStatus }>();
@@ -80,7 +83,7 @@ function RoomList({ building, sel, demo, live }: { building: Building; sel: Sele
   const counts = { open: 0, opensSoon: 0, occupied: 0 };
   for (const { status } of days.values()) if (status.state in counts) counts[status.state as keyof typeof counts]++;
   const known = [...days.values()].some((d) => d.status.state !== 'unknown');
-  const source = getSource(rooms[0]!.verification.sourceIds[0]!);
+  const source = getSource(allRooms[0]!.verification.sourceIds[0]!);
 
   return (
     <div className="space-y-3 px-4 py-3">
@@ -88,16 +91,16 @@ function RoomList({ building, sel, demo, live }: { building: Building; sel: Sele
       <div>
         <h1 className="text-lg leading-tight font-semibold">{building.headline}</h1>
         <p className="mt-0.5 text-xs text-muted">
-          {buildingPhrase(building)} {roomCountPhrase(rooms.length)}
+          {buildingPhrase(building)} {roomCountPhrase(allRooms.length)}
           {floorsPhrase(building) ? ` on ${floorsPhrase(building)}` : ''}.
         </p>
       </div>
 
       {known && (
         <div className="flex flex-wrap gap-x-3 gap-y-1 text-xs text-muted tabular">
-          <span className="inline-flex items-center gap-1.5"><span className="size-2 rounded-full bg-accent" />{counts.open} open</span>
-          <span className="inline-flex items-center gap-1.5"><span className="size-2 rounded-full border border-dashed border-accent-border" />{counts.opensSoon} opening soon</span>
-          <span className="inline-flex items-center gap-1.5"><span className="size-2 rounded-full bg-occupied" />{counts.occupied} occupied</span>
+          <span className="inline-flex items-center gap-1.5"><span className="size-2 rounded-full bg-open" />{counts.open} open</span>
+          <span className="inline-flex items-center gap-1.5"><span className="size-2 rounded-full border border-dashed border-yellow" />{counts.opensSoon} opening soon</span>
+          <span className="inline-flex items-center gap-1.5"><span className="size-2 rounded-full bg-busy" />{counts.occupied} occupied</span>
         </div>
       )}
 
@@ -119,6 +122,17 @@ function RoomList({ building, sel, demo, live }: { building: Building; sel: Sele
             );
           })}
         </div>
+      )}
+
+      {filtering && (
+        <p className="flex items-center justify-between rounded-control bg-accent-soft px-3 py-2 text-xs text-accent-text">
+          <span>
+            {rooms.length} of {allRooms.length} rooms match your filters
+          </span>
+          <button type="button" onClick={clearFilters} className="font-semibold underline underline-offset-2">
+            Show all
+          </button>
+        </p>
       )}
 
       <p className="text-[11px] leading-snug text-subtle">

@@ -78,7 +78,7 @@ test.describe('building → floor → room → handoff', () => {
     await page.goto('/b/ecore?room=ecore-248');
     await expect(page.getByText('Check PSU site').first()).toBeVisible();
     await expect(page.getByText(/doesn't publish these rooms' schedules publicly/)).toBeVisible();
-    await expect(page.getByRole('radio')).toHaveCount(0);
+    await expect(page.getByRole('group', { name: 'Open times you can book' })).toHaveCount(0);
     await expect(page.getByRole('link', { name: /Continue to Penn State reservation/ })).toHaveAttribute('href', 'https://outlook.office.com/calendar/');
     await expect(page.getByText(/It isn’t reserved until you get the approval email/)).toBeVisible();
   });
@@ -98,7 +98,7 @@ test.describe('data trust states', () => {
       await expect(page.getByText(/Couldn't reach Penn State's LibCal/)).toBeVisible();
       await expect(page.getByRole('button', { name: 'Retry' })).toBeVisible();
       await expect(page.getByText('We couldn’t refresh availability from Penn State just now.')).toBeVisible();
-      await expect(page.getByRole('radio')).toHaveCount(0);
+      await expect(page.getByRole('group', { name: 'Open times you can book' })).toHaveCount(0);
     });
   });
 
@@ -107,7 +107,7 @@ test.describe('data trust states', () => {
     test('is withheld rather than shown as live', async ({ page, api: _ }) => {
       await page.goto('/b/pattee-paterno?room=pattee-w120');
       await expect(page.getByText(/too old to trust/)).toBeVisible();
-      await expect(page.getByRole('radio')).toHaveCount(0);
+      await expect(page.getByRole('group', { name: 'Open times you can book' })).toHaveCount(0);
     });
   });
 

@@ -1,15 +1,18 @@
 import { lazy, Suspense, useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react';
 import { Controls } from './components/Controls';
 import { ChevronUp } from './components/Icons';
-import { DemoBanner, Footer } from './components/Notices';
+import { About } from './components/About';
+import { DemoBanner } from './components/Notices';
+import { buildingMatches, NO_FILTERS, type Filters } from './lib/filters';
+import { requestLocation, type GeoState } from './lib/geo';
 import { buildingCounts, useDemo } from './lib/availability';
 import { buildings, getBuilding } from './lib/data';
 import { useLiveLibcal } from './lib/live';
 import { navigate, useRoute } from './lib/router';
-import { useTheme } from './lib/theme';
+import { useThemePref } from './lib/theme';
 import { useSelectedTime } from './lib/time';
 import { BuildingPanel } from './views/BuildingPanel';
-import { CampusList, NO_FILTERS, matchesFilters, type Filters } from './views/CampusList';
+import { CampusList } from './views/CampusList';
 import type { MarkerInfo } from './views/MapView';
 
 const MapView = lazy(() => import('./views/MapView').then((m) => ({ default: m.MapView })));
@@ -33,7 +36,9 @@ export function App() {
   const { route, params } = useRoute();
   const sel = useSelectedTime();
   const demo = useDemo();
-  const [theme, toggleTheme] = useTheme();
+  const [themePref, setThemePref] = useThemePref();
+  const [geo, setGeo] = useState<GeoState>({ status: 'idle' });
+  const locate = () => requestLocation(setGeo);
   const live = useLiveLibcal(sel.date, sel.now);
   const [filters, setFilters] = useState<Filters>(NO_FILTERS);
   const isDesktop = useMedia('(min-width: 768px)');
@@ -48,7 +53,7 @@ export function App() {
       }),
     [sel.date, sel.at, sel.now, demo, live],
   );
-  const visible = markers.filter((m) => matchesFilters(m, filters, sel, demo, live));
+  const visible = markers.filter((m) => buildingMatches(m.building.id, filters, sel, demo, live));
   const visibleKey = visible.map((m) => m.building.id).join(',');
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const visibleIds = useMemo(() => new Set(visible.map((m) => m.building.id)), [visibleKey]);
@@ -88,16 +93,16 @@ export function App() {
           </button>
         )}
         {demo && <DemoBanner />}
-        <Controls sel={sel} theme={theme} onToggleTheme={toggleTheme} />
+        <Controls sel={sel} />
         <div ref={scroller} id="sidebar-content" tabIndex={-1} className="scrollbar-thin flex-1 overflow-y-auto outline-none" onFocus={() => setSheetOpen(true)}>
           <main>
             {route.name === 'building' ? (
-              <BuildingPanel buildingId={route.buildingId} sel={sel} demo={demo} live={live} />
+              <BuildingPanel buildingId={route.buildingId} sel={sel} demo={demo} live={live} filters={filters} clearFilters={() => setFilters(NO_FILTERS)} />
             ) : (
-              <CampusList markers={markers} visible={visible} filters={filters} setFilters={setFilters} demo={demo} live={live} />
+              <CampusList markers={markers} visible={visible} filters={filters} setFilters={setFilters} demo={demo} live={live} geo={geo} onLocate={locate} />
             )}
           </main>
-          <Footer />
+          <About pref={themePref} setPref={setThemePref} liveCheckedAt={live.status === 'ok' ? live.retrievedAt : null} />
         </div>
       </aside>
 
@@ -109,6 +114,8 @@ export function App() {
             selectedId={selectedId}
             onSelect={(id) => navigate(`/b/${id}`)}
             bottomPadding={bottomPadding}
+            userPos={geo.status === 'ok' ? geo.pos : null}
+            onLocate={locate}
           />
         </Suspense>
         <Legend />
@@ -126,8 +133,9 @@ function Legend() {
   );
   return (
     <div className="pointer-events-none absolute top-3 left-3 hidden gap-3 rounded-full border border-line bg-surface/90 px-3 py-1.5 text-[11px] text-muted md:flex">
-      {item('bg-accent', 'Rooms open')}
-      {item('bg-surface-3', 'None open / check PSU site')}
+      {item('bg-open', 'Rooms open')}
+      {item('bg-busy', 'None open')}
+      {item('fill-unknown', 'Check PSU site')}
       {item('border border-dashed border-subtle', 'Not verified')}
     </div>
   );
