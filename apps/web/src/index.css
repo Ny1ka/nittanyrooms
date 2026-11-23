@@ -46,6 +46,10 @@
   --nr-now: #facc15;
   /* Wordmark: navy + yellow (navy lifted so it reads on dark) */
   --nr-brand-navy: #7c9be0;
+  /* Walk-in open study spaces (category color) */
+  --nr-space: #a78bfa;
+  --nr-space-soft: rgb(167 139 250 / 0.16);
+  --nr-space-text: #c4b5fd;
   --nr-brand-yellow: #facc15;
   --nr-shadow: 0 8px 28px rgb(0 0 0 / 0.45);
 }
@@ -79,6 +83,9 @@
   --nr-dot-b: #f1f3f5;
   --nr-now: #ca8a04;
   --nr-brand-navy: #12284c;
+  --nr-space: #7c3aed;
+  --nr-space-soft: #ede9fe;
+  --nr-space-text: #5b21b6;
   --nr-brand-yellow: #a16207;
   --nr-shadow: 0 8px 28px rgb(17 20 24 / 0.12);
 }
@@ -107,6 +114,9 @@
   --color-busy-soft: var(--nr-busy-soft);
   --color-busy-text: var(--nr-busy-text);
   --color-soon-text: var(--nr-soon-text);
+  --color-space: var(--nr-space);
+  --color-space-soft: var(--nr-space-soft);
+  --color-space-text: var(--nr-space-text);
   --color-now: var(--nr-now);
 
   --radius-control: 8px;

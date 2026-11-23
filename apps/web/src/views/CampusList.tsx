@@ -100,7 +100,10 @@ export function CampusList({
 
       {!anyFilter(filters) && (
         <section aria-label="Open study spaces">
-          <h2 className="px-4 pt-4 pb-1.5 text-[13px] font-medium text-subtle">Open study spaces · walk-in, not reservable</h2>
+          <h2 className="flex items-center gap-2 px-4 pt-4 pb-1.5 text-[13px] font-medium text-subtle">
+            <span className="size-2 rounded-full bg-space" aria-hidden="true" />
+            Open study spaces · walk-in, not reservable
+          </h2>
           <ul className="border-t border-line">
             {(pos ? [...openSpaces].sort((a, b) => distanceMeters(pos, a.location) - distanceMeters(pos, b.location)) : openSpaces).map((s) => (
               <SpaceRow key={s.id} space={s} live={live} sel={sel} distance={pos ? formatDistance(distanceMeters(pos, s.location)) : null} />
@@ -192,11 +195,12 @@ function SpaceRow({ space, live, sel, distance }: { space: import('@nittany-room
     ) : st.state === 'closed' ? (
       <span className={`${base} bg-surface-2 text-muted`}>Closed{st.opensAt ? ` · opens ${formatTime(st.opensAt)}` : ''}</span>
     ) : (
-      <span className={`${base} bg-surface-2 text-muted`}>Check hours</span>
+      <span className={`${base} bg-space-soft text-space-text`}>Check hours</span>
     );
   return (
     <li className="border-b border-line">
       <a href={space.url} target="_blank" rel="noopener noreferrer" className="flex w-full items-center gap-3 px-4 py-3 text-left no-underline hover:bg-surface-2">
+        <span className="h-8 w-1 shrink-0 rounded-full bg-space" aria-hidden="true" />
         <span className="min-w-0 flex-1">
           <span className="block truncate text-[15px] font-semibold">{space.name}</span>
           <span className="block truncate text-xs text-muted">
