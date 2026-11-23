@@ -17,6 +17,7 @@ Early development. See [docs/PROJECT_PLAN.md](docs/PROJECT_PLAN.md) for mileston
 | `packages/core/` | Shared types, data schemas, the availability engine (pure functions), and data-quality checks |
 | `data/` | Building, room, provider and source records, each with provenance and verification status |
 | `docs/` | Plan, architecture, research, source inventory, known limitations |
+| `nittany-rooms-design/` | Design package: logo, tokens, mockups, Overpass fonts. Source of truth for the UI. |
 
 ## Getting started
 

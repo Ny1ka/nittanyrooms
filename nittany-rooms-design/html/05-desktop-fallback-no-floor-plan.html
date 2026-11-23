@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Engineering Library, floor 2</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>@font-face{font-family:Overpass;font-weight:400;src:url(../fonts/overpass-latin-400-normal.woff2) format('woff2')}@font-face{font-family:Overpass;font-weight:600;src:url(../fonts/overpass-latin-600-normal.woff2) format('woff2')}@font-face{font-family:Overpass;font-weight:800;src:url(../fonts/overpass-latin-800-normal.woff2) format('woff2')}</style>
+</head>
+<body>
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Overpass:wght@400;600;800&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#12284C}a:hover{color:#0E1E3A}
+</style>
+
+<div style="box-sizing: border-box; min-height: 900px; background: #F5F7FA; font-family: Overpass, sans-serif; color: #12284C; display: flex; flex-direction: column">
+
+  <header style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px 24px; padding: 14px 24px; background: #FFFFFF; border-bottom: 1px solid #DCE2EA">
+    <a href="06-mobile-campus-map.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none">
+      <svg width="32" height="32" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 3C18.2 3 7.5 13.6 7.5 27C7.5 44.5 32 61 32 61S56.5 44.5 56.5 27C56.5 13.6 45.8 3 32 3Z" fill="#12284C"></path><rect x="22" y="15" width="20" height="26" rx="2" fill="#FFC845"></rect><path d="M42 15L33 18.5V41H42Z" fill="#000000" opacity="0.28"></path></svg>
+      <span style="font-size: 20px; font-weight: 800; letter-spacing: -0.02em">Nittany Rooms</span>
+    </a>
+    <label style="flex: 1 1 260px; max-width: 420px; display: flex">
+      <span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Search buildings and rooms</span>
+      <input type="search" placeholder="Search buildings and rooms" style="width: 100%; height: 44px; box-sizing: border-box; padding: 0 14px; border: 1px solid #B8C1CE; border-radius: 10px; font: 400 16px Overpass, sans-serif; color: #12284C; background: #FFFFFF">
+    </label>
+    <div style="display: flex; gap: 8px; flex-wrap: wrap">
+      <button type="button" style="height: 44px; padding: 0 14px; border: 1px solid #B8C1CE; border-radius: 10px; background: #FFFFFF; color: #12284C; font: 600 15px Overpass, sans-serif">Mon, Nov 23</button>
+      <button type="button" style="height: 44px; padding: 0 14px; border: 1px solid #B8C1CE; border-radius: 10px; background: #FFFFFF; color: #12284C; font: 600 15px Overpass, sans-serif; font-variant-numeric: tabular-nums">2:00 PM</button>
+    </div>
+    <div style="margin-left: auto; font-size: 13px; color: #4F5B6E">Student-made. Not an official Penn State service.</div>
+  </header>
+
+  <div style="flex: 1; display: flex; flex-wrap: wrap; gap: 16px; padding: 16px 24px 24px">
+
+    <aside style="flex: 1 1 260px; max-width: 320px; display: flex; flex-direction: column; gap: 16px">
+      <a href="06-mobile-campus-map.html" style="font-size: 15px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; min-height: 44px">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M10 3L5 8l5 5"></path></svg>Back to campus map</a>
+      <div>
+        <h1 style="margin: 0; font-size: 32px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1">Engineering Library</h1>
+        <div style="margin-top: 6px; font-size: 15px; color: #4F5B6E">In the ECoRE Building. 5 group study rooms on floors 1 to 3.</div>
+      </div>
+      <div style="display: flex; flex-direction: column; background: #FFFFFF; border: 1px solid #DCE2EA; border-radius: 16px; overflow: hidden">
+        
+          <button type="button" style="display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 56px; padding: 0 16px; border: 0; border-bottom: 1px solid #DCE2EA; background: #FFFFFF; color: #12284C; font: 400 15px Overpass, sans-serif; text-align: left">
+            <span><strong style="font-weight: 800">133</strong><span style="color: #4F5B6E"> Floor 1</span></span>
+            <span style="display: inline-flex; align-items: center; height: 28px; padding: 0 10px; border-radius: 999px; font-size: 13px; font-weight: 600; background: #FFFFFF; color: #6B4700; border: 2px dashed #C99400">Opens 3:00</span>
+          </button>
+        
+          <button type="button" style="display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 56px; padding: 0 16px; border: 0; border-bottom: 1px solid #DCE2EA; background: #FFF6DC; color: #12284C; font: 400 15px Overpass, sans-serif; text-align: left">
+            <span><strong style="font-weight: 800">248</strong><span style="color: #4F5B6E"> Floor 2</span></span>
+            <span style="display: inline-flex; align-items: center; height: 28px; padding: 0 10px; border-radius: 999px; font-size: 13px; font-weight: 600; background: #FFC845; color: #12284C; border: 0">Open</span>
+          </button>
+        
+          <button type="button" style="display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 56px; padding: 0 16px; border: 0; border-bottom: 1px solid #DCE2EA; background: #FFFFFF; color: #12284C; font: 400 15px Overpass, sans-serif; text-align: left">
+            <span><strong style="font-weight: 800">249</strong><span style="color: #4F5B6E"> Floor 2</span></span>
+            <span style="display: inline-flex; align-items: center; height: 28px; padding: 0 10px; border-radius: 999px; font-size: 13px; font-weight: 600; background: #12284C; color: #FFFFFF; border: 0">Occupied</span>
+          </button>
+        
+          <button type="button" style="display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 56px; padding: 0 16px; border: 0; border-bottom: 1px solid #DCE2EA; background: #FFFFFF; color: #12284C; font: 400 15px Overpass, sans-serif; text-align: left">
+            <span><strong style="font-weight: 800">322</strong><span style="color: #4F5B6E"> Floor 3</span></span>
+            <span style="display: inline-flex; align-items: center; height: 28px; padding: 0 10px; border-radius: 999px; font-size: 13px; font-weight: 600; background: #FFC845; color: #12284C; border: 0">Open</span>
+          </button>
+        
+          <button type="button" style="display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 56px; padding: 0 16px; border: 0; border-bottom: 1px solid #DCE2EA; background: #FFFFFF; color: #12284C; font: 400 15px Overpass, sans-serif; text-align: left">
+            <span><strong style="font-weight: 800">333</strong><span style="color: #4F5B6E"> Floor 3</span></span>
+            <span style="display: inline-flex; align-items: center; height: 28px; padding: 0 10px; border-radius: 999px; font-size: 13px; font-weight: 600; background: #12284C; color: #FFFFFF; border: 0">Occupied</span>
+          </button>
+        
+      </div>
+      <div style="font-size: 13px; color: #4F5B6E; line-height: 1.5">Room numbers from Penn State University Libraries. Availability on this screen is sample data.</div>
+    </aside>
+
+    <section aria-label="Floor 2 plan" style="flex: 999 1 520px; min-width: 0; min-height: 640px; background: #0E1E3A; border-radius: 16px; padding: 20px; box-sizing: border-box; display: flex; gap: 20px">
+      <div style="display: flex; flex-direction: column; gap: 6px; padding: 6px; background: #162A4D; border-radius: 14px; align-self: flex-start">
+        <button type="button" aria-label="Floor 3, 2 rooms" style="width: 52px; height: 52px; border: 0; border-radius: 10px; background: #1F3358; color: #FFFFFF; font: 800 18px Overpass, sans-serif">3</button>
+        <button type="button" aria-pressed="true" aria-label="Floor 2, 2 rooms, selected" style="width: 52px; height: 52px; border: 0; border-radius: 10px; background: #FFC845; color: #12284C; font: 800 18px Overpass, sans-serif">2</button>
+        <button type="button" aria-label="Floor 1, 1 room" style="width: 52px; height: 52px; border: 0; border-radius: 10px; background: #1F3358; color: #FFFFFF; font: 800 18px Overpass, sans-serif">1</button>
+      </div>
+      <div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+        <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
+          <div style="font-size: 20px; font-weight: 800; color: #FFFFFF">Floor 2</div>
+          <div style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 10px; background: #1F3358; color: #DCE2EA; font-size: 13px">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="8" cy="8" r="6.5"></circle><path d="M8 7v4M8 4.8v.2"></path></svg>
+            Schematic only. Rooms are shown in number order, not their real positions.</div>
+        </div>
+        <div style="flex: 1; position: relative; border: 2px dashed #3A5280; border-radius: 14px; background-image: linear-gradient(#16294A 1px, transparent 1px), linear-gradient(90deg, #16294A 1px, transparent 1px); background-size: 32px 32px; display: flex; align-items: center; justify-content: center; gap: 24px; padding: 32px; flex-wrap: wrap">
+          <button type="button" aria-label="Room 248, open until 3:30 PM, selected" style="width: 220px; height: 170px; border: 0; border-radius: 12px; background: #FFC845; color: #12284C; box-shadow: 0 0 0 4px #0E1E3A, 0 0 0 7px #FFFFFF, 0 0 48px 8px rgba(255,200,69,0.35); display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; padding: 16px; font-family: Overpass, sans-serif; text-align: left">
+            <svg width="22" height="22" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 14V2h7v12M10 3l3 1.5V14"></path></svg>
+            <span><span style="display: block; font-size: 30px; font-weight: 800">248</span><span style="font-size: 15px; font-weight: 600">Open until 3:30 PM</span></span>
+          </button>
+          <button type="button" aria-label="Room 249, occupied until 5:00 PM" style="width: 220px; height: 170px; border: 1.5px solid #3A5280; border-radius: 12px; background: #1F3358; color: #FFFFFF; display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; padding: 16px; font-family: Overpass, sans-serif; text-align: left">
+            <svg width="22" height="22" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 14V2h10v12M10 8.5h.5"></path></svg>
+            <span><span style="display: block; font-size: 30px; font-weight: 800">249</span><span style="font-size: 15px; font-weight: 600; color: #DCE2EA">Occupied until 5:00 PM</span></span>
+          </button>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 16px; font-size: 13px; color: #DCE2EA">
+          <span style="display: inline-flex; align-items: center; gap: 8px"><span style="width: 14px; height: 14px; border-radius: 4px; background: #FFC845"></span>Open</span>
+          <span style="display: inline-flex; align-items: center; gap: 8px"><span style="width: 14px; height: 14px; border-radius: 4px; border: 2px dashed #FFC845; box-sizing: border-box"></span>Opens soon</span>
+          <span style="display: inline-flex; align-items: center; gap: 8px"><span style="width: 14px; height: 14px; border-radius: 4px; background: #1F3358; border: 1.5px solid #3A5280; box-sizing: border-box"></span>Occupied</span>
+          <span style="display: inline-flex; align-items: center; gap: 8px"><span style="width: 14px; height: 14px; border-radius: 4px; background: repeating-linear-gradient(135deg, #3A5280 0 3px, #1F3358 3px 5px)"></span>Unavailable</span>
+        </div>
+      </div>
+    </section>
+
+    <section aria-label="Room 248 details" style="flex: 1 1 340px; max-width: 420px; background: #FFFFFF; border: 1px solid #DCE2EA; border-radius: 16px; padding: 24px; box-sizing: border-box; display: flex; flex-direction: column; gap: 18px">
+      <div>
+        <h2 style="margin: 0; font-size: 28px; font-weight: 800; letter-spacing: -0.01em">Room 248</h2>
+        <div style="margin-top: 4px; font-size: 15px; color: #4F5B6E">Engineering Library, floor 2. Group study room.</div>
+      </div>
+      <span style="align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; height: 34px; padding: 0 14px; border-radius: 999px; background: #FFC845; color: #12284C; font-size: 14px; font-weight: 600"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 14V2h7v12M10 3l3 1.5V14"></path></svg>Open now until 3:30 PM</span>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; font-size: 14px">
+        <div><div style="color: #4F5B6E">Capacity</div><div style="font-weight: 600">Not verified yet</div></div>
+        <div><div style="color: #4F5B6E">Features</div><div style="font-weight: 600">Not verified yet</div></div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 10px; border-top: 1px solid #DCE2EA; padding-top: 16px">
+        <div style="display: flex; align-items: center; justify-content: space-between">
+          <button type="button" aria-label="Previous day" style="width: 44px; height: 44px; border: 1px solid #DCE2EA; border-radius: 10px; background: #FFFFFF; color: #12284C"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M10 3L5 8l5 5"></path></svg></button>
+          <div style="font-size: 16px; font-weight: 600">Today, Mon Nov 23</div>
+          <button type="button" aria-label="Next day" style="width: 44px; height: 44px; border: 1px solid #DCE2EA; border-radius: 10px; background: #FFFFFF; color: #12284C"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 3l5 5-5 5"></path></svg></button>
+        </div>
+        <div role="img" aria-label="Timeline: occupied 8 to 11 AM, open 11 AM to 12:30 PM, occupied until 2 PM, open 2 to 3:30 PM, 15 minute gap too short to book, occupied until 5 PM, open 5 to 9 PM, closed after 9 PM" style="position: relative; height: 44px; display: flex; border-radius: 8px; overflow: hidden; border: 1px solid #DCE2EA">
+          <div style="flex: 3; background: #12284C"></div>
+          <div style="flex: 1.5; background: #FFC845"></div>
+          <div style="flex: 1.5; background: #12284C"></div>
+          <div style="flex: 1.5; background: #FFC845; box-shadow: inset 0 0 0 3px #12284C, inset 0 0 0 5px #FFFFFF"></div>
+          <div style="flex: 0.25; background: #EEF1F5"></div>
+          <div style="flex: 1.25; background: #12284C"></div>
+          <div style="flex: 4; background: #FFC845"></div>
+          <div style="flex: 1; background: repeating-linear-gradient(135deg, #E3E7ED 0 6px, #CBD2DC 6px 8px)"></div>
+          <div style="position: absolute; left: 0; top: 0; bottom: 0; width: 37.5%; background: rgba(255,255,255,0.55)"></div>
+          <div style="position: absolute; left: 37.5%; top: 0; bottom: 0; width: 2px; background: #C2185B"></div>
+        </div>
+        <div style="display: flex; justify-content: space-between; font-size: 12px; color: #4F5B6E; font-variant-numeric: tabular-nums"><span>8 AM</span><span>11</span><span>2 PM</span><span>5</span><span>8</span><span>10</span></div>
+      </div>
+
+      <fieldset style="margin: 0; padding: 0; border: 0; display: flex; flex-direction: column; gap: 8px">
+        <legend style="font-size: 16px; font-weight: 600; margin-bottom: 8px">Open times you can book</legend>
+        <label style="display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 52px; padding: 0 14px; border: 2px solid #12284C; border-radius: 10px; font-size: 15px; font-variant-numeric: tabular-nums">
+          <span style="display: flex; align-items: center; gap: 10px"><input type="radio" name="slot" checked style="width: 18px; height: 18px; accent-color: #12284C"><strong>2:00 – 3:30 PM</strong></span><span style="color: #4F5B6E">1 hr 30 min</span></label>
+        <label style="display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 52px; padding: 0 14px; border: 1px solid #DCE2EA; border-radius: 10px; font-size: 15px; font-variant-numeric: tabular-nums">
+          <span style="display: flex; align-items: center; gap: 10px"><input type="radio" name="slot" style="width: 18px; height: 18px; accent-color: #12284C">5:00 – 9:00 PM</span><span style="color: #4F5B6E">4 hr</span></label>
+        <div style="font-size: 13px; color: #4F5B6E; line-height: 1.5">A 15-minute gap at 3:30 PM is hidden because it's shorter than the minimum booking. <a href="#">Show shorter gaps</a></div>
+      </fieldset>
+
+      <div style="display: flex; flex-direction: column; gap: 10px; margin-top: auto">
+        <a href="#" style="display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 52px; padding: 0 16px; border-radius: 10px; background: #12284C; color: #FFFFFF; font-size: 16px; font-weight: 600; text-decoration: none; white-space: nowrap">Continue to Penn State reservation
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 3h7v7M13 3L5 11"></path></svg></a>
+        <div style="font-size: 13px; color: #4F5B6E; line-height: 1.5">Opens Penn State's site in a new tab. You'll sign in and confirm 2:00 to 3:30 PM there. Times may have changed since the last check.</div>
+        <div style="display: flex; align-items: center; gap: 8px; padding: 10px 12px; border-radius: 10px; background: #F5F7FA; font-size: 13px; color: #3A4558">
+          <span style="width: 8px; height: 8px; border-radius: 999px; background: #8A96A8"></span>Sample data. Live availability isn't connected yet.</div>
+      </div>
+    </section>
+    <p style="flex-basis: 100%; margin: 0; font-size: 12px; color: #4F5B6E; line-height: 1.5">* Room numbers 133, 248, 249, 322 and 333 come from Penn State University Libraries. Floor assignments are read from those numbers and not yet confirmed. Statuses, times, the timeline and the 15-minute gap are sample data. The tile layout is a fallback schematic, not room positions.</p>
+  </div>
+</div>
+
+
+</body>
+</html>
