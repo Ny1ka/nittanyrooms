@@ -34,7 +34,8 @@ Last updated: **2026-11-22**. This file separates what we know from what we're g
 
 ## What the product does about it today
 
-- **Availability:** No permitted live source exists yet, so every room shows **"Check on PSU site"** (the "unknown" state). The availability engine is built and tested, but it only marks time as free when a provider snapshot is flagged complete and fresh.
+- **Availability:** **Library rooms are live**. `/api/availability` reads LibCal's public grid, the CDN caches it for 3 minutes, and the browser refreshes every 3 minutes. If data is missing, failed, or older than 15 minutes, rooms fall back to **"Check on PSU site"**. ECoRE rooms always show "Check on PSU site" (Outlook schedules aren't public).
+- **Temporary:** the function sends a browser User-Agent string until the route is proven in production. Set `LIBCAL_USER_AGENT` to an honest identifier before public launch.
 - **Rooms:** 58 verified rooms: 5 in ECoRE, plus 53 library rooms from LibCal with official titles, capacities, features, and direct booking links. Floors are inferred from room numbers. Davey's five collaboration spaces have no floor in LibCal, so they're grouped as "Floor not listed".
 - **Floor plans:** every building uses the **fallback schematic**: rooms in number order, explicitly labeled "not real positions".
 - **Handoff:** ECoRE sends students to Outlook Calendar with step-by-step instructions, because no room-specific link exists. Library rooms link straight to each room's LibCal page.

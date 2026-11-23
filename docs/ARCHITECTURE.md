@@ -18,7 +18,7 @@ The repo started empty (MIT LICENSE only), so there was no existing stack to kee
 | Data store (MVP) | Versioned JSON in `data/`, validated in CI | No live provider exists yet, so a DB adds ops cost with no benefit | First live adapter lands |
 | Data store (later) | PostgreSQL, schema below | Snapshots, ingestion runs, audit log | — |
 | Hosting | **Vercel (free Hobby plan)** | Project owner's choice. Static Vite build plus serverless functions, preview deploys per branch. | Traffic outgrows Hobby limits or the use becomes commercial (Hobby is for non-commercial use) |
-| API (later) | Hono as **Vercel Functions** (`apps/web/api/`) | Provider credentials must stay server-side. Hono has a first-class Vercel adapter. | First credentialed adapter |
+| API | Plain Web `Request → Response` **Vercel Functions** in `apps/web/api/` (`_lib/` holds shared code) | One endpoint so far, so a framework adds nothing. Kept self-contained (zod + luxon) so Vercel bundles it without compiling workspace TS. | More endpoints. Then adopt Hono. |
 
 ### Map provider comparison
 
@@ -83,6 +83,24 @@ Rules:
 - **Availability refresh (later):** Hobby cron jobs run at most once a day, too slow for availability. Instead, `GET /api/rooms/:id/availability` fetches from the provider on demand and returns `Cache-Control: s-maxage=<N>, stale-while-revalidate`. The CDN coalesces traffic, so the provider sees at most about 1 request per room per N seconds. The daily cron is reserved for slow-changing inventory checks.
 - **Database (later):** a free Postgres from the Vercel Marketplace (Neon or Supabase), only if snapshots need to persist beyond the CDN cache.
 - **Map tiles** come from OpenFreeMap directly in the browser, so Vercel serves no tile traffic.
+
+## Live availability (LibCal)
+
+```mermaid
+sequenceDiagram
+  participant B as Browser (TanStack Query, 3-min refresh)
+  participant C as Vercel CDN (s-maxage=180, swr=120)
+  participant F as /api/availability (memo 2 min)
+  participant L as psu.libcal.com grid
+  B->>C: GET /api/availability?date=YYYY-MM-DD
+  C-->>B: cached payload (most requests)
+  C->>F: on miss
+  F->>L: POST /spaces/availability/grid (one call = every UP room)
+  L-->>F: 15-min slots, booked = s-lc-eq-checkout
+  F-->>C: {items: {eid: {open, busy}}, retrievedAt, complete}
+```
+
+The browser maps LibCal `eid` → room via `providerRoomId` and builds an engine snapshot with `open` as the bookable hours and `busy` as occupied time. A room with no slots isn't bookable that day. Env: `LIBCAL_LIVE=off` (kill switch) and `LIBCAL_USER_AGENT`. Local `pnpm dev` serves `api/*.ts` through a Vite middleware.
 
 ## Security & privacy
 
