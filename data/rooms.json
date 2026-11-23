@@ -118,5 +118,1651 @@
       ],
       "verifiedAt": "2026-11-22"
     }
+  },
+  {
+    "id": "paterno-e128a",
+    "providerRoomId": "30978",
+    "buildingId": "pattee-paterno",
+    "floorId": "pattee-paterno-f1",
+    "officialLabel": "Paterno E128A",
+    "shortLabel": "E128A",
+    "displayName": "Paterno E128A",
+    "area": null,
+    "type": "group-study",
+    "capacity": 4,
+    "features": [
+      "accessible",
+      "power",
+      "solstice",
+      "whiteboard"
+    ],
+    "eligibility": "Penn State students have priority. Reservations are for two or more people, based on seating capacity.",
+    "providerId": "psul-libcal",
+    "policyId": "psul-group-study",
+    "bookingUrl": "https://psu.libcal.com/space/30978",
+    "floorplanLocation": "unknown",
+    "floorVerification": "inferred",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psu-libcal-up-spaces"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
+  },
+  {
+    "id": "paterno-e128b",
+    "providerRoomId": "30979",
+    "buildingId": "pattee-paterno",
+    "floorId": "pattee-paterno-f1",
+    "officialLabel": "Paterno E128B",
+    "shortLabel": "E128B",
+    "displayName": "Paterno E128B",
+    "area": null,
+    "type": "group-study",
+    "capacity": 4,
+    "features": [
+      "accessible",
+      "power",
+      "solstice",
+      "whiteboard"
+    ],
+    "eligibility": "Penn State students have priority. Reservations are for two or more people, based on seating capacity.",
+    "providerId": "psul-libcal",
+    "policyId": "psul-group-study",
+    "bookingUrl": "https://psu.libcal.com/space/30979",
+    "floorplanLocation": "unknown",
+    "floorVerification": "inferred",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psu-libcal-up-spaces"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
+  },
+  {
+    "id": "paterno-e128c",
+    "providerRoomId": "31012",
+    "buildingId": "pattee-paterno",
+    "floorId": "pattee-paterno-f1",
+    "officialLabel": "Paterno E128C",
+    "shortLabel": "E128C",
+    "displayName": "Paterno E128C",
+    "area": null,
+    "type": "group-study",
+    "capacity": 4,
+    "features": [
+      "accessible",
+      "power",
+      "solstice",
+      "whiteboard"
+    ],
+    "eligibility": "Penn State students have priority. Reservations are for two or more people, based on seating capacity.",
+    "providerId": "psul-libcal",
+    "policyId": "psul-group-study",
+    "bookingUrl": "https://psu.libcal.com/space/31012",
+    "floorplanLocation": "unknown",
+    "floorVerification": "inferred",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psu-libcal-up-spaces"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
+  },
+  {
+    "id": "paterno-e128d",
+    "providerRoomId": "31013",
+    "buildingId": "pattee-paterno",
+    "floorId": "pattee-paterno-f1",
+    "officialLabel": "Paterno E128D",
+    "shortLabel": "E128D",
+    "displayName": "Paterno E128D",
+    "area": null,
+    "type": "group-study",
+    "capacity": 4,
+    "features": [
+      "accessible",
+      "power",
+      "solstice",
+      "whiteboard"
+    ],
+    "eligibility": "Penn State students have priority. Reservations are for two or more people, based on seating capacity.",
+    "providerId": "psul-libcal",
+    "policyId": "psul-group-study",
+    "bookingUrl": "https://psu.libcal.com/space/31013",
+    "floorplanLocation": "unknown",
+    "floorVerification": "inferred",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psu-libcal-up-spaces"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
+  },
+  {
+    "id": "paterno-e128e",
+    "providerRoomId": "31014",
+    "buildingId": "pattee-paterno",
+    "floorId": "pattee-paterno-f1",
+    "officialLabel": "Paterno E128E",
+    "shortLabel": "E128E",
+    "displayName": "Paterno E128E",
+    "area": null,
+    "type": "group-study",
+    "capacity": 4,
+    "features": [
+      "accessible",
+      "power",
+      "solstice",
+      "whiteboard"
+    ],
+    "eligibility": "Penn State students have priority. Reservations are for two or more people, based on seating capacity.",
+    "providerId": "psul-libcal",
+    "policyId": "psul-group-study",
+    "bookingUrl": "https://psu.libcal.com/space/31014",
+    "floorplanLocation": "unknown",
+    "floorVerification": "inferred",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psu-libcal-up-spaces"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
+  },
+  {
+    "id": "paterno-e128f",
+    "providerRoomId": "32325",
+    "buildingId": "pattee-paterno",
+    "floorId": "pattee-paterno-f1",
+    "officialLabel": "Paterno E128F",
+    "shortLabel": "E128F",
+    "displayName": "Paterno E128F",
+    "area": null,
+    "type": "group-study",
+    "capacity": 4,
+    "features": [
+      "accessible",
+      "power",
+      "solstice",
+      "whiteboard"
+    ],
+    "eligibility": "Penn State students have priority. Reservations are for two or more people, based on seating capacity.",
+    "providerId": "psul-libcal",
+    "policyId": "psul-group-study",
+    "bookingUrl": "https://psu.libcal.com/space/32325",
+    "floorplanLocation": "unknown",
+    "floorVerification": "inferred",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psu-libcal-up-spaces"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
+  },
+  {
+    "id": "paterno-e128g",
+    "providerRoomId": "31015",
+    "buildingId": "pattee-paterno",
+    "floorId": "pattee-paterno-f1",
+    "officialLabel": "Paterno E128G",
+    "shortLabel": "E128G",
+    "displayName": "Paterno E128G",
+    "area": null,
+    "type": "group-study",
+    "capacity": 4,
+    "features": [
+      "accessible",
+      "power",
+      "solstice",
+      "whiteboard"
+    ],
+    "eligibility": "Penn State students have priority. Reservations are for two or more people, based on seating capacity.",
+    "providerId": "psul-libcal",
+    "policyId": "psul-group-study",
+    "bookingUrl": "https://psu.libcal.com/space/31015",
+    "floorplanLocation": "unknown",
+    "floorVerification": "inferred",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psu-libcal-up-spaces"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
+  },
+  {
+    "id": "paterno-e304",
+    "providerRoomId": "8570",
+    "buildingId": "pattee-paterno",
+    "floorId": "pattee-paterno-f3",
+    "officialLabel": "Paterno E304",
+    "shortLabel": "E304",
+    "displayName": "Paterno E304",
+    "area": null,
+    "type": "group-study",
+    "capacity": 16,
+    "features": [
+      "accessible",
+      "power",
+      "solstice",
+      "whiteboard"
+    ],
+    "eligibility": "Penn State students have priority. Reservations are for two or more people, based on seating capacity.",
+    "providerId": "psul-libcal",
+    "policyId": "psul-group-study",
+    "bookingUrl": "https://psu.libcal.com/space/8570",
+    "floorplanLocation": "unknown",
+    "floorVerification": "inferred",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psu-libcal-up-spaces"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
+  },
+  {
+    "id": "paterno-e307",
+    "providerRoomId": "8571",
+    "buildingId": "pattee-paterno",
+    "floorId": "pattee-paterno-f3",
+    "officialLabel": "Paterno E307",
+    "shortLabel": "E307",
+    "displayName": "Paterno E307",
+    "area": null,
+    "type": "group-study",
+    "capacity": 12,
+    "features": [
+      "accessible",
+      "power",
+      "solstice",
+      "whiteboard"
+    ],
+    "eligibility": "Penn State students have priority. Reservations are for two or more people, based on seating capacity.",
+    "providerId": "psul-libcal",
+    "policyId": "psul-group-study",
+    "bookingUrl": "https://psu.libcal.com/space/8571",
+    "floorplanLocation": "unknown",
+    "floorVerification": "inferred",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psu-libcal-up-spaces"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
+  },
+  {
+    "id": "pattee-w024",
+    "providerRoomId": "41114",
+    "buildingId": "pattee-paterno",
+    "floorId": "pattee-paterno-fg",
+    "officialLabel": "Pattee W024 - Collaboration Commons",
+    "shortLabel": "W024",
+    "displayName": "Pattee W024",
+    "area": "Collaboration Commons",
+    "type": "group-study",
+    "capacity": 4,
+    "features": [
+      "accessible",
+      "power",
+      "solstice",
+      "whiteboard"
+    ],
+    "eligibility": "Penn State students have priority. Reservations are for two or more people, based on seating capacity.",
+    "providerId": "psul-libcal",
+    "policyId": "psul-group-study",
+    "bookingUrl": "https://psu.libcal.com/space/41114",
+    "floorplanLocation": "unknown",
+    "floorVerification": "inferred",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psu-libcal-up-spaces"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
+  },
+  {
+    "id": "pattee-w025",
+    "providerRoomId": "41115",
+    "buildingId": "pattee-paterno",
+    "floorId": "pattee-paterno-fg",
+    "officialLabel": "Pattee W025 - Collaboration Commons",
+    "shortLabel": "W025",
+    "displayName": "Pattee W025",
+    "area": "Collaboration Commons",
+    "type": "group-study",
+    "capacity": 4,
+    "features": [
+      "accessible",
+      "power",
+      "solstice",
+      "whiteboard"
+    ],
+    "eligibility": "Penn State students have priority. Reservations are for two or more people, based on seating capacity.",
+    "providerId": "psul-libcal",
+    "policyId": "psul-group-study",
+    "bookingUrl": "https://psu.libcal.com/space/41115",
+    "floorplanLocation": "unknown",
+    "floorVerification": "inferred",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psu-libcal-up-spaces"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
+  },
+  {
+    "id": "pattee-w026",
+    "providerRoomId": "41116",
+    "buildingId": "pattee-paterno",
+    "floorId": "pattee-paterno-fg",
+    "officialLabel": "Pattee W026 - Collaboration Commons Mini",
+    "shortLabel": "W026",
+    "displayName": "Pattee W026",
+    "area": "Collaboration Commons Mini",
+    "type": "group-study",
+    "capacity": 2,
+    "features": [
+      "accessible",
+      "power",
+      "solstice",
+      "whiteboard"
+    ],
+    "eligibility": "Penn State students have priority. Reservations are for two or more people, based on seating capacity.",
+    "providerId": "psul-libcal",
+    "policyId": "psul-group-study",
+    "bookingUrl": "https://psu.libcal.com/space/41116",
+    "floorplanLocation": "unknown",
+    "floorVerification": "inferred",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psu-libcal-up-spaces"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
+  },
+  {
+    "id": "pattee-w028",
+    "providerRoomId": "41118",
+    "buildingId": "pattee-paterno",
+    "floorId": "pattee-paterno-fg",
+    "officialLabel": "Pattee W028 - Collaboration Commons",
+    "shortLabel": "W028",
+    "displayName": "Pattee W028",
+    "area": "Collaboration Commons",
+    "type": "group-study",
+    "capacity": 4,
+    "features": [
+      "accessible",
+      "power",
+      "solstice",
+      "whiteboard"
+    ],
+    "eligibility": "Penn State students have priority. Reservations are for two or more people, based on seating capacity.",
+    "providerId": "psul-libcal",
+    "policyId": "psul-group-study",
+    "bookingUrl": "https://psu.libcal.com/space/41118",
+    "floorplanLocation": "unknown",
+    "floorVerification": "inferred",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psu-libcal-up-spaces"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
+  },
+  {
+    "id": "pattee-w029",
+    "providerRoomId": "41119",
+    "buildingId": "pattee-paterno",
+    "floorId": "pattee-paterno-fg",
+    "officialLabel": "Pattee W029 - Collaboration Commons",
+    "shortLabel": "W029",
+    "displayName": "Pattee W029",
+    "area": "Collaboration Commons",
+    "type": "group-study",
+    "capacity": 4,
+    "features": [
+      "accessible",
+      "power",
+      "solstice",
+      "whiteboard"
+    ],
+    "eligibility": "Penn State students have priority. Reservations are for two or more people, based on seating capacity.",
+    "providerId": "psul-libcal",
+    "policyId": "psul-group-study",
+    "bookingUrl": "https://psu.libcal.com/space/41119",
+    "floorplanLocation": "unknown",
+    "floorVerification": "inferred",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psu-libcal-up-spaces"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
+  },
+  {
+    "id": "pattee-w030",
+    "providerRoomId": "41120",
+    "buildingId": "pattee-paterno",
+    "floorId": "pattee-paterno-fg",
+    "officialLabel": "Pattee W030 - Collaboration Commons",
+    "shortLabel": "W030",
+    "displayName": "Pattee W030",
+    "area": "Collaboration Commons",
+    "type": "group-study",
+    "capacity": 4,
+    "features": [
+      "accessible",
+      "power",
+      "solstice",
+      "whiteboard"
+    ],
+    "eligibility": "Penn State students have priority. Reservations are for two or more people, based on seating capacity.",
+    "providerId": "psul-libcal",
+    "policyId": "psul-group-study",
+    "bookingUrl": "https://psu.libcal.com/space/41120",
+    "floorplanLocation": "unknown",
+    "floorVerification": "inferred",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psu-libcal-up-spaces"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
+  },
+  {
+    "id": "pattee-w031",
+    "providerRoomId": "41121",
+    "buildingId": "pattee-paterno",
+    "floorId": "pattee-paterno-fg",
+    "officialLabel": "Pattee W031 - Collaboration Commons",
+    "shortLabel": "W031",
+    "displayName": "Pattee W031",
+    "area": "Collaboration Commons",
+    "type": "group-study",
+    "capacity": 6,
+    "features": [
+      "accessible",
+      "power",
+      "solstice",
+      "whiteboard"
+    ],
+    "eligibility": "Penn State students have priority. Reservations are for two or more people, based on seating capacity.",
+    "providerId": "psul-libcal",
+    "policyId": "psul-group-study",
+    "bookingUrl": "https://psu.libcal.com/space/41121",
+    "floorplanLocation": "unknown",
+    "floorVerification": "inferred",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psu-libcal-up-spaces"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
+  },
+  {
+    "id": "pattee-w032",
+    "providerRoomId": "41122",
+    "buildingId": "pattee-paterno",
+    "floorId": "pattee-paterno-fg",
+    "officialLabel": "Pattee W032 - Collaboration Commons",
+    "shortLabel": "W032",
+    "displayName": "Pattee W032",
+    "area": "Collaboration Commons",
+    "type": "group-study",
+    "capacity": 4,
+    "features": [
+      "accessible",
+      "power",
+      "solstice",
+      "whiteboard"
+    ],
+    "eligibility": "Penn State students have priority. Reservations are for two or more people, based on seating capacity.",
+    "providerId": "psul-libcal",
+    "policyId": "psul-group-study",
+    "bookingUrl": "https://psu.libcal.com/space/41122",
+    "floorplanLocation": "unknown",
+    "floorVerification": "inferred",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psu-libcal-up-spaces"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
+  },
+  {
+    "id": "pattee-w033",
+    "providerRoomId": "41123",
+    "buildingId": "pattee-paterno",
+    "floorId": "pattee-paterno-fg",
+    "officialLabel": "Pattee W033 - Collaboration Commons",
+    "shortLabel": "W033",
+    "displayName": "Pattee W033",
+    "area": "Collaboration Commons",
+    "type": "group-study",
+    "capacity": 4,
+    "features": [
+      "accessible",
+      "power",
+      "solstice",
+      "whiteboard"
+    ],
+    "eligibility": "Penn State students have priority. Reservations are for two or more people, based on seating capacity.",
+    "providerId": "psul-libcal",
+    "policyId": "psul-group-study",
+    "bookingUrl": "https://psu.libcal.com/space/41123",
+    "floorplanLocation": "unknown",
+    "floorVerification": "inferred",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psu-libcal-up-spaces"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
+  },
+  {
+    "id": "pattee-w034",
+    "providerRoomId": "41124",
+    "buildingId": "pattee-paterno",
+    "floorId": "pattee-paterno-fg",
+    "officialLabel": "Pattee W034 - Collaboration Commons",
+    "shortLabel": "W034",
+    "displayName": "Pattee W034",
+    "area": "Collaboration Commons",
+    "type": "group-study",
+    "capacity": 4,
+    "features": [
+      "accessible",
+      "power",
+      "solstice",
+      "whiteboard"
+    ],
+    "eligibility": "Penn State students have priority. Reservations are for two or more people, based on seating capacity.",
+    "providerId": "psul-libcal",
+    "policyId": "psul-group-study",
+    "bookingUrl": "https://psu.libcal.com/space/41124",
+    "floorplanLocation": "unknown",
+    "floorVerification": "inferred",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psu-libcal-up-spaces"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
+  },
+  {
+    "id": "pattee-w035",
+    "providerRoomId": "41125",
+    "buildingId": "pattee-paterno",
+    "floorId": "pattee-paterno-fg",
+    "officialLabel": "Pattee W035 - Collaboration Commons",
+    "shortLabel": "W035",
+    "displayName": "Pattee W035",
+    "area": "Collaboration Commons",
+    "type": "group-study",
+    "capacity": 4,
+    "features": [
+      "accessible",
+      "power",
+      "solstice",
+      "whiteboard"
+    ],
+    "eligibility": "Penn State students have priority. Reservations are for two or more people, based on seating capacity.",
+    "providerId": "psul-libcal",
+    "policyId": "psul-group-study",
+    "bookingUrl": "https://psu.libcal.com/space/41125",
+    "floorplanLocation": "unknown",
+    "floorVerification": "inferred",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psu-libcal-up-spaces"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
+  },
+  {
+    "id": "pattee-w036",
+    "providerRoomId": "41126",
+    "buildingId": "pattee-paterno",
+    "floorId": "pattee-paterno-fg",
+    "officialLabel": "Pattee W036 - Collaboration Commons",
+    "shortLabel": "W036",
+    "displayName": "Pattee W036",
+    "area": "Collaboration Commons",
+    "type": "group-study",
+    "capacity": 4,
+    "features": [
+      "accessible",
+      "power",
+      "solstice",
+      "whiteboard"
+    ],
+    "eligibility": "Penn State students have priority. Reservations are for two or more people, based on seating capacity.",
+    "providerId": "psul-libcal",
+    "policyId": "psul-group-study",
+    "bookingUrl": "https://psu.libcal.com/space/41126",
+    "floorplanLocation": "unknown",
+    "floorVerification": "inferred",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psu-libcal-up-spaces"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
+  },
+  {
+    "id": "pattee-w037",
+    "providerRoomId": "41127",
+    "buildingId": "pattee-paterno",
+    "floorId": "pattee-paterno-fg",
+    "officialLabel": "Pattee W037 - Collaboration Commons",
+    "shortLabel": "W037",
+    "displayName": "Pattee W037",
+    "area": "Collaboration Commons",
+    "type": "group-study",
+    "capacity": 4,
+    "features": [
+      "accessible",
+      "power",
+      "solstice",
+      "whiteboard"
+    ],
+    "eligibility": "Penn State students have priority. Reservations are for two or more people, based on seating capacity.",
+    "providerId": "psul-libcal",
+    "policyId": "psul-group-study",
+    "bookingUrl": "https://psu.libcal.com/space/41127",
+    "floorplanLocation": "unknown",
+    "floorVerification": "inferred",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psu-libcal-up-spaces"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
+  },
+  {
+    "id": "pattee-w038",
+    "providerRoomId": "41128",
+    "buildingId": "pattee-paterno",
+    "floorId": "pattee-paterno-fg",
+    "officialLabel": "Pattee W038 - Collaboration Commons",
+    "shortLabel": "W038",
+    "displayName": "Pattee W038",
+    "area": "Collaboration Commons",
+    "type": "group-study",
+    "capacity": 4,
+    "features": [
+      "accessible",
+      "power",
+      "solstice",
+      "whiteboard"
+    ],
+    "eligibility": "Penn State students have priority. Reservations are for two or more people, based on seating capacity.",
+    "providerId": "psul-libcal",
+    "policyId": "psul-group-study",
+    "bookingUrl": "https://psu.libcal.com/space/41128",
+    "floorplanLocation": "unknown",
+    "floorVerification": "inferred",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psu-libcal-up-spaces"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
+  },
+  {
+    "id": "pattee-w039",
+    "providerRoomId": "41129",
+    "buildingId": "pattee-paterno",
+    "floorId": "pattee-paterno-fg",
+    "officialLabel": "Pattee W039 - Collaboration Commons",
+    "shortLabel": "W039",
+    "displayName": "Pattee W039",
+    "area": "Collaboration Commons",
+    "type": "group-study",
+    "capacity": 4,
+    "features": [
+      "accessible",
+      "power",
+      "solstice",
+      "whiteboard"
+    ],
+    "eligibility": "Penn State students have priority. Reservations are for two or more people, based on seating capacity.",
+    "providerId": "psul-libcal",
+    "policyId": "psul-group-study",
+    "bookingUrl": "https://psu.libcal.com/space/41129",
+    "floorplanLocation": "unknown",
+    "floorVerification": "inferred",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psu-libcal-up-spaces"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
+  },
+  {
+    "id": "pattee-w101a",
+    "providerRoomId": "8572",
+    "buildingId": "pattee-paterno",
+    "floorId": "pattee-paterno-f1",
+    "officialLabel": "Pattee W101A - Leisure Reading Room",
+    "shortLabel": "W101A",
+    "displayName": "Pattee W101A",
+    "area": "Leisure Reading Room",
+    "type": "group-study",
+    "capacity": 8,
+    "features": [
+      "accessible",
+      "power",
+      "solstice",
+      "whiteboard"
+    ],
+    "eligibility": "Penn State students have priority. Reservations are for two or more people, based on seating capacity.",
+    "providerId": "psul-libcal",
+    "policyId": "psul-group-study",
+    "bookingUrl": "https://psu.libcal.com/space/8572",
+    "floorplanLocation": "unknown",
+    "floorVerification": "inferred",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psu-libcal-up-spaces"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
+  },
+  {
+    "id": "pattee-w101b",
+    "providerRoomId": "8573",
+    "buildingId": "pattee-paterno",
+    "floorId": "pattee-paterno-f1",
+    "officialLabel": "Pattee W101B - Leisure Reading Room",
+    "shortLabel": "W101B",
+    "displayName": "Pattee W101B",
+    "area": "Leisure Reading Room",
+    "type": "group-study",
+    "capacity": 4,
+    "features": [
+      "accessible",
+      "power",
+      "solstice",
+      "whiteboard"
+    ],
+    "eligibility": "Penn State students have priority. Reservations are for two or more people, based on seating capacity.",
+    "providerId": "psul-libcal",
+    "policyId": "psul-group-study",
+    "bookingUrl": "https://psu.libcal.com/space/8573",
+    "floorplanLocation": "unknown",
+    "floorVerification": "inferred",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psu-libcal-up-spaces"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
+  },
+  {
+    "id": "pattee-w120",
+    "providerRoomId": "8577",
+    "buildingId": "pattee-paterno",
+    "floorId": "pattee-paterno-f1",
+    "officialLabel": "Pattee W120 - Knowledge Commons",
+    "shortLabel": "W120",
+    "displayName": "Pattee W120",
+    "area": "Knowledge Commons",
+    "type": "group-study",
+    "capacity": 12,
+    "features": [
+      "power",
+      "solstice",
+      "whiteboard"
+    ],
+    "eligibility": "Penn State students have priority. Reservations are for two or more people, based on seating capacity.",
+    "providerId": "psul-libcal",
+    "policyId": "psul-group-study",
+    "bookingUrl": "https://psu.libcal.com/space/8577",
+    "floorplanLocation": "unknown",
+    "floorVerification": "inferred",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psu-libcal-up-spaces"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
+  },
+  {
+    "id": "pattee-w121",
+    "providerRoomId": "120911",
+    "buildingId": "pattee-paterno",
+    "floorId": "pattee-paterno-f1",
+    "officialLabel": "Pattee W121 - Knowledge Commons",
+    "shortLabel": "W121",
+    "displayName": "Pattee W121",
+    "area": "Knowledge Commons",
+    "type": "group-study",
+    "capacity": 4,
+    "features": [
+      "accessible",
+      "power",
+      "solstice",
+      "whiteboard"
+    ],
+    "eligibility": "Penn State students have priority. Reservations are for two or more people, based on seating capacity.",
+    "providerId": "psul-libcal",
+    "policyId": "psul-group-study",
+    "bookingUrl": "https://psu.libcal.com/space/120911",
+    "floorplanLocation": "unknown",
+    "floorVerification": "inferred",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psu-libcal-up-spaces"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
+  },
+  {
+    "id": "pattee-w122",
+    "providerRoomId": "8578",
+    "buildingId": "pattee-paterno",
+    "floorId": "pattee-paterno-f1",
+    "officialLabel": "Pattee W122 - Knowledge Commons",
+    "shortLabel": "W122",
+    "displayName": "Pattee W122",
+    "area": "Knowledge Commons",
+    "type": "group-study",
+    "capacity": 4,
+    "features": [
+      "accessible",
+      "power",
+      "solstice",
+      "whiteboard"
+    ],
+    "eligibility": "Penn State students have priority. Reservations are for two or more people, based on seating capacity.",
+    "providerId": "psul-libcal",
+    "policyId": "psul-group-study",
+    "bookingUrl": "https://psu.libcal.com/space/8578",
+    "floorplanLocation": "unknown",
+    "floorVerification": "inferred",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psu-libcal-up-spaces"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
+  },
+  {
+    "id": "pattee-w123",
+    "providerRoomId": "8579",
+    "buildingId": "pattee-paterno",
+    "floorId": "pattee-paterno-f1",
+    "officialLabel": "Pattee W123 - Knowledge Commons",
+    "shortLabel": "W123",
+    "displayName": "Pattee W123",
+    "area": "Knowledge Commons",
+    "type": "group-study",
+    "capacity": 4,
+    "features": [
+      "accessible",
+      "power",
+      "solstice",
+      "whiteboard"
+    ],
+    "eligibility": "Penn State students have priority. Reservations are for two or more people, based on seating capacity.",
+    "providerId": "psul-libcal",
+    "policyId": "psul-group-study",
+    "bookingUrl": "https://psu.libcal.com/space/8579",
+    "floorplanLocation": "unknown",
+    "floorVerification": "inferred",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psu-libcal-up-spaces"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
+  },
+  {
+    "id": "pattee-w124",
+    "providerRoomId": "8580",
+    "buildingId": "pattee-paterno",
+    "floorId": "pattee-paterno-f1",
+    "officialLabel": "Pattee W124 - Knowledge Commons",
+    "shortLabel": "W124",
+    "displayName": "Pattee W124",
+    "area": "Knowledge Commons",
+    "type": "group-study",
+    "capacity": 4,
+    "features": [
+      "accessible",
+      "power",
+      "solstice",
+      "whiteboard"
+    ],
+    "eligibility": "Penn State students have priority. Reservations are for two or more people, based on seating capacity.",
+    "providerId": "psul-libcal",
+    "policyId": "psul-group-study",
+    "bookingUrl": "https://psu.libcal.com/space/8580",
+    "floorplanLocation": "unknown",
+    "floorVerification": "inferred",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psu-libcal-up-spaces"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
+  },
+  {
+    "id": "pattee-w125",
+    "providerRoomId": "8581",
+    "buildingId": "pattee-paterno",
+    "floorId": "pattee-paterno-f1",
+    "officialLabel": "Pattee W125 - Knowledge Commons",
+    "shortLabel": "W125",
+    "displayName": "Pattee W125",
+    "area": "Knowledge Commons",
+    "type": "group-study",
+    "capacity": 4,
+    "features": [
+      "accessible",
+      "power",
+      "solstice",
+      "whiteboard"
+    ],
+    "eligibility": "Penn State students have priority. Reservations are for two or more people, based on seating capacity.",
+    "providerId": "psul-libcal",
+    "policyId": "psul-group-study",
+    "bookingUrl": "https://psu.libcal.com/space/8581",
+    "floorplanLocation": "unknown",
+    "floorVerification": "inferred",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psu-libcal-up-spaces"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
+  },
+  {
+    "id": "pattee-w126",
+    "providerRoomId": "8582",
+    "buildingId": "pattee-paterno",
+    "floorId": "pattee-paterno-f1",
+    "officialLabel": "Pattee W126 - Knowledge Commons ",
+    "shortLabel": "W126",
+    "displayName": "Pattee W126",
+    "area": "Knowledge Commons",
+    "type": "group-study",
+    "capacity": 10,
+    "features": [
+      "accessible",
+      "power",
+      "solstice",
+      "whiteboard"
+    ],
+    "eligibility": "Penn State students have priority. Reservations are for two or more people, based on seating capacity.",
+    "providerId": "psul-libcal",
+    "policyId": "psul-group-study",
+    "bookingUrl": "https://psu.libcal.com/space/8582",
+    "floorplanLocation": "unknown",
+    "floorVerification": "inferred",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psu-libcal-up-spaces"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
+  },
+  {
+    "id": "pattee-w127",
+    "providerRoomId": "8583",
+    "buildingId": "pattee-paterno",
+    "floorId": "pattee-paterno-f1",
+    "officialLabel": "Pattee W127 - Knowledge Commons",
+    "shortLabel": "W127",
+    "displayName": "Pattee W127",
+    "area": "Knowledge Commons",
+    "type": "group-study",
+    "capacity": 8,
+    "features": [
+      "accessible",
+      "power",
+      "solstice",
+      "whiteboard"
+    ],
+    "eligibility": "Penn State students have priority. Reservations are for two or more people, based on seating capacity.",
+    "providerId": "psul-libcal",
+    "policyId": "psul-group-study",
+    "bookingUrl": "https://psu.libcal.com/space/8583",
+    "floorplanLocation": "unknown",
+    "floorVerification": "inferred",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psu-libcal-up-spaces"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
+  },
+  {
+    "id": "pattee-w128",
+    "providerRoomId": "8584",
+    "buildingId": "pattee-paterno",
+    "floorId": "pattee-paterno-f1",
+    "officialLabel": "Pattee W128 - Knowledge Commons",
+    "shortLabel": "W128",
+    "displayName": "Pattee W128",
+    "area": "Knowledge Commons",
+    "type": "group-study",
+    "capacity": 8,
+    "features": [
+      "accessible",
+      "power",
+      "solstice",
+      "whiteboard"
+    ],
+    "eligibility": "Penn State students have priority. Reservations are for two or more people, based on seating capacity.",
+    "providerId": "psul-libcal",
+    "policyId": "psul-group-study",
+    "bookingUrl": "https://psu.libcal.com/space/8584",
+    "floorplanLocation": "unknown",
+    "floorVerification": "inferred",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psu-libcal-up-spaces"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
+  },
+  {
+    "id": "pattee-w129",
+    "providerRoomId": "8586",
+    "buildingId": "pattee-paterno",
+    "floorId": "pattee-paterno-f1",
+    "officialLabel": "Pattee W129 - Knowledge Commons",
+    "shortLabel": "W129",
+    "displayName": "Pattee W129",
+    "area": "Knowledge Commons",
+    "type": "group-study",
+    "capacity": 8,
+    "features": [
+      "accessible",
+      "power",
+      "solstice",
+      "whiteboard"
+    ],
+    "eligibility": "Penn State students have priority. Reservations are for two or more people, based on seating capacity.",
+    "providerId": "psul-libcal",
+    "policyId": "psul-group-study",
+    "bookingUrl": "https://psu.libcal.com/space/8586",
+    "floorplanLocation": "unknown",
+    "floorVerification": "inferred",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psu-libcal-up-spaces"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
+  },
+  {
+    "id": "stuckeman-117",
+    "providerRoomId": "8246",
+    "buildingId": "stuckeman",
+    "floorId": "stuckeman-f1",
+    "officialLabel": "Stuckeman 117 - Architecture & Landscape Architecture Library",
+    "shortLabel": "117",
+    "displayName": "Stuckeman 117",
+    "area": null,
+    "type": "group-study",
+    "capacity": 11,
+    "features": [
+      "accessible",
+      "power",
+      "solstice",
+      "whiteboard"
+    ],
+    "eligibility": "Penn State students have priority. Reservations are for two or more people, based on seating capacity.",
+    "providerId": "psul-libcal",
+    "policyId": "psul-group-study",
+    "bookingUrl": "https://psu.libcal.com/space/8246",
+    "floorplanLocation": "unknown",
+    "floorVerification": "inferred",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psu-libcal-up-spaces"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
+  },
+  {
+    "id": "deike-105a",
+    "providerRoomId": "8251",
+    "buildingId": "deike",
+    "floorId": "deike-f1",
+    "officialLabel": "Deike 105A - Earth and Mineral Sciences Library",
+    "shortLabel": "105A",
+    "displayName": "Deike 105A",
+    "area": null,
+    "type": "group-study",
+    "capacity": 6,
+    "features": [
+      "accessible",
+      "power",
+      "solstice",
+      "whiteboard"
+    ],
+    "eligibility": "Penn State students have priority. Reservations are for two or more people, based on seating capacity.",
+    "providerId": "psul-libcal",
+    "policyId": "psul-group-study",
+    "bookingUrl": "https://psu.libcal.com/space/8251",
+    "floorplanLocation": "unknown",
+    "floorVerification": "inferred",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psu-libcal-up-spaces"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
+  },
+  {
+    "id": "deike-105b",
+    "providerRoomId": "51793",
+    "buildingId": "deike",
+    "floorId": "deike-f1",
+    "officialLabel": "Deike 105B - Earth and Mineral Sciences Library",
+    "shortLabel": "105B",
+    "displayName": "Deike 105B",
+    "area": null,
+    "type": "group-study",
+    "capacity": 6,
+    "features": [
+      "accessible",
+      "power",
+      "whiteboard"
+    ],
+    "eligibility": "Penn State students have priority. Reservations are for two or more people, based on seating capacity.",
+    "providerId": "psul-libcal",
+    "policyId": "psul-group-study",
+    "bookingUrl": "https://psu.libcal.com/space/51793",
+    "floorplanLocation": "unknown",
+    "floorVerification": "inferred",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psu-libcal-up-spaces"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
+  },
+  {
+    "id": "deike-113a",
+    "providerRoomId": "12730",
+    "buildingId": "deike",
+    "floorId": "deike-f1",
+    "officialLabel": "Deike 113A - Study Cubicle - Earth and Mineral Sciences Library",
+    "shortLabel": "113A",
+    "displayName": "Deike 113A",
+    "area": "Study Cubicle",
+    "type": "group-study",
+    "capacity": 6,
+    "features": [
+      "accessible",
+      "power",
+      "solstice",
+      "whiteboard"
+    ],
+    "eligibility": "Penn State students have priority. Reservations are for two or more people, based on seating capacity.",
+    "providerId": "psul-libcal",
+    "policyId": "psul-group-study",
+    "bookingUrl": "https://psu.libcal.com/space/12730",
+    "floorplanLocation": "unknown",
+    "floorVerification": "inferred",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psu-libcal-up-spaces"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
+  },
+  {
+    "id": "deike-113b",
+    "providerRoomId": "12731",
+    "buildingId": "deike",
+    "floorId": "deike-f1",
+    "officialLabel": "Deike 113B - Study Cubicle - Earth and Mineral Sciences Library",
+    "shortLabel": "113B",
+    "displayName": "Deike 113B",
+    "area": "Study Cubicle",
+    "type": "group-study",
+    "capacity": 6,
+    "features": [
+      "accessible",
+      "power",
+      "solstice",
+      "whiteboard"
+    ],
+    "eligibility": "Penn State students have priority. Reservations are for two or more people, based on seating capacity.",
+    "providerId": "psul-libcal",
+    "policyId": "psul-group-study",
+    "bookingUrl": "https://psu.libcal.com/space/12731",
+    "floorplanLocation": "unknown",
+    "floorVerification": "inferred",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psu-libcal-up-spaces"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
+  },
+  {
+    "id": "deike-113c",
+    "providerRoomId": "12732",
+    "buildingId": "deike",
+    "floorId": "deike-f1",
+    "officialLabel": "Deike 113C - Study Cubicle - Earth and Mineral Sciences Library",
+    "shortLabel": "113C",
+    "displayName": "Deike 113C",
+    "area": "Study Cubicle",
+    "type": "group-study",
+    "capacity": 6,
+    "features": [
+      "accessible",
+      "power",
+      "solstice",
+      "whiteboard"
+    ],
+    "eligibility": "Penn State students have priority. Reservations are for two or more people, based on seating capacity.",
+    "providerId": "psul-libcal",
+    "policyId": "psul-group-study",
+    "bookingUrl": "https://psu.libcal.com/space/12732",
+    "floorplanLocation": "unknown",
+    "floorVerification": "inferred",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psu-libcal-up-spaces"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
+  },
+  {
+    "id": "deike-113d",
+    "providerRoomId": "12733",
+    "buildingId": "deike",
+    "floorId": "deike-f1",
+    "officialLabel": "Deike 113D - Study Cubicle - Earth and Mineral Sciences Library",
+    "shortLabel": "113D",
+    "displayName": "Deike 113D",
+    "area": "Study Cubicle",
+    "type": "group-study",
+    "capacity": 6,
+    "features": [
+      "accessible",
+      "power",
+      "solstice",
+      "whiteboard"
+    ],
+    "eligibility": "Penn State students have priority. Reservations are for two or more people, based on seating capacity.",
+    "providerId": "psul-libcal",
+    "policyId": "psul-group-study",
+    "bookingUrl": "https://psu.libcal.com/space/12733",
+    "floorplanLocation": "unknown",
+    "floorVerification": "inferred",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psu-libcal-up-spaces"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
+  },
+  {
+    "id": "deike-114a",
+    "providerRoomId": "8253",
+    "buildingId": "deike",
+    "floorId": "deike-f1",
+    "officialLabel": "Deike 114A - Earth and Mineral Sciences Library",
+    "shortLabel": "114A",
+    "displayName": "Deike 114A",
+    "area": null,
+    "type": "group-study",
+    "capacity": 6,
+    "features": [
+      "accessible",
+      "power",
+      "solstice",
+      "whiteboard"
+    ],
+    "eligibility": "Penn State students have priority. Reservations are for two or more people, based on seating capacity.",
+    "providerId": "psul-libcal",
+    "policyId": "psul-group-study",
+    "bookingUrl": "https://psu.libcal.com/space/8253",
+    "floorplanLocation": "unknown",
+    "floorVerification": "inferred",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psu-libcal-up-spaces"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
+  },
+  {
+    "id": "deike-114b",
+    "providerRoomId": "8254",
+    "buildingId": "deike",
+    "floorId": "deike-f1",
+    "officialLabel": "Deike 114B - Earth and Mineral Sciences Library",
+    "shortLabel": "114B",
+    "displayName": "Deike 114B",
+    "area": null,
+    "type": "group-study",
+    "capacity": 6,
+    "features": [
+      "accessible",
+      "power",
+      "solstice",
+      "whiteboard"
+    ],
+    "eligibility": "Penn State students have priority. Reservations are for two or more people, based on seating capacity.",
+    "providerId": "psul-libcal",
+    "policyId": "psul-group-study",
+    "bookingUrl": "https://psu.libcal.com/space/8254",
+    "floorplanLocation": "unknown",
+    "floorVerification": "inferred",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psu-libcal-up-spaces"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
+  },
+  {
+    "id": "davey-204",
+    "providerRoomId": "3335",
+    "buildingId": "davey",
+    "floorId": "davey-f2",
+    "officialLabel": "Davey 204 - Physical and Mathematical Sciences Library",
+    "shortLabel": "204",
+    "displayName": "Davey 204",
+    "area": null,
+    "type": "group-study",
+    "capacity": 6,
+    "features": [
+      "accessible",
+      "power",
+      "solstice",
+      "whiteboard"
+    ],
+    "eligibility": "Penn State students have priority. Reservations are for two or more people, based on seating capacity.",
+    "providerId": "psul-libcal",
+    "policyId": "psul-group-study",
+    "bookingUrl": "https://psu.libcal.com/space/3335",
+    "floorplanLocation": "unknown",
+    "floorVerification": "inferred",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psu-libcal-up-spaces"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
+  },
+  {
+    "id": "davey-205",
+    "providerRoomId": "3577",
+    "buildingId": "davey",
+    "floorId": "davey-f2",
+    "officialLabel": "Davey 205 - Physical and Mathematical Sciences Library",
+    "shortLabel": "205",
+    "displayName": "Davey 205",
+    "area": null,
+    "type": "group-study",
+    "capacity": 6,
+    "features": [
+      "accessible",
+      "power",
+      "solstice",
+      "whiteboard"
+    ],
+    "eligibility": "Penn State students have priority. Reservations are for two or more people, based on seating capacity.",
+    "providerId": "psul-libcal",
+    "policyId": "psul-group-study",
+    "bookingUrl": "https://psu.libcal.com/space/3577",
+    "floorplanLocation": "unknown",
+    "floorVerification": "inferred",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psu-libcal-up-spaces"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
+  },
+  {
+    "id": "davey-214",
+    "providerRoomId": "3680",
+    "buildingId": "davey",
+    "floorId": "davey-f2",
+    "officialLabel": "Davey 214 - Physical and Mathematical Sciences Library",
+    "shortLabel": "214",
+    "displayName": "Davey 214",
+    "area": null,
+    "type": "group-study",
+    "capacity": 10,
+    "features": [
+      "accessible",
+      "power",
+      "solstice",
+      "whiteboard"
+    ],
+    "eligibility": "Penn State students have priority. Reservations are for two or more people, based on seating capacity.",
+    "providerId": "psul-libcal",
+    "policyId": "psul-group-study",
+    "bookingUrl": "https://psu.libcal.com/space/3680",
+    "floorplanLocation": "unknown",
+    "floorVerification": "inferred",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psu-libcal-up-spaces"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
+  },
+  {
+    "id": "davey-collaboration-space-1",
+    "providerRoomId": "3710",
+    "buildingId": "davey",
+    "floorId": "davey-funlisted",
+    "officialLabel": "Davey Collaboration Space 1 - Physical and Mathematical Sciences Libary",
+    "shortLabel": "Collab 1",
+    "displayName": "Davey Collaboration Space 1",
+    "area": null,
+    "type": "group-study",
+    "capacity": 6,
+    "features": [
+      "accessible",
+      "power",
+      "desktop-pc",
+      "screen-monitor",
+      "whiteboard"
+    ],
+    "eligibility": "Penn State students have priority. Reservations are for two or more people, based on seating capacity.",
+    "providerId": "psul-libcal",
+    "policyId": "psul-group-study",
+    "bookingUrl": "https://psu.libcal.com/space/3710",
+    "floorplanLocation": "unknown",
+    "floorVerification": "candidate",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psu-libcal-up-spaces"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
+  },
+  {
+    "id": "davey-collaboration-space-2",
+    "providerRoomId": "3711",
+    "buildingId": "davey",
+    "floorId": "davey-funlisted",
+    "officialLabel": "Davey Collaboration Space 2 - Physical and Mathematical Sciences Library",
+    "shortLabel": "Collab 2",
+    "displayName": "Davey Collaboration Space 2",
+    "area": null,
+    "type": "group-study",
+    "capacity": 6,
+    "features": [
+      "accessible",
+      "power",
+      "desktop-pc",
+      "screen-monitor",
+      "whiteboard"
+    ],
+    "eligibility": "Penn State students have priority. Reservations are for two or more people, based on seating capacity.",
+    "providerId": "psul-libcal",
+    "policyId": "psul-group-study",
+    "bookingUrl": "https://psu.libcal.com/space/3711",
+    "floorplanLocation": "unknown",
+    "floorVerification": "candidate",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psu-libcal-up-spaces"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
+  },
+  {
+    "id": "davey-collaboration-space-3",
+    "providerRoomId": "3712",
+    "buildingId": "davey",
+    "floorId": "davey-funlisted",
+    "officialLabel": "Davey Collaboration Space 3 - Physical and Mathematical Sciences Library",
+    "shortLabel": "Collab 3",
+    "displayName": "Davey Collaboration Space 3",
+    "area": null,
+    "type": "group-study",
+    "capacity": 6,
+    "features": [
+      "accessible",
+      "power",
+      "desktop-pc",
+      "screen-monitor",
+      "whiteboard"
+    ],
+    "eligibility": "Penn State students have priority. Reservations are for two or more people, based on seating capacity.",
+    "providerId": "psul-libcal",
+    "policyId": "psul-group-study",
+    "bookingUrl": "https://psu.libcal.com/space/3712",
+    "floorplanLocation": "unknown",
+    "floorVerification": "candidate",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psu-libcal-up-spaces"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
+  },
+  {
+    "id": "davey-collaboration-space-4",
+    "providerRoomId": "3713",
+    "buildingId": "davey",
+    "floorId": "davey-funlisted",
+    "officialLabel": "Davey Collaboration Space 4 - Physical and Mathematical Sciences Library",
+    "shortLabel": "Collab 4",
+    "displayName": "Davey Collaboration Space 4",
+    "area": null,
+    "type": "group-study",
+    "capacity": 6,
+    "features": [
+      "accessible",
+      "power",
+      "desktop-pc",
+      "screen-monitor",
+      "whiteboard"
+    ],
+    "eligibility": "Penn State students have priority. Reservations are for two or more people, based on seating capacity.",
+    "providerId": "psul-libcal",
+    "policyId": "psul-group-study",
+    "bookingUrl": "https://psu.libcal.com/space/3713",
+    "floorplanLocation": "unknown",
+    "floorVerification": "candidate",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psu-libcal-up-spaces"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
+  },
+  {
+    "id": "davey-collaboration-space-5",
+    "providerRoomId": "3714",
+    "buildingId": "davey",
+    "floorId": "davey-funlisted",
+    "officialLabel": "Davey Collaboration Space 5 - Physical and Mathematical Sciences Library",
+    "shortLabel": "Collab 5",
+    "displayName": "Davey Collaboration Space 5",
+    "area": null,
+    "type": "group-study",
+    "capacity": 6,
+    "features": [
+      "accessible",
+      "power",
+      "desktop-pc",
+      "screen-monitor",
+      "whiteboard"
+    ],
+    "eligibility": "Penn State students have priority. Reservations are for two or more people, based on seating capacity.",
+    "providerId": "psul-libcal",
+    "policyId": "psul-group-study",
+    "bookingUrl": "https://psu.libcal.com/space/3714",
+    "floorplanLocation": "unknown",
+    "floorVerification": "candidate",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psu-libcal-up-spaces"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
   }
 ]

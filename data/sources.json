@@ -43,5 +43,14 @@
     "accessMethod": "api",
     "retrievedAt": "2026-11-22",
     "license": "ODbL 1.0 — attribution required"
+  },
+  {
+    "id": "psu-libcal-up-spaces",
+    "name": "LibCal: University Park study spaces (all groups)",
+    "owner": "Penn State University Libraries (Springshare LibCal)",
+    "url": "https://psu.libcal.com/spaces?lid=428&gid=0",
+    "accessMethod": "public-page",
+    "retrievedAt": "2026-11-22",
+    "notes": "Room list parsed from the public page (resources.push blocks): eid, title, capacity, features, booking URL."
   }
 ]

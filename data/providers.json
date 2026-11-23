@@ -18,7 +18,9 @@
     "supportContact": "coefacilities@engr.psu.edu",
     "verification": {
       "status": "verified",
-      "sourceIds": ["psul-engineering-rooms"],
+      "sourceIds": [
+        "psul-engineering-rooms"
+      ],
       "verifiedAt": "2026-11-22",
       "note": "The official page says 'Outlook Calendar' but gives no link; portalUrl is Outlook on the web, which Penn State Microsoft 365 accounts use."
     }
@@ -31,17 +33,21 @@
     "portalUrl": "https://psu.libcal.com/spaces?lid=428&gid=2159",
     "handoffMode": "room-link",
     "handoffSteps": [
-      "Select your location and room.",
-      "Pick an open time. Rooms can be reserved for up to 3 hours.",
+      "Pick an open time on the room's page. Rooms can be reserved for up to 3 hours a day.",
       "Enter your details, including your Penn State access ID.",
-      "Watch for the email confirmation."
+      "Watch for the email confirmation. It isn't reserved until that arrives."
     ],
     "confirmation": "instant-email",
     "availabilityAccess": "none",
     "supportContact": "Ul-study-rooms@lists.psu.edu",
     "verification": {
       "status": "verified",
-      "sourceIds": ["psul-rooms-spaces", "psu-libcal-up-study", "psul-policy-ul-adg16"],
+      "sourceIds": [
+        "psul-rooms-spaces",
+        "psu-libcal-up-study",
+        "psul-policy-ul-adg16",
+        "psu-libcal-up-spaces"
+      ],
       "verifiedAt": "2026-11-22"
     }
   }

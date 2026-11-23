@@ -104,21 +104,63 @@
       "osmElement": "relation/359265"
     },
     "hoursUrl": "https://libraries.psu.edu/hours-and-locations",
-    "status": "candidate",
-    "roomInventory": "none",
+    "status": "verified",
+    "roomInventory": "complete",
     "providerIds": [
       "psul-libcal"
     ],
-    "floors": [],
+    "floors": [
+      {
+        "id": "pattee-paterno-fg",
+        "label": "G",
+        "level": 0,
+        "floorplan": "none",
+        "verification": {
+          "status": "inferred",
+          "sourceIds": [
+            "psu-libcal-up-spaces"
+          ],
+          "verifiedAt": "2026-11-22",
+          "note": "Ground level read from 0xx room numbers; not confirmed by a floor plan."
+        }
+      },
+      {
+        "id": "pattee-paterno-f1",
+        "label": "1",
+        "level": 1,
+        "floorplan": "none",
+        "verification": {
+          "status": "inferred",
+          "sourceIds": [
+            "psu-libcal-up-spaces"
+          ],
+          "verifiedAt": "2026-11-22",
+          "note": "Floor read from the first digit of the room number; not confirmed by a floor plan."
+        }
+      },
+      {
+        "id": "pattee-paterno-f3",
+        "label": "3",
+        "level": 3,
+        "floorplan": "none",
+        "verification": {
+          "status": "inferred",
+          "sourceIds": [
+            "psu-libcal-up-spaces"
+          ],
+          "verifiedAt": "2026-11-22",
+          "note": "Floor read from the first digit of the room number; not confirmed by a floor plan."
+        }
+      }
+    ],
     "notes": [
-      "Listed as a University Park study-space location in the Libraries' LibCal.",
-      "The Libraries site names group study rooms W120–W128 in West Pattee (Knowledge Commons). Individual rooms aren't listed here yet."
+      "36 reservable rooms listed in the Libraries' LibCal (checked 2026-11-22).",
+      "Floors are read from room numbers and not yet confirmed by a floor plan."
     ],
     "verification": {
       "status": "verified",
       "sourceIds": [
-        "psu-libcal-up-study",
-        "psul-rooms-spaces",
+        "psu-libcal-up-spaces",
         "osm"
       ],
       "verifiedAt": "2026-11-22"
@@ -142,24 +184,38 @@
       "osmElement": "way/37861072"
     },
     "hoursUrl": "https://libraries.psu.edu/hours-and-locations",
-    "status": "candidate",
-    "roomInventory": "none",
+    "status": "verified",
+    "roomInventory": "complete",
     "providerIds": [
       "psul-libcal"
     ],
-    "floors": [],
+    "floors": [
+      {
+        "id": "deike-f1",
+        "label": "1",
+        "level": 1,
+        "floorplan": "none",
+        "verification": {
+          "status": "inferred",
+          "sourceIds": [
+            "psu-libcal-up-spaces"
+          ],
+          "verifiedAt": "2026-11-22",
+          "note": "Floor read from the first digit of the room number; not confirmed by a floor plan."
+        }
+      }
+    ],
     "notes": [
-      "Earth and Mineral Sciences Library is listed as a University Park study-space location in the Libraries' LibCal.",
-      "That the library is in the Deike Building is not yet confirmed against a Libraries page."
+      "8 reservable rooms listed in the Libraries' LibCal (checked 2026-11-22).",
+      "Floors are read from room numbers and not yet confirmed by a floor plan."
     ],
     "verification": {
-      "status": "inferred",
+      "status": "verified",
       "sourceIds": [
-        "psu-libcal-up-study",
+        "psu-libcal-up-spaces",
         "osm"
       ],
-      "verifiedAt": "2026-11-22",
-      "note": "Library-to-building mapping from general knowledge; verify."
+      "verifiedAt": "2026-11-22"
     }
   },
   {
@@ -180,24 +236,38 @@
       "osmElement": "way/431071070"
     },
     "hoursUrl": "https://libraries.psu.edu/hours-and-locations",
-    "status": "candidate",
-    "roomInventory": "none",
+    "status": "verified",
+    "roomInventory": "complete",
     "providerIds": [
       "psul-libcal"
     ],
-    "floors": [],
+    "floors": [
+      {
+        "id": "stuckeman-f1",
+        "label": "1",
+        "level": 1,
+        "floorplan": "none",
+        "verification": {
+          "status": "inferred",
+          "sourceIds": [
+            "psu-libcal-up-spaces"
+          ],
+          "verifiedAt": "2026-11-22",
+          "note": "Floor read from the first digit of the room number; not confirmed by a floor plan."
+        }
+      }
+    ],
     "notes": [
-      "Architecture and Landscape Architecture Library is listed as a University Park study-space location in the Libraries' LibCal.",
-      "That the library is in the Stuckeman Family Building is not yet confirmed against a Libraries page."
+      "1 reservable room listed in the Libraries' LibCal (checked 2026-11-22).",
+      "Floors are read from room numbers and not yet confirmed by a floor plan."
     ],
     "verification": {
-      "status": "inferred",
+      "status": "verified",
       "sourceIds": [
-        "psu-libcal-up-study",
+        "psu-libcal-up-spaces",
         "osm"
       ],
-      "verifiedAt": "2026-11-22",
-      "note": "Library-to-building mapping from general knowledge; verify."
+      "verifiedAt": "2026-11-22"
     }
   },
   {
@@ -218,24 +288,54 @@
       "osmElement": "way/431740622"
     },
     "hoursUrl": "https://libraries.psu.edu/hours-and-locations",
-    "status": "candidate",
-    "roomInventory": "none",
+    "status": "verified",
+    "roomInventory": "complete",
     "providerIds": [
       "psul-libcal"
     ],
-    "floors": [],
+    "floors": [
+      {
+        "id": "davey-f2",
+        "label": "2",
+        "level": 2,
+        "floorplan": "none",
+        "verification": {
+          "status": "inferred",
+          "sourceIds": [
+            "psu-libcal-up-spaces"
+          ],
+          "verifiedAt": "2026-11-22",
+          "note": "Floor read from the first digit of the room number; not confirmed by a floor plan."
+        }
+      },
+      {
+        "id": "davey-funlisted",
+        "label": "?",
+        "level": 999,
+        "unlisted": true,
+        "floorplan": "none",
+        "verification": {
+          "status": "candidate",
+          "sourceIds": [
+            "psu-libcal-up-spaces"
+          ],
+          "verifiedAt": "2026-11-22",
+          "note": "LibCal doesn't say which floor these rooms are on."
+        }
+      }
+    ],
     "notes": [
-      "Physical and Mathematical Sciences Library is listed as a University Park study-space location in the Libraries' LibCal.",
-      "That the library is in the Davey Laboratory is not yet confirmed against a Libraries page."
+      "8 reservable rooms listed in the Libraries' LibCal (checked 2026-11-22).",
+      "Floors are read from room numbers and not yet confirmed by a floor plan.",
+      "Some rooms don't have a floor listed in LibCal, so they're grouped under “?”."
     ],
     "verification": {
-      "status": "inferred",
+      "status": "verified",
       "sourceIds": [
-        "psu-libcal-up-study",
+        "psu-libcal-up-spaces",
         "osm"
       ],
-      "verifiedAt": "2026-11-22",
-      "note": "Library-to-building mapping from general knowledge; verify."
+      "verifiedAt": "2026-11-22"
     }
   }
 ]

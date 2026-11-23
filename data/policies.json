@@ -15,7 +15,9 @@
     ],
     "verification": {
       "status": "verified",
-      "sourceIds": ["psul-engineering-rooms"],
+      "sourceIds": [
+        "psul-engineering-rooms"
+      ],
       "verifiedAt": "2026-11-22",
       "note": "Rules are verified. Duration, increment and horizon are unpublished; numeric values are configurable defaults."
     }
@@ -23,13 +25,17 @@
   {
     "id": "psul-group-study",
     "providerId": "psul-libcal",
-    "minDurationMinutes": 30,
+    "minDurationMinutes": 15,
     "maxDurationMinutes": 180,
-    "startIncrementMinutes": 30,
+    "startIncrementMinutes": 15,
     "leadTimeMinutes": 0,
     "bookingHorizonDays": 14,
     "minUsefulGapMinutes": 30,
-    "verifiedFields": ["maxDurationMinutes", "bookingHorizonDays"],
+    "verifiedFields": [
+      "maxDurationMinutes",
+      "bookingHorizonDays",
+      "startIncrementMinutes"
+    ],
     "rules": [
       "Penn State students have priority.",
       "Up to 3 hours per day per group.",
@@ -40,9 +46,13 @@
     ],
     "verification": {
       "status": "verified",
-      "sourceIds": ["psul-policy-ul-adg16", "psul-rooms-spaces"],
+      "sourceIds": [
+        "psul-policy-ul-adg16",
+        "psul-rooms-spaces",
+        "psu-libcal-up-spaces"
+      ],
       "verifiedAt": "2026-11-22",
-      "note": "Minimum duration and 30-minute start increment are assumptions pending LibCal room configuration."
+      "note": "15-minute start increment observed in the LibCal availability grid (2026-11-22). Minimum duration of one 15-minute slot is inferred from the grid, not confirmed; gaps under 30 minutes are hidden by default."
     }
   }
 ]
