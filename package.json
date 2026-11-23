@@ -15,7 +15,8 @@
     "typecheck": "pnpm -r typecheck",
     "validate:data": "pnpm --filter @nittany-rooms/core validate:data",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "e2e": "pnpm --filter @nittany-rooms/web build && pnpm --filter @nittany-rooms/web e2e"
   },
   "devDependencies": {
     "@playwright/test": "^1.65.1",

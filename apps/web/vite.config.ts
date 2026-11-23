@@ -1,3 +1,4 @@
+/// <reference types="vitest/config" />
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import { defineConfig, type Plugin } from 'vite';
@@ -39,6 +40,7 @@ function vercelApiDev(): Plugin {
 
 export default defineConfig({
   plugins: [react(), tailwindcss(), vercelApiDev()],
+  test: { include: ['test/**/*.test.ts'] },
   build: {
     // maplibre-gl (~300 kB gzip) is lazy-loaded in its own chunk.
     chunkSizeWarningLimit: 1200,
