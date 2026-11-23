@@ -250,3 +250,18 @@ test.describe('room actions', () => {
     await expect(page.getByRole('link', { name: 'Google Calendar' })).toHaveAttribute('href', /calendar\.google\.com.*20261123T180000Z/);
   });
 });
+
+test.describe('share a room', () => {
+  test.use({ permissions: ['clipboard-read', 'clipboard-write'] });
+  test('copies a link that reopens the same room, date and time', async ({ page, api: _ }) => {
+    await page.goto('/b/pattee-paterno?room=paterno-e128a');
+    await page.evaluate(() => Object.defineProperty(navigator, 'share', { value: undefined, configurable: true }));
+    await page.getByRole('button', { name: 'Share room' }).click();
+    await expect(page.getByRole('button', { name: 'Link copied' })).toBeVisible();
+    const url = await page.evaluate(() => navigator.clipboard.readText());
+    expect(url).toMatch(/\/b\/pattee-paterno\?room=paterno-e128a&d=2026-11-23&t=13%3A00$/);
+    await page.goto(url);
+    await expect(page.getByRole('heading', { level: 1, name: 'Paterno E128A' })).toBeVisible();
+    await expect(page.getByRole('button', { name: /Date and time/ })).toContainText('1:00 PM');
+  });
+});
