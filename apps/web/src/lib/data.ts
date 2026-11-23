@@ -1,6 +1,7 @@
 import {
   FEATURE_LABELS,
   loadDataset,
+  loadFootprints,
   rawDataset,
   validateDataset,
   type Building,
@@ -23,6 +24,7 @@ export const rooms: Room[] = dataset.rooms
   .filter((r) => okRooms.has(r.id))
   .sort((a, b) => a.officialLabel.localeCompare(b.officialLabel, 'en', { numeric: true }));
 export const sources = dataset.sources;
+export const footprints = loadFootprints();
 
 const providers = new Map(dataset.providers.map((p) => [p.id, p]));
 const policies = new Map(dataset.policies.map((p) => [p.id, p]));
