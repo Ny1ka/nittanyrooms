@@ -165,21 +165,70 @@ export function App() {
   );
 }
 
+const LEGEND: [string, string, string][] = [
+  ['bg-open', 'Rooms open', 'At least one room bookable now'],
+  ['bg-yellow', 'Opening soon', 'A room opens within 30 minutes'],
+  ['bg-busy', 'None open', 'All rooms booked for now'],
+  ['bg-[#6b7280]', 'Closed', 'No bookable time right now'],
+  ['fill-unknown ring-1 ring-subtle', 'Check PSU site', 'Availability isn’t public'],
+  ['bg-space', 'Walk-in study space', 'No reservation needed'],
+  ['border border-dashed border-subtle', 'Not verified', 'Rooms not listed yet'],
+];
+
+/** Collapsed map key: a dot strip that expands into a compact card. */
 function Legend() {
-  const item = (cls: string, text: string) => (
-    <span className="inline-flex items-center gap-1.5">
-      <span className={`size-2.5 rounded-full ${cls}`} aria-hidden="true" />
-      {text}
-    </span>
-  );
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!open) return;
+    const down = (e: PointerEvent) => !ref.current?.contains(e.target as Node) && setOpen(false);
+    const key = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false);
+    document.addEventListener('pointerdown', down);
+    document.addEventListener('keydown', key);
+    return () => {
+      document.removeEventListener('pointerdown', down);
+      document.removeEventListener('keydown', key);
+    };
+  }, [open]);
   return (
-    <div className="pointer-events-none absolute top-3 left-3 hidden gap-3 rounded-full border border-line bg-surface/90 px-3 py-1.5 text-[11px] text-muted md:flex">
-      {item('bg-open', 'Rooms open')}
-      {item('bg-yellow', 'Opening soon')}
-      {item('bg-busy', 'None open')}
-      {item('fill-unknown', 'Check PSU site')}
-      {item('bg-space', 'Walk-in study space')}
-      {item('border border-dashed border-subtle', 'Not verified')}
+    <div ref={ref} className="absolute top-3 left-3 z-10">
+      <button
+        type="button"
+        aria-expanded={open}
+        aria-controls="map-key"
+        onClick={() => setOpen((o) => !o)}
+        className="inline-flex h-8 items-center gap-2 rounded-full border border-line bg-surface/95 px-3 text-[11px] font-semibold text-muted shadow-float hover:text-fg"
+      >
+        <span className="flex -space-x-0.5" aria-hidden="true">
+          {LEGEND.slice(0, 6).map(([cls]) => (
+            <span key={cls} className={`size-2.5 rounded-full ring-2 ring-surface ${cls}`} />
+          ))}
+        </span>
+        Key
+      </button>
+      {open && (
+        <div id="map-key" role="dialog" aria-label="Map key" className="mt-1.5 w-64 rounded-panel border border-line bg-surface p-3 text-xs shadow-float">
+          <ul className="space-y-2">
+            {LEGEND.map(([cls, label, hint]) => (
+              <li key={label} className="flex items-start gap-2.5">
+                <span className={`mt-0.5 size-3 shrink-0 rounded-full ${cls}`} aria-hidden="true" />
+                <span>
+                  <span className="block font-semibold text-fg">{label}</span>
+                  <span className="block text-subtle">{hint}</span>
+                </span>
+              </li>
+            ))}
+            <li className="flex items-start gap-2.5 border-t border-line pt-2">
+              <span className="mt-0.5 size-3 shrink-0 rounded-full border-2 border-white bg-[#3b82f6]" aria-hidden="true" />
+              <span className="font-semibold text-fg">You are here</span>
+            </li>
+            <li className="flex items-center gap-2.5">
+              <span className="h-1 w-3 shrink-0 rounded-full bg-[#3b82f6]" aria-hidden="true" />
+              <span className="font-semibold text-fg">Walking route</span>
+            </li>
+          </ul>
+        </div>
+      )}
     </div>
   );
 }
