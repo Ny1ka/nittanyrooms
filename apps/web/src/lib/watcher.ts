@@ -71,7 +71,8 @@ export function useWatcher(now: number): { fired: FiredAlert[]; dismiss: (id: st
         };
         setFired((f) => [...f.filter((x) => x.id !== alert.id), alert]);
         try {
-          if ('Notification' in window && Notification.permission === 'granted') {
+          // When the server owns this alert it sends the push; show only the in-app alert here.
+          if (!w.server && 'Notification' in window && Notification.permission === 'granted') {
             const n = new Notification(alert.title, { body: `${alert.body}. Tap to book on Penn State's site.`, tag: w.id, icon: '/favicon.svg' });
             n.onclick = () => {
               window.focus();

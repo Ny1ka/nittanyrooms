@@ -3,6 +3,7 @@ import { getBuilding, getProvider, openSpaces, rooms as allRooms } from '../lib/
 import { roomDay, roomStatus } from '../lib/availability';
 import { buildingKey, useFavorites } from '../lib/favorites';
 import { useWatches } from '../lib/watches';
+import { deleteServerWatch } from '../lib/push';
 import { formatDateLabel, formatDuration } from '@nittany-rooms/core';
 import { StatusChip } from '../components/StatusChip';
 import { spaceStatus } from '../lib/openSpaces';
@@ -105,7 +106,7 @@ export function CampusList({
                       {formatDuration(w.minMinutes)}+ slot by {formatTime(w.after + 30 * 60_000)}, {formatDateLabel(w.date)}
                     </span>
                   </button>
-                  <button type="button" onClick={() => watches.remove(w.id)} className="font-semibold text-muted underline underline-offset-2 hover:text-fg">
+                  <button type="button" onClick={() => { deleteServerWatch(w.server); watches.remove(w.id); }} className="font-semibold text-muted underline underline-offset-2 hover:text-fg">
                     Cancel
                   </button>
                 </li>

@@ -38,6 +38,7 @@ export function About({ pref, setPref, liveCheckedAt }: { pref: ThemePref; setPr
           <li>Engineering (ECoRE) rooms are booked in Outlook. Their schedules aren't public, so they show "Check PSU site".</li>
           <li>Floors are read from room numbers. No floor plans are shown until officially sourced.</li>
           <li>Gaps under 30 minutes are hidden by default. Availability can change at any moment.</li>
+          <li>Room alerts: favorites and alerts stay in your browser. If you allow notifications, an anonymous push subscription is stored with the room and time, and deleted once the alert fires or the day ends.</li>
         </ul>
       </details>
 

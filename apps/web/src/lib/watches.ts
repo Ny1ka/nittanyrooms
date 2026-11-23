@@ -13,6 +13,8 @@ export interface Watch {
   after: number;
   minMinutes: number;
   createdAt: number;
+  /** Set when the server will also push this alert (works with the site closed). */
+  server?: { id: string; token: string };
 }
 
 const KEY = 'nr-watches';
@@ -56,6 +58,9 @@ export function useWatches() {
   return {
     list,
     forRoom: (roomId: string, date: string) => list.find((w) => w.roomId === roomId && w.date === date),
+    /** Attach the server registration to an existing local watch. */
+    attachServer: (roomId: string, date: string, server: { id: string; token: string }) =>
+      write(cache.map((x) => (x.roomId === roomId && x.date === date ? { ...x, server } : x))),
     add: (w: Omit<Watch, 'id' | 'createdAt'>) =>
       write([...cache.filter((x) => !(x.roomId === w.roomId && x.date === w.date)), { ...w, id: `${w.roomId}-${w.date}-${Date.now()}`, createdAt: Date.now() }]),
     remove: (id: string) => write(cache.filter((x) => x.id !== id)),
