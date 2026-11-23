@@ -15,6 +15,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { roomDay, roomStatus, useDemo, type RoomDay } from '../lib/availability';
 import { floorOf, getBuilding, getPolicy, getProvider, getSource, roomsIn } from '../lib/data';
 import { navigate, setParams, useRoute } from '../lib/router';
+import { buildingPhrase, featureList, floorName, floorsPhrase, roomCountPhrase, roomShort, unknownReason } from '../lib/labels';
 import type { SelectedTime } from '../lib/time';
 import { HandoffPanel } from '../components/HandoffPanel';
 import { ChevronLeft, ChevronRight, Close, External, Info } from '../components/Icons';
@@ -102,7 +103,6 @@ function BuildingWithRooms({ building, sel }: { building: Building; sel: Selecte
     (room && floorOf(room, building)) ??
     floors[floors.length - 1]!;
   const floorRooms = rooms.filter((r) => r.floorId === floor.id);
-  const levels = floors.map((f) => f.label);
 
   const selectRoom = (r: Room) => {
     const f = floorOf(r, building);
@@ -116,37 +116,56 @@ function BuildingWithRooms({ building, sel }: { building: Building; sel: Selecte
         <div>
           <h1 className="text-[32px] leading-[1.1] font-extrabold tracking-[-0.02em]">{building.headline}</h1>
           <p className="mt-1.5 text-[15px] leading-snug text-slate">
-            In the {building.shortName} Building. {rooms.length} group study rooms on floors {levels[levels.length - 1]} to {levels[0]}.
+            {buildingPhrase(building)} {roomCountPhrase(rooms.length)}
+            {floorsPhrase(building) ? ` on ${floorsPhrase(building)}` : ''}.
           </p>
         </div>
-        <ul className="overflow-hidden rounded-panel border border-line bg-surface" aria-label={`Rooms in ${building.headline}`}>
-          {rooms.map((r) => {
-            const s = statuses.get(r.id)!.status;
-            const f = floorOf(r, building);
-            const active = r.id === room?.id;
-            return (
-              <li key={r.id} className="border-b border-line last:border-b-0">
-                <button
-                  type="button"
-                  onClick={() => selectRoom(r)}
-                  aria-current={active ? 'true' : undefined}
-                  aria-label={`Room ${r.officialLabel}, floor ${f?.label}, ${statusLabel(s, { long: true })}`}
-                  className={`flex min-h-14 w-full items-center justify-between gap-3 px-4 text-left text-[15px] ${active ? 'bg-glow-tint' : 'bg-surface hover:bg-paper'}`}
-                >
-                  <span>
-                    <strong className="font-extrabold">{r.officialLabel}</strong>
-                    <span className="text-slate"> Floor {f?.label}</span>
-                  </span>
-                  <StatusChip status={s} />
-                </button>
-              </li>
-            );
-          })}
-        </ul>
+        <div className="overflow-hidden rounded-panel border border-line bg-surface">
+          <div className="max-h-[50vh] overflow-y-auto lg:max-h-[calc(100dvh-360px)]">
+            {[...floors].reverse().map((f) => {
+              const list = rooms.filter((r) => r.floorId === f.id);
+              if (!list.length) return null;
+              return (
+                <section key={f.id} aria-label={floorName(f)}>
+                  {floors.length > 1 && (
+                    <h2 className="sticky top-0 z-10 border-b border-line bg-paper px-4 py-1.5 text-small font-semibold text-slate">
+                      {floorName(f)}
+                    </h2>
+                  )}
+                  <ul>
+                    {list.map((r) => {
+                      const s = statuses.get(r.id)!.status;
+                      const active = r.id === room?.id;
+                      return (
+                        <li key={r.id} className="border-b border-line last:border-b-0">
+                          <button
+                            type="button"
+                            onClick={() => selectRoom(r)}
+                            aria-current={active ? 'true' : undefined}
+                            aria-label={`${r.displayName}, ${floorName(f)}${r.capacity ? `, ${r.capacity} seats` : ''}, ${statusLabel(s, { long: true })}`}
+                            className={`flex min-h-14 w-full items-center justify-between gap-3 px-4 py-2 text-left text-[15px] ${active ? 'bg-glow-tint' : 'bg-surface hover:bg-paper'}`}
+                          >
+                            <span className="min-w-0">
+                              <strong className="font-extrabold">{roomShort(r)}</strong>
+                              <span className="block truncate text-small text-slate">
+                                {[r.area, r.capacity ? `${r.capacity} seats` : null].filter(Boolean).join(' · ') || floorName(f)}
+                              </span>
+                            </span>
+                            <StatusChip status={s} />
+                          </button>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </section>
+              );
+            })}
+          </div>
+        </div>
         <p className="text-small leading-relaxed text-slate">
-          Room numbers from{' '}
+          Rooms from{' '}
           <a className="underline" href={getSource(rooms[0]!.verification.sourceIds[0]!)?.url} target="_blank" rel="noopener noreferrer">
-            Penn State University Libraries
+            {getSource(rooms[0]!.verification.sourceIds[0]!)?.name}
           </a>
           , checked {DateTime.fromISO(rooms[0]!.verification.verifiedAt).toFormat('LLL d, yyyy')}.
         </p>
@@ -201,7 +220,7 @@ function FloorSection({
   const inferred = floor.verification.status === 'inferred';
   return (
     <section
-      aria-label={`${building.headline}, floor ${floor.label}`}
+      aria-label={`${building.headline}, ${floorName(floor).toLowerCase()}`}
       className="on-night flex min-h-[420px] flex-1 gap-3 rounded-panel bg-night p-3 sm:gap-5 sm:p-5 lg:min-h-[640px] lg:min-w-0"
     >
       <div role="group" aria-label="Floors" className="flex flex-col gap-1.5 self-start rounded-[14px] bg-night-panel p-1.5">
@@ -213,7 +232,7 @@ function FloorSection({
               key={f.id}
               type="button"
               aria-pressed={on}
-              aria-label={`Floor ${f.label}, ${n} room${n === 1 ? '' : 's'}`}
+              aria-label={`${floorName(f)}, ${n} room${n === 1 ? '' : 's'}`}
               onClick={() => setParams({ floor: f.label, room: null })}
               className={`size-[52px] rounded-control text-lg font-extrabold ${on ? 'bg-glow text-navy' : 'bg-night-raised text-white hover:bg-night-line'}`}
             >
@@ -224,20 +243,22 @@ function FloorSection({
       </div>
       <div className="flex min-w-0 flex-1 flex-col gap-4">
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <h2 className="text-heading font-extrabold text-white">Floor {floor.label}</h2>
+          <h2 className="text-heading font-extrabold text-white">{floorName(floor)}</h2>
           <div className="inline-flex items-start gap-2 rounded-control bg-night-raised px-3 py-2 text-small text-line">
             <Info className="mt-px shrink-0" />
             <span>
               Schematic only. Rooms are shown in number order, not their real positions.
-              {inferred && ' Floor numbers are read from room numbers and not yet confirmed.'}
+              {floor.unlisted
+                ? " Penn State's booking site doesn't say which floor these rooms are on."
+                : inferred && ' Floor numbers are read from room numbers and not yet confirmed.'}
             </span>
           </div>
         </div>
         {/* Floor plan state "none": number-order tiles. Verified SVG plans render here once sourced (M9). */}
-        <div className="night-grid relative flex flex-1 flex-wrap content-center items-center justify-center gap-4 rounded-[14px] border-2 border-dashed border-night-line p-4 sm:gap-6 sm:p-8">
+        <div className={`night-grid relative flex flex-1 flex-wrap content-center items-center justify-center rounded-[14px] border-2 border-dashed border-night-line p-4 sm:p-8 ${rooms.length > 6 ? 'gap-3' : 'gap-4 sm:gap-6'}`}>
           {rooms.length === 0 && <p className="text-line">No reservable rooms on this floor.</p>}
           {rooms.map((r) => (
-            <RoomTile key={r.id} room={r} status={statuses.get(r.id)!.status} selected={r.id === selectedId} onClick={() => onSelectRoom(r)} />
+            <RoomTile key={r.id} room={r} compact={rooms.length > 6} status={statuses.get(r.id)!.status} selected={r.id === selectedId} onClick={() => onSelectRoom(r)} />
           ))}
         </div>
         <NightLegend />
@@ -254,7 +275,7 @@ const TILE_STYLE = {
   unknown: 'fill-unknown-night text-white border-[1.5px] border-night-line',
 } as const;
 
-function RoomTile({ room, status, selected, onClick }: { room: Room; status: RoomStatus; selected: boolean; onClick: () => void }) {
+function RoomTile({ room, status, selected, compact, onClick }: { room: Room; status: RoomStatus; selected: boolean; compact: boolean; onClick: () => void }) {
   const Icon = STATE_ICON[status.state];
   const label = statusLabel(status, { long: true });
   return (
@@ -262,15 +283,15 @@ function RoomTile({ room, status, selected, onClick }: { room: Room; status: Roo
       type="button"
       onClick={onClick}
       aria-pressed={selected}
-      aria-label={`Room ${room.officialLabel}, ${label}${selected ? ', selected' : ''}`}
-      className={`flex h-[150px] w-[min(220px,100%)] flex-col items-start justify-between rounded-xl p-4 text-left sm:h-[170px] ${TILE_STYLE[status.state]} ${
+      aria-label={`${room.displayName}, ${label}${selected ? ', selected' : ''}`}
+      className={`flex flex-col items-start justify-between rounded-xl text-left ${compact ? 'h-[108px] w-[136px] p-3' : 'h-[150px] w-[min(220px,100%)] p-4 sm:h-[170px]'} ${TILE_STYLE[status.state]} ${
         selected ? 'shadow-[0_0_0_4px_#0E1E3A,0_0_0_7px_#FFFFFF,0_0_48px_8px_rgba(255,200,69,0.35)]' : ''
       }`}
     >
-      <Icon size={22} />
+      <Icon size={compact ? 18 : 22} />
       <span>
-        <span className="block text-[30px] leading-tight font-extrabold">{room.officialLabel}</span>
-        <span className={`text-[15px] font-semibold ${status.state === 'open' ? '' : 'text-line'}`}>{label}</span>
+        <span className={`block leading-tight font-extrabold ${compact ? 'text-[22px]' : 'text-[30px]'}`}>{roomShort(room)}</span>
+        <span className={`font-semibold ${compact ? 'text-small' : 'text-[15px]'} ${status.state === 'open' ? '' : 'text-line'}`}>{label}</span>
       </span>
     </button>
   );
@@ -354,8 +375,11 @@ function RoomPanel({ room, building, sel, demo }: { room: Room; building: Buildi
           <div>
             <h2 className="text-title leading-tight font-extrabold tracking-[-0.01em]">{room.displayName}</h2>
             <p className="mt-1 text-[15px] text-slate">
-              {building.headline}, floor {floor?.label}. Group study room.
+              {building.headline}, {floorName(floor).toLowerCase()}.{room.area ? ` ${room.area}.` : ''}
             </p>
+            {room.officialLabel !== room.displayName && (
+              <p className="mt-1 text-small text-slate">Listed on Penn State's site as “{room.officialLabel}”.</p>
+            )}
           </div>
           <button type="button" onClick={close} aria-label="Close room details" className="grid size-11 shrink-0 place-items-center rounded-control border border-line lg:hidden">
             <Close />
@@ -371,7 +395,7 @@ function RoomPanel({ room, building, sel, demo }: { room: Room; building: Buildi
           </div>
           <div>
             <dt className="text-slate">Features</dt>
-            <dd className="font-semibold">{room.features.length ? room.features.join(', ') : 'Not verified yet'}</dd>
+            <dd className="font-semibold">{room.features.length ? featureList(room).join(', ') : 'Not verified yet'}</dd>
           </div>
           <div className="col-span-2">
             <dt className="text-slate">Who can book</dt>
@@ -421,8 +445,7 @@ function RoomPanel({ room, building, sel, demo }: { room: Room; building: Buildi
             setExpired(false);
           }}
           maxBooking={policy.maxDurationMinutes}
-          providerOwner={provider.owner}
-          isOutlook={provider.system === 'outlook'}
+          unknownText={unknownReason(provider)}
           onNextDay={horizonEnd === null || sel.date < horizonEnd ? () => sel.setDate(shiftDate(sel.date, 1)) : null}
         />
         {expired && (
@@ -486,16 +509,14 @@ function Windows({
   chosenStart,
   onPick,
   maxBooking,
-  providerOwner,
-  isOutlook,
+  unknownText,
   onNextDay,
 }: {
   day: RoomDay;
   chosenStart: number | null;
   onPick: (start: number) => void;
   maxBooking: number | null;
-  providerOwner: string;
-  isOutlook: boolean;
+  unknownText: string;
   onNextDay: (() => void) | null;
 }) {
   if (day.freshness !== 'fresh') {
@@ -507,8 +528,7 @@ function Windows({
             ? 'Our last availability check is too old to trust, so we’re not showing it.'
             : day.freshness === 'error'
               ? 'We couldn’t refresh availability from Penn State just now.'
-              : `${providerOwner} doesn’t publish this room’s schedule publicly, so we can’t show open times.`}{' '}
-          {isOutlook ? 'You’ll see which rooms are free when you search in Outlook.' : 'You’ll see open times on Penn State’s booking page.'}
+              : unknownText}
         </p>
       </div>
     );

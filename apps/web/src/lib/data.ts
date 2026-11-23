@@ -1,4 +1,5 @@
 import {
+  FEATURE_LABELS,
   loadDataset,
   rawDataset,
   validateDataset,
@@ -56,8 +57,8 @@ export function searchIndex() {
       id: r.id,
       buildingId: b.id,
       label: r.displayName,
-      sub: `${b.headline}, ${b.shortName}`,
-      hay: [r.displayName, r.officialLabel, b.shortName, b.headline, ...b.aliases, ...r.features]
+      sub: [r.area, b.headline].filter(Boolean).join(' · '),
+      hay: [r.displayName, r.officialLabel, r.shortLabel ?? '', r.area ?? '', b.shortName, b.headline, ...b.aliases, ...r.features.map((f) => FEATURE_LABELS[f])]
         .join(' ')
         .toLowerCase(),
     });

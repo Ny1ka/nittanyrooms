@@ -48,7 +48,7 @@ function markerHtml(info: MarkerInfo, selected: boolean): { html: string; label:
     html: `<span class="nr-pill" style="${pill}${ring}">${badge.replace(
       '<span ',
       '<span class="nr-badge" ',
-    )}<span class="nr-name">${esc(b.headline)}</span></span>`,
+    )}<span class="nr-name">${esc(b.mapLabel ?? b.headline)}</span></span>`,
   };
 }
 

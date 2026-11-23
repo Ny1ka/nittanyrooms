@@ -1,7 +1,8 @@
-import { formatTime, type Building } from '@nittany-rooms/core';
+import { formatTime } from '@nittany-rooms/core';
 import { lazy, Suspense, useMemo, useState } from 'react';
 import { buildingCounts, roomDay, roomStatus, useDemo, type StateCounts } from '../lib/availability';
 import { buildings, getProvider, getSource, roomsIn } from '../lib/data';
+import { buildingPhrase, floorsPhrase, roomCountPhrase, unknownReason } from '../lib/labels';
 import { navigate, setParams, useRoute } from '../lib/router';
 import type { SelectedTime } from '../lib/time';
 import { Close, External, ListIcon, MapIcon } from '../components/Icons';
@@ -22,17 +23,6 @@ const chip = (on: boolean) =>
   `inline-flex min-h-11 items-center rounded-full px-5 text-[15px] font-semibold ${
     on ? 'bg-glow text-navy' : 'border border-input-border bg-surface text-navy'
   }`;
-
-function floorsLabel(b: Building) {
-  const labels = [...b.floors].sort((x, y) => x.level - y.level).map((f) => f.label);
-  if (labels.length === 0) return null;
-  if (labels.length === 1) return `Floor ${labels[0]}`;
-  return `Floors ${labels[0]} to ${labels[labels.length - 1]}`;
-}
-
-function roomCountLabel(n: number) {
-  return `${n} group study room${n === 1 ? '' : 's'}`;
-}
 
 export function CampusView({ sel }: { sel: SelectedTime }) {
   const demo = useDemo();
@@ -171,7 +161,9 @@ function BuildingRow({ info, selected, onSelect }: { info: MarkerInfo; selected:
         <span>
           <span className="block text-lg leading-tight font-semibold">{b.headline}</span>
           <span className="block text-[15px] text-slate">
-            {b.status === 'candidate' ? 'Rooms not listed yet' : `${b.shortName} Building, ${n} rooms`}
+            {b.status === 'candidate'
+              ? 'Rooms not listed yet'
+              : `${n} room${n === 1 ? '' : 's'}${b.headline.includes(b.shortName) ? '' : ` · ${b.shortName}`}`}
           </span>
         </span>
         <BuildingBadge info={info} />
@@ -254,7 +246,6 @@ function CountTile({ n, label, cls }: { n: number; label: string; cls: string })
 function BuildingPreview({ info, sel, onClose }: { info: MarkerInfo; sel: SelectedTime; onClose: () => void }) {
   const b = info.building;
   const c: StateCounts = info.counts;
-  const floors = floorsLabel(b);
   const provider = getProvider(b.providerIds[0]!);
   const source = getSource(b.verification.sourceIds[0]!);
   const at = formatTime(sel.at).replace(':00 ', ' ');
@@ -269,9 +260,9 @@ function BuildingPreview({ info, sel, onClose }: { info: MarkerInfo; sel: Select
         <div>
           <h2 className="text-2xl leading-tight font-extrabold tracking-[-0.01em]">{b.headline}</h2>
           <p className="mt-1 text-[15px] text-slate">
-            {b.headline === b.name ? '' : `${b.shortName} Building. `}
+            {buildingPhrase(b)}{' '}
             {b.status === 'verified'
-              ? `${roomCountLabel(c.total)}${floors ? `, ${floors.toLowerCase()}` : ''}.`
+              ? `${roomCountPhrase(c.total)}${floorsPhrase(b) ? ` on ${floorsPhrase(b)}` : ''}.`
               : 'Rooms not listed yet.'}
           </p>
           {b.address && <p className="text-small text-slate">{b.address}</p>}
@@ -292,7 +283,7 @@ function BuildingPreview({ info, sel, onClose }: { info: MarkerInfo; sel: Select
               </div>
             ) : (
               <p className="rounded-control fill-unknown px-3.5 py-3 text-sm font-semibold text-ink-muted">
-                Availability: check on PSU site. {provider.owner} doesn't publish these rooms' schedules publicly.
+                Availability: check on PSU site. {unknownReason(provider)}
               </p>
             )}
           </div>
