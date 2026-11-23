@@ -1,0 +1,122 @@
+[
+  {
+    "id": "ecore-133",
+    "providerRoomId": null,
+    "buildingId": "ecore",
+    "floorId": "ecore-f1",
+    "officialLabel": "133",
+    "displayName": "Room 133",
+    "type": "group-study",
+    "capacity": null,
+    "features": [],
+    "eligibility": "Current Penn State undergraduate and graduate students, staff, and faculty.",
+    "providerId": "coe-outlook",
+    "policyId": "coe-ecore",
+    "bookingUrl": null,
+    "floorplanLocation": "unknown",
+    "floorVerification": "inferred",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psul-engineering-rooms"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
+  },
+  {
+    "id": "ecore-248",
+    "providerRoomId": null,
+    "buildingId": "ecore",
+    "floorId": "ecore-f2",
+    "officialLabel": "248",
+    "displayName": "Room 248",
+    "type": "group-study",
+    "capacity": null,
+    "features": [],
+    "eligibility": "Current Penn State undergraduate and graduate students, staff, and faculty.",
+    "providerId": "coe-outlook",
+    "policyId": "coe-ecore",
+    "bookingUrl": null,
+    "floorplanLocation": "unknown",
+    "floorVerification": "inferred",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psul-engineering-rooms"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
+  },
+  {
+    "id": "ecore-249",
+    "providerRoomId": null,
+    "buildingId": "ecore",
+    "floorId": "ecore-f2",
+    "officialLabel": "249",
+    "displayName": "Room 249",
+    "type": "group-study",
+    "capacity": null,
+    "features": [],
+    "eligibility": "Current Penn State undergraduate and graduate students, staff, and faculty.",
+    "providerId": "coe-outlook",
+    "policyId": "coe-ecore",
+    "bookingUrl": null,
+    "floorplanLocation": "unknown",
+    "floorVerification": "inferred",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psul-engineering-rooms"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
+  },
+  {
+    "id": "ecore-322",
+    "providerRoomId": null,
+    "buildingId": "ecore",
+    "floorId": "ecore-f3",
+    "officialLabel": "322",
+    "displayName": "Room 322",
+    "type": "group-study",
+    "capacity": null,
+    "features": [],
+    "eligibility": "Current Penn State undergraduate and graduate students, staff, and faculty.",
+    "providerId": "coe-outlook",
+    "policyId": "coe-ecore",
+    "bookingUrl": null,
+    "floorplanLocation": "unknown",
+    "floorVerification": "inferred",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psul-engineering-rooms"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
+  },
+  {
+    "id": "ecore-333",
+    "providerRoomId": null,
+    "buildingId": "ecore",
+    "floorId": "ecore-f3",
+    "officialLabel": "333",
+    "displayName": "Room 333",
+    "type": "group-study",
+    "capacity": null,
+    "features": [],
+    "eligibility": "Current Penn State undergraduate and graduate students, staff, and faculty.",
+    "providerId": "coe-outlook",
+    "policyId": "coe-ecore",
+    "bookingUrl": null,
+    "floorplanLocation": "unknown",
+    "floorVerification": "inferred",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psul-engineering-rooms"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
+  }
+]

@@ -1,0 +1,48 @@
+[
+  {
+    "id": "coe-ecore",
+    "providerId": "coe-outlook",
+    "minDurationMinutes": 30,
+    "maxDurationMinutes": null,
+    "startIncrementMinutes": 30,
+    "leadTimeMinutes": 0,
+    "bookingHorizonDays": null,
+    "minUsefulGapMinutes": 30,
+    "verifiedFields": [],
+    "rules": [
+      "Open to current Penn State undergraduate and graduate students, staff, and faculty.",
+      "Requests are approved by the College of Engineering. You'll get an email if yours is approved."
+    ],
+    "verification": {
+      "status": "verified",
+      "sourceIds": ["psul-engineering-rooms"],
+      "verifiedAt": "2026-11-22",
+      "note": "Rules are verified. Duration, increment and horizon are unpublished; numeric values are configurable defaults."
+    }
+  },
+  {
+    "id": "psul-group-study",
+    "providerId": "psul-libcal",
+    "minDurationMinutes": 30,
+    "maxDurationMinutes": 180,
+    "startIncrementMinutes": 30,
+    "leadTimeMinutes": 0,
+    "bookingHorizonDays": 14,
+    "minUsefulGapMinutes": 30,
+    "verifiedFields": ["maxDurationMinutes", "bookingHorizonDays"],
+    "rules": [
+      "Penn State students have priority.",
+      "Up to 3 hours per day per group.",
+      "Reservations are for two or more people, based on seating capacity.",
+      "Can be booked up to two weeks in advance.",
+      "Rooms are held for 15 minutes past the start time, then the reservation is forfeited.",
+      "Unreserved rooms are open for drop-in use."
+    ],
+    "verification": {
+      "status": "verified",
+      "sourceIds": ["psul-policy-ul-adg16", "psul-rooms-spaces"],
+      "verifiedAt": "2026-11-22",
+      "note": "Minimum duration and 30-minute start increment are assumptions pending LibCal room configuration."
+    }
+  }
+]

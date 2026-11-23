@@ -1,0 +1,241 @@
+[
+  {
+    "id": "ecore",
+    "name": "Engineering Collaborative Research and Education Building",
+    "shortName": "ECoRE",
+    "aliases": [
+      "ECoRE",
+      "ECORE",
+      "ECoRE Bldg",
+      "Engineering Library",
+      "Engineering Collaborative Research and Education"
+    ],
+    "headline": "Engineering Library",
+    "address": "556 White Course Drive, University Park, PA 16802",
+    "location": {
+      "lat": 40.7928783,
+      "lon": -77.8707086,
+      "source": "openstreetmap",
+      "osmElement": "way/1204345414"
+    },
+    "hoursUrl": "https://libraries.psu.edu/monthly-hours/engineering",
+    "status": "verified",
+    "roomInventory": "complete",
+    "providerIds": [
+      "coe-outlook"
+    ],
+    "floors": [
+      {
+        "id": "ecore-f1",
+        "label": "1",
+        "level": 1,
+        "floorplan": "none",
+        "verification": {
+          "status": "inferred",
+          "sourceIds": [
+            "psul-engineering-rooms"
+          ],
+          "verifiedAt": "2026-11-22",
+          "note": "Floor read from the first digit of the room number; not confirmed by an official floor plan."
+        }
+      },
+      {
+        "id": "ecore-f2",
+        "label": "2",
+        "level": 2,
+        "floorplan": "none",
+        "verification": {
+          "status": "inferred",
+          "sourceIds": [
+            "psul-engineering-rooms"
+          ],
+          "verifiedAt": "2026-11-22",
+          "note": "Floor read from the first digit of the room number; not confirmed by an official floor plan."
+        }
+      },
+      {
+        "id": "ecore-f3",
+        "label": "3",
+        "level": 3,
+        "floorplan": "none",
+        "verification": {
+          "status": "inferred",
+          "sourceIds": [
+            "psul-engineering-rooms"
+          ],
+          "verifiedAt": "2026-11-22",
+          "note": "Floor read from the first digit of the room number; not confirmed by an official floor plan."
+        }
+      }
+    ],
+    "notes": [
+      "The Engineering Library page lists 5 group study rooms in ECoRE; rooms are booked through the College of Engineering, not the library.",
+      "Room 204 (Quiet Study Room) can't be reserved.",
+      "Hours link is the Engineering Library's. Room hours are not confirmed."
+    ],
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psul-engineering-rooms",
+        "osm"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
+  },
+  {
+    "id": "pattee-paterno",
+    "name": "Pattee Library and Paterno Library",
+    "shortName": "Pattee and Paterno",
+    "aliases": [
+      "Pattee",
+      "Paterno",
+      "Pattee Library",
+      "Paterno Library",
+      "Knowledge Commons",
+      "Tombros McWhirter Knowledge Commons",
+      "West Pattee"
+    ],
+    "headline": "Pattee and Paterno Libraries",
+    "address": null,
+    "location": {
+      "lat": 40.7977846,
+      "lon": -77.8662328,
+      "source": "openstreetmap",
+      "osmElement": "relation/359265"
+    },
+    "hoursUrl": "https://libraries.psu.edu/hours-and-locations",
+    "status": "candidate",
+    "roomInventory": "none",
+    "providerIds": [
+      "psul-libcal"
+    ],
+    "floors": [],
+    "notes": [
+      "Listed as a University Park study-space location in the Libraries' LibCal.",
+      "The Libraries site names group study rooms W120–W128 in West Pattee (Knowledge Commons). Individual rooms aren't listed here yet."
+    ],
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "psu-libcal-up-study",
+        "psul-rooms-spaces",
+        "osm"
+      ],
+      "verifiedAt": "2026-11-22"
+    }
+  },
+  {
+    "id": "deike",
+    "name": "Deike Building",
+    "shortName": "Earth and Mineral Sciences Library",
+    "aliases": [
+      "EMS Library",
+      "Deike",
+      "Earth and Mineral Sciences Library"
+    ],
+    "headline": "Earth and Mineral Sciences Library",
+    "address": null,
+    "location": {
+      "lat": 40.7942302,
+      "lon": -77.8654394,
+      "source": "openstreetmap",
+      "osmElement": "way/37861072"
+    },
+    "hoursUrl": "https://libraries.psu.edu/hours-and-locations",
+    "status": "candidate",
+    "roomInventory": "none",
+    "providerIds": [
+      "psul-libcal"
+    ],
+    "floors": [],
+    "notes": [
+      "Earth and Mineral Sciences Library is listed as a University Park study-space location in the Libraries' LibCal.",
+      "That the library is in the Deike Building is not yet confirmed against a Libraries page."
+    ],
+    "verification": {
+      "status": "inferred",
+      "sourceIds": [
+        "psu-libcal-up-study",
+        "osm"
+      ],
+      "verifiedAt": "2026-11-22",
+      "note": "Library-to-building mapping from general knowledge; verify."
+    }
+  },
+  {
+    "id": "stuckeman",
+    "name": "Stuckeman Family Building",
+    "shortName": "Architecture and Landscape Architecture Library",
+    "aliases": [
+      "Architecture Library",
+      "Stuckeman",
+      "SFB"
+    ],
+    "headline": "Architecture and Landscape Architecture Library",
+    "address": null,
+    "location": {
+      "lat": 40.8010877,
+      "lon": -77.8667354,
+      "source": "openstreetmap",
+      "osmElement": "way/431071070"
+    },
+    "hoursUrl": "https://libraries.psu.edu/hours-and-locations",
+    "status": "candidate",
+    "roomInventory": "none",
+    "providerIds": [
+      "psul-libcal"
+    ],
+    "floors": [],
+    "notes": [
+      "Architecture and Landscape Architecture Library is listed as a University Park study-space location in the Libraries' LibCal.",
+      "That the library is in the Stuckeman Family Building is not yet confirmed against a Libraries page."
+    ],
+    "verification": {
+      "status": "inferred",
+      "sourceIds": [
+        "psu-libcal-up-study",
+        "osm"
+      ],
+      "verifiedAt": "2026-11-22",
+      "note": "Library-to-building mapping from general knowledge; verify."
+    }
+  },
+  {
+    "id": "davey",
+    "name": "Davey Laboratory",
+    "shortName": "Physical and Mathematical Sciences Library",
+    "aliases": [
+      "PMS Library",
+      "Davey Lab",
+      "Physical and Mathematical Sciences Library"
+    ],
+    "headline": "Physical and Mathematical Sciences Library",
+    "address": null,
+    "location": {
+      "lat": 40.79817,
+      "lon": -77.8628638,
+      "source": "openstreetmap",
+      "osmElement": "way/431740622"
+    },
+    "hoursUrl": "https://libraries.psu.edu/hours-and-locations",
+    "status": "candidate",
+    "roomInventory": "none",
+    "providerIds": [
+      "psul-libcal"
+    ],
+    "floors": [],
+    "notes": [
+      "Physical and Mathematical Sciences Library is listed as a University Park study-space location in the Libraries' LibCal.",
+      "That the library is in the Davey Laboratory is not yet confirmed against a Libraries page."
+    ],
+    "verification": {
+      "status": "inferred",
+      "sourceIds": [
+        "psu-libcal-up-study",
+        "osm"
+      ],
+      "verifiedAt": "2026-11-22",
+      "note": "Library-to-building mapping from general knowledge; verify."
+    }
+  }
+]

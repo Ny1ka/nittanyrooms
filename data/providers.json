@@ -1,0 +1,48 @@
+[
+  {
+    "id": "coe-outlook",
+    "name": "College of Engineering room booking (Outlook Calendar)",
+    "owner": "Penn State College of Engineering",
+    "system": "outlook",
+    "portalUrl": "https://outlook.office.com/calendar/",
+    "handoffMode": "portal-with-instructions",
+    "handoffSteps": [
+      "Sign in to Outlook Calendar with your Penn State account.",
+      "Click the day you want and start a new event.",
+      "Search for the building and location: “ECoRE Bldg” brings up a list of available rooms.",
+      "Add the room and the time shown here, then send the request.",
+      "You'll get an email if the reservation is approved. Until then, it isn't booked."
+    ],
+    "confirmation": "approval-email",
+    "availabilityAccess": "none",
+    "supportContact": "coefacilities@engr.psu.edu",
+    "verification": {
+      "status": "verified",
+      "sourceIds": ["psul-engineering-rooms"],
+      "verifiedAt": "2026-11-22",
+      "note": "The official page says 'Outlook Calendar' but gives no link; portalUrl is Outlook on the web, which Penn State Microsoft 365 accounts use."
+    }
+  },
+  {
+    "id": "psul-libcal",
+    "name": "Penn State University Libraries (LibCal)",
+    "owner": "Penn State University Libraries",
+    "system": "libcal",
+    "portalUrl": "https://psu.libcal.com/spaces?lid=428&gid=2159",
+    "handoffMode": "room-link",
+    "handoffSteps": [
+      "Select your location and room.",
+      "Pick an open time. Rooms can be reserved for up to 3 hours.",
+      "Enter your details, including your Penn State access ID.",
+      "Watch for the email confirmation."
+    ],
+    "confirmation": "instant-email",
+    "availabilityAccess": "none",
+    "supportContact": "Ul-study-rooms@lists.psu.edu",
+    "verification": {
+      "status": "verified",
+      "sourceIds": ["psul-rooms-spaces", "psu-libcal-up-study", "psul-policy-ul-adg16"],
+      "verifiedAt": "2026-11-22"
+    }
+  }
+]

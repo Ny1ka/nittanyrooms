@@ -1,0 +1,47 @@
+[
+  {
+    "id": "psul-engineering-rooms",
+    "name": "Engineering Library: Rooms and Spaces",
+    "owner": "Penn State University Libraries",
+    "url": "https://libraries.psu.edu/about/libraries/engineering-library/study-engineering-library",
+    "accessMethod": "public-page",
+    "retrievedAt": "2026-11-22",
+    "notes": "Lists ECoRE group study rooms 133, 248, 249, 322, 333; booking via Outlook Calendar, controlled by College of Engineering."
+  },
+  {
+    "id": "psul-rooms-spaces",
+    "name": "Libraries: Rooms & Spaces",
+    "owner": "Penn State University Libraries",
+    "url": "https://libraries.psu.edu/services/rooms-spaces",
+    "accessMethod": "public-page",
+    "retrievedAt": "2026-11-22",
+    "notes": "Links to LibCal 'Reserve a Study Room'; names Knowledge Commons rooms W120–W128 in West Pattee."
+  },
+  {
+    "id": "psul-policy-ul-adg16",
+    "name": "Policy UL-ADG16: Group Study Rooms",
+    "owner": "Penn State University Libraries",
+    "url": "https://libraries.psu.edu/policies/ul-adg16",
+    "accessMethod": "public-page",
+    "retrievedAt": "2026-11-22",
+    "notes": "3 hours/day/group max; 2+ people; two weeks in advance; held 15 minutes. Last reviewed Feb 2022."
+  },
+  {
+    "id": "psu-libcal-up-study",
+    "name": "LibCal: University Park Study Space",
+    "owner": "Penn State University Libraries (Springshare LibCal)",
+    "url": "https://psu.libcal.com/spaces?lid=428&gid=2159",
+    "accessMethod": "public-page",
+    "retrievedAt": "2026-11-22",
+    "notes": "Locations: Pattee/Paterno, Architecture and Landscape Architecture, Earth and Mineral Sciences, Physical and Mathematical Sciences, Wellness space. Room list is JS-rendered; room IDs not yet observed."
+  },
+  {
+    "id": "osm",
+    "name": "OpenStreetMap (Overpass API)",
+    "owner": "OpenStreetMap contributors",
+    "url": "https://www.openstreetmap.org/copyright",
+    "accessMethod": "api",
+    "retrievedAt": "2026-11-22",
+    "license": "ODbL 1.0 — attribution required"
+  }
+]
