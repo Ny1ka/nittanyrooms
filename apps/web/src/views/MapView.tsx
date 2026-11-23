@@ -104,7 +104,8 @@ function footprintData(markers: MarkerInfo[], selectedId: string | null) {
       .map((f) => {
         const m = byId.get(f.properties.buildingId)!;
         const open = m.known && m.counts.open > 0;
-        const none = m.known && m.counts.open === 0;
+        const closed = m.known && m.counts.unavailable === m.counts.total;
+        const none = m.known && m.counts.open === 0 && !closed;
         const selected = f.properties.buildingId === selectedId;
         return {
           type: 'Feature' as const,
@@ -150,6 +151,34 @@ function addOverlays(map: MLMap, theme: Theme, data: ReturnType<typeof footprint
   });
 }
 
+function addRouteLayers(map: MLMap, theme: Theme) {
+  if (map.getSource('nr-route')) return;
+  map.addSource('nr-route', { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
+  map.addLayer({
+    id: 'nr-route-casing',
+    type: 'line',
+    source: 'nr-route',
+    layout: { 'line-cap': 'round', 'line-join': 'round' },
+    paint: { 'line-color': theme === 'dark' ? '#0B0D10' : '#FFFFFF', 'line-width': 9, 'line-opacity': 0.9 },
+  });
+  map.addLayer({
+    id: 'nr-route-line',
+    type: 'line',
+    source: 'nr-route',
+    layout: { 'line-cap': 'round', 'line-join': 'round' },
+    paint: { 'line-color': '#3B82F6', 'line-width': 5 },
+  });
+}
+
+function setRoute(map: MLMap, coords: [number, number][], fallback: boolean) {
+  const src = map.getSource('nr-route') as { setData?: (d: unknown) => void } | undefined;
+  src?.setData?.({
+    type: 'FeatureCollection',
+    features: coords.length > 1 ? [{ type: 'Feature', properties: {}, geometry: { type: 'LineString', coordinates: coords } }] : [],
+  });
+  if (map.getLayer('nr-route-line')) map.setPaintProperty('nr-route-line', 'line-dasharray', fallback ? [1.5, 1.5] : [1, 0]);
+}
+
 function markerHtml(info: MarkerInfo, selected: boolean): { html: string; label: string } {
   const b = info.building;
   const esc = (s: string) => s.replace(/[&<>"]/g, (c) => `&#${c.charCodeAt(0)};`);
@@ -165,6 +194,9 @@ function markerHtml(info: MarkerInfo, selected: boolean): { html: string; label:
     cls += ' nr-pin--open';
     badge = String(info.counts.open);
     label = `${b.headline}, ${info.counts.open} of ${info.counts.total} rooms open at this time`;
+  } else if (info.known && info.counts.unavailable === info.counts.total) {
+    badge = '–';
+    label = `${b.headline}, closed at this time`;
   } else if (info.known) {
     cls += ' nr-pin--busy';
     badge = '0';
@@ -185,6 +217,7 @@ export function MapView({
   bottomPadding = 0,
   userPos = null,
   onLocate,
+  routeLine = null,
 }: {
   markers: MarkerInfo[];
   visibleIds: Set<string>;
@@ -193,7 +226,11 @@ export function MapView({
   bottomPadding?: number;
   userPos?: LatLon | null;
   onLocate?: () => void;
+  /** Walking route (or straight-line fallback) to draw, [lon, lat] pairs. */
+  routeLine?: { coords: [number, number][]; fallback: boolean } | null;
 }) {
+  const routeRef = useRef(routeLine);
+  routeRef.current = routeLine;
   const userMarker = useRef<Marker | null>(null);
   const mlRef = useRef<typeof import('maplibre-gl') | null>(null);
   const theme = useThemeValue();
@@ -246,6 +283,8 @@ export function MapView({
         lm.on('style.load', () => {
           const { markers: ms, selectedId: sid, theme: th } = latest.current;
           addOverlays(lm, th, footprintData(ms, sid));
+          addRouteLayers(lm, th);
+          if (routeRef.current) setRoute(lm, routeRef.current.coords, routeRef.current.fallback);
         });
         lm.on('load', () => !cancelled && setStatus('ready'));
         lm.on('click', 'nr-footprints-3d', (e) => {
@@ -327,6 +366,43 @@ export function MapView({
     // Only react to selection and layout changes, not every count refresh.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedId, status, bottomPadding]);
+
+  // Walking route: animate the line drawing from the user to the building.
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || status !== 'ready' || !map.getSource('nr-route')) return;
+    if (!routeLine) {
+      setRoute(map, [], false);
+      return;
+    }
+    const { coords, fallback } = routeLine;
+    const lons = coords.map((c) => c[0]);
+    const lats = coords.map((c) => c[1]);
+    map.fitBounds(
+      [
+        [Math.min(...lons), Math.min(...lats)],
+        [Math.max(...lons), Math.max(...lats)],
+      ],
+      { padding: { top: 80, bottom: bottomPadding + 80, left: 80, right: 80 }, maxZoom: 17.5, pitch: 45, duration: 700 },
+    );
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || coords.length < 3) {
+      setRoute(map, coords, fallback);
+      return;
+    }
+    let raf = 0;
+    const start = performance.now() + 500; // let the camera settle first
+    const DURATION = 1400;
+    const tick = (now: number) => {
+      const t = Math.min(1, Math.max(0, (now - start) / DURATION));
+      const eased = 1 - Math.pow(1 - t, 3);
+      const n = Math.max(2, Math.ceil(eased * coords.length));
+      setRoute(map, coords.slice(0, n), fallback);
+      if (t < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [routeLine, status]);
 
   // "You are here" dot; fly to show it once located.
   useEffect(() => {

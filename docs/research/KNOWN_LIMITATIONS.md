@@ -40,3 +40,9 @@ Last updated: **2026-11-22**. This file separates what we know from what we're g
 - **Floor plans:** every building uses the **fallback schematic**: rooms in number order, explicitly labeled "not real positions".
 - **Handoff:** ECoRE sends students to Outlook Calendar with step-by-step instructions, because no room-specific link exists. Library rooms link straight to each room's LibCal page.
 - **Demo mode:** Adding `?demo=1` to the URL shows clearly labeled **sample** schedules, so the timeline and gap filtering can be seen working. Sample data never appears without the banner.
+
+## Added 2026-11-23
+
+- **Open study spaces:** library study areas show live open/closed status inferred from LibCal bookable hours. That matched the Libraries' banner on 2026-11-23 ("Pattee and Paterno: 9:00am - 5:00pm"), but it's an inference, so each row links to the official hours page. Penn State Learning (220 Boucke) and the HUB lounges don't publish weekly hours, so they show **Check hours**. Entries are flagged after 60 days for re-checking.
+- **Closed state:** a reservable building where no room has bookable time at the selected moment shows grey **Closed** (list, map pin, 3D building) instead of red "0/n".
+- **Walking route:** only drawn after the user taps "Show walking route". The user's location is then sent to the FOSSGIS OSRM server (routing.openstreetmap.de), which logs requests. Its policy: non-commercial use, at most 1 request per second, attribution and a "fix the map" link (all shown). If routing fails, the map shows a dashed straight line instead.

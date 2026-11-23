@@ -4,6 +4,7 @@ import { ChevronUp } from './components/Icons';
 import { DemoBanner } from './components/Notices';
 import { buildingMatches, NO_FILTERS, type Filters } from './lib/filters';
 import { requestLocation, type GeoState } from './lib/geo';
+import { fetchWalkingRoute, type RouteState } from './lib/route';
 import { buildingCounts, useDemo } from './lib/availability';
 import { buildings, getBuilding } from './lib/data';
 import { useLiveLibcal } from './lib/live';
@@ -38,6 +39,22 @@ export function App() {
   const [themePref, setThemePref] = useThemePref();
   const [geo, setGeo] = useState<GeoState>({ status: 'idle' });
   const locate = () => requestLocation(setGeo);
+  const [walk, setWalk] = useState<RouteState>({ status: 'idle' });
+  const showRoute = (buildingId: string) => {
+    const b = getBuilding(buildingId);
+    if (geo.status !== 'ok' || !b) return;
+    setWalk({ status: 'loading', targetId: buildingId });
+    fetchWalkingRoute(geo.pos, b.location)
+      .then((r) => setWalk({ status: 'ok', targetId: buildingId, route: r }))
+      .catch((e: Error) => setWalk({ status: 'error', targetId: buildingId, message: e.message || 'Couldn’t get a walking route' }));
+  };
+  const routeTarget = walk.status !== 'idle' ? getBuilding(walk.targetId) : undefined;
+  const routeLine =
+    walk.status === 'ok'
+      ? { coords: walk.route.coords, fallback: false }
+      : walk.status === 'error' && geo.status === 'ok' && routeTarget
+        ? { coords: [[geo.pos.lon, geo.pos.lat], [routeTarget.location.lon, routeTarget.location.lat]] as [number, number][], fallback: true }
+        : null;
   const live = useLiveLibcal(sel.date, sel.now);
   const [filters, setFilters] = useState<Filters>(NO_FILTERS);
   const isDesktop = useMedia('(min-width: 768px)');
@@ -98,7 +115,7 @@ export function App() {
             {route.name === 'building' ? (
               <BuildingPanel buildingId={route.buildingId} sel={sel} demo={demo} live={live} filters={filters} clearFilters={() => setFilters(NO_FILTERS)} />
             ) : (
-              <CampusList markers={markers} visible={visible} filters={filters} setFilters={setFilters} demo={demo} live={live} geo={geo} />
+              <CampusList markers={markers} visible={visible} filters={filters} setFilters={setFilters} demo={demo} live={live} geo={geo} sel={sel} route={walk} onRoute={showRoute} onClearRoute={() => setWalk({ status: 'idle' })} />
             )}
           </main>
         </div>
@@ -114,6 +131,7 @@ export function App() {
             bottomPadding={bottomPadding}
             userPos={geo.status === 'ok' ? geo.pos : null}
             onLocate={locate}
+            routeLine={routeLine}
           />
         </Suspense>
         <Legend />

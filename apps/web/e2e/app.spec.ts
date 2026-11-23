@@ -8,7 +8,7 @@ test.describe('campus discovery', () => {
     await page.goto('/');
     await expect(page.getByRole('button', { name: /Pattee and Paterno Libraries/ })).toContainText('/36');
     await expect(page.getByRole('button', { name: /Engineering Library/ })).toContainText('Check site');
-    await expect(page.getByRole('button', { name: /Physical and Mathematical Sciences/ })).toContainText('0/8');
+    await expect(page.getByRole('button', { name: /Physical and Mathematical Sciences/ })).toContainText('Closed');
     await expect(page.getByText(/Live from Penn State's LibCal · checked 12:59 PM/)).toBeVisible();
     await expect(page.getByText("The map couldn't load.")).toBeVisible();
     expect(api).toContain(TODAY);
@@ -185,5 +185,42 @@ test.describe('mobile', () => {
     await expect(cta).toHaveAttribute('href', 'https://psu.libcal.com/space/8251');
     const box = await cta.boundingBox();
     expect(box!.height).toBeGreaterThanOrEqual(44);
+  });
+});
+
+test.describe('open study spaces and closed state', () => {
+  test('walk-in spaces show live library hours, grey Closed, and Check hours', async ({ page, api: _ }) => {
+    await page.goto('/');
+    const section = page.getByRole('region', { name: 'Open study spaces' });
+    await expect(section.getByRole('link', { name: /Pattee and Paterno study areas/ })).toContainText('Open · until 5:00 PM');
+    await expect(section.getByRole('link', { name: /Earth and Mineral Sciences Library study areas/ })).toContainText('Open · until 3:00 PM');
+    await expect(section.getByRole('link', { name: /Physical and Mathematical Sciences Library study areas/ })).toContainText('Closed');
+    await expect(section.getByRole('link', { name: /HUB-Robeson Center lounges/ })).toContainText('Check hours');
+    // A reservable building with no bookable slots shows grey Closed, not red 0/n.
+    await expect(page.getByRole('button', { name: /Physical and Mathematical Sciences Library/ })).toContainText('Closed');
+  });
+});
+
+test.describe('walking route to the closest building', () => {
+  test.use({ geolocation: { latitude: 40.7963, longitude: -77.8627 }, permissions: ['geolocation'] });
+  test('asks before routing, then draws the route with attribution', async ({ page, api: _ }) => {
+    let routed = 0;
+    await page.route('https://routing.openstreetmap.de/**', (r) => {
+      routed++;
+      return r.fulfill({
+        json: { code: 'Ok', routes: [{ distance: 350, duration: 280, geometry: { coordinates: [[-77.8627, 40.7963], [-77.8628, 40.797], [-77.8629, 40.7982]] } }] },
+        headers: { 'access-control-allow-origin': '*' },
+      });
+    });
+    await page.goto('/');
+    await page.getByRole('button', { name: 'Filters' }).click();
+    await page.getByRole('button', { name: /Sort by distance/ }).click();
+    await page.keyboard.press('Escape');
+    await expect(page.getByText('Closest to you')).toBeVisible();
+    expect(routed).toBe(0); // nothing sent until the user asks
+    await page.getByRole('button', { name: /Show walking route to/ }).click();
+    await expect(page.getByText(/5 min walk · 0\.2 mi to/)).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Fix the map' })).toBeVisible();
+    expect(routed).toBe(1);
   });
 });

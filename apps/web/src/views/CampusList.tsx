@@ -1,4 +1,9 @@
-import { getProvider } from '../lib/data';
+import { formatTime } from '@nittany-rooms/core';
+import { getProvider, openSpaces } from '../lib/data';
+import { spaceStatus } from '../lib/openSpaces';
+import { formatWalk, ROUTE_ATTRIBUTION, type RouteState } from '../lib/route';
+import type { SelectedTime } from '../lib/time';
+import { External } from '../components/Icons';
 import { anyFilter, NO_FILTERS, type Filters } from '../lib/filters';
 import { distanceMeters, formatDistance, type GeoState } from '../lib/geo';
 import type { LiveState } from '../lib/live';
@@ -16,6 +21,10 @@ export function CampusList({
   demo,
   live,
   geo,
+  sel,
+  route,
+  onRoute,
+  onClearRoute,
 }: {
   markers: MarkerInfo[];
   visible: MarkerInfo[];
@@ -24,6 +33,10 @@ export function CampusList({
   demo: boolean;
   live: LiveState;
   geo: GeoState;
+  sel: SelectedTime;
+  route: RouteState;
+  onRoute: (buildingId: string) => void;
+  onClearRoute: () => void;
 }) {
   const pos = geo.status === 'ok' ? geo.pos : null;
   const dist = (m: MarkerInfo) => (pos ? distanceMeters(pos, { lat: m.building.location.lat, lon: m.building.location.lon }) : 0);
@@ -50,6 +63,7 @@ export function CampusList({
             <span className="text-[14px] font-semibold text-fg hover:underline">{nearest.building.headline}</span>
             <span className="block">{formatDistance(dist(nearest))}</span>
           </button>
+          <RouteControls target={nearestOpen ?? nearest} route={route} onRoute={onRoute} onClearRoute={onClearRoute} />
           {nearestOpen && nearestOpen !== nearest && (
             <button type="button" onClick={() => navigate(`/b/${nearestOpen.building.id}`)} className="mt-2 block text-left">
               Closest with a room open: <span className="font-semibold text-open-text">{nearestOpen.building.headline}</span> · {formatDistance(dist(nearestOpen))}
@@ -84,6 +98,17 @@ export function CampusList({
         ) : null,
       )}
 
+      {!anyFilter(filters) && (
+        <section aria-label="Open study spaces">
+          <h2 className="px-4 pt-4 pb-1.5 text-[13px] font-medium text-subtle">Open study spaces · walk-in, not reservable</h2>
+          <ul className="border-t border-line">
+            {(pos ? [...openSpaces].sort((a, b) => distanceMeters(pos, a.location) - distanceMeters(pos, b.location)) : openSpaces).map((s) => (
+              <SpaceRow key={s.id} space={s} live={live} sel={sel} distance={pos ? formatDistance(distanceMeters(pos, s.location)) : null} />
+            ))}
+          </ul>
+        </section>
+      )}
+
       <div className="px-4 pt-3">
         <AvailabilityFreshness demo={demo} live={live} />
       </div>
@@ -95,7 +120,8 @@ function Badge({ info }: { info: MarkerInfo }) {
   const base = 'inline-flex h-6 min-w-12 items-center justify-center rounded-full px-2 text-xs font-semibold tabular';
   if (info.building.status === 'candidate') return <span className={`${base} bg-surface-2 text-muted`}>Not verified</span>;
   if (!info.known) return <span className={`${base} bg-surface-2 text-muted`}>Check site</span>;
-  const { open, total } = info.counts;
+  const { open, total, unavailable } = info.counts;
+  if (open === 0 && unavailable === total) return <span className={`${base} bg-surface-2 text-muted`}>Closed</span>;
   return open > 0 ? (
     <span className={`${base} bg-open-soft text-open-text`} aria-label={`${open} of ${total} open`}>
       {open}/{total}
@@ -119,6 +145,69 @@ function Row({ info, distance }: { info: MarkerInfo; distance: string | null }) 
         <Badge info={info} />
         <ChevronRight size={14} className="shrink-0 text-subtle" />
       </button>
+    </li>
+  );
+}
+
+function RouteControls({ target, route, onRoute, onClearRoute }: { target: MarkerInfo; route: RouteState; onRoute: (id: string) => void; onClearRoute: () => void }) {
+  const mine = route.status !== 'idle' && route.targetId === target.building.id;
+  if (mine && route.status === 'ok') {
+    return (
+      <div className="mt-2 space-y-1">
+        <div className="flex items-center justify-between">
+          <span className="font-semibold text-fg">{formatWalk(route.route)} to {target.building.mapLabel ?? target.building.headline}</span>
+          <button type="button" onClick={onClearRoute} className="font-semibold underline underline-offset-2 hover:text-fg">
+            Hide route
+          </button>
+        </div>
+        <p className="text-[11px] text-subtle">
+          <a href={ROUTE_ATTRIBUTION.about} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">{ROUTE_ATTRIBUTION.text}</a> ·{' '}
+          <a href={ROUTE_ATTRIBUTION.fix} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">Fix the map</a>
+        </p>
+      </div>
+    );
+  }
+  return (
+    <div className="mt-2">
+      <button
+        type="button"
+        onClick={() => onRoute(target.building.id)}
+        disabled={mine && route.status === 'loading'}
+        className="inline-flex h-8 items-center gap-1.5 rounded-control bg-accent px-3 text-xs font-semibold text-accent-ink disabled:opacity-60"
+      >
+        {mine && route.status === 'loading' ? 'Finding route…' : `Show walking route to ${target.building.mapLabel ?? target.building.headline}`}
+      </button>
+      {mine && route.status === 'error' && <p className="mt-1 text-busy-text">{route.message}. The map shows a straight line instead.</p>}
+      <p className="mt-1 text-[11px] text-subtle">Sends your location to routing.openstreetmap.de (FOSSGIS) to draw the path.</p>
+    </div>
+  );
+}
+
+function SpaceRow({ space, live, sel, distance }: { space: import('@nittany-rooms/core').OpenSpace; live: LiveState; sel: SelectedTime; distance: string | null }) {
+  const st = spaceStatus(space, live, sel);
+  const base = 'inline-flex h-6 items-center justify-center rounded-full px-2 text-xs font-semibold tabular whitespace-nowrap';
+  const badge =
+    st.state === 'open' ? (
+      <span className={`${base} bg-open-soft text-open-text`}>Open · until {formatTime(st.until)}</span>
+    ) : st.state === 'closed' ? (
+      <span className={`${base} bg-surface-2 text-muted`}>Closed{st.opensAt ? ` · opens ${formatTime(st.opensAt)}` : ''}</span>
+    ) : (
+      <span className={`${base} bg-surface-2 text-muted`}>Check hours</span>
+    );
+  return (
+    <li className="border-b border-line">
+      <a href={space.url} target="_blank" rel="noopener noreferrer" className="flex w-full items-center gap-3 px-4 py-3 text-left no-underline hover:bg-surface-2">
+        <span className="min-w-0 flex-1">
+          <span className="block truncate text-[15px] font-semibold">{space.name}</span>
+          <span className="block truncate text-xs text-muted">
+            {space.access}
+            {distance ? ` · ${distance}` : ''}
+          </span>
+        </span>
+        {badge}
+        <External size={13} className="shrink-0 text-subtle" />
+        <span className="sr-only">(opens official page in a new tab)</span>
+      </a>
     </li>
   );
 }
