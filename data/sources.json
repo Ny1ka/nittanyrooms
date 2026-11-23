@@ -45,15 +45,6 @@
     "license": "ODbL 1.0 — attribution required"
   },
   {
-    "id": "psu-libcal-up-spaces",
-    "name": "LibCal: University Park study spaces (all groups)",
-    "owner": "Penn State University Libraries (Springshare LibCal)",
-    "url": "https://psu.libcal.com/spaces?lid=428&gid=0",
-    "accessMethod": "public-page",
-    "retrievedAt": "2026-11-22",
-    "notes": "Room list parsed from the public page (resources.push blocks): eid, title, capacity, features, booking URL."
-  },
-  {
     "id": "ime-leonhard-commons",
     "name": "Leonhard Knowledge Commons",
     "owner": "Harold and Inge Marcus Department of Industrial and Manufacturing Engineering",
@@ -97,5 +88,23 @@
     "accessMethod": "public-page",
     "retrievedAt": "2026-11-23",
     "notes": "Lounges are 'public areas', 'not appropriate for … events that require a quiet environment'. Regular weekly hours not published."
+  },
+  {
+    "id": "psu-libcal-up-spaces",
+    "name": "LibCal: University Park study spaces (all groups)",
+    "owner": "Penn State University Libraries (Springshare LibCal)",
+    "url": "https://psu.libcal.com/spaces?lid=428&gid=0",
+    "accessMethod": "public-page",
+    "retrievedAt": "2026-11-22",
+    "notes": "Room list parsed from the public page (resources.push blocks): eid, title, capacity, features, booking URL."
+  },
+  {
+    "id": "owner-pms-floor",
+    "name": "Project owner confirmation: PMS Library floor",
+    "owner": "Nittany Rooms project owner",
+    "url": "https://libraries.psu.edu/hours-and-locations",
+    "accessMethod": "manual",
+    "retrievedAt": "2026-11-23",
+    "notes": "The Physical and Mathematical Sciences Library (Davey Laboratory) is on the 2nd floor, so all its reservable rooms are on floor 2."
   }
 ]

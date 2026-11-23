@@ -58,6 +58,19 @@ const FEATURE_MAP: Record<string, RoomFeature> = {
 
 const BUILDING_WORDS = ['Pattee', 'Paterno', 'Deike', 'Davey', 'Stuckeman'];
 
+/**
+ * Confirmed floors for buildings whose room titles don't carry a number
+ * (e.g. "Davey Collaboration Space 1"). Each entry cites its source.
+ */
+const BUILDING_FLOOR_OVERRIDES: Record<string, { label: string; level: number; sourceId: string; note: string }> = {
+  davey: {
+    label: '2',
+    level: 2,
+    sourceId: 'owner-pms-floor',
+    note: 'Physical and Mathematical Sciences Library is on the 2nd floor of Davey Laboratory (project owner, 2026-11-23).',
+  },
+};
+
 const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
 /** "Pattee W120 - Knowledge Commons" → head "Pattee W120", area "Knowledge Commons". */
@@ -115,7 +128,8 @@ function main() {
       if (!mapped) throw new Error(`Unknown LibCal feature "${f}" on ${r.title}`);
       features.push(mapped);
     }
-    const inferred = inferFloor(parsed.roomNo);
+    const override = BUILDING_FLOOR_OVERRIDES[buildingId];
+    const inferred = override ? { label: override.label, level: override.level } : inferFloor(parsed.roomNo);
     const floors = floorsByBuilding.get(buildingId) ?? new Map<string, Floor>();
     floorsByBuilding.set(buildingId, floors);
     const floorKey = inferred ? inferred.label : 'unlisted';
@@ -128,7 +142,9 @@ function main() {
               label: inferred.label,
               level: inferred.level,
               floorplan: 'none',
-              verification: verification(
+              verification: override
+                ? { status: 'verified' as const, sourceIds: [SOURCE_ID, override.sourceId], verifiedAt: snap.retrievedAt, note: override.note }
+                : verification(
                 'inferred',
                 inferred.level === 0
                   ? 'Ground level read from 0xx room numbers; not confirmed by a floor plan.'
@@ -164,7 +180,7 @@ function main() {
       policyId: POLICY,
       bookingUrl: new URL(r.url, LIBCAL_ORIGIN).toString(),
       floorplanLocation: 'unknown',
-      floorVerification: inferred ? 'inferred' : 'candidate',
+      floorVerification: override ? 'verified' : inferred ? 'inferred' : 'candidate',
       verification: verification('verified'),
     });
   }
@@ -179,7 +195,16 @@ function main() {
     retrievedAt: snap.retrievedAt,
     notes: 'Room list parsed from the public page (resources.push blocks): eid, title, capacity, features, booking URL.',
   };
-  const nextSources = [...sources.filter((s) => s.id !== SOURCE_ID), source];
+  const ownerFloor: DataSource = {
+    id: 'owner-pms-floor',
+    name: 'Project owner confirmation: PMS Library floor',
+    owner: 'Nittany Rooms project owner',
+    url: 'https://libraries.psu.edu/hours-and-locations',
+    accessMethod: 'manual',
+    retrievedAt: '2026-11-23',
+    notes: 'The Physical and Mathematical Sciences Library (Davey Laboratory) is on the 2nd floor, so all its reservable rooms are on floor 2.',
+  };
+  const nextSources = [...sources.filter((s) => s.id !== SOURCE_ID && s.id !== ownerFloor.id), source, ownerFloor];
 
   // Buildings: floors, status, notes
   const nextBuildings = buildings.map((b) => {
@@ -194,7 +219,9 @@ function main() {
       floors: [...floors.values()].sort((a, z) => a.level - z.level),
       notes: [
         `${roomCount} reservable room${roomCount === 1 ? '' : 's'} listed in the Libraries' LibCal (checked ${snap.retrievedAt}).`,
-        'Floors are read from room numbers and not yet confirmed by a floor plan.',
+        b.id in BUILDING_FLOOR_OVERRIDES
+          ? BUILDING_FLOOR_OVERRIDES[b.id]!.note
+          : 'Floors are read from room numbers and not yet confirmed by a floor plan.',
         ...(hasUnlisted ? ["Some rooms don't have a floor listed in LibCal, so they're grouped under “?”."] : []),
       ],
       verification: {

@@ -305,34 +305,19 @@
         "level": 2,
         "floorplan": "none",
         "verification": {
-          "status": "inferred",
+          "status": "verified",
           "sourceIds": [
-            "psu-libcal-up-spaces"
+            "psu-libcal-up-spaces",
+            "owner-pms-floor"
           ],
           "verifiedAt": "2026-11-22",
-          "note": "Floor read from the first digit of the room number; not confirmed by a floor plan."
-        }
-      },
-      {
-        "id": "davey-funlisted",
-        "label": "?",
-        "level": 999,
-        "unlisted": true,
-        "floorplan": "none",
-        "verification": {
-          "status": "candidate",
-          "sourceIds": [
-            "psu-libcal-up-spaces"
-          ],
-          "verifiedAt": "2026-11-22",
-          "note": "LibCal doesn't say which floor these rooms are on."
+          "note": "Physical and Mathematical Sciences Library is on the 2nd floor of Davey Laboratory (project owner, 2026-11-23)."
         }
       }
     ],
     "notes": [
       "8 reservable rooms listed in the Libraries' LibCal (checked 2026-11-22).",
-      "Floors are read from room numbers and not yet confirmed by a floor plan.",
-      "Some rooms don't have a floor listed in LibCal, so they're grouped under “?”."
+      "Physical and Mathematical Sciences Library is on the 2nd floor of Davey Laboratory (project owner, 2026-11-23)."
     ],
     "verification": {
       "status": "verified",

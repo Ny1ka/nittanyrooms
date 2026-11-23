@@ -120,6 +120,174 @@
     }
   },
   {
+    "id": "leonhard-105a",
+    "providerRoomId": null,
+    "buildingId": "leonhard",
+    "floorId": "leonhard-f1",
+    "officialLabel": "105A",
+    "shortLabel": "105A",
+    "displayName": "Leonhard 105A",
+    "area": "Knowledge Commons",
+    "type": "group-study",
+    "capacity": null,
+    "features": [],
+    "eligibility": "Described by IME as a space for Industrial and Manufacturing Engineering students. Check eligibility in Outlook.",
+    "providerId": "coe-outlook",
+    "policyId": "coe-leonhard",
+    "bookingUrl": null,
+    "floorplanLocation": "unknown",
+    "floorVerification": "inferred",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "owner-coe-booking",
+        "ime-leonhard-commons"
+      ],
+      "verifiedAt": "2026-11-23",
+      "note": "Room numbers from the project owner; Knowledge Commons location from IME."
+    }
+  },
+  {
+    "id": "leonhard-105b",
+    "providerRoomId": null,
+    "buildingId": "leonhard",
+    "floorId": "leonhard-f1",
+    "officialLabel": "105B",
+    "shortLabel": "105B",
+    "displayName": "Leonhard 105B",
+    "area": "Knowledge Commons",
+    "type": "group-study",
+    "capacity": null,
+    "features": [],
+    "eligibility": "Described by IME as a space for Industrial and Manufacturing Engineering students. Check eligibility in Outlook.",
+    "providerId": "coe-outlook",
+    "policyId": "coe-leonhard",
+    "bookingUrl": null,
+    "floorplanLocation": "unknown",
+    "floorVerification": "inferred",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "owner-coe-booking",
+        "ime-leonhard-commons"
+      ],
+      "verifiedAt": "2026-11-23",
+      "note": "Room numbers from the project owner; Knowledge Commons location from IME."
+    }
+  },
+  {
+    "id": "leonhard-105c",
+    "providerRoomId": null,
+    "buildingId": "leonhard",
+    "floorId": "leonhard-f1",
+    "officialLabel": "105C",
+    "shortLabel": "105C",
+    "displayName": "Leonhard 105C",
+    "area": "Knowledge Commons",
+    "type": "group-study",
+    "capacity": null,
+    "features": [],
+    "eligibility": "Described by IME as a space for Industrial and Manufacturing Engineering students. Check eligibility in Outlook.",
+    "providerId": "coe-outlook",
+    "policyId": "coe-leonhard",
+    "bookingUrl": null,
+    "floorplanLocation": "unknown",
+    "floorVerification": "inferred",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "owner-coe-booking",
+        "ime-leonhard-commons"
+      ],
+      "verifiedAt": "2026-11-23",
+      "note": "Room numbers from the project owner; Knowledge Commons location from IME."
+    }
+  },
+  {
+    "id": "leonhard-105d",
+    "providerRoomId": null,
+    "buildingId": "leonhard",
+    "floorId": "leonhard-f1",
+    "officialLabel": "105D",
+    "shortLabel": "105D",
+    "displayName": "Leonhard 105D",
+    "area": "Knowledge Commons",
+    "type": "group-study",
+    "capacity": null,
+    "features": [],
+    "eligibility": "Described by IME as a space for Industrial and Manufacturing Engineering students. Check eligibility in Outlook.",
+    "providerId": "coe-outlook",
+    "policyId": "coe-leonhard",
+    "bookingUrl": null,
+    "floorplanLocation": "unknown",
+    "floorVerification": "inferred",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "owner-coe-booking",
+        "ime-leonhard-commons"
+      ],
+      "verifiedAt": "2026-11-23",
+      "note": "Room numbers from the project owner; Knowledge Commons location from IME."
+    }
+  },
+  {
+    "id": "leonhard-105e",
+    "providerRoomId": null,
+    "buildingId": "leonhard",
+    "floorId": "leonhard-f1",
+    "officialLabel": "105E",
+    "shortLabel": "105E",
+    "displayName": "Leonhard 105E",
+    "area": "Knowledge Commons",
+    "type": "group-study",
+    "capacity": null,
+    "features": [],
+    "eligibility": "Described by IME as a space for Industrial and Manufacturing Engineering students. Check eligibility in Outlook.",
+    "providerId": "coe-outlook",
+    "policyId": "coe-leonhard",
+    "bookingUrl": null,
+    "floorplanLocation": "unknown",
+    "floorVerification": "inferred",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "owner-coe-booking",
+        "ime-leonhard-commons"
+      ],
+      "verifiedAt": "2026-11-23",
+      "note": "Room numbers from the project owner; Knowledge Commons location from IME."
+    }
+  },
+  {
+    "id": "leonhard-105f",
+    "providerRoomId": null,
+    "buildingId": "leonhard",
+    "floorId": "leonhard-f1",
+    "officialLabel": "105F",
+    "shortLabel": "105F",
+    "displayName": "Leonhard 105F",
+    "area": "Knowledge Commons",
+    "type": "group-study",
+    "capacity": null,
+    "features": [],
+    "eligibility": "Described by IME as a space for Industrial and Manufacturing Engineering students. Check eligibility in Outlook.",
+    "providerId": "coe-outlook",
+    "policyId": "coe-leonhard",
+    "bookingUrl": null,
+    "floorplanLocation": "unknown",
+    "floorVerification": "inferred",
+    "verification": {
+      "status": "verified",
+      "sourceIds": [
+        "owner-coe-booking",
+        "ime-leonhard-commons"
+      ],
+      "verifiedAt": "2026-11-23",
+      "note": "Room numbers from the project owner; Knowledge Commons location from IME."
+    }
+  },
+  {
     "id": "paterno-e128a",
     "providerRoomId": "30978",
     "buildingId": "pattee-paterno",
@@ -1534,7 +1702,7 @@
     "policyId": "psul-group-study",
     "bookingUrl": "https://psu.libcal.com/space/3335",
     "floorplanLocation": "unknown",
-    "floorVerification": "inferred",
+    "floorVerification": "verified",
     "verification": {
       "status": "verified",
       "sourceIds": [
@@ -1565,7 +1733,7 @@
     "policyId": "psul-group-study",
     "bookingUrl": "https://psu.libcal.com/space/3577",
     "floorplanLocation": "unknown",
-    "floorVerification": "inferred",
+    "floorVerification": "verified",
     "verification": {
       "status": "verified",
       "sourceIds": [
@@ -1596,7 +1764,7 @@
     "policyId": "psul-group-study",
     "bookingUrl": "https://psu.libcal.com/space/3680",
     "floorplanLocation": "unknown",
-    "floorVerification": "inferred",
+    "floorVerification": "verified",
     "verification": {
       "status": "verified",
       "sourceIds": [
@@ -1609,7 +1777,7 @@
     "id": "davey-collaboration-space-1",
     "providerRoomId": "3710",
     "buildingId": "davey",
-    "floorId": "davey-funlisted",
+    "floorId": "davey-f2",
     "officialLabel": "Davey Collaboration Space 1 - Physical and Mathematical Sciences Libary",
     "shortLabel": "Collab 1",
     "displayName": "Davey Collaboration Space 1",
@@ -1628,7 +1796,7 @@
     "policyId": "psul-group-study",
     "bookingUrl": "https://psu.libcal.com/space/3710",
     "floorplanLocation": "unknown",
-    "floorVerification": "candidate",
+    "floorVerification": "verified",
     "verification": {
       "status": "verified",
       "sourceIds": [
@@ -1641,7 +1809,7 @@
     "id": "davey-collaboration-space-2",
     "providerRoomId": "3711",
     "buildingId": "davey",
-    "floorId": "davey-funlisted",
+    "floorId": "davey-f2",
     "officialLabel": "Davey Collaboration Space 2 - Physical and Mathematical Sciences Library",
     "shortLabel": "Collab 2",
     "displayName": "Davey Collaboration Space 2",
@@ -1660,7 +1828,7 @@
     "policyId": "psul-group-study",
     "bookingUrl": "https://psu.libcal.com/space/3711",
     "floorplanLocation": "unknown",
-    "floorVerification": "candidate",
+    "floorVerification": "verified",
     "verification": {
       "status": "verified",
       "sourceIds": [
@@ -1673,7 +1841,7 @@
     "id": "davey-collaboration-space-3",
     "providerRoomId": "3712",
     "buildingId": "davey",
-    "floorId": "davey-funlisted",
+    "floorId": "davey-f2",
     "officialLabel": "Davey Collaboration Space 3 - Physical and Mathematical Sciences Library",
     "shortLabel": "Collab 3",
     "displayName": "Davey Collaboration Space 3",
@@ -1692,7 +1860,7 @@
     "policyId": "psul-group-study",
     "bookingUrl": "https://psu.libcal.com/space/3712",
     "floorplanLocation": "unknown",
-    "floorVerification": "candidate",
+    "floorVerification": "verified",
     "verification": {
       "status": "verified",
       "sourceIds": [
@@ -1705,7 +1873,7 @@
     "id": "davey-collaboration-space-4",
     "providerRoomId": "3713",
     "buildingId": "davey",
-    "floorId": "davey-funlisted",
+    "floorId": "davey-f2",
     "officialLabel": "Davey Collaboration Space 4 - Physical and Mathematical Sciences Library",
     "shortLabel": "Collab 4",
     "displayName": "Davey Collaboration Space 4",
@@ -1724,7 +1892,7 @@
     "policyId": "psul-group-study",
     "bookingUrl": "https://psu.libcal.com/space/3713",
     "floorplanLocation": "unknown",
-    "floorVerification": "candidate",
+    "floorVerification": "verified",
     "verification": {
       "status": "verified",
       "sourceIds": [
@@ -1737,7 +1905,7 @@
     "id": "davey-collaboration-space-5",
     "providerRoomId": "3714",
     "buildingId": "davey",
-    "floorId": "davey-funlisted",
+    "floorId": "davey-f2",
     "officialLabel": "Davey Collaboration Space 5 - Physical and Mathematical Sciences Library",
     "shortLabel": "Collab 5",
     "displayName": "Davey Collaboration Space 5",
@@ -1756,181 +1924,13 @@
     "policyId": "psul-group-study",
     "bookingUrl": "https://psu.libcal.com/space/3714",
     "floorplanLocation": "unknown",
-    "floorVerification": "candidate",
+    "floorVerification": "verified",
     "verification": {
       "status": "verified",
       "sourceIds": [
         "psu-libcal-up-spaces"
       ],
       "verifiedAt": "2026-11-22"
-    }
-  },
-  {
-    "id": "leonhard-105a",
-    "providerRoomId": null,
-    "buildingId": "leonhard",
-    "floorId": "leonhard-f1",
-    "officialLabel": "105A",
-    "shortLabel": "105A",
-    "displayName": "Leonhard 105A",
-    "area": "Knowledge Commons",
-    "type": "group-study",
-    "capacity": null,
-    "features": [],
-    "eligibility": "Described by IME as a space for Industrial and Manufacturing Engineering students. Check eligibility in Outlook.",
-    "providerId": "coe-outlook",
-    "policyId": "coe-leonhard",
-    "bookingUrl": null,
-    "floorplanLocation": "unknown",
-    "floorVerification": "inferred",
-    "verification": {
-      "status": "verified",
-      "sourceIds": [
-        "owner-coe-booking",
-        "ime-leonhard-commons"
-      ],
-      "verifiedAt": "2026-11-23",
-      "note": "Room numbers from the project owner; Knowledge Commons location from IME."
-    }
-  },
-  {
-    "id": "leonhard-105b",
-    "providerRoomId": null,
-    "buildingId": "leonhard",
-    "floorId": "leonhard-f1",
-    "officialLabel": "105B",
-    "shortLabel": "105B",
-    "displayName": "Leonhard 105B",
-    "area": "Knowledge Commons",
-    "type": "group-study",
-    "capacity": null,
-    "features": [],
-    "eligibility": "Described by IME as a space for Industrial and Manufacturing Engineering students. Check eligibility in Outlook.",
-    "providerId": "coe-outlook",
-    "policyId": "coe-leonhard",
-    "bookingUrl": null,
-    "floorplanLocation": "unknown",
-    "floorVerification": "inferred",
-    "verification": {
-      "status": "verified",
-      "sourceIds": [
-        "owner-coe-booking",
-        "ime-leonhard-commons"
-      ],
-      "verifiedAt": "2026-11-23",
-      "note": "Room numbers from the project owner; Knowledge Commons location from IME."
-    }
-  },
-  {
-    "id": "leonhard-105c",
-    "providerRoomId": null,
-    "buildingId": "leonhard",
-    "floorId": "leonhard-f1",
-    "officialLabel": "105C",
-    "shortLabel": "105C",
-    "displayName": "Leonhard 105C",
-    "area": "Knowledge Commons",
-    "type": "group-study",
-    "capacity": null,
-    "features": [],
-    "eligibility": "Described by IME as a space for Industrial and Manufacturing Engineering students. Check eligibility in Outlook.",
-    "providerId": "coe-outlook",
-    "policyId": "coe-leonhard",
-    "bookingUrl": null,
-    "floorplanLocation": "unknown",
-    "floorVerification": "inferred",
-    "verification": {
-      "status": "verified",
-      "sourceIds": [
-        "owner-coe-booking",
-        "ime-leonhard-commons"
-      ],
-      "verifiedAt": "2026-11-23",
-      "note": "Room numbers from the project owner; Knowledge Commons location from IME."
-    }
-  },
-  {
-    "id": "leonhard-105d",
-    "providerRoomId": null,
-    "buildingId": "leonhard",
-    "floorId": "leonhard-f1",
-    "officialLabel": "105D",
-    "shortLabel": "105D",
-    "displayName": "Leonhard 105D",
-    "area": "Knowledge Commons",
-    "type": "group-study",
-    "capacity": null,
-    "features": [],
-    "eligibility": "Described by IME as a space for Industrial and Manufacturing Engineering students. Check eligibility in Outlook.",
-    "providerId": "coe-outlook",
-    "policyId": "coe-leonhard",
-    "bookingUrl": null,
-    "floorplanLocation": "unknown",
-    "floorVerification": "inferred",
-    "verification": {
-      "status": "verified",
-      "sourceIds": [
-        "owner-coe-booking",
-        "ime-leonhard-commons"
-      ],
-      "verifiedAt": "2026-11-23",
-      "note": "Room numbers from the project owner; Knowledge Commons location from IME."
-    }
-  },
-  {
-    "id": "leonhard-105e",
-    "providerRoomId": null,
-    "buildingId": "leonhard",
-    "floorId": "leonhard-f1",
-    "officialLabel": "105E",
-    "shortLabel": "105E",
-    "displayName": "Leonhard 105E",
-    "area": "Knowledge Commons",
-    "type": "group-study",
-    "capacity": null,
-    "features": [],
-    "eligibility": "Described by IME as a space for Industrial and Manufacturing Engineering students. Check eligibility in Outlook.",
-    "providerId": "coe-outlook",
-    "policyId": "coe-leonhard",
-    "bookingUrl": null,
-    "floorplanLocation": "unknown",
-    "floorVerification": "inferred",
-    "verification": {
-      "status": "verified",
-      "sourceIds": [
-        "owner-coe-booking",
-        "ime-leonhard-commons"
-      ],
-      "verifiedAt": "2026-11-23",
-      "note": "Room numbers from the project owner; Knowledge Commons location from IME."
-    }
-  },
-  {
-    "id": "leonhard-105f",
-    "providerRoomId": null,
-    "buildingId": "leonhard",
-    "floorId": "leonhard-f1",
-    "officialLabel": "105F",
-    "shortLabel": "105F",
-    "displayName": "Leonhard 105F",
-    "area": "Knowledge Commons",
-    "type": "group-study",
-    "capacity": null,
-    "features": [],
-    "eligibility": "Described by IME as a space for Industrial and Manufacturing Engineering students. Check eligibility in Outlook.",
-    "providerId": "coe-outlook",
-    "policyId": "coe-leonhard",
-    "bookingUrl": null,
-    "floorplanLocation": "unknown",
-    "floorVerification": "inferred",
-    "verification": {
-      "status": "verified",
-      "sourceIds": [
-        "owner-coe-booking",
-        "ime-leonhard-commons"
-      ],
-      "verifiedAt": "2026-11-23",
-      "note": "Room numbers from the project owner; Knowledge Commons location from IME."
     }
   }
 ]
