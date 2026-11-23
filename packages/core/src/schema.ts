@@ -176,8 +176,10 @@ export const Room = z.object({
   providerRoomId: z.string().nullable(),
   buildingId: id,
   floorId: id,
-  /** Official label exactly as published, e.g. "248". */
+  /** Official label exactly as published, e.g. "248" or "Pattee W120 - Knowledge Commons". */
   officialLabel: z.string().min(1),
+  /** Compact label for tiles and lists, e.g. "W120". Defaults to officialLabel. */
+  shortLabel: z.string().min(1).optional(),
   displayName: z.string().min(1),
   /** Named area within the building, e.g. "Knowledge Commons". */
   area: z.string().nullable().optional(),
