@@ -365,7 +365,7 @@
     },
     "hoursUrl": null,
     "status": "verified",
-    "roomInventory": "partial",
+    "roomInventory": "complete",
     "providerIds": [
       "coe-outlook"
     ],
@@ -386,8 +386,9 @@
       }
     ],
     "notes": [
-      "Five group study rooms in the Leonhard Knowledge Commons (first-floor lobby). Room numbers aren't published, so they're listed together.",
-      "Booked in Outlook like other College of Engineering group rooms."
+      "Group study rooms 105A–105F in the Leonhard Knowledge Commons (first-floor lobby).",
+      "Booked in Outlook like other College of Engineering group rooms.",
+      "IME's page says five group study rooms; the project owner lists six (105A–F)."
     ],
     "verification": {
       "status": "verified",

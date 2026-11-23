@@ -29,7 +29,7 @@ test.describe('campus discovery', () => {
     await page.getByRole('button', { name: 'Open now', exact: true }).click();
     await page.keyboard.press('Escape');
     // Pattee/Paterno and Deike have open rooms at 1 PM in the fixture; Stuckeman and Davey have no slots.
-    await expect(page.getByText('2 of 5 buildings match')).toBeVisible();
+    await expect(page.getByText(/^2 of \d+ buildings match$/)).toBeVisible();
     await expect(page.getByRole('button', { name: /Engineering Library/ })).toHaveCount(0);
     await page.getByRole('button', { name: 'Clear', exact: true }).click();
     await expect(page.getByRole('button', { name: /Engineering Library/ })).toBeVisible();

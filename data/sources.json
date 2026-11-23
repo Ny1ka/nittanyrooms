@@ -64,11 +64,11 @@
   },
   {
     "id": "owner-coe-booking",
-    "name": "Project owner confirmation: CoE spaces & group rooms booked in Outlook",
+    "name": "Project owner confirmation: Leonhard group rooms (105A–F) booked in Outlook",
     "owner": "Nittany Rooms project owner",
     "url": "https://www.engr.psu.edu",
     "accessMethod": "manual",
     "retrievedAt": "2026-11-23",
-    "notes": "Owner confirmed on 2026-11-23 that Leonhard group rooms are reserved like other College of Engineering spaces & group rooms: Outlook Calendar, with the room."
+    "notes": "Owner confirmed on 2026-11-23: rooms 105A, 105B, 105C, 105D, 105E, 105F, reserved like other College of Engineering spaces & group rooms (Outlook Calendar, with the room). IME page says five group study rooms; owner lists six."
   }
 ]
