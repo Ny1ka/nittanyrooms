@@ -3,7 +3,7 @@
   "framework": "vite",
   "buildCommand": "pnpm build",
   "outputDirectory": "dist",
-  "rewrites": [{ "source": "/((?!assets/|fonts/|favicon|mark).*)", "destination": "/index.html" }],
+  "rewrites": [{ "source": "/((?!api/|assets/|fonts/|favicon|mark).*)", "destination": "/index.html" }],
   "headers": [
     {
       "source": "/fonts/(.*)",
