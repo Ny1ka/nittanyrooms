@@ -19,37 +19,86 @@
   src: url(/fonts/overpass-latin-800-normal.woff2) format('woff2');
 }
 
-/* Design tokens — mirrors nittany-rooms-design/tokens/tokens.json */
-@theme {
+/*
+ * Design tokens v2: minimal, dark-first.
+ * Mirrors nittany-rooms-design/tokens/tokens.json. Dark is the default theme;
+ * [data-theme='light'] switches every token. Components only use semantic names.
+ */
+:root,
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --nr-bg: #0a1628;
+  --nr-surface: #0f1f38;
+  --nr-surface-2: #16294a;
+  --nr-surface-3: #1f3358;
+  --nr-line: #22365a;
+  --nr-fg: #e8eef7;
+  --nr-muted: #8fa0ba;
+  --nr-subtle: #60759a;
+  --nr-accent: #ffc845;
+  --nr-accent-ink: #12284c;
+  --nr-accent-text: #ffc845;
+  --nr-accent-border: #ffc845;
+  --nr-accent-soft: rgb(255 200 69 / 0.1);
+  --nr-occupied: #2b4170;
+  --nr-occupied-fg: #dce4f2;
+  --nr-hatch-a: #1f3358;
+  --nr-hatch-b: #2b4170;
+  --nr-dot-a: #3a5280;
+  --nr-dot-b: #16294a;
+  --nr-now: #ff5c93;
+  --nr-shadow: 0 8px 28px rgb(0 0 0 / 0.35);
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+  --nr-bg: #f5f7fa;
+  --nr-surface: #ffffff;
+  --nr-surface-2: #f0f3f7;
+  --nr-surface-3: #e4e9f0;
+  --nr-line: #dce2ea;
+  --nr-fg: #12284c;
+  --nr-muted: #4f5b6e;
+  --nr-subtle: #7a8699;
+  --nr-accent: #ffc845;
+  --nr-accent-ink: #12284c;
+  --nr-accent-text: #6b4700;
+  --nr-accent-border: #c99400;
+  --nr-accent-soft: #fff6dc;
+  --nr-occupied: #12284c;
+  --nr-occupied-fg: #ffffff;
+  --nr-hatch-a: #e3e7ed;
+  --nr-hatch-b: #cbd2dc;
+  --nr-dot-a: #b8c1ce;
+  --nr-dot-b: #eef1f5;
+  --nr-now: #c2185b;
+  --nr-shadow: 0 8px 28px rgb(18 40 76 / 0.16);
+}
+
+@theme inline {
   --font-sans: Overpass, ui-sans-serif, system-ui, sans-serif;
 
-  --color-navy: #12284c;
-  --color-night: #0e1e3a;
-  --color-night-panel: #162a4d;
-  --color-night-raised: #1f3358;
-  --color-night-line: #3a5280;
-  --color-night-grid: #16294a;
-  --color-glow: #ffc845;
-  --color-glow-tint: #fff6dc;
-  --color-glow-border: #c99400;
-  --color-amber-text: #6b4700;
-  --color-paper: #f5f7fa;
-  --color-surface: #ffffff;
-  --color-line: #dce2ea;
-  --color-input-border: #b8c1ce;
-  --color-slate: #4f5b6e;
-  --color-ink-muted: #3a4558;
-  --color-dot: #8a96a8;
-  --color-now: #c2185b;
+  --color-bg: var(--nr-bg);
+  --color-surface: var(--nr-surface);
+  --color-surface-2: var(--nr-surface-2);
+  --color-surface-3: var(--nr-surface-3);
+  --color-line: var(--nr-line);
+  --color-fg: var(--nr-fg);
+  --color-muted: var(--nr-muted);
+  --color-subtle: var(--nr-subtle);
+  --color-accent: var(--nr-accent);
+  --color-accent-ink: var(--nr-accent-ink);
+  --color-accent-text: var(--nr-accent-text);
+  --color-accent-border: var(--nr-accent-border);
+  --color-accent-soft: var(--nr-accent-soft);
+  --color-occupied: var(--nr-occupied);
+  --color-occupied-fg: var(--nr-occupied-fg);
+  --color-now: var(--nr-now);
 
-  --radius-control: 10px;
-  --radius-panel: 16px;
-  --radius-sheet: 20px;
-
-  --text-display: 40px;
-  --text-title: 28px;
-  --text-heading: 20px;
-  --text-small: 13px;
+  --radius-control: 8px;
+  --radius-panel: 12px;
+  --radius-sheet: 16px;
+  --shadow-float: var(--nr-shadow);
 }
 
 @layer base {
@@ -57,17 +106,15 @@
     -webkit-text-size-adjust: 100%;
   }
   body {
-    @apply bg-paper font-sans text-navy antialiased;
+    @apply bg-bg font-sans text-fg antialiased;
+    font-size: 14px;
   }
   a {
-    @apply text-navy;
+    color: inherit;
   }
   :focus-visible {
-    outline: 3px solid var(--color-glow-border);
+    outline: 2px solid var(--nr-accent);
     outline-offset: 2px;
-  }
-  .on-night :focus-visible {
-    outline-color: #ffffff;
   }
 }
 
@@ -75,55 +122,28 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* Room-state fills that can't be expressed as single colors */
+/* Room-state fills that aren't single colors (never color alone: each state also has an icon and a word) */
 @utility fill-unavailable {
-  background: repeating-linear-gradient(135deg, #e3e7ed 0 6px, #cbd2dc 6px 8px);
-}
-@utility fill-unavailable-night {
-  background: repeating-linear-gradient(135deg, #3a5280 0 3px, #1f3358 3px 5px);
+  background: repeating-linear-gradient(135deg, var(--nr-hatch-a) 0 5px, var(--nr-hatch-b) 5px 7px);
 }
 @utility fill-unknown {
-  background: radial-gradient(#b8c1ce 1px, #eef1f5 1.5px) 0 0 / 6px 6px;
-}
-@utility fill-unknown-night {
-  background: radial-gradient(#3a5280 1.2px, #1f3358 1.6px) 0 0 / 7px 7px;
-}
-@utility night-grid {
-  background-image:
-    linear-gradient(var(--color-night-grid) 1px, transparent 1px),
-    linear-gradient(90deg, var(--color-night-grid) 1px, transparent 1px);
-  background-size: 32px 32px;
+  background: radial-gradient(var(--nr-dot-a) 1px, var(--nr-dot-b) 1.5px) 0 0 / 6px 6px;
 }
 @utility sr-only-focusable {
   position: absolute;
   left: -9999px;
   &:focus {
-    left: 16px;
-    top: 16px;
+    left: 12px;
+    top: 12px;
     z-index: 100;
   }
 }
+@utility scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: var(--nr-line) transparent;
+}
 
-/* Campus → building: a single ~300ms zoom. Reduced motion: instant cut. */
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation-duration: 300ms;
-  animation-timing-function: ease-out;
-}
-::view-transition-new(root) {
-  animation-name: nr-zoom-in;
-}
-@keyframes nr-zoom-in {
-  from {
-    opacity: 0;
-    transform: scale(0.97);
-  }
-}
 @media (prefers-reduced-motion: reduce) {
-  ::view-transition-old(root),
-  ::view-transition-new(root) {
-    animation: none;
-  }
   *,
   *::before,
   *::after {
@@ -134,5 +154,27 @@
 
 .maplibregl-ctrl-attrib {
   font-family: var(--font-sans);
-  font-size: 12px;
+  font-size: 11px;
+}
+:root[data-theme='dark'] .maplibregl-ctrl-attrib,
+:root:not([data-theme]) .maplibregl-ctrl-attrib {
+  background: rgb(15 31 56 / 0.8) !important;
+  color: var(--nr-muted);
+}
+:root[data-theme='dark'] .maplibregl-ctrl-attrib a,
+:root:not([data-theme]) .maplibregl-ctrl-attrib a {
+  color: var(--nr-muted);
+}
+:root[data-theme='dark'] .maplibregl-ctrl-group,
+:root:not([data-theme]) .maplibregl-ctrl-group {
+  background: var(--nr-surface);
+  box-shadow: 0 0 0 1px var(--nr-line);
+}
+:root[data-theme='dark'] .maplibregl-ctrl-group button + button,
+:root:not([data-theme]) .maplibregl-ctrl-group button + button {
+  border-top-color: var(--nr-line);
+}
+:root[data-theme='dark'] .maplibregl-ctrl-icon,
+:root:not([data-theme]) .maplibregl-ctrl-icon {
+  filter: invert(1) brightness(0.85);
 }

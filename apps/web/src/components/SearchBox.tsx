@@ -35,7 +35,7 @@ export function SearchBox({ placeholder = 'Search buildings and rooms' }: { plac
       <label htmlFor={`${listId}-input`} className="sr-only">
         {placeholder}
       </label>
-      <Search className="pointer-events-none absolute top-1/2 left-3.5 -translate-y-1/2 text-slate" />
+      <Search size={14} className="pointer-events-none absolute top-1/2 left-3 -translate-y-1/2 text-subtle" />
       <input
         ref={inputRef}
         id={`${listId}-input`}
@@ -69,17 +69,17 @@ export function SearchBox({ placeholder = 'Search buildings and rooms' }: { plac
             setOpen(false);
           }
         }}
-        className="h-11 w-full rounded-control border border-input-border bg-surface pr-3.5 pl-10 text-base text-navy placeholder:text-slate"
+        className="h-10 w-full rounded-control border border-line bg-surface-2 pr-3 pl-9 text-[14px] text-fg placeholder:text-subtle focus:border-accent-border focus:outline-none"
       />
       {showList && (
         <ul
           id={listId}
           role="listbox"
           aria-label="Search results"
-          className="absolute top-full right-0 left-0 z-50 mt-1 overflow-hidden rounded-control border border-line bg-surface shadow-lg"
+          className="absolute top-full right-0 left-0 z-50 mt-1 overflow-hidden rounded-control border border-line bg-surface shadow-float"
         >
           {results.length === 0 && (
-            <li className="px-3.5 py-3 text-sm text-slate" role="option" aria-selected="false" aria-disabled="true">
+            <li className="px-3 py-2.5 text-xs text-muted" role="option" aria-selected="false" aria-disabled="true">
               No buildings or rooms match “{q.trim()}”.
             </li>
           )}
@@ -92,10 +92,10 @@ export function SearchBox({ placeholder = 'Search buildings and rooms' }: { plac
               onMouseDown={(e) => e.preventDefault()}
               onClick={() => choose(i)}
               onMouseEnter={() => setActive(i)}
-              className={`flex min-h-11 cursor-pointer flex-col justify-center px-3.5 py-2 ${i === active ? 'bg-glow-tint' : ''}`}
+              className={`flex min-h-11 cursor-pointer flex-col justify-center px-3 py-1.5 ${i === active ? 'bg-surface-2' : ''}`}
             >
-              <span className="font-semibold">{r.label}</span>
-              <span className="text-small text-slate">
+              <span className="text-[13px] font-semibold">{r.label}</span>
+              <span className="text-[11px] text-muted">
                 {r.kind === 'room' ? 'Room · ' : 'Building · '}
                 {r.sub}
               </span>
