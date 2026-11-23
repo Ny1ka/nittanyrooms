@@ -11,15 +11,14 @@ Last updated: **2026-11-22**. This file separates what we know from what we're g
 3. ECoRE rooms: any current PSU undergrad, grad student, staff, or faculty member can book. A request is only confirmed by an approval email.
 4. ECoRE room 204 (Quiet Study Room) is **not reservable**.
 5. HUB-Robeson meeting spaces are for events and student organizations, booked through 25Live. They aren't individual study rooms.
+6. **LibCal's public availability grid works without credentials** (tested 2026-11-22). It returns 15-minute slots for every University Park library room, with booked slots marked, so the data is complete. The test used a browser User-Agent temporarily; production must identify honestly.
+7. **54 LibCal rooms** with official labels, IDs, capacities, and features. The branch-library buildings (Deike, Davey, Stuckeman) are confirmed by room titles.
 
 ## Reasonable hypotheses (not verified)
 
 - ECoRE room floors match their first digit (133 → floor 1, 248/249 → floor 2, 322/333 → floor 3). The design mockups make the same assumption. **The UI labels these floors as "inferred".**
-- The Libraries' LibCal can deep-link to a specific space (`/space/<id>`), as other LibCal sites can. PSU room IDs haven't been observed, and date preselection is untested.
+- Each LibCal room's `/space/<id>` page (IDs now observed) is its booking page. Date preselection via URL is untested.
 - ECoRE room availability may follow ECoRE building hours rather than Engineering Library hours.
-
-6. **LibCal's public availability grid works without credentials** (tested 2026-11-22). It returns 15-minute slots for every University Park library room, with booked slots marked, so the data is complete. The test used a browser User-Agent temporarily; production must identify honestly.
-7. **54 LibCal rooms** with official labels, IDs, capacities, and features. The branch-library buildings (Deike, Davey, Stuckeman) are confirmed by room titles.
 
 ## Unknowns and blockers
 
