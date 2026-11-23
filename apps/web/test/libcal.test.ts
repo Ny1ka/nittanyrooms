@@ -117,6 +117,19 @@ describe('handleAvailability', () => {
     expect(fetch).not.toHaveBeenCalled();
   });
 
+  it('memo serves repeat requests without calling LibCal again until it expires', async () => {
+    const fetch = vi.fn(async () => ok());
+    const memo = new Map();
+    let t = NOW;
+    const deps = { fetch, env: {}, memo, now: () => t };
+    await handleAvailability(req(`?date=${DATE}`), deps);
+    await handleAvailability(req(`?date=${DATE}`), deps);
+    expect(fetch).toHaveBeenCalledTimes(1);
+    t += 121_000;
+    await handleAvailability(req(`?date=${DATE}`), deps);
+    expect(fetch).toHaveBeenCalledTimes(2);
+  });
+
   it('maps upstream failures to 502 with a short cache', async () => {
     const deps = (f: () => Promise<Response>) => ({ fetch: vi.fn(f), env: {}, now: () => NOW });
     const r1 = await handleAvailability(req(`?date=${DATE}`), deps(async () => new Response('', { status: 503 })));

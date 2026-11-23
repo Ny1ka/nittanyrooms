@@ -6,8 +6,10 @@
  *   LIBCAL_LIVE=off          kill switch (returns 503; the app falls back to "Check on PSU site")
  *   LIBCAL_USER_AGENT=...    identifier sent to LibCal (see TEMP_BROWSER_UA note)
  */
-import { handleAvailability } from './_lib/libcal.js';
+import { handleAvailability, type HandlerDeps } from './_lib/libcal.js';
+
+const memo: NonNullable<HandlerDeps['memo']> = new Map();
 
 export function GET(request: Request): Promise<Response> {
-  return handleAvailability(request, { fetch, env: process.env });
+  return handleAvailability(request, { fetch, env: process.env, memo });
 }

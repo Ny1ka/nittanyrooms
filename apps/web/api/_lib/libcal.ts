@@ -142,7 +142,14 @@ export interface HandlerDeps {
   fetch: typeof fetch;
   env: Record<string, string | undefined>;
   now?: () => number;
+  /**
+   * Optional per-instance memo (date → payload). Backs up the CDN cache so a
+   * warm function instance never calls LibCal more than once per MEMO_TTL_MS.
+   */
+  memo?: Map<string, { expires: number; payload: AvailabilityPayload }>;
 }
+
+export const MEMO_TTL_MS = 120_000;
 
 const json = (body: unknown, status: number, cache: string) =>
   new Response(JSON.stringify(body), {
@@ -173,6 +180,9 @@ export async function handleAvailability(request: Request, deps: HandlerDeps): P
     );
   }
 
+  const hit = deps.memo?.get(date);
+  if (hit && hit.expires > now) return json(hit.payload, 200, SUCCESS_CACHE);
+
   let upstream: Response;
   try {
     upstream = await deps.fetch(LIBCAL_GRID_URL, {
@@ -197,6 +207,7 @@ export async function handleAvailability(request: Request, deps: HandlerDeps): P
 
   try {
     const payload = parseGrid(await upstream.json(), date, now);
+    deps.memo?.set(date, { expires: now + MEMO_TTL_MS, payload });
     return json(payload, 200, SUCCESS_CACHE);
   } catch {
     return json({ error: 'upstream-shape', message: 'LibCal returned an unexpected response.' }, 502, ERROR_CACHE);
