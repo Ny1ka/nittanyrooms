@@ -18,7 +18,7 @@ The design package uses the **Engineering Library (ECoRE)** as its example build
 | M3 | Verified seed data: ECoRE + 5 rooms, LibCal buildings as "rooms not listed yet", with provenance | ✅ |
 | M4 | Web app shell: design tokens, header, campus map (MapLibre/OSM), building list, building preview | ✅ |
 | M5 | Building view: floor picker, fallback schematic, synced room list, room panel, timeline, handoff | ✅ |
-| M6 | Playwright E2E (search → building → floor → room → handoff, keyboard, mobile viewport), CI workflow | ⏭ next |
+| M6 | Playwright E2E (search → building → room → handoff, keyboard, mobile, axe) + GitHub Actions CI | ✅ |
 | M7 | Ingest LibCal rooms into `data/` with provenance (`pnpm --filter @nittany-rooms/core ingest:libcal <snapshot>`) | ✅ 53 rooms (wellness room excluded) |
 | M8 | LibCal grid adapter as a Vercel Function (`/api/availability`) with CDN cache, memo, and kill switch | ✅ built. Before public launch: honest User-Agent + terms review (U2) |
 | M9 | Floor plan sourcing for one building (needs U6), plus the SVG floor plan renderer | blocked on U6 |
@@ -34,7 +34,7 @@ The design package uses the **Engineering Library (ECoRE)** as its example build
 - [x] Map with real OSM coordinates and attribution
 - [x] Fallback schematic floor view, explicitly labeled
 - [x] Honest handoff for Outlook-booked rooms
-- [ ] Playwright E2E + GitHub Actions CI
+- [x] Playwright E2E + GitHub Actions CI
 - [ ] Ask PSU Libraries for LibCal API access (draft email for the project owner)
 - [ ] Ask CoE facilities for ECoRE room capacity, features, and policies
 - [ ] Inventory LibCal rooms for Pattee/Paterno (Knowledge Commons W120–W128 first)
