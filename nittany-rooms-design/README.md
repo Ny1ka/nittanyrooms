@@ -33,6 +33,7 @@ The code is the source of truth. Tokens are implemented in `apps/web/src/index.c
 - **State colors carry meaning.** Green marks open and available, red marks occupied and not available. Both appear as soft tinted chips with AA text. Blue `#2563EB` is for actions and selection (with white text). Yellow is reserved for the brand, “opens soon”, and the now marker.
 - **Quiet surfaces.** Three neutral gray steps (`bg` → `surface` → `surface-2`), 1px `line` borders, and almost no shadows (only floating sheets and popovers have one). No gradients, glass, or oversized cards.
 - **Small, steady type.** Inter (variable, features `cv11` and `ss03`) at 14px body, 18–20px headings, and 11px uppercase section labels. Times and counts use tabular figures.
+- **One header row, everything else in popovers** (illiniSpots pattern): brand · search · Filters · date/time (“Now”) · ⋯ (Appearance, Important notes, Data updates, GitHub). Buildings are grouped (Libraries, Engineering, Not verified), each row with one count badge: green `34/36` = rooms open, red `0/8` = none open, gray “Check site” / “Not verified”, plus a chevron.
 - **Lists over decoration.** Rooms are compact rows with a status chip and a thin day timeline. Until a real floor plan is sourced, the building view is a floor-grouped list. That's the documented fallback, not a drawn layout.
 - **Dark by default**, with a light theme one tap away. Both themes share every component; only tokens change.
 

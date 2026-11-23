@@ -10,7 +10,8 @@ const h = 'text-[11px] font-semibold tracking-wide text-subtle uppercase';
 export function About({ pref, setPref, liveCheckedAt }: { pref: ThemePref; setPref: (p: ThemePref) => void; liveCheckedAt: number | null }) {
   const roomsChecked = sources.find((s) => s.id === 'psu-libcal-up-spaces')?.retrievedAt;
   return (
-    <section aria-label="About and settings" className="space-y-4 border-t border-line px-4 py-4 text-xs text-muted">
+    <section aria-label="About and settings" className="space-y-4 text-xs text-muted">
+      <p className="text-[11px] text-subtle">Nittany Rooms · student-made, not an official Penn State service.</p>
       <div className="space-y-2">
         <h2 className={h}>Appearance</h2>
         <div role="radiogroup" aria-label="Appearance" className="grid grid-cols-3 gap-1 rounded-control bg-surface-2 p-1">

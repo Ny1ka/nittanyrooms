@@ -36,7 +36,7 @@ export function SearchBox({ placeholder = 'Search buildings and rooms' }: { plac
   return (
     <div className="relative w-full">
       <label htmlFor={`${listId}-input`} className="sr-only">
-        {placeholder}
+        Search buildings and rooms
       </label>
       <Search size={14} className="pointer-events-none absolute top-1/2 left-3 -translate-y-1/2 text-subtle" />
       <input
@@ -72,7 +72,7 @@ export function SearchBox({ placeholder = 'Search buildings and rooms' }: { plac
             setOpen(false);
           }
         }}
-        className="h-10 w-full rounded-control border border-line bg-surface-2 pr-3 pl-9 text-[14px] text-fg placeholder:text-subtle focus:border-accent-border focus:outline-none"
+        className="h-9 w-full rounded-control border border-line bg-surface-2 pr-3 pl-9 text-[14px] text-fg placeholder:text-subtle focus:border-accent-border focus:outline-none"
       />
       {showList && (
         <ul

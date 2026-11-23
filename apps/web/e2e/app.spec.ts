@@ -6,9 +6,9 @@ const roomRow = (name: string) => new RegExp(`^${name},`);
 test.describe('campus discovery', () => {
   test('lists buildings with live counts and provenance; map failure leaves the list usable', async ({ page, api }) => {
     await page.goto('/');
-    await expect(page.getByRole('button', { name: /Pattee and Paterno Libraries/ })).toContainText('open');
-    await expect(page.getByRole('button', { name: /Engineering Library/ })).toContainText('Check PSU site');
-    await expect(page.getByRole('button', { name: /Physical and Mathematical Sciences/ })).toContainText('None open');
+    await expect(page.getByRole('button', { name: /Pattee and Paterno Libraries/ })).toContainText('/36');
+    await expect(page.getByRole('button', { name: /Engineering Library/ })).toContainText('Check site');
+    await expect(page.getByRole('button', { name: /Physical and Mathematical Sciences/ })).toContainText('0/8');
     await expect(page.getByText(/Live from Penn State's LibCal · checked 12:59 PM/)).toBeVisible();
     await expect(page.getByText("The map couldn't load.")).toBeVisible();
     expect(api).toContain(TODAY);
@@ -25,12 +25,14 @@ test.describe('campus discovery', () => {
 
   test('"Open now" filter narrows buildings and can be cleared', async ({ page, api: _ }) => {
     await page.goto('/');
+    await page.getByRole('button', { name: 'Filters' }).click();
     await page.getByRole('button', { name: 'Open now', exact: true }).click();
+    await page.keyboard.press('Escape');
     // Pattee/Paterno and Deike have open rooms at 1 PM in the fixture; Stuckeman and Davey have no slots.
-    await expect(page.getByText('2 of 5 buildings')).toBeVisible();
+    await expect(page.getByText('2 of 5 buildings match')).toBeVisible();
     await expect(page.getByRole('button', { name: /Engineering Library/ })).toHaveCount(0);
-    await page.getByRole('button', { name: 'Clear' }).click();
-    await expect(page.getByText('5 of 5 buildings')).toBeVisible();
+    await page.getByRole('button', { name: 'Clear', exact: true }).click();
+    await expect(page.getByRole('button', { name: /Engineering Library/ })).toBeVisible();
   });
 });
 

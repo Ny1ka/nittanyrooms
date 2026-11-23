@@ -1,7 +1,6 @@
 import { lazy, Suspense, useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react';
 import { Controls } from './components/Controls';
 import { ChevronUp } from './components/Icons';
-import { About } from './components/About';
 import { DemoBanner } from './components/Notices';
 import { buildingMatches, NO_FILTERS, type Filters } from './lib/filters';
 import { requestLocation, type GeoState } from './lib/geo';
@@ -29,7 +28,7 @@ function useMedia(query: string): boolean {
   );
 }
 
-const SHEET_PEEK = 212; // px: handle + brand + search + date pills
+const SHEET_PEEK = 150; // px: handle + header row + first list row
 const SHEET_OPEN = 0.7; // fraction of viewport height
 
 export function App() {
@@ -77,7 +76,7 @@ export function App() {
       </a>
       <aside
         aria-label="Study rooms"
-        className="fixed inset-x-0 bottom-0 z-20 flex flex-col overflow-hidden rounded-t-sheet border-t border-line bg-surface shadow-float transition-[height] duration-200 ease-out md:static md:z-auto md:h-full md:w-[400px] md:shrink-0 md:rounded-none md:border-t-0 md:border-r md:shadow-none"
+        className="fixed inset-x-0 bottom-0 z-20 flex flex-col overflow-hidden rounded-t-sheet border-t border-line bg-surface shadow-float transition-[height] duration-200 ease-out md:static md:z-auto md:h-full md:w-[460px] xl:w-[500px] md:shrink-0 md:rounded-none md:border-t-0 md:border-r md:shadow-none"
         style={isDesktop ? undefined : { height: sheetOpen ? `${SHEET_OPEN * 100}dvh` : SHEET_PEEK }}
       >
         {!isDesktop && (
@@ -93,16 +92,15 @@ export function App() {
           </button>
         )}
         {demo && <DemoBanner />}
-        <Controls sel={sel} />
+        <Controls sel={sel} filters={filters} setFilters={setFilters} geo={geo} onLocate={locate} themePref={themePref} setThemePref={setThemePref} liveCheckedAt={live.status === 'ok' ? live.retrievedAt : null} />
         <div ref={scroller} id="sidebar-content" tabIndex={-1} className="scrollbar-thin flex-1 overflow-y-auto outline-none" onFocus={() => setSheetOpen(true)}>
           <main>
             {route.name === 'building' ? (
               <BuildingPanel buildingId={route.buildingId} sel={sel} demo={demo} live={live} filters={filters} clearFilters={() => setFilters(NO_FILTERS)} />
             ) : (
-              <CampusList markers={markers} visible={visible} filters={filters} setFilters={setFilters} demo={demo} live={live} geo={geo} onLocate={locate} />
+              <CampusList markers={markers} visible={visible} filters={filters} setFilters={setFilters} demo={demo} live={live} geo={geo} />
             )}
           </main>
-          <About pref={themePref} setPref={setThemePref} liveCheckedAt={live.status === 'ok' ? live.retrievedAt : null} />
         </div>
       </aside>
 
