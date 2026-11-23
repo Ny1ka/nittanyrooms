@@ -2,6 +2,8 @@ import { formatTime } from '@nittany-rooms/core';
 import { getBuilding, getProvider, openSpaces, rooms as allRooms } from '../lib/data';
 import { roomDay, roomStatus } from '../lib/availability';
 import { buildingKey, useFavorites } from '../lib/favorites';
+import { useWatches } from '../lib/watches';
+import { formatDateLabel, formatDuration } from '@nittany-rooms/core';
 import { StatusChip } from '../components/StatusChip';
 import { spaceStatus } from '../lib/openSpaces';
 import { formatWalk, ROUTE_ATTRIBUTION, type RouteState } from '../lib/route';
@@ -42,6 +44,7 @@ export function CampusList({
   onClearRoute: () => void;
 }) {
   const favs = useFavorites();
+  const watches = useWatches();
   const favRooms = allRooms.filter((r) => favs.ids.includes(r.id));
   const favBuildings = markers.filter((m) => favs.has(buildingKey(m.building.id)));
   const pos = geo.status === 'ok' ? geo.pos : null;
@@ -86,6 +89,30 @@ export function CampusList({
             Clear
           </button>
         </div>
+      )}
+
+      {watches.list.length > 0 && (
+        <section aria-label="Alerts">
+          <h2 className="px-4 pt-4 pb-1.5 text-[13px] font-medium text-subtle">🔔 Alerts</h2>
+          <ul className="border-t border-line">
+            {watches.list.map((w) => {
+              const r = allRooms.find((x) => x.id === w.roomId);
+              return (
+                <li key={w.id} className="flex items-center gap-3 border-b border-line px-4 py-2.5 text-xs">
+                  <button type="button" onClick={() => navigate(`/b/${w.buildingId}`, { room: w.roomId, d: w.date })} className="min-w-0 flex-1 text-left">
+                    <span className="block truncate text-[14px] font-semibold">{r?.displayName ?? w.roomId}</span>
+                    <span className="block text-muted">
+                      {formatDuration(w.minMinutes)}+ slot by {formatTime(w.after + 30 * 60_000)}, {formatDateLabel(w.date)}
+                    </span>
+                  </button>
+                  <button type="button" onClick={() => watches.remove(w.id)} className="font-semibold text-muted underline underline-offset-2 hover:text-fg">
+                    Cancel
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
       )}
 
       {(favRooms.length > 0 || favBuildings.length > 0) && !anyFilter(filters) && (

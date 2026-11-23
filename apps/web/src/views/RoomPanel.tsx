@@ -19,6 +19,7 @@ import type { SelectedTime } from '../lib/time';
 import { BookingRange } from '../components/BookingRange';
 import { HandoffPanel } from '../components/HandoffPanel';
 import { RoomActions } from '../components/RoomActions';
+import { NotifyMe } from '../components/NotifyMe';
 import { ChevronLeft, ChevronRight, Star } from '../components/Icons';
 import { useFavorites } from '../lib/favorites';
 import { FreshnessNote } from '../components/Notices';
@@ -178,6 +179,7 @@ export function RoomPanel({ room, building, sel, demo, live }: { room: Room; bui
         </button>
       )}
 
+      {day.live && day.freshness === 'fresh' && <NotifyMe room={room} building={building} date={sel.date} after={sel.at} day={day} />}
       <HandoffPanel room={room} building={building} date={sel.date} selection={selection} />
       <RoomActions room={room} building={building} date={sel.date} selection={selection} at={sel.at} />
 

@@ -6,6 +6,7 @@ import { buildingMatches, NO_FILTERS, type Filters } from './lib/filters';
 import { requestLocation, type GeoState } from './lib/geo';
 import { fetchWalkingRoute, type RouteState } from './lib/route';
 import { spaceStatus } from './lib/openSpaces';
+import { useWatcher } from './lib/watcher';
 import { buildingCounts, useDemo } from './lib/availability';
 import { buildings, getBuilding, openSpaces } from './lib/data';
 import { useLiveLibcal } from './lib/live';
@@ -40,6 +41,7 @@ export function App() {
   const [themePref, setThemePref] = useThemePref();
   const [geo, setGeo] = useState<GeoState>({ status: 'idle' });
   const locate = () => requestLocation(setGeo);
+  const alerts = useWatcher(sel.now);
   const [walk, setWalk] = useState<RouteState>({ status: 'idle' });
   const showRoute = (buildingId: string) => {
     const b = getBuilding(buildingId);
@@ -110,6 +112,27 @@ export function App() {
           </button>
         )}
         {demo && <DemoBanner />}
+        {alerts.fired.map((a) => (
+          <div key={a.id} role="alert" className="flex items-start gap-3 border-b border-line bg-open-soft px-4 py-2.5 text-xs text-open-text">
+            <span className="min-w-0 flex-1">
+              <span className="block font-semibold">🔔 {a.title}</span>
+              <span className="block">{a.body}</span>
+            </span>
+            <button
+              type="button"
+              onClick={() => {
+                alerts.dismiss(a.id);
+                navigate(`/b/${a.buildingId}`, { room: a.roomId });
+              }}
+              className="font-semibold underline underline-offset-2"
+            >
+              View room
+            </button>
+            <button type="button" aria-label="Dismiss alert" onClick={() => alerts.dismiss(a.id)} className="font-semibold">
+              ×
+            </button>
+          </div>
+        ))}
         <Controls sel={sel} filters={filters} setFilters={setFilters} geo={geo} onLocate={locate} themePref={themePref} setThemePref={setThemePref} liveCheckedAt={live.status === 'ok' ? live.retrievedAt : null} />
         <div ref={scroller} id="sidebar-content" tabIndex={-1} className="scrollbar-thin flex-1 overflow-y-auto outline-none" onFocus={() => setSheetOpen(true)}>
           <main>

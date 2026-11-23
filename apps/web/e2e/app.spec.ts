@@ -1,5 +1,5 @@
 import AxeBuilder from '@axe-core/playwright';
-import { TODAY, expect, test } from './fixtures';
+import { NOW, TODAY, expect, payload, test } from './fixtures';
 
 const roomRow = (name: string) => new RegExp(`^${name},`);
 
@@ -313,5 +313,39 @@ test.describe('adjustable booking range', () => {
     const href = decodeURIComponent((await page.getByRole('link', { name: 'Apple / Outlook (.ics)' }).getAttribute('href'))!);
     expect(href).toContain('DTSTART:20261123T183000Z');
     expect(href).toContain('DTEND:20261123T184500Z');
+  });
+});
+
+test.describe('notify me when it opens', () => {
+  test('watch an occupied room; when it frees up, a notification and in-app alert fire once', async ({ page, api: _ }) => {
+    await page.addInitScript(() => {
+      (window as any).__notes = [];
+      class FakeNotification {
+        static permission = 'granted';
+        static requestPermission = async () => 'granted';
+        onclick: (() => void) | null = null;
+        constructor(title: string, opts: { body?: string }) {
+          (window as any).__notes.push({ title, body: opts?.body });
+        }
+      }
+      (window as any).Notification = FakeNotification;
+    });
+    // W101B is occupied 12:00–4:00 PM in the default fixture.
+    await page.goto('/b/pattee-paterno?room=pattee-w101b');
+    await page.getByRole('button', { name: /Notify me/ }).click();
+    await expect(page.getByText(/You'll be notified if a 30 min\+ slot opens by 1:30 PM/)).toBeVisible();
+
+    // It frees up at 1:15 PM; the next check (here, a reload) fires the alert.
+    await page.unroute('**/api/availability?*');
+    await page.route('**/api/availability?*', async (route) => {
+      const date = new URL(route.request().url()).searchParams.get('date')!;
+      const body = payload(date);
+      body.items['8573'] = { open: body.items['8573']!.open, busy: [[NOW.set({ hour: 12 }).toMillis(), NOW.set({ hour: 13, minute: 15 }).toMillis()]] };
+      await route.fulfill({ json: body });
+    });
+    await page.goto('/');
+    await expect(page.getByRole('alert').filter({ hasText: 'Pattee W101B just opened up' })).toBeVisible();
+    expect(await page.evaluate(() => (window as any).__notes.length)).toBe(1);
+    await expect(page.getByRole('region', { name: 'Alerts' })).toHaveCount(0); // watch removed after firing
   });
 });

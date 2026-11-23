@@ -17,7 +17,7 @@ export type LiveState =
 
 class DisabledError extends Error {}
 
-async function fetchAvailability(date: string): Promise<AvailabilityPayload> {
+export async function fetchAvailability(date: string): Promise<AvailabilityPayload> {
   const res = await fetch(`/api/availability?date=${date}`, { headers: { accept: 'application/json' } });
   const body: unknown = await res.json().catch(() => null);
   if (res.status === 503 && (body as { error?: string } | null)?.error === 'disabled') {

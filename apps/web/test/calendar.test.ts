@@ -26,3 +26,17 @@ describe('calendar export', () => {
     expect(u.searchParams.get('text')).toBe('Study: Pattee W120');
   });
 });
+
+import { matchingWindow } from '../src/lib/watcher';
+describe('notify-me matching', () => {
+  const t = (h: number, m = 0) => Date.parse(`2026-11-23T${String(h + 5).padStart(2, '0')}:${String(m).padStart(2, '0')}:00Z`);
+  const win = (a: number, b: number) => ({ start: a, end: b, raw: { start: a, end: b }, durationMinutes: (b - a) / 60000, maxBookingMinutes: 180, startTimes: [] });
+  it('matches a slot that frees up within 30 min of the requested time and is long enough', () => {
+    expect(matchingWindow([win(t(13, 15), t(17))], { after: t(13), minMinutes: 30 })).toBeTruthy();
+  });
+  it('ignores later slots, short slots, and slots that ended', () => {
+    expect(matchingWindow([win(t(16), t(17))], { after: t(13), minMinutes: 30 })).toBeUndefined();
+    expect(matchingWindow([win(t(13), t(13, 20))], { after: t(13), minMinutes: 30 })).toBeUndefined();
+    expect(matchingWindow([win(t(11), t(12))], { after: t(13), minMinutes: 15 })).toBeUndefined();
+  });
+});
