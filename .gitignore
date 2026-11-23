@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build output
+dist/
+build/
+coverage/
+*.tsbuildinfo
+.vite/
+
+# Test artifacts
+playwright-report/
+test-results/
+
+# Environment and secrets — never commit
+.env
+.env.*
+!.env.example
+
+# Local tooling
+.DS_Store
+*.log
+.idea/
+.vscode/*
+!.vscode/extensions.json
+.claude/settings.local.json
+
+# Raw source snapshots fetched during research (keep provenance in data/, not raw dumps)
+data/raw/
