@@ -139,7 +139,10 @@ export function Controls({
         title="Nittany Rooms"
       >
         <LogoMark size={20} onNavy={theme === 'dark'} />
-        <span className="hidden text-[15px] font-extrabold tracking-[-0.02em] lg:inline">Nittany Rooms</span>
+        <span className="hidden text-[15px] font-extrabold tracking-[-0.02em] lg:inline">
+          <span style={{ color: 'var(--nr-brand-navy)' }}>Nittany</span>
+          <span style={{ color: 'var(--nr-brand-yellow)' }}>Rooms</span>
+        </span>
       </a>
       <div className="min-w-0 flex-1">
         <SearchBox placeholder="Search rooms" />

@@ -44,6 +44,9 @@
   --nr-dot-a: #3a414b;
   --nr-dot-b: #1a1e24;
   --nr-now: #facc15;
+  /* Wordmark: navy + yellow (navy lifted so it reads on dark) */
+  --nr-brand-navy: #7c9be0;
+  --nr-brand-yellow: #facc15;
   --nr-shadow: 0 8px 28px rgb(0 0 0 / 0.45);
 }
 
@@ -75,6 +78,8 @@
   --nr-dot-a: #b9c0c9;
   --nr-dot-b: #f1f3f5;
   --nr-now: #ca8a04;
+  --nr-brand-navy: #12284c;
+  --nr-brand-yellow: #d9a400;
   --nr-shadow: 0 8px 28px rgb(17 20 24 / 0.12);
 }
 
