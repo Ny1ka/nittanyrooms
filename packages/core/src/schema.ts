@@ -131,6 +131,8 @@ export const Building = z.object({
   aliases: z.array(z.string()),
   /** What the student is looking for here (e.g. "Engineering Library"). */
   headline: z.string().min(1),
+  /** Short marker label for the map; one of the aliases. Defaults to headline. */
+  mapLabel: z.string().min(1).optional(),
   address: z.string().nullable(),
   location: z.object({
     lat: z.number().min(-90).max(90),

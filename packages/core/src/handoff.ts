@@ -48,7 +48,7 @@ export function buildHandoff(args: {
   const summary = {
     room: room.displayName,
     building: building.name,
-    floor: floor ? `Floor ${floor.label}` : 'Floor not verified',
+    floor: !floor ? 'Floor not verified' : floor.unlisted ? 'Floor not listed' : `Floor ${floor.label}`,
     date: dateLabel,
     time,
     duration,

@@ -80,7 +80,8 @@
         "osm"
       ],
       "verifiedAt": "2026-11-22"
-    }
+    },
+    "mapLabel": "Engineering Library"
   },
   {
     "id": "pattee-paterno",
@@ -93,7 +94,8 @@
       "Paterno Library",
       "Knowledge Commons",
       "Tombros McWhirter Knowledge Commons",
-      "West Pattee"
+      "West Pattee",
+      "Pattee & Paterno"
     ],
     "headline": "Pattee and Paterno Libraries",
     "address": null,
@@ -164,12 +166,13 @@
         "osm"
       ],
       "verifiedAt": "2026-11-22"
-    }
+    },
+    "mapLabel": "Pattee & Paterno"
   },
   {
     "id": "deike",
     "name": "Deike Building",
-    "shortName": "Earth and Mineral Sciences Library",
+    "shortName": "Deike",
     "aliases": [
       "EMS Library",
       "Deike",
@@ -216,12 +219,13 @@
         "osm"
       ],
       "verifiedAt": "2026-11-22"
-    }
+    },
+    "mapLabel": "EMS Library"
   },
   {
     "id": "stuckeman",
     "name": "Stuckeman Family Building",
-    "shortName": "Architecture and Landscape Architecture Library",
+    "shortName": "Stuckeman",
     "aliases": [
       "Architecture Library",
       "Stuckeman",
@@ -268,12 +272,13 @@
         "osm"
       ],
       "verifiedAt": "2026-11-22"
-    }
+    },
+    "mapLabel": "Architecture Library"
   },
   {
     "id": "davey",
     "name": "Davey Laboratory",
-    "shortName": "Physical and Mathematical Sciences Library",
+    "shortName": "Davey Lab",
     "aliases": [
       "PMS Library",
       "Davey Lab",
@@ -336,6 +341,7 @@
         "osm"
       ],
       "verifiedAt": "2026-11-22"
-    }
+    },
+    "mapLabel": "PMS Library"
   }
 ]
