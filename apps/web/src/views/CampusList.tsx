@@ -1,7 +1,7 @@
 import { formatTime } from '@nittany-rooms/core';
 import { getBuilding, getProvider, openSpaces, rooms as allRooms } from '../lib/data';
 import { roomDay, roomStatus } from '../lib/availability';
-import { useFavorites } from '../lib/favorites';
+import { buildingKey, useFavorites } from '../lib/favorites';
 import { StatusChip } from '../components/StatusChip';
 import { spaceStatus } from '../lib/openSpaces';
 import { formatWalk, ROUTE_ATTRIBUTION, type RouteState } from '../lib/route';
@@ -43,6 +43,7 @@ export function CampusList({
 }) {
   const favs = useFavorites();
   const favRooms = allRooms.filter((r) => favs.ids.includes(r.id));
+  const favBuildings = markers.filter((m) => favs.has(buildingKey(m.building.id)));
   const pos = geo.status === 'ok' ? geo.pos : null;
   const dist = (m: MarkerInfo) => (pos ? distanceMeters(pos, { lat: m.building.location.lat, lon: m.building.location.lon }) : 0);
   const rows = pos ? [...visible].sort((a, b) => dist(a) - dist(b)) : visible;
@@ -87,12 +88,15 @@ export function CampusList({
         </div>
       )}
 
-      {favRooms.length > 0 && !anyFilter(filters) && (
+      {(favRooms.length > 0 || favBuildings.length > 0) && !anyFilter(filters) && (
         <section aria-label="Favorites">
           <h2 className="flex items-center gap-1.5 px-4 pt-4 pb-1.5 text-[13px] font-medium text-subtle">
             <Star size={12} filled className="text-yellow" /> Favorites
           </h2>
           <ul className="border-t border-line">
+            {favBuildings.map((m) => (
+              <Row key={m.building.id} info={m} distance={pos ? formatDistance(dist(m)) : null} />
+            ))}
             {favRooms.map((r) => {
               const b = getBuilding(r.buildingId)!;
               const st = roomStatus(roomDay(r, sel.date, sel.now, { demo, live }), sel.at);
@@ -169,11 +173,15 @@ function Badge({ info }: { info: MarkerInfo }) {
 
 function Row({ info, distance }: { info: MarkerInfo; distance: string | null }) {
   const b = info.building;
+  const isFav = useFavorites().has(buildingKey(b.id));
   return (
     <li className="border-b border-line">
       <button type="button" onClick={() => navigate(`/b/${b.id}`)} className="flex w-full items-center gap-3 px-4 py-3 text-left hover:bg-surface-2">
         <span className="min-w-0 flex-1">
-          <span className="block truncate text-[15px] font-semibold">{b.headline}</span>
+          <span className="block truncate text-[15px] font-semibold">
+            {b.headline}
+            {isFav && <Star size={12} filled className="ml-1.5 inline align-[-1px] text-yellow" aria-label="Favorite" />}
+          </span>
           {distance && <span className="block truncate text-xs text-muted">{distance}</span>}
         </span>
         <Badge info={info} />

@@ -8,7 +8,7 @@ import type { LiveState } from '../lib/live';
 import { navigate, setParams, useRoute } from '../lib/router';
 import type { SelectedTime } from '../lib/time';
 import { ChevronLeft, External, Star } from '../components/Icons';
-import { useFavorites } from '../lib/favorites';
+import { buildingKey, useFavorites } from '../lib/favorites';
 import { AvailabilityFreshness } from '../components/Notices';
 import { StatusChip, statusLabel } from '../components/StatusChip';
 import { MiniTimeline, displayRange } from '../components/Timeline';
@@ -90,7 +90,10 @@ function RoomList({ building, sel, demo, live, filters, clearFilters }: { buildi
     <div className="space-y-3 px-4 py-3">
       <BackButton label="All buildings" onClick={toCampus} />
       <div>
-        <h1 className="text-lg leading-tight font-semibold">{building.headline}</h1>
+        <div className="flex items-start justify-between gap-2">
+          <h1 className="text-lg leading-tight font-semibold">{building.headline}</h1>
+          <BuildingStar id={building.id} name={building.headline} />
+        </div>
         <p className="mt-0.5 text-xs text-muted">
           {buildingPhrase(building)} {roomCountPhrase(allRooms.length)}
           {floorsPhrase(building) ? ` on ${floorsPhrase(building)}` : ''}.
@@ -211,5 +214,22 @@ function RoomRow({
         <MiniTimeline day={day} now={now} range={range} />
       </button>
     </li>
+  );
+}
+
+function BuildingStar({ id, name }: { id: string; name: string }) {
+  const fav = useFavorites();
+  const on = fav.has(buildingKey(id));
+  return (
+    <button
+      type="button"
+      aria-pressed={on}
+      aria-label={on ? `Remove ${name} from favorites` : `Save ${name} to favorites`}
+      title={on ? 'Remove from favorites' : 'Save to favorites'}
+      onClick={() => fav.toggle(buildingKey(id))}
+      className={`grid size-8 shrink-0 place-items-center rounded-control hover:bg-surface-2 ${on ? 'text-yellow' : 'text-subtle hover:text-fg'}`}
+    >
+      <Star size={18} filled={on} />
+    </button>
   );
 }

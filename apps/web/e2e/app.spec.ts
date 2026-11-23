@@ -278,3 +278,16 @@ test.describe('report wrong info', () => {
     expect(u.searchParams.get('body')).toContain('Open/booked times');
   });
 });
+
+test.describe('favorite buildings', () => {
+  test('save a building and see it in Favorites with its live count', async ({ page, api: _ }) => {
+    await page.goto('/b/deike');
+    await page.getByRole('button', { name: 'Save Earth and Mineral Sciences Library to favorites' }).click();
+    await page.goto('/');
+    const favs = page.getByRole('region', { name: 'Favorites' });
+    await expect(favs.getByRole('button', { name: /Earth and Mineral Sciences Library/ })).toContainText('/8');
+    await favs.getByRole('button', { name: /Earth and Mineral Sciences Library/ }).click();
+    await expect(page.getByRole('heading', { level: 1, name: 'Earth and Mineral Sciences Library' })).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Remove Earth and Mineral Sciences Library from favorites' })).toHaveAttribute('aria-pressed', 'true');
+  });
+});

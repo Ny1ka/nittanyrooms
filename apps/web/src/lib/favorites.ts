@@ -1,6 +1,10 @@
 import { useSyncExternalStore } from 'react';
 
-/** Favorite room ids, stored in this browser only (a convenience; no accounts). */
+/**
+ * Favorite rooms and buildings, stored in this browser only (a convenience; no accounts).
+ * Rooms are stored by room id; buildings as `building:<id>` (see buildingKey).
+ */
+export const buildingKey = (id: string) => `building:${id}`;
 const KEY = 'nr-favorites';
 const EVENT = 'nr:favorites';
 
