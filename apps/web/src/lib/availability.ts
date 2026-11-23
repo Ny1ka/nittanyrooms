@@ -1,6 +1,7 @@
 import {
   MINUTE,
   computeDay,
+  dayBounds,
   localTime,
   operatingWindow,
   statusAt,
@@ -11,6 +12,7 @@ import {
   type RoomStatus,
 } from '@nittany-rooms/core';
 import { getPolicy, roomsIn } from './data';
+import type { LiveState } from './live';
 import { useRoute } from './router';
 
 /**
@@ -33,6 +35,8 @@ export function useDemo(): boolean {
 
 export interface RoomDay extends DayAvailability {
   sample: boolean;
+  /** Data came from a live provider response (not demo, not missing). */
+  live: boolean;
 }
 
 // ---- deterministic sample data (demo mode only) ----
@@ -80,27 +84,60 @@ function sampleSnapshot(room: Room, date: string, now: number): ProviderSnapshot
 
 // ---- public API ----
 
+function liveSnapshot(room: Room, date: string, now: number, live: LiveState | undefined) {
+  if (room.providerId !== 'psul-libcal' || !room.providerRoomId || !live) return null;
+  if (live.status === 'ok' && live.data.date === date) {
+    const item = live.data.items[room.providerRoomId];
+    const toIv = ([start, end]: [number, number]) => ({ start, end });
+    // No slots for this room on this date means it isn't bookable that day.
+    const openHours = item ? item.open.map(toIv) : [];
+    const snapshot: ProviderSnapshot = {
+      roomId: room.id,
+      providerId: room.providerId,
+      coverage: dayBounds(date),
+      complete: live.data.complete,
+      retrievedAt: live.retrievedAt,
+      busy: item ? item.busy.map(toIv) : [],
+    };
+    return { snapshot, openHours };
+  }
+  if (live.status === 'error') {
+    const snapshot: ProviderSnapshot = {
+      roomId: room.id,
+      providerId: room.providerId,
+      coverage: dayBounds(date),
+      complete: false,
+      retrievedAt: now,
+      busy: [],
+      error: live.message,
+    };
+    return { snapshot, openHours: null };
+  }
+  return null;
+}
+
 export function roomDay(
   room: Room,
   date: string,
   now: number,
-  opts: { demo: boolean; showShorter?: boolean },
+  opts: { demo: boolean; showShorter?: boolean; live?: LiveState },
 ): RoomDay {
   const policy = getPolicy(room.policyId);
-  // Live provider adapters (milestone M8) will supply snapshots here when
-  // getProvider(room.providerId).availabilityAccess !== 'none'. None do yet.
-  const snapshot = opts.demo ? sampleSnapshot(room, date, now) : null;
+  const fromLive = opts.demo ? null : liveSnapshot(room, date, now, opts.live);
+  const snapshot = opts.demo ? sampleSnapshot(room, date, now) : (fromLive?.snapshot ?? null);
+  const openHours = opts.demo
+    ? [operatingWindow(date, SAMPLE_OPEN, SAMPLE_CLOSE)]
+    : (fromLive?.openHours ?? null);
   const day = computeDay({
     date,
-    // Real hours aren't verified for any room yet; demo uses labeled sample hours.
-    openHours: opts.demo ? [operatingWindow(date, SAMPLE_OPEN, SAMPLE_CLOSE)] : null,
+    openHours,
     snapshot,
     policy,
     now,
     staleAfterMinutes: STALE_AFTER_MINUTES,
     ...(opts.showShorter ? { minUsefulGapMinutes: policy.minDurationMinutes } : {}),
   });
-  return { ...day, sample: opts.demo };
+  return { ...day, sample: opts.demo, live: !opts.demo && !!fromLive && !snapshot?.error };
 }
 
 export function roomStatus(day: RoomDay, at: number): RoomStatus {
@@ -115,6 +152,7 @@ export function buildingCounts(
   at: number,
   now: number,
   demo: boolean,
+  live?: LiveState,
 ): StateCounts {
   const counts: StateCounts = {
     open: 0,
@@ -125,7 +163,7 @@ export function buildingCounts(
     total: 0,
   };
   for (const r of roomsIn(buildingId)) {
-    const s = roomStatus(roomDay(r, date, now, { demo }), at);
+    const s = roomStatus(roomDay(r, date, now, { demo, live }), at);
     counts[s.state]++;
     counts.total++;
   }

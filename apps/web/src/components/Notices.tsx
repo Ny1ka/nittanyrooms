@@ -1,5 +1,6 @@
-import { navigate, setParams } from '../lib/router';
-import { useRoute } from '../lib/router';
+import { formatTime } from '@nittany-rooms/core';
+import type { LiveState } from '../lib/live';
+import { navigate, setParams, useRoute } from '../lib/router';
 
 /** Shown on every page in demo mode. Sample data never appears without it. */
 export function DemoBanner() {
@@ -23,19 +24,49 @@ export function FreshnessNote({ children }: { children: React.ReactNode }) {
   );
 }
 
-export function AvailabilityFreshness({ demo }: { demo: boolean }) {
-  return (
-    <FreshnessNote>
-      {demo ? (
-        <>Sample data. Live availability isn't connected yet.</>
-      ) : (
-        <>
-          Live availability isn't connected yet, so rooms show <strong>Check on PSU site</strong>.{' '}
-          <TryDemoLink />
-        </>
-      )}
-    </FreshnessNote>
-  );
+export function AvailabilityFreshness({ demo, live, scope = 'campus' }: { demo: boolean; live?: LiveState; scope?: 'campus' | 'libcal' | 'outlook' }) {
+  if (demo) return <FreshnessNote>Sample data, not real Penn State availability.</FreshnessNote>;
+  const ecore = scope === 'campus' ? ' Engineering Library (ECoRE) rooms: check on PSU site.' : '';
+  if (scope === 'outlook') {
+    return (
+      <FreshnessNote>
+        These rooms are booked in Outlook, and their schedules aren't public, so they show <strong>Check on PSU site</strong>.
+      </FreshnessNote>
+    );
+  }
+  switch (live?.status) {
+    case 'ok':
+      return (
+        <FreshnessNote>
+          Library availability is live from Penn State's LibCal, checked {formatTime(live.retrievedAt)}. Penn State's page has the final say.{ecore}
+        </FreshnessNote>
+      );
+    case 'loading':
+      return <FreshnessNote>Checking library availability with Penn State…</FreshnessNote>;
+    case 'error':
+      return (
+        <FreshnessNote>
+          Couldn't reach Penn State's LibCal just now, so library rooms show <strong>Check on PSU site</strong>.{' '}
+          <button type="button" className="font-semibold underline underline-offset-2" onClick={live.refetch}>
+            Try again
+          </button>
+        </FreshnessNote>
+      );
+    case 'disabled':
+      return (
+        <FreshnessNote>
+          Live library availability is turned off right now, so rooms show <strong>Check on PSU site</strong>. <TryDemoLink />
+        </FreshnessNote>
+      );
+    case 'out-of-range':
+      return <FreshnessNote>Penn State only takes library bookings up to two weeks ahead.</FreshnessNote>;
+    default:
+      return (
+        <FreshnessNote>
+          Live availability isn't connected, so rooms show <strong>Check on PSU site</strong>. <TryDemoLink />
+        </FreshnessNote>
+      );
+  }
 }
 
 function TryDemoLink() {

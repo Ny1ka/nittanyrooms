@@ -3,6 +3,7 @@ import { lazy, Suspense, useMemo, useState } from 'react';
 import { buildingCounts, roomDay, roomStatus, useDemo, type StateCounts } from '../lib/availability';
 import { buildings, getProvider, getSource, roomsIn } from '../lib/data';
 import { buildingPhrase, floorsPhrase, roomCountPhrase, unknownReason } from '../lib/labels';
+import { useLiveLibcal } from '../lib/live';
 import { navigate, setParams, useRoute } from '../lib/router';
 import type { SelectedTime } from '../lib/time';
 import { Close, External, ListIcon, MapIcon } from '../components/Icons';
@@ -31,14 +32,15 @@ export function CampusView({ sel }: { sel: SelectedTime }) {
   const listMode = params.get('view') === 'list';
   const [filters, setFilters] = useState<Filters>({ openNow: false, minSize: 0, accessible: false });
   const anyFilter = filters.openNow || filters.minSize > 0 || filters.accessible;
+  const live = useLiveLibcal(sel.date, sel.now);
 
   const markers: MarkerInfo[] = useMemo(
     () =>
       buildings.map((b) => {
-        const counts = buildingCounts(b.id, sel.date, sel.at, sel.now, demo);
+        const counts = buildingCounts(b.id, sel.date, sel.at, sel.now, demo, live);
         return { building: b, counts, known: counts.total > 0 && counts.unknown < counts.total };
       }),
-    [sel.date, sel.at, sel.now, demo],
+    [sel.date, sel.at, sel.now, demo, live],
   );
 
   // A building matches if at least one of its verified rooms matches every active filter.
@@ -48,7 +50,7 @@ export function CampusView({ sel }: { sel: SelectedTime }) {
       if (filters.minSize && (r.capacity === null || r.capacity < filters.minSize)) return false;
       if (filters.accessible && !r.features.includes('accessible')) return false;
       if (filters.openNow) {
-        const s = roomStatus(roomDay(r, sel.date, sel.now, { demo }), sel.at);
+        const s = roomStatus(roomDay(r, sel.date, sel.now, { demo, live }), sel.at);
         if (s.state !== 'open') return false;
       }
       return true;
@@ -115,7 +117,7 @@ export function CampusView({ sel }: { sel: SelectedTime }) {
           <EmptyFilters filters={filters} demo={demo} />
         )}
 
-        <AvailabilityFreshness demo={demo} />
+        <AvailabilityFreshness demo={demo} live={live} />
       </aside>
 
       <section
@@ -200,8 +202,7 @@ function EmptyFilters({ filters, demo }: { filters: Filters; demo: boolean }) {
   const reasons: string[] = [];
   if (filters.minSize) reasons.push('No room has a verified capacity yet.');
   if (filters.accessible) reasons.push('No room has verified accessibility details yet.');
-  if (filters.openNow && !demo) reasons.push('Live availability isn’t connected, so no room can be confirmed open.');
-  if (filters.openNow && demo) reasons.push('No rooms are open at the selected time. Try a different time.');
+  if (filters.openNow) reasons.push('No room is confirmed open at the selected time. Try a different time, or check the library hours.');
   return (
     <div className="rounded-panel border border-line bg-surface p-5 text-[15px]">
       <div className="font-semibold">No buildings match these filters.</div>

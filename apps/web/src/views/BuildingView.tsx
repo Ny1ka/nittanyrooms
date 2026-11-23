@@ -14,6 +14,7 @@ import { DateTime } from 'luxon';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { roomDay, roomStatus, useDemo, type RoomDay } from '../lib/availability';
 import { floorOf, getBuilding, getPolicy, getProvider, getSource, roomsIn } from '../lib/data';
+import { useLiveLibcal, type LiveState } from '../lib/live';
 import { navigate, setParams, useRoute } from '../lib/router';
 import { buildingPhrase, featureList, floorName, floorsPhrase, roomCountPhrase, roomShort, unknownReason } from '../lib/labels';
 import type { SelectedTime } from '../lib/time';
@@ -78,22 +79,24 @@ function NoRoomsYet({ building }: { building: Building }) {
   );
 }
 
-function useStatuses(rooms: Room[], sel: SelectedTime, demo: boolean) {
+function useStatuses(rooms: Room[], sel: SelectedTime, demo: boolean, live: LiveState) {
   return useMemo(() => {
     const m = new Map<string, { day: RoomDay; status: RoomStatus }>();
     for (const r of rooms) {
-      const day = roomDay(r, sel.date, sel.now, { demo });
+      const day = roomDay(r, sel.date, sel.now, { demo, live });
       m.set(r.id, { day, status: roomStatus(day, sel.at) });
     }
     return m;
-  }, [rooms, sel.date, sel.now, sel.at, demo]);
+  }, [rooms, sel.date, sel.now, sel.at, demo, live]);
 }
 
 function BuildingWithRooms({ building, sel }: { building: Building; sel: SelectedTime }) {
   const demo = useDemo();
   const { params } = useRoute();
   const rooms = roomsIn(building.id);
-  const statuses = useStatuses(rooms, sel, demo);
+  const live = useLiveLibcal(sel.date, sel.now);
+  const statuses = useStatuses(rooms, sel, demo, live);
+  const scope = getProvider(building.providerIds[0]!).system === 'outlook' ? 'outlook' : 'libcal';
   const floors = [...building.floors].sort((a, b) => b.level - a.level); // elevator order
   const roomId = params.get('room');
   const room = rooms.find((r) => r.id === roomId) ?? null;
@@ -170,7 +173,7 @@ function BuildingWithRooms({ building, sel }: { building: Building; sel: Selecte
           , checked {DateTime.fromISO(rooms[0]!.verification.verifiedAt).toFormat('LLL d, yyyy')}.
         </p>
         <div className="lg:hidden">
-          <AvailabilityFreshness demo={demo} />
+          <AvailabilityFreshness demo={demo} live={live} scope={scope} />
         </div>
       </aside>
 
@@ -186,12 +189,12 @@ function BuildingWithRooms({ building, sel }: { building: Building; sel: Selecte
       />
 
       {room ? (
-        <RoomPanel key={`${room.id}`} room={room} building={building} sel={sel} demo={demo} />
+        <RoomPanel key={`${room.id}`} room={room} building={building} sel={sel} demo={demo} live={live} />
       ) : (
         <section className="hidden flex-col justify-center gap-3 rounded-panel border border-line bg-surface p-6 text-slate lg:flex lg:w-[400px] lg:shrink-0">
           <div className="text-heading font-semibold text-navy">Pick a room</div>
           <p>Choose a room on the floor or from the list to see its times and how to book it.</p>
-          <AvailabilityFreshness demo={demo} />
+          <AvailabilityFreshness demo={demo} live={live} scope={scope} />
         </section>
       )}
     </div>
@@ -319,12 +322,12 @@ function shiftDate(date: string, days: number) {
   return DateTime.fromISO(date, { zone: 'America/New_York' }).plus({ days }).toISODate()!;
 }
 
-function RoomPanel({ room, building, sel, demo }: { room: Room; building: Building; sel: SelectedTime; demo: boolean }) {
+function RoomPanel({ room, building, sel, demo, live }: { room: Room; building: Building; sel: SelectedTime; demo: boolean; live: LiveState }) {
   const policy = getPolicy(room.policyId);
   const provider = getProvider(room.providerId);
   const floor = floorOf(room, building);
   const [showShorter, setShowShorter] = useState(false);
-  const day = useMemo(() => roomDay(room, sel.date, sel.now, { demo, showShorter }), [room, sel.date, sel.now, demo, showShorter]);
+  const day = useMemo(() => roomDay(room, sel.date, sel.now, { demo, showShorter, live }), [room, sel.date, sel.now, demo, showShorter, live]);
   const status = roomStatus(day, sel.at);
   const [picked, setPicked] = useState<number | null>(null);
   const [expired, setExpired] = useState(false);
@@ -352,9 +355,15 @@ function RoomPanel({ room, building, sel, demo }: { room: Room; building: Buildi
     if (window.matchMedia('(max-width: 1023px)').matches) panelRef.current?.focus();
   }, []);
 
-  const selection = chosen
-    ? { start: chosen.start, end: Math.min(chosen.end, chosen.start + chosen.maxBookingMinutes * MINUTE) }
+  // Start at the selected time when it falls inside the window (first valid
+  // booking start at or after it), otherwise at the window's start.
+  const selStart = chosen
+    ? (sel.at > chosen.start ? chosen.startTimes.find((t) => t >= sel.at) : undefined) ?? chosen.start
     : null;
+  const maxEnd = (start: number) =>
+    policy.maxDurationMinutes === null ? Infinity : start + policy.maxDurationMinutes * MINUTE;
+  const selection =
+    chosen && selStart !== null ? { start: selStart, end: Math.min(chosen.end, maxEnd(selStart)) } : null;
   const shortGaps = day.filtered.filter((f) => f.reason === 'too-short' && f.raw.end > sel.now);
   const today = campusDate(sel.now);
   const horizonEnd = policy.bookingHorizonDays ? shiftDate(today, policy.bookingHorizonDays) : null;
@@ -487,7 +496,15 @@ function RoomPanel({ room, building, sel, demo }: { room: Room; building: Buildi
           <HandoffPanel room={room} building={building} date={sel.date} selection={selection} />
           <FreshnessNote>
             {day.sample ? (
-              <>Sample data, generated {Math.round((sel.now - (day.retrievedAt ?? sel.now)) / MINUTE)} min ago. Live availability isn't connected yet.</>
+              <>Sample data, generated {Math.round((sel.now - (day.retrievedAt ?? sel.now)) / MINUTE)} min ago. Not real Penn State availability.</>
+            ) : day.live ? (
+              <>
+                Availability checked {formatTime(day.retrievedAt!)} from{' '}
+                <a className="underline" href={provider.portalUrl} target="_blank" rel="noopener noreferrer">
+                  Penn State's LibCal
+                </a>
+                . It can change at any moment; Penn State's page has the final say.
+              </>
             ) : (
               <>
                 Room verified {DateTime.fromISO(room.verification.verifiedAt).toFormat('LLL d, yyyy')} from{' '}
@@ -537,6 +554,19 @@ function Windows({
     return (
       <div className="rounded-control fill-unknown p-4 text-sm text-ink-muted">
         Penn State only returned part of today’s schedule, so we can’t confirm open times. Check on PSU site.
+      </div>
+    );
+  }
+  if (day.windows.length === 0 && day.segments.every((s) => s.kind === 'closed')) {
+    return (
+      <div className="rounded-control fill-unavailable p-4 text-sm text-ink-muted">
+        <div className="font-semibold text-navy">Not bookable on this day</div>
+        <p className="mt-1">Penn State's booking system has no times for this room on this date. The library may be closed or the room may be unavailable.</p>
+        {onNextDay && (
+          <button type="button" className="mt-1 font-semibold text-navy underline" onClick={onNextDay}>
+            Check the next day
+          </button>
+        )}
       </div>
     );
   }
