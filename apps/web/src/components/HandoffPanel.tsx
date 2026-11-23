@@ -64,7 +64,9 @@ export function HandoffPanel({ room, building, date, selection }: { room: Room; 
         </summary>
         <p className="mt-2">
           {h.mode === 'room-link'
-            ? `Opens Penn State's page for ${h.summary.room} in a new tab.`
+            ? h.datePreselected
+              ? `Opens Penn State's page for ${h.summary.room}, already on ${h.summary.date}.${h.summary.time ? ` Tap ${h.summary.time} on its calendar.` : ''}`
+              : `Opens Penn State's page for ${h.summary.room} in a new tab.`
             : `Opens ${provider.system === 'outlook' ? 'Outlook Calendar' : provider.name} in a new tab. There's no direct link to this room, so:`}
         </p>
         <ol className="mt-1.5 ml-4 list-decimal space-y-1">

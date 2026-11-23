@@ -30,7 +30,7 @@ Last updated: **2026-11-22**. This file separates what we know from what we're g
 | U4 | ECoRE room capacity, features, accessibility | Shown as "Not verified yet" | College of Engineering facilities |
 | U5 | ECoRE booking limits (duration, advance window) | Can't apply policy rules to ECoRE timelines | College of Engineering facilities |
 | U6 | Floor plans for ECoRE and Pattee/Paterno, and permission to use them | Without them, the floor view stays a labeled schematic | PSU Office of Physical Plant / Libraries / CoE |
-| U7 | Whether LibCal has a supported date/time deep-link format | Handoff can't preselect a time | PSU Libraries or testing in a browser |
+| ~~U7~~ | ~~LibCal date/time deep link~~ | **Partly resolved 2026-11-23:** `psu.libcal.com/space/<id>?date=YYYY-MM-DD` opens the room calendar on that date (server sets `initialDate`). No time parameter exists, so students tap the start time; the handoff tells them which. | — |
 
 ## What the product does about it today
 

@@ -59,7 +59,7 @@ test.describe('building → floor → room → handoff', () => {
     await expect(page.getByText('Mon, Nov 23 · 1:00 – 2:00 PM · 1 hr')).toBeVisible();
 
     const cta = page.getByRole('link', { name: /Continue to Penn State reservation/ });
-    await expect(cta).toHaveAttribute('href', 'https://psu.libcal.com/space/30978');
+    await expect(cta).toHaveAttribute('href', 'https://psu.libcal.com/space/30978?date=2026-11-23');
     await expect(cta).toHaveAttribute('target', '_blank');
     await expect(page.getByText(/It isn’t reserved until Penn State emails your confirmation/)).toBeVisible();
     await expect(page.getByText('Booked', { exact: true })).toHaveCount(0);
@@ -74,6 +74,8 @@ test.describe('building → floor → room → handoff', () => {
     await expect(page.getByLabel('Availability').getByText('Tue, Nov 24')).toBeVisible();
     await expect.poll(() => api).toContain('2026-11-24');
     await expect(page.getByRole('radio', { name: /9:00 AM – 3:00 PM/ })).toBeVisible();
+    // The official LibCal page opens on the newly selected day.
+    await expect(page.getByRole('link', { name: /Continue to Penn State reservation/ })).toHaveAttribute('href', 'https://psu.libcal.com/space/8251?date=2026-11-24');
   });
 
   test('ECoRE (Outlook) never shows free time and explains the approval handoff', async ({ page, api: _ }) => {
@@ -182,7 +184,7 @@ test.describe('mobile', () => {
     const cta = page.getByRole('link', { name: /Continue to Penn State reservation/ });
     await cta.scrollIntoViewIfNeeded();
     await expect(cta).toBeVisible();
-    await expect(cta).toHaveAttribute('href', 'https://psu.libcal.com/space/8251');
+    await expect(cta).toHaveAttribute('href', 'https://psu.libcal.com/space/8251?date=2026-11-23');
     const box = await cta.boundingBox();
     expect(box!.height).toBeGreaterThanOrEqual(44);
   });
