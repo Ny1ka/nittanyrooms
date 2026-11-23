@@ -102,8 +102,17 @@ sequenceDiagram
 
 The browser maps LibCal `eid` → room via `providerRoomId` and builds an engine snapshot with `open` as the bookable hours and `busy` as occupied time. A room with no slots isn't bookable that day. Env: `LIBCAL_LIVE=off` (kill switch) and `LIBCAL_USER_AGENT`. Local `pnpm dev` serves `api/*.ts` through a Vite middleware.
 
+## Notifications ("Notify me when it opens")
+
+- **In-tab (always on):** the browser keeps checking live data every 3 minutes, including in background tabs, and shows a notification and an in-app alert. Watches live in localStorage.
+- **Server push (when configured):** the browser subscribes with Web Push (service worker `public/sw.js`), and `POST /api/watches` stores `{room, LibCal eid, date, after, minMinutes, push subscription}` in Upstash Redis. Keys expire the day after. Limit: 10 per subscription.
+- **Checker:** `GET /api/check-watches` (Bearer `CRON_SECRET`) runs every ~5 min from GitHub Actions (`.github/workflows/watch-check.yml`), because Vercel Hobby cron is daily only. It loads LibCal through the same memoized fetch as the site, finds a slot that starts within 30 min of the requested time and lasts long enough, sends one push (VAPID), and deletes the watch. Subscriptions returning 404/410 are deleted; other failures retry next run.
+- **No double alerts:** when a watch has a server registration, the in-tab watcher shows only the in-app alert.
+- **Env:** `KV_REST_API_URL`, `KV_REST_API_TOKEN`, `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, `CRON_SECRET`, `SITE_URL`.
+
 ## Security & privacy
 
 - No accounts, no PSU credentials, no cookies from PSU. Discovery is anonymous and read-only.
+- Push alerts store only an anonymous push subscription (endpoint + keys) with the room and time, deleted when the alert fires or the day after. No names, emails, or location.
 - Availability only ever shows occupied/free, never who booked or why.
 - Provider credentials (when granted) live only in server env vars. Never in the bundle.

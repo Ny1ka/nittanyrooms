@@ -1,0 +1,32 @@
+name: Room alert checker
+
+# Calls the server-side checker every ~5 minutes so "Notify me when it opens"
+# alerts fire even when nobody has the site open. GitHub may delay scheduled runs
+# by a few minutes under load.
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: watch-check
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Check watches
+        env:
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+          SITE_URL: ${{ vars.SITE_URL || 'https://nittanyrooms.vercel.app' }}
+        run: |
+          if [ -z "$CRON_SECRET" ]; then
+            echo "CRON_SECRET not set; server push alerts are not configured yet. Skipping."
+            exit 0
+          fi
+          code=$(curl -sS -o result.json -w '%{http_code}' -H "Authorization: Bearer $CRON_SECRET" "$SITE_URL/api/check-watches")
+          cat result.json; echo
+          if [ "$code" = "503" ]; then echo "Push not configured on Vercel yet."; exit 0; fi
+          test "$code" = "200"
