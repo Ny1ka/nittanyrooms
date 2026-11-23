@@ -56,7 +56,7 @@ Choosing a building flies the camera in and lists its rooms by floor, each with 
 
 - **Filters:** Open now, Accessible, **Free until**, **Available for at least**, group size, sort by distance.
 - **Date and time:** check any time in Penn State's two-week booking window.
-- **Settings (⋯):** Appearance (Light / Dark / Auto), Important notes on how data is sourced, Data updates, View on GitHub.
+- **Settings (⋯):** Appearance (Light / Dark / Auto), Important notes on how data is sourced, Data updates, Report wrong info. The GitHub icon next to it opens the source code.
 
 ### Open study spaces
 

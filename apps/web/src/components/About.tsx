@@ -1,7 +1,6 @@
 import { DateTime } from 'luxon';
 import { sources } from '../lib/data';
 import type { ThemePref } from '../lib/theme';
-import { GitHub } from './Icons';
 
 const REPO = 'https://github.com/Ny1ka/nittanyrooms';
 const h = 'text-[11px] font-semibold tracking-wide text-subtle uppercase';
@@ -61,9 +60,6 @@ export function About({ pref, setPref, liveCheckedAt }: { pref: ThemePref; setPr
       </details>
 
       <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-        <a href={REPO} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 font-semibold text-fg hover:underline">
-          <GitHub size={14} /> View on GitHub
-        </a>
         <a href={`${REPO}/issues/new`} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-fg">
           Report wrong info
         </a>

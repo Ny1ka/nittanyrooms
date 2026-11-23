@@ -7,7 +7,7 @@ import type { ThemePref } from '../lib/theme';
 import { useThemeValue } from '../lib/theme';
 import type { SelectedTime } from '../lib/time';
 import { About } from './About';
-import { Calendar, Locate } from './Icons';
+import { Calendar, GitHub, Locate } from './Icons';
 import { LogoMark } from './Logo';
 import { Popover } from './Popover';
 import { SearchBox } from './SearchBox';
@@ -208,6 +208,16 @@ export function Controls({
       <Popover label={`Date and time: ${live ? 'now' : timeLabel}`} active={!live} width={300} button={<><Calendar size={14} /><span className="whitespace-nowrap tabular">{timeLabel}</span></>}>
         {(close) => <TimePanel sel={sel} close={close} />}
       </Popover>
+      <a
+        href="https://github.com/Ny1ka/nittanyrooms"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="View source on GitHub (opens in a new tab)"
+        title="View on GitHub"
+        className="inline-flex size-9 shrink-0 items-center justify-center rounded-control border border-line bg-surface-2 text-fg hover:border-subtle"
+      >
+        <GitHub size={16} />
+      </a>
       <Popover label="More" width={320} button={<DotsIcon />}>
         {() => <About pref={themePref} setPref={setThemePref} liveCheckedAt={liveCheckedAt} />}
       </Popover>
