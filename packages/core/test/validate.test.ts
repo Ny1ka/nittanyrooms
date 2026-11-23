@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { buildHandoff, loadDataset, localTime, rawDataset, rawFootprints, validateDataset, validateFootprints } from '../src/index.js';
+import { buildHandoff, loadDataset, localTime, rawDataset, rawFootprints, rawOpenSpaces, validateDataset, validateFootprints, validateOpenSpaces } from '../src/index.js';
 
 const NOW = Date.parse('2026-11-23T12:00:00Z');
 const clone = () => structuredClone(rawDataset) as any;
@@ -151,5 +151,16 @@ describe('validateFootprints', () => {
     fc.features[2].geometry.coordinates[0][1] = [-80, 41];
     const codes = validateFootprints(fc, ids, ids).map((i) => i.code);
     expect(codes).toEqual(expect.arrayContaining(['footprint-orphan', 'footprint-open-ring', 'footprint-outside-campus']));
+  });
+});
+
+describe('validateOpenSpaces', () => {
+  const ctx = { buildingIds: rawDataset.buildings.map((b) => b.id), sourceIds: rawDataset.sources.map((s) => s.id), now: Date.parse('2026-11-24') };
+  it('passes on the committed open spaces', () => expect(validateOpenSpaces(rawOpenSpaces, ctx)).toEqual([]));
+  it('requires a building for LibCal-derived hours and flags stale entries', () => {
+    const d = structuredClone(rawOpenSpaces) as any;
+    d[0].buildingId = null;
+    const codes = validateOpenSpaces(d, { ...ctx, now: Date.parse('2027-03-01') }).map((i) => i.code);
+    expect(codes).toEqual(expect.arrayContaining(['libcal-needs-building', 'stale-open-space']));
   });
 });

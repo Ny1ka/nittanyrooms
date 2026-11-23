@@ -70,5 +70,32 @@
     "accessMethod": "manual",
     "retrievedAt": "2026-11-23",
     "notes": "Owner confirmed on 2026-11-23: rooms 105A, 105B, 105C, 105D, 105E, 105F, reserved like other College of Engineering spaces & group rooms (Outlook Calendar, with the room). IME page says five group study rooms; owner lists six."
+  },
+  {
+    "id": "psul-hours",
+    "name": "Libraries: Hours & Locations",
+    "owner": "Penn State University Libraries",
+    "url": "https://libraries.psu.edu/hours-and-locations",
+    "accessMethod": "public-page",
+    "retrievedAt": "2026-11-23",
+    "notes": "Banner on 2026-11-23: 'Pattee and Paterno: 9:00am - 5:00pm', matching LibCal bookable slots that day."
+  },
+  {
+    "id": "psl-teamwork",
+    "name": "Penn State Learning: Teamwork Areas",
+    "owner": "Penn State Learning",
+    "url": "https://pennstatelearning.psu.edu/about-us/facilities/teamwork-areas",
+    "accessMethod": "public-page",
+    "retrievedAt": "2026-11-23",
+    "notes": "220 Boucke: teamwork areas reservable through Starfish; 'walk-ins are welcome'. Hours not published."
+  },
+  {
+    "id": "sa-hub",
+    "name": "HUB-Robeson Center",
+    "owner": "Penn State Student Affairs",
+    "url": "https://studentaffairs.psu.edu/hub",
+    "accessMethod": "public-page",
+    "retrievedAt": "2026-11-23",
+    "notes": "Lounges are 'public areas', 'not appropriate for … events that require a quiet environment'. Regular weekly hours not published."
   }
 ]

@@ -4,11 +4,20 @@ import providers from '../../../data/providers.json';
 import rooms from '../../../data/rooms.json';
 import sources from '../../../data/sources.json';
 import footprintsRaw from '../../../data/footprints.json';
+import openSpacesRaw from '../../../data/open-spaces.json';
+import { z } from 'zod';
+import { OpenSpace } from './openSpaces.js';
 import { Dataset } from './schema.js';
 import { FootprintCollection } from './validate/footprints.js';
 
 /** Raw building footprints (OSM, ODbL). */
 export const rawFootprints: unknown = footprintsRaw;
+
+/** Walk-in study spaces (not reservable). */
+export const rawOpenSpaces: unknown = openSpacesRaw;
+export function loadOpenSpaces(): OpenSpace[] {
+  return z.array(OpenSpace).parse(openSpacesRaw);
+}
 
 export function loadFootprints(): FootprintCollection {
   return FootprintCollection.parse(footprintsRaw);

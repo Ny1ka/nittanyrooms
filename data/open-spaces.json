@@ -1,0 +1,162 @@
+[
+  {
+    "id": "pattee-paterno-study",
+    "name": "Pattee and Paterno study areas",
+    "buildingId": "pattee-paterno",
+    "buildingName": "Pattee Library and Paterno Library",
+    "location": {
+      "lat": 40.7977846,
+      "lon": -77.8662328,
+      "osmElement": "relation/359265"
+    },
+    "kind": "library",
+    "access": "Walk-in when the library is open. Library rules apply.",
+    "hours": {
+      "mode": "libcal"
+    },
+    "url": "https://libraries.psu.edu/hours-and-locations",
+    "notes": [
+      "Open/closed is inferred from the library's bookable room hours in LibCal; check the Libraries' hours page for the full schedule."
+    ],
+    "verification": {
+      "sourceIds": [
+        "psul-hours",
+        "psu-libcal-up-spaces"
+      ],
+      "verifiedAt": "2026-11-23"
+    }
+  },
+  {
+    "id": "ems-library-study",
+    "name": "Earth and Mineral Sciences Library study areas",
+    "buildingId": "deike",
+    "buildingName": "Deike Building",
+    "location": {
+      "lat": 40.7942302,
+      "lon": -77.8654394,
+      "osmElement": "way/37861072"
+    },
+    "kind": "library",
+    "access": "Walk-in when the library is open. Library rules apply.",
+    "hours": {
+      "mode": "libcal"
+    },
+    "url": "https://libraries.psu.edu/hours-and-locations",
+    "notes": [
+      "Open/closed is inferred from the library's bookable room hours in LibCal; check the Libraries' hours page for the full schedule."
+    ],
+    "verification": {
+      "sourceIds": [
+        "psul-hours",
+        "psu-libcal-up-spaces"
+      ],
+      "verifiedAt": "2026-11-23"
+    }
+  },
+  {
+    "id": "pms-library-study",
+    "name": "Physical and Mathematical Sciences Library study areas",
+    "buildingId": "davey",
+    "buildingName": "Davey Laboratory",
+    "location": {
+      "lat": 40.79817,
+      "lon": -77.8628638,
+      "osmElement": "way/431740622"
+    },
+    "kind": "library",
+    "access": "Walk-in when the library is open. Library rules apply.",
+    "hours": {
+      "mode": "libcal"
+    },
+    "url": "https://libraries.psu.edu/hours-and-locations",
+    "notes": [
+      "Open/closed is inferred from the library's bookable room hours in LibCal; check the Libraries' hours page for the full schedule."
+    ],
+    "verification": {
+      "sourceIds": [
+        "psul-hours",
+        "psu-libcal-up-spaces"
+      ],
+      "verifiedAt": "2026-11-23"
+    }
+  },
+  {
+    "id": "architecture-library-study",
+    "name": "Architecture and Landscape Architecture Library study areas",
+    "buildingId": "stuckeman",
+    "buildingName": "Stuckeman Family Building",
+    "location": {
+      "lat": 40.8010877,
+      "lon": -77.8667354,
+      "osmElement": "way/431071070"
+    },
+    "kind": "library",
+    "access": "Walk-in when the library is open. Library rules apply.",
+    "hours": {
+      "mode": "libcal"
+    },
+    "url": "https://libraries.psu.edu/hours-and-locations",
+    "notes": [
+      "Open/closed is inferred from the library's bookable room hours in LibCal; check the Libraries' hours page for the full schedule."
+    ],
+    "verification": {
+      "sourceIds": [
+        "psul-hours",
+        "psu-libcal-up-spaces"
+      ],
+      "verifiedAt": "2026-11-23"
+    }
+  },
+  {
+    "id": "penn-state-learning-boucke",
+    "name": "Penn State Learning teamwork areas",
+    "buildingId": null,
+    "buildingName": "Boucke Building (220 Boucke)",
+    "location": {
+      "lat": 40.7991719,
+      "lon": -77.8616136,
+      "osmElement": "way/431740620"
+    },
+    "kind": "commons",
+    "access": "Walk-ins welcome; groups can also reserve through Starfish (max 3 hours).",
+    "hours": {
+      "mode": "not-published"
+    },
+    "url": "https://pennstatelearning.psu.edu/about-us/facilities/teamwork-areas",
+    "notes": [
+      "Teamwork PODs and areas with whiteboards and Solstice screens, for groups of up to six."
+    ],
+    "verification": {
+      "sourceIds": [
+        "psl-teamwork"
+      ],
+      "verifiedAt": "2026-11-23"
+    }
+  },
+  {
+    "id": "hub-lounges",
+    "name": "HUB-Robeson Center lounges",
+    "buildingId": null,
+    "buildingName": "HUB-Robeson Center",
+    "location": {
+      "lat": 40.7982257,
+      "lon": -77.8611876,
+      "osmElement": "way/431712457"
+    },
+    "kind": "lounge",
+    "access": "Public lounges, walk-in. Not quiet spaces.",
+    "hours": {
+      "mode": "not-published"
+    },
+    "url": "https://studentaffairs.psu.edu/hub",
+    "notes": [
+      "Busy public areas, better for group work than quiet study."
+    ],
+    "verification": {
+      "sourceIds": [
+        "sa-hub"
+      ],
+      "verifiedAt": "2026-11-23"
+    }
+  }
+]
