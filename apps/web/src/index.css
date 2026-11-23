@@ -1,0 +1,138 @@
+@import 'tailwindcss';
+
+@font-face {
+  font-family: Overpass;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/overpass-latin-400-normal.woff2) format('woff2');
+}
+@font-face {
+  font-family: Overpass;
+  font-weight: 600;
+  font-display: swap;
+  src: url(/fonts/overpass-latin-600-normal.woff2) format('woff2');
+}
+@font-face {
+  font-family: Overpass;
+  font-weight: 800;
+  font-display: swap;
+  src: url(/fonts/overpass-latin-800-normal.woff2) format('woff2');
+}
+
+/* Design tokens — mirrors nittany-rooms-design/tokens/tokens.json */
+@theme {
+  --font-sans: Overpass, ui-sans-serif, system-ui, sans-serif;
+
+  --color-navy: #12284c;
+  --color-night: #0e1e3a;
+  --color-night-panel: #162a4d;
+  --color-night-raised: #1f3358;
+  --color-night-line: #3a5280;
+  --color-night-grid: #16294a;
+  --color-glow: #ffc845;
+  --color-glow-tint: #fff6dc;
+  --color-glow-border: #c99400;
+  --color-amber-text: #6b4700;
+  --color-paper: #f5f7fa;
+  --color-surface: #ffffff;
+  --color-line: #dce2ea;
+  --color-input-border: #b8c1ce;
+  --color-slate: #4f5b6e;
+  --color-ink-muted: #3a4558;
+  --color-dot: #8a96a8;
+  --color-now: #c2185b;
+
+  --radius-control: 10px;
+  --radius-panel: 16px;
+  --radius-sheet: 20px;
+
+  --text-display: 40px;
+  --text-title: 28px;
+  --text-heading: 20px;
+  --text-small: 13px;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-paper font-sans text-navy antialiased;
+  }
+  a {
+    @apply text-navy;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-glow-border);
+    outline-offset: 2px;
+  }
+  .on-night :focus-visible {
+    outline-color: #ffffff;
+  }
+}
+
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Room-state fills that can't be expressed as single colors */
+@utility fill-unavailable {
+  background: repeating-linear-gradient(135deg, #e3e7ed 0 6px, #cbd2dc 6px 8px);
+}
+@utility fill-unavailable-night {
+  background: repeating-linear-gradient(135deg, #3a5280 0 3px, #1f3358 3px 5px);
+}
+@utility fill-unknown {
+  background: radial-gradient(#b8c1ce 1px, #eef1f5 1.5px) 0 0 / 6px 6px;
+}
+@utility fill-unknown-night {
+  background: radial-gradient(#3a5280 1.2px, #1f3358 1.6px) 0 0 / 7px 7px;
+}
+@utility night-grid {
+  background-image:
+    linear-gradient(var(--color-night-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-night-grid) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+@utility sr-only-focusable {
+  position: absolute;
+  left: -9999px;
+  &:focus {
+    left: 16px;
+    top: 16px;
+    z-index: 100;
+  }
+}
+
+/* Campus → building: a single ~300ms zoom. Reduced motion: instant cut. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 300ms;
+  animation-timing-function: ease-out;
+}
+::view-transition-new(root) {
+  animation-name: nr-zoom-in;
+}
+@keyframes nr-zoom-in {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0ms !important;
+    animation-duration: 0ms !important;
+  }
+}
+
+.maplibregl-ctrl-attrib {
+  font-family: var(--font-sans);
+  font-size: 12px;
+}
