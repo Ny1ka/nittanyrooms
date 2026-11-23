@@ -121,3 +121,18 @@ Legend for **Status**: ✅ verified from an official source · 🟡 partial / in
 | Repo | https://github.com/plon/illinispots |
 | Seen | README only, via a mirror. Stack: Next.js, React, TypeScript, Tailwind, Supabase. Combines class schedules with university-booked events, refreshed periodically. |
 | License | Not verified. **No code reused.** Concept-level inspiration only. |
+
+---
+
+## 9. Campus-wide "likely free" study spots (researched 2026-11-23)
+
+Goal: cover all of University Park, like illiniSpots does for UIUC, not just reservable rooms. These rooms are **not reservable**. They'd be shown as "likely free to sit in", below reservable rooms, with a grey **Closed** state when the building is closed.
+
+| Source | What it gives | Status / next step |
+|---|---|---|
+| **Penn State Map, "Classroom Availability" filter** (map.psu.edu) | Official: "open rooms, daily schedules and hours for all general-purpose classrooms at University Park" (per OPP news) | ❔ **Best candidate.** One official source that already combines classes, events and hours. Need to find its data endpoint and check terms and robots before using it. |
+| LionPATH public class search (public.lionpath.psu.edu) | Day, time and room for every class section | ❔ Fallback for class schedules. Public, but heavy to collect per term; check terms. |
+| 25Live (CollegeNET) | Room reservations and events | ⛔ Staff/faculty only. Only the public events calendar is exposed. |
+| Building hours | No central public source found. Libraries: libraries.psu.edu/hours. 24/7 finals buildings announced by OPP (Boucke, Hammond, Osmond, Thomas, Willard; HUB-Robeson) | ❔ Use the Penn State Map hours if it has them. Otherwise curate per building, with dates. |
+
+Sources: https://www.psu.edu/news/office-physical-plant/story/five-university-park-classroom-buildings-open-24-7-during-finals-week · https://www.psu.edu/news/students/story/lionpath-updates-class-search-feature-students · https://www.registrar.psu.edu/faculty-staff/scheduling/classroom-scheduling/
