@@ -145,7 +145,7 @@ export function App() {
         </div>
       </aside>
 
-      <section aria-label="Campus map" className="theme-dark fixed inset-0 md:relative md:flex-1">
+      <section aria-label="Campus map" className="fixed inset-0 md:relative md:flex-1">
         <Suspense fallback={<div className="absolute inset-0 bg-bg" />}>
           <MapView
             markers={markers}
@@ -220,7 +220,7 @@ function Legend() {
               </li>
             ))}
             <li className="flex items-start gap-2.5 border-t border-line pt-2">
-              <span className="mt-0.5 size-3 shrink-0 rounded-full border-2 border-white bg-[#3b82f6]" aria-hidden="true" />
+              <span className="mt-0.5 size-3 shrink-0 rounded-full bg-[#3b82f6] ring-4 ring-[#3b82f6]/25" aria-hidden="true" />
               <span className="font-semibold text-fg">You are here</span>
             </li>
             <li className="flex items-center gap-2.5">

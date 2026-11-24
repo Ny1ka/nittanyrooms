@@ -372,7 +372,7 @@ export function MapView({
         for (const m of latest.current.markers) {
           const el = document.createElement('button');
           el.type = 'button';
-          el.className = 'nr-marker';
+          el.className = 'nr-marker theme-dark'; // pins sit on the always-dark map
           el.addEventListener('click', (ev) => {
             ev.stopPropagation();
             latest.current.onSelect(m.building.id);
@@ -384,7 +384,7 @@ export function MapView({
         }
         for (const s of mappedSpaces) {
           const el = document.createElement('a');
-          el.className = 'nr-marker';
+          el.className = 'nr-marker theme-dark'; // pins sit on the always-dark map
           el.href = s.url;
           el.target = '_blank';
           el.rel = 'noopener noreferrer';
