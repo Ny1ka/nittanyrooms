@@ -296,7 +296,9 @@ export function MapView({
   routeRef.current = routeLine;
   const userMarker = useRef<Marker | null>(null);
   const mlRef = useRef<typeof import('maplibre-gl') | null>(null);
-  const theme = useThemeValue();
+  // The map is always dark, in light mode too (only the UI around it goes light).
+  useThemeValue();
+  const theme: Theme = 'dark';
   const container = useRef<HTMLDivElement>(null);
   const mapRef = useRef<MLMap | null>(null);
   const markerRefs = useRef(new Map<string, { marker: Marker; el: HTMLButtonElement }>());

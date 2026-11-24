@@ -14,7 +14,8 @@
  * [data-theme='light'] switches every token. Components only use semantic names.
  */
 :root,
-:root[data-theme='dark'] {
+:root[data-theme='dark'],
+.theme-dark {
   color-scheme: dark;
   --nr-bg: #0b0d10;
   --nr-surface: #111418;
@@ -191,24 +192,29 @@
   font-size: 11px;
 }
 :root[data-theme='dark'] .maplibregl-ctrl-attrib,
-:root:not([data-theme]) .maplibregl-ctrl-attrib {
+:root:not([data-theme]) .maplibregl-ctrl-attrib,
+.theme-dark .maplibregl-ctrl-attrib {
   background: rgb(17 20 24 / 0.85) !important;
   color: var(--nr-muted);
 }
 :root[data-theme='dark'] .maplibregl-ctrl-attrib a,
-:root:not([data-theme]) .maplibregl-ctrl-attrib a {
+:root:not([data-theme]) .maplibregl-ctrl-attrib a,
+.theme-dark .maplibregl-ctrl-attrib a {
   color: var(--nr-muted);
 }
 :root[data-theme='dark'] .maplibregl-ctrl-group,
-:root:not([data-theme]) .maplibregl-ctrl-group {
+:root:not([data-theme]) .maplibregl-ctrl-group,
+.theme-dark .maplibregl-ctrl-group {
   background: var(--nr-surface);
   box-shadow: 0 0 0 1px var(--nr-line);
 }
 :root[data-theme='dark'] .maplibregl-ctrl-group button + button,
-:root:not([data-theme]) .maplibregl-ctrl-group button + button {
+:root:not([data-theme]) .maplibregl-ctrl-group button + button,
+.theme-dark .maplibregl-ctrl-group button + button {
   border-top-color: var(--nr-line);
 }
 :root[data-theme='dark'] .maplibregl-ctrl-icon,
-:root:not([data-theme]) .maplibregl-ctrl-icon {
+:root:not([data-theme]) .maplibregl-ctrl-icon,
+.theme-dark .maplibregl-ctrl-icon {
   filter: invert(1) brightness(0.85);
 }

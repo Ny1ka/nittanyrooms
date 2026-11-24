@@ -145,7 +145,7 @@ export function App() {
         </div>
       </aside>
 
-      <section aria-label="Campus map" className="fixed inset-0 md:relative md:flex-1">
+      <section aria-label="Campus map" className="theme-dark fixed inset-0 md:relative md:flex-1">
         <Suspense fallback={<div className="absolute inset-0 bg-bg" />}>
           <MapView
             markers={markers}
