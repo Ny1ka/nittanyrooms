@@ -21,7 +21,7 @@ A visual study-room finder for **Penn State University Park**. Pick a building o
 
 ### Live availability on a 3D campus map
 
-Buildings with reservable rooms are drawn from their OpenStreetMap outlines and colored by what's free at the selected time: **green** = rooms open, **yellow** = a room opens within 30 minutes, **red** = none open, **grey** = closed or can't be checked, **purple** = walk-in study space. The list groups Libraries, Engineering, and open study spaces, with one badge per building (`22/36`, `2 soon`, `0/8`, `Closed`, `Check site`).
+Buildings with reservable rooms are drawn from their OpenStreetMap outlines and colored by what's free at the selected time: **green** = rooms open, **yellow** = a room opens within 30 minutes, **orange** = rooms close for the day within 30 minutes, **red** = none open, **grey** = closed or can't be checked, **purple** = walk-in study space. The list groups Libraries, Engineering, and open study spaces, with one badge per building (`22/36`, `2 soon`, `0/8`, `Closed`, `Check site`).
 
 Library availability is live from Penn State's public LibCal, refreshed every 3 minutes.
 
@@ -31,7 +31,7 @@ Library availability is live from Penn State's public LibCal, refreshed every 3 
 |---|---|
 | ![Building view: rooms by floor with status and a mini timeline each](nittany-rooms-design/png/04-desktop-building-dark.png) | ![Room view: day timeline, bookable windows, and the official booking button](nittany-rooms-design/png/05-desktop-room-dark.png) |
 
-Choosing a building flies the camera in and lists its rooms by floor, each with a status chip and a mini day timeline. A room shows its features and capacity, a timeline for the day, the windows you can actually book (gaps too short to book are hidden), and **Continue to Penn State reservation**. That button goes straight to the room's LibCal page, **already open on your chosen date**, and tells you which time to tap. LibCal has no link parameter for the time itself. For College of Engineering rooms, it opens Outlook with step-by-step instructions.
+Choosing a building shows its **building hours** in small text, for example "Open until 5:00 PM" or "Closing soon · 5:00 PM". Hours for library buildings come from LibCal; other buildings show "Hours unavailable" until sourced hours are added to `data/building-hours.json`. It also flies the camera in and lists its rooms by floor, each with a status chip and a mini day timeline. A room shows its features and capacity, a timeline for the day, the windows you can actually book (gaps too short to book are hidden), and **Continue to Penn State reservation**. That button goes straight to the room's LibCal page, **already open on your chosen date**, and tells you which time to tap. LibCal has no link parameter for the time itself. For College of Engineering rooms, it opens Outlook with step-by-step instructions.
 
 ### Closest room and a walking route
 

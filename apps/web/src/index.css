@@ -39,6 +39,9 @@
   --nr-busy-soft: rgb(239 68 68 / 0.16);
   --nr-busy-text: #f87171;
   --nr-soon-text: #facc15;
+  --nr-closing: #f97316;
+  --nr-closing-soft: rgb(249 115 22 / 0.16);
+  --nr-closing-text: #fdba74;
   --nr-hatch-a: #1a1e24;
   --nr-hatch-b: #262c34;
   --nr-dot-a: #3a414b;
@@ -77,6 +80,9 @@
   --nr-busy-soft: #fee2e2;
   --nr-busy-text: #991b1b;
   --nr-soon-text: #854d0e;
+  --nr-closing: #ea580c;
+  --nr-closing-soft: #ffedd5;
+  --nr-closing-text: #9a3412;
   --nr-hatch-a: #eceef1;
   --nr-hatch-b: #d9dde2;
   --nr-dot-a: #b9c0c9;
@@ -114,6 +120,9 @@
   --color-busy-soft: var(--nr-busy-soft);
   --color-busy-text: var(--nr-busy-text);
   --color-soon-text: var(--nr-soon-text);
+  --color-closing: var(--nr-closing);
+  --color-closing-soft: var(--nr-closing-soft);
+  --color-closing-text: var(--nr-closing-text);
   --color-space: var(--nr-space);
   --color-space-soft: var(--nr-space-soft);
   --color-space-text: var(--nr-space-text);

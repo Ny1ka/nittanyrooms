@@ -157,6 +157,7 @@ export function buildingCounts(
   const counts: StateCounts = {
     open: 0,
     opensSoon: 0,
+    closingSoon: 0,
     occupied: 0,
     unavailable: 0,
     unknown: 0,

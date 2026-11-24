@@ -5,6 +5,7 @@ import { Clock, DoorClosed, DoorOpen, Question, SlashCircle } from './Icons';
 export const STATE_STYLE: Record<RoomState, string> = {
   open: 'bg-open-soft text-open-text',
   opensSoon: 'border border-dashed border-yellow text-soon-text',
+  closingSoon: 'bg-closing-soft text-closing-text',
   occupied: 'bg-busy-soft text-busy-text',
   unavailable: 'fill-unavailable text-fg',
   unknown: 'fill-unknown text-fg',
@@ -13,6 +14,7 @@ export const STATE_STYLE: Record<RoomState, string> = {
 export const STATE_ICON = {
   open: DoorOpen,
   opensSoon: Clock,
+  closingSoon: Clock,
   occupied: DoorClosed,
   unavailable: SlashCircle,
   unknown: Question,
@@ -25,6 +27,8 @@ export function statusLabel(s: RoomStatus, opts: { long?: boolean; nowish?: bool
       return `${opts.nowish ? 'Open now' : 'Open'} until ${formatTime(s.until)}`;
     case 'opensSoon':
       return `Opens ${opts.long ? formatTime(s.opensAt!) : formatTimeShort(s.opensAt!)}`;
+    case 'closingSoon':
+      return `Closes ${opts.long ? formatTime(s.until!) : formatTimeShort(s.until!)}`;
     case 'occupied':
       return opts.long && s.until ? `Occupied until ${formatTime(s.until)}` : 'Occupied';
     case 'unavailable':

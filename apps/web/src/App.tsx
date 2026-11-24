@@ -168,6 +168,7 @@ export function App() {
 const LEGEND: [string, string, string][] = [
   ['bg-open', 'Rooms open', 'At least one room bookable now'],
   ['bg-yellow', 'Opening soon', 'A room opens within 30 minutes'],
+  ['bg-closing', 'Closing soon', 'Rooms close for the day within 30 minutes'],
   ['bg-busy', 'None open', 'All rooms booked for now'],
   ['bg-[#6b7280]', 'Closed', 'No bookable time right now'],
   ['fill-unknown ring-1 ring-subtle', 'Check PSU site', 'Availability isn’t public'],

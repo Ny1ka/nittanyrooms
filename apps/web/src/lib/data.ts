@@ -3,6 +3,7 @@ import {
   loadDataset,
   loadFootprints,
   loadOpenSpaces,
+  loadBuildingHours,
   rawDataset,
   validateDataset,
   type Building,
@@ -27,6 +28,7 @@ export const rooms: Room[] = dataset.rooms
 export const sources = dataset.sources;
 export const footprints = loadFootprints();
 export const openSpaces = loadOpenSpaces();
+export const buildingHoursTable = loadBuildingHours();
 
 const providers = new Map(dataset.providers.map((p) => [p.id, p]));
 const policies = new Map(dataset.policies.map((p) => [p.id, p]));

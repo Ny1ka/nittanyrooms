@@ -108,7 +108,8 @@ function footprintData(markers: MarkerInfo[], selectedId: string | null) {
         const open = m.known && m.counts.open > 0;
         const closed = m.known && m.counts.unavailable === m.counts.total;
         const soon = m.known && m.counts.open === 0 && m.counts.opensSoon > 0;
-        const none = m.known && m.counts.open === 0 && !closed && !soon;
+        const closing = m.known && m.counts.open === 0 && !soon && m.counts.closingSoon > 0;
+        const none = m.known && m.counts.open === 0 && !closed && !soon && !(m.counts.closingSoon > 0);
         const selected = f.properties.buildingId === selectedId;
         return {
           type: 'Feature' as const,
@@ -116,7 +117,7 @@ function footprintData(markers: MarkerInfo[], selectedId: string | null) {
           properties: {
             buildingId: f.properties.buildingId,
             height: f.properties.heightMeters + 2,
-            tone: `${open ? 'open' : soon ? 'soon' : none ? 'busy' : 'quiet'}${selected ? '-selected' : ''}`,
+            tone: `${open ? 'open' : soon ? 'soon' : closing ? 'closing' : none ? 'busy' : 'quiet'}${selected ? '-selected' : ''}`,
           },
         };
       }),
@@ -143,6 +144,10 @@ function addOverlays(map: MLMap, theme: Theme, data: ReturnType<typeof footprint
         '#FACC15',
         'soon-selected',
         '#FDE047',
+        'closing',
+        '#F97316',
+        'closing-selected',
+        '#FB923C',
         'busy',
         '#DC2626',
         'busy-selected',
@@ -244,6 +249,10 @@ function markerHtml(info: MarkerInfo, selected: boolean): { html: string; label:
     cls += ' nr-pin--soon';
     badge = String(info.counts.opensSoon);
     label = `${b.headline}, ${info.counts.opensSoon} rooms opening within 30 minutes`;
+  } else if (info.known && info.counts.open === 0 && info.counts.closingSoon > 0) {
+    cls += ' nr-pin--closing';
+    badge = String(info.counts.closingSoon);
+    label = `${b.headline}, ${info.counts.closingSoon} rooms closing within 30 minutes`;
   } else if (info.known && info.counts.unavailable === info.counts.total) {
     badge = '–';
     label = `${b.headline}, closed at this time`;
@@ -578,6 +587,7 @@ export function MapView({
         .nr-pin--open .nr-pin__badge{background:var(--nr-open);color:#05230f}
         .nr-pin--busy .nr-pin__badge{background:var(--nr-busy);color:#fff}
         .nr-pin--soon .nr-pin__badge{background:#FACC15;color:#111418}
+        .nr-pin--closing .nr-pin__badge{background:#F97316;color:#111418}
         .nr-pin--space .nr-pin__badge{background:var(--nr-space);color:#fff;font-size:9px}
         .nr-pin--candidate{box-shadow:none;outline:1.5px dashed var(--nr-subtle);outline-offset:-1.5px}
         .nr-pin--selected{box-shadow:0 0 0 2px var(--nr-accent-border),0 4px 14px rgb(0 0 0 / .35)}

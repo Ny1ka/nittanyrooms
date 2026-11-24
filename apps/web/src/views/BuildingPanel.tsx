@@ -12,6 +12,8 @@ import { buildingKey, useFavorites } from '../lib/favorites';
 import { AvailabilityFreshness } from '../components/Notices';
 import { StatusChip, statusLabel } from '../components/StatusChip';
 import { MiniTimeline, displayRange } from '../components/Timeline';
+import { buildingHours } from '../lib/hours';
+import { formatTime } from '@nittany-rooms/core';
 import { RoomPanel } from './RoomPanel';
 
 export function BackButton({ label, onClick }: { label: string; onClick: () => void }) {
@@ -81,7 +83,7 @@ function RoomList({ building, sel, demo, live, filters, clearFilters }: { buildi
   const floorParam = params.get('floor');
   const activeFloor = floors.find((f) => f.label === floorParam) ?? null;
   const shown = floors.filter((f) => !activeFloor || f.id === activeFloor.id);
-  const counts = { open: 0, opensSoon: 0, occupied: 0 };
+  const counts = { open: 0, opensSoon: 0, closingSoon: 0, occupied: 0 };
   for (const { status } of days.values()) if (status.state in counts) counts[status.state as keyof typeof counts]++;
   const known = [...days.values()].some((d) => d.status.state !== 'unknown');
   const source = getSource(allRooms[0]!.verification.sourceIds[0]!);
@@ -98,12 +100,14 @@ function RoomList({ building, sel, demo, live, filters, clearFilters }: { buildi
           {buildingPhrase(building)} {roomCountPhrase(allRooms.length)}
           {floorsPhrase(building) ? ` on ${floorsPhrase(building)}` : ''}.
         </p>
+        <HoursLine building={building} live={live} sel={sel} />
       </div>
 
       {known && (
         <div className="flex flex-wrap gap-x-3 gap-y-1 text-xs text-muted tabular">
           <span className="inline-flex items-center gap-1.5"><span className="size-2 rounded-full bg-open" />{counts.open} open</span>
           <span className="inline-flex items-center gap-1.5"><span className="size-2 rounded-full border border-dashed border-yellow" />{counts.opensSoon} opening soon</span>
+          {counts.closingSoon > 0 && <span className="inline-flex items-center gap-1.5"><span className="size-2 rounded-full bg-closing" />{counts.closingSoon} closing soon</span>}
           <span className="inline-flex items-center gap-1.5"><span className="size-2 rounded-full bg-busy" />{counts.occupied} occupied</span>
         </div>
       )}
@@ -231,5 +235,32 @@ function BuildingStar({ id, name }: { id: string; name: string }) {
     >
       <Star size={18} filled={on} />
     </button>
+  );
+}
+
+/** General building hours in small secondary text (separate from room availability). */
+function HoursLine({ building, live, sel }: { building: Building; live: LiveState; sel: SelectedTime }) {
+  const h = buildingHours(building, live, sel);
+  const tip =
+    h.state !== 'unknown' && h.source === 'libcal'
+      ? "Inferred from when rooms can be booked in Penn State's LibCal. An open building does not mean every room is free."
+      : 'General building hours. An open building does not mean every room is free.';
+  let text: React.ReactNode;
+  if (h.state === 'open') text = <>Open until {formatTime(h.until)}</>;
+  else if (h.state === 'closingSoon') text = <span className="font-semibold text-closing-text">Closing soon · {formatTime(h.until)}</span>;
+  else if (h.state === 'closed') text = <>Closed{h.opensAt ? ` · opens ${formatTime(h.opensAt)}` : sel.isToday ? ' for the rest of today' : ' this day'}</>;
+  else text = <>Hours unavailable</>;
+  return (
+    <p className="mt-1 text-[11px] text-subtle" title={tip}>
+      <span className="font-semibold">Building hours</span> · {text}
+      {h.state === 'unknown' && building.hoursUrl && (
+        <>
+          {' · '}
+          <a href={building.hoursUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-fg">
+            check official hours
+          </a>
+        </>
+      )}
+    </p>
   );
 }

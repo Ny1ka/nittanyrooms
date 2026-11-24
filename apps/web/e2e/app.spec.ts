@@ -380,3 +380,30 @@ test.describe('opening soon in the building list', () => {
     await expect(ems).not.toContainText('0/8');
   });
 });
+
+test.describe('building hours', () => {
+  test('library hours come from LibCal; buildings without a source say "Hours unavailable"', async ({ page, api: _ }) => {
+    await page.goto('/b/pattee-paterno');
+    await expect(page.getByText(/Building hours · Open until 5:00 PM/)).toBeVisible();
+    await page.goto('/b/ecore');
+    await expect(page.getByText(/Building hours · Hours unavailable/)).toBeVisible();
+  });
+});
+
+test.describe('closing soon', () => {
+  test('within 30 minutes of closing: room "Closes 5:00 PM", building hours and badge say closing soon', async ({ page, api: _ }) => {
+    const at = NOW.set({ hour: 16, minute: 40 });
+    await page.clock.setFixedTime(at.toJSDate());
+    // Serve data checked just now (the default fixture is from 12:59 PM and would be stale at 4:40).
+    await page.unroute('**/api/availability?*');
+    await page.route('**/api/availability?*', (r) =>
+      r.fulfill({ json: payload(new URL(r.request().url()).searchParams.get('date')!, { retrievedAt: at.minus({ minutes: 1 }) }) }),
+    );
+    await page.goto('/b/pattee-paterno?room=pattee-w120');
+    await expect(page.getByText('Closes 5:00 PM').first()).toBeVisible();
+    await page.goto('/b/pattee-paterno');
+    await expect(page.getByText(/Building hours · Closing soon · 5:00 PM/)).toBeVisible();
+    await page.goto('/');
+    await expect(page.getByRole('button', { name: /Pattee and Paterno Libraries/ })).toContainText('Closing soon');
+  });
+});
