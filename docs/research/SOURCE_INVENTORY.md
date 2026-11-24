@@ -144,3 +144,17 @@ Sources: https://www.psu.edu/news/office-physical-plant/story/five-university-pa
 - **Reber Building (ME E-Knowledge Commons):** five small group study rooms, sponsor-named I–V, each with a large monitor and whiteboards (https://www.me.psu.edu/commons/Study-Rooms.aspx). **No booking method or eligibility published.**
 - **LionPATH public class search** (public.lionpath.psu.edu): `robots.txt` is `User-agent: * / Disallow: /`, and the PeopleSoft search needs a browser session cookie (a plain request gets an error page). ⛔ **Automated collection isn't permitted.** Class data needs a Registrar-approved export.
 - **Conclusion (2026-11-23):** every route to campus-wide class, event and hours data (Concept3D map API, LionPATH, 25Live) needs Penn State's permission. Next step: the permission request to the map.psu.edu team (and/or the Registrar for a schedule export).
+
+## 10. Academic building availability: public source check (2026-11-24)
+
+| Source | Finding | Usable now? |
+|---|---|---|
+| **OPP ArcGIS `Building_Features` FeatureServer** (services1.arcgis.com/fmL63zawJNFGptQt/…/Building_Features/FeatureServer/0) | Official, public, no key. **1,252 buildings** with `BLDG_NUM`, `BLDG_NAME`, `BLDG_ABBR`, `ZONE`, polygons (max 2,000 records/request). Contact listed: John Richendrfer (jdr20@psu.edu). | ✅ Buildings, IDs and footprints |
+| **LionPATH public class search** | `robots.txt`: `Disallow: /`; PeopleSoft search needs a session cookie. | ⛔ Not permitted |
+| **psu.edu/events** | Returns 404 (no events listing at that URL). | ⛔ |
+| **studentaffairs.psu.edu/events** | HTML page; no ICS/RSS/structured feed found; events aren't room-structured. | ⛔ For room schedules |
+| **25Live Publisher** (25livepub.collegenet.com) | `robots.txt` allows all. Would need Penn State–published calendar names (none found yet). | ❔ If PSU publishes per-location calendars |
+| **25Live web services, guest view** (25live.collegenet.com/25live/data/psu/run/…) | Two requests (`spaces.json`, `events.json`) returned data **without login**; private event names masked as "(Private)". Further per-room reservation queries were **stopped**: treated as unauthorized access without Penn State's OK. | ⏸ **Ask PSU IT** whether guest-level reads are permitted, or get a sanctioned feed/account |
+| **Building hours** | No public structured source found for academic or Engineering buildings. Library hours can be inferred from LibCal (already used for open study spaces). | Manual table with sources; "Hours unavailable" otherwise |
+
+**Conclusion:** class schedules and room events, the data free-classroom detection depends on, aren't publicly available in a permitted form. The PSU IT / 25Live meeting is the path. Buildable now: OPP building data and footprints, building hours (LibCal-inferred for libraries plus a manual, sourced table), and the Transition Time / academic availability engine, ready to plug into 25Live data.
