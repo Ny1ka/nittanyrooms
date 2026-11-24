@@ -315,6 +315,16 @@ describe('statusAt', () => {
     const q = run({ busy: [iv('12:00', '14:10')], now: t('14:00'), policy: { ...policy, startIncrementMinutes: 15 } });
     expect(statusAt(q, t('14:00'))).toMatchObject({ state: 'opensSoon', opensAt: t('14:15') });
   });
+  it('closing soon: free now, closes for the day within 30 min (even when too short to book)', () => {
+    // Free 9:00–10:00 PM, closes at 10. At 9:40 the 20-min remainder is below the booking threshold.
+    expect(statusAt(d, t('21:40'))).toMatchObject({ state: 'closingSoon', until: t('22:00') });
+    // At 9:20 the room is open until 10 with 40 min left: still Open.
+    expect(statusAt(d, t('21:20'))).toMatchObject({ state: 'open', until: t('22:00') });
+  });
+  it('not closing soon when another window follows later the same day', () => {
+    const q = run({ busy: [iv('12:20', '15:00')], now: t('07:30') });
+    expect(statusAt(q, t('12:00'))).not.toMatchObject({ state: 'closingSoon' });
+  });
   it('closed time is unavailable', () => {
     expect(statusAt(d, t('23:00')).state).toBe('unavailable');
   });

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { buildHandoff, loadDataset, localTime, rawDataset, rawFootprints, rawOpenSpaces, validateDataset, validateFootprints, validateOpenSpaces } from '../src/index.js';
+import { buildHandoff, validateBuildingHours, loadDataset, localTime, rawDataset, rawFootprints, rawOpenSpaces, validateDataset, validateFootprints, validateOpenSpaces } from '../src/index.js';
 
 const NOW = Date.parse('2026-11-23T12:00:00Z');
 const clone = () => structuredClone(rawDataset) as any;
@@ -164,5 +164,23 @@ describe('validateOpenSpaces', () => {
     d[0].buildingId = null;
     const codes = validateOpenSpaces(d, { ...ctx, now: Date.parse('2027-03-01') }).map((i) => i.code);
     expect(codes).toEqual(expect.arrayContaining(['libcal-needs-building', 'stale-open-space']));
+  });
+});
+
+describe('validateBuildingHours', () => {
+  const ctx = { buildingIds: rawDataset.buildings.map((b) => b.id), sourceIds: rawDataset.sources.map((s) => s.id), now: Date.parse('2026-11-24') };
+  const week = { mon: [['08:00', '22:00']], tue: [], wed: [], thu: [], fri: [], sat: [], sun: [] };
+  it('accepts a sourced entry and an empty file', () => {
+    expect(validateBuildingHours([], ctx)).toEqual([]);
+    expect(validateBuildingHours([{ buildingId: 'ecore', weekly: week, exceptions: [], sourceId: 'psul-engineering-rooms', verifiedAt: '2026-11-24' }], ctx)).toEqual([]);
+  });
+  it('rejects unknown buildings/sources, bad times and duplicates', () => {
+    const bad = [
+      { buildingId: 'nowhere', weekly: week, exceptions: [], sourceId: 'made-up', verifiedAt: '2026-11-24' },
+      { buildingId: 'ecore', weekly: { ...week, mon: [['25:00', '22:00']] }, exceptions: [], sourceId: 'psul-engineering-rooms', verifiedAt: '2026-11-24' },
+    ];
+    expect(validateBuildingHours(bad, ctx).map((i) => i.code)).toContain('hours-schema');
+    const codes = validateBuildingHours([bad[0]], ctx).map((i) => i.code);
+    expect(codes).toEqual(expect.arrayContaining(['unknown-building', 'unknown-source']));
   });
 });

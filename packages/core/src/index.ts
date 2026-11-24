@@ -8,3 +8,4 @@ export * from './availability/engine.js';
 export * from './validate/index.js';
 export * from './validate/footprints.js';
 export * from './openSpaces.js';
+export * from './buildingHours.js';

@@ -222,11 +222,11 @@ export function computeDay(input: DayInput): DayAvailability {
   };
 }
 
-export type RoomState = 'open' | 'opensSoon' | 'occupied' | 'unavailable' | 'unknown';
+export type RoomState = 'open' | 'opensSoon' | 'closingSoon' | 'occupied' | 'unavailable' | 'unknown';
 
 export interface RoomStatus {
   state: RoomState;
-  /** For open: window end. For occupied: end of the occupied run. */
+  /** For open / closingSoon: when it stops being free. For occupied: end of the occupied run. */
   until?: number;
   /** For opensSoon: when the next window starts. */
   opensAt?: number;
@@ -254,7 +254,15 @@ export function statusAt(day: DayAvailability, t: number, soonMinutes = OPENS_SO
   const current = day.windows.find(
     (w) => contains(w, t) || (w.raw.start <= t && t < w.start && w.start - t < day.incrementMinutes * MINUTE),
   );
-  if (current) return { state: 'open', until: current.end, window: current };
+  // Closing soon: free now, but the room closes for the rest of the day within the window.
+  const closesForDay = (end: number) =>
+    end - t <= OPENS_SOON_MINUTES * MINUTE && !day.windows.some((w) => w.start >= end);
+  if (current) {
+    return closesForDay(current.end)
+      ? { state: 'closingSoon', until: current.end, window: current }
+      : { state: 'open', until: current.end, window: current };
+  }
+  if (seg.kind === 'free' && closesForDay(seg.end)) return { state: 'closingSoon', until: seg.end };
 
   const upcoming = day.windows.find((w) => w.start > t);
   if (upcoming && upcoming.start - t <= soonMinutes * MINUTE) {

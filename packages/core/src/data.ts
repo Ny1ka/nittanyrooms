@@ -5,6 +5,8 @@ import rooms from '../../../data/rooms.json';
 import sources from '../../../data/sources.json';
 import footprintsRaw from '../../../data/footprints.json';
 import openSpacesRaw from '../../../data/open-spaces.json';
+import buildingHoursRaw from '../../../data/building-hours.json';
+import { BuildingHoursEntry } from './buildingHours.js';
 import { z } from 'zod';
 import { OpenSpace } from './openSpaces.js';
 import { Dataset } from './schema.js';
@@ -17,6 +19,12 @@ export const rawFootprints: unknown = footprintsRaw;
 export const rawOpenSpaces: unknown = openSpacesRaw;
 export function loadOpenSpaces(): OpenSpace[] {
   return z.array(OpenSpace).parse(openSpacesRaw);
+}
+
+/** Manually maintained building hours (sourced). */
+export const rawBuildingHours: unknown = buildingHoursRaw;
+export function loadBuildingHours(): BuildingHoursEntry[] {
+  return z.array(BuildingHoursEntry).parse(buildingHoursRaw);
 }
 
 export function loadFootprints(): FootprintCollection {

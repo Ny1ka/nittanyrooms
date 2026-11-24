@@ -4,7 +4,8 @@
  *   pnpm validate:data           human-readable report
  *   pnpm validate:data --json    machine-readable report
  */
-import { rawDataset, rawFootprints, rawOpenSpaces } from '../src/data.js';
+import { rawBuildingHours, rawDataset, rawFootprints, rawOpenSpaces } from '../src/data.js';
+import { validateBuildingHours } from '../src/buildingHours.js';
 import { validateOpenSpaces } from '../src/openSpaces.js';
 import { validateFootprints } from '../src/validate/footprints.js';
 import { validateDataset } from '../src/validate/index.js';
@@ -20,7 +21,11 @@ const osIssues = validateOpenSpaces(rawOpenSpaces, {
   buildingIds: buildings.map((b) => b.id),
   sourceIds: (rawDataset.sources as { id: string }[]).map((s) => s.id),
 });
-for (const i of [...fpIssues, ...osIssues]) (i.severity === 'error' ? report.errors : report.warnings).push(i);
+const bhIssues = validateBuildingHours(rawBuildingHours, {
+  buildingIds: buildings.map((b) => b.id),
+  sourceIds: (rawDataset.sources as { id: string }[]).map((s) => s.id),
+});
+for (const i of [...fpIssues, ...osIssues, ...bhIssues]) (i.severity === 'error' ? report.errors : report.warnings).push(i);
 report.ok = report.errors.length === 0;
 
 if (process.argv.includes('--json')) {
